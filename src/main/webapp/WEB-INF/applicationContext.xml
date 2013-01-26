@@ -1,0 +1,30 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<bean id="sessionManager" class="com.cjs.core.DefaultSessionManager" />
+
+	<bean id="user" class="com.cjs.basicweb.base.model.user.UserImpl"
+		scope="prototype" />
+	<bean id="userDao" class="com.cjs.basicweb.base.model.user.UserDaoDummy"
+		scope="singleton" />
+	<bean id="loginBL" class="com.cjs.basicweb.base.login.logic.LoginBL"
+		scope="singleton">
+		<constructor-arg ref="userDao" />
+	</bean>
+
+	<bean id="loginMainAction" class="com.cjs.basicweb.base.login.action.LoginMainAction"
+		scope="prototype">
+		<constructor-arg ref="loginBL" />
+		<property name="user" ref="user" />
+	</bean>
+
+	<bean id="logoutMainAction" class="com.cjs.basicweb.base.logout.action.LogoutMainAction"
+		scope="prototype">
+		<property name="user" ref="user" />
+	</bean>
+
+</beans>
