@@ -7,5 +7,6 @@
 	<h2>Hello World!</h2>
 	
 	<p><a href='<s:url action="prepareLogin" />' >Login</a></p>
+	<p><a href='<s:url action="testHibernate" />' >Test Hibernate</a></p>
 </body>
 </html>

@@ -46,6 +46,14 @@
 			<version>2.3.1.2</version>
 		</dependency>
 		
+		<!-- javaee -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
 		<!-- MySQL database driver -->
 		<dependency>
 			<groupId>mysql</groupId>
