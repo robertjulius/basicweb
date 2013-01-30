@@ -5,7 +5,7 @@
 
 <struts>
 
-	<package name="default" extends="hibernate-default" namespace="/">
+	<package name="testhibernate" extends="hibernate-default">
 
 		<action name="testHibernate" class="com.cjs.basicweb.testhibernate.TestHibernateAction">
 			<result name="success">/jsp/login/login.jsp</result>

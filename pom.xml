@@ -16,7 +16,7 @@
 	</repositories>
 
 	<dependencies>
-	
+
 		<!-- jUnit -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -24,28 +24,28 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- Struts 2 -->
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-core</artifactId>
 			<version>2.1.8</version>
 		</dependency>
-		
+
 		<!-- Log4j logging (Struts 2 Hibernate Plugins dependency) -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.9</version>
 		</dependency>
-		
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-spring-plugin</artifactId>
 			<version>2.3.1.2</version>
 		</dependency>
-		
+
 		<!-- javaee -->
 		<dependency>
 			<groupId>javax</groupId>
@@ -53,14 +53,14 @@
 			<version>6.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- MySQL database driver -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.9</version>
 		</dependency>
-		
+
 		<!-- Loggin -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -77,35 +77,35 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.6.6</version>
 		</dependency>
-		
+
 		<!-- jquery -->
 		<dependency>
 			<groupId>com.jgeppert.struts2.jquery</groupId>
 			<artifactId>struts2-jquery-plugin</artifactId>
 			<version>3.4.0</version>
 		</dependency>
-		
+
 		<!-- Hibernate validator (Struts 2 Hibernate Plugins dependency) -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>3.1.0.GA</version>
 		</dependency>
-		
+
 		<!-- Hibernate core -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate</artifactId>
 			<version>3.2.7.ga</version>
 		</dependency>
-		
+
 		<!-- Hibernate core library dependency start -->
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
 			<version>1.6.1</version>
 		</dependency>
-				<dependency>
+		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>1.1.1</version>
@@ -121,7 +121,7 @@
 			<version>2.2</version>
 		</dependency>
 		<!-- Hibernate core library dependency end -->
-		
+
 		<!-- Hibernate query library dependency start -->
 		<dependency>
 			<groupId>antlr</groupId>

@@ -5,8 +5,50 @@
 
 <struts>
 
-	
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.custom.i18n.resources" value="global" />
 
-	<include file="testhibernate-struts.xml"/>
+	<package name="default" extends="struts-default">
+		<interceptors>
+			<interceptor-stack name="appDefault">
+				<interceptor-ref name="timer" />
+				<interceptor-ref name="logger" />
+				<interceptor-ref name="defaultStack">
+					<param name="exception.logEnabled">true</param>
+					<param name="exception.logLevel">ERROR</param>
+					<param name="params.excludeParams">dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,parameters\...*</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="appDefault" />
+
+		<action name="index">
+			<result>/index.jsp</result>
+		</action>
+
+		<action name="topFrame">
+			<result>/jsp/main/top_frame.jsp</result>
+		</action>
+
+		<action name="leftFrame">
+			<result>/jsp/main/left_frame.jsp</result>
+		</action>
+
+		<action name="home">
+			<result>/jsp/main/home.jsp</result>
+		</action>
+
+		<action name="*Login" class="loginMainAction" method="{1}">
+			<result name="input">/jsp/login/login.jsp</result>
+			<result name="success">/jsp/main/main.jsp</result>
+		</action>
+
+		<action name="*Logout" class="logoutMainAction" method="{1}">
+			<result name="success">/jsp/logout/logout.jsp</result>
+		</action>
+
+	</package>
+	
+	<include file="com/cjs/basicweb/testhibernate/testhibernate-struts.xml"></include>
 
 </struts>
