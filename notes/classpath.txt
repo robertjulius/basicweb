@@ -1,0 +1,1 @@
+Semuanya bisa di-handle di pom.xml, tapi javaee.jar dan hibernate-annotations.jar masih harus set classpath manual dulu.
