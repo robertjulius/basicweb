@@ -3,12 +3,14 @@ package com.mkyong.customer.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "customer")
 public class Customer implements java.io.Serializable {
 
+	@Id
 	private Long customerId;
 	private String name;
 	private String address;
