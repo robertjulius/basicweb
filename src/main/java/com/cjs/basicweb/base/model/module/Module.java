@@ -3,6 +3,7 @@ package com.cjs.basicweb.base.model.module;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -12,6 +13,7 @@ import com.cjs.basicweb.base.model.Trackable;
 import com.cjs.basicweb.base.model.accesspath.AccessPath;
 import com.cjs.basicweb.base.model.usergroup.UserGroup;
 
+@Entity
 @Table(name = "ms_module")
 public class Module extends Trackable {
 
@@ -31,40 +33,40 @@ public class Module extends Trackable {
 	@ManyToMany(mappedBy = "modules")
 	private List<UserGroup> userGroups;
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getModuleName() {
-		return moduleName;
-	}
-
-	public void setModuleName(String moduleName) {
-		this.moduleName = moduleName;
+	public List<AccessPath> getAccessPaths() {
+		return accessPaths;
 	}
 
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public String getId() {
+		return id;
 	}
 
-	public List<AccessPath> getAccessPaths() {
-		return accessPaths;
+	public String getModuleName() {
+		return moduleName;
+	}
+
+	public List<UserGroup> getUserGroups() {
+		return userGroups;
 	}
 
 	public void setAccessPaths(List<AccessPath> accessPaths) {
 		this.accessPaths = accessPaths;
 	}
 
-	public List<UserGroup> getUserGroups() {
-		return userGroups;
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setModuleName(String moduleName) {
+		this.moduleName = moduleName;
 	}
 
 	public void setUserGroups(List<UserGroup> userGroups) {
