@@ -5,7 +5,9 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,10 +24,20 @@ public class Module extends Trackable {
 	@Id
 	private String id;
 
-	@Column(name = "module_name", unique = true, nullable = false)
-	private String moduleName;
+	@Column(name = "name", unique = true, nullable = false)
+	private String name;
 
 	private String description;
+
+	@Column(unique = true)
+	private String action;
+
+	@ManyToOne
+	@JoinColumn(name = "parent")
+	private Module parent;
+
+	@OneToMany(mappedBy = "parent")
+	private List<Module> childs;
 
 	@OneToMany(mappedBy = "module")
 	private List<AccessPath> accessPaths;
@@ -33,40 +45,64 @@ public class Module extends Trackable {
 	@ManyToMany(mappedBy = "modules")
 	private List<UserGroup> userGroups;
 
-	public List<AccessPath> getAccessPaths() {
-		return accessPaths;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
 	public String getId() {
 		return id;
-	}
-
-	public String getModuleName() {
-		return moduleName;
-	}
-
-	public List<UserGroup> getUserGroups() {
-		return userGroups;
-	}
-
-	public void setAccessPaths(List<AccessPath> accessPaths) {
-		this.accessPaths = accessPaths;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	public void setModuleName(String moduleName) {
-		this.moduleName = moduleName;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
+	}
+
+	public Module getParent() {
+		return parent;
+	}
+
+	public void setParent(Module parent) {
+		this.parent = parent;
+	}
+
+	public List<Module> getChilds() {
+		return childs;
+	}
+
+	public void setChilds(List<Module> childs) {
+		this.childs = childs;
+	}
+
+	public List<AccessPath> getAccessPaths() {
+		return accessPaths;
+	}
+
+	public void setAccessPaths(List<AccessPath> accessPaths) {
+		this.accessPaths = accessPaths;
+	}
+
+	public List<UserGroup> getUserGroups() {
+		return userGroups;
 	}
 
 	public void setUserGroups(List<UserGroup> userGroups) {

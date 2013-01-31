@@ -22,19 +22,19 @@ public class AccessPath extends Trackable {
 	@JoinColumn(name = "module_id")
 	private Module module;
 
-	public Module getModule() {
-		return module;
-	}
-
 	public String getUrl() {
 		return url;
 	}
 
-	public void setModule(Module module) {
-		this.module = module;
-	}
-
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public Module getModule() {
+		return module;
+	}
+
+	public void setModule(Module module) {
+		this.module = module;
 	}
 }

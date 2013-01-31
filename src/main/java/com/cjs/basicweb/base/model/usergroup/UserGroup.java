@@ -26,6 +26,8 @@ public class UserGroup extends Trackable {
 
 	@Column(unique = true, nullable = false)
 	private String name;
+	
+	private String description;
 
 	@ManyToMany
 	@JoinTable(name = "ms_privilege", joinColumns = @JoinColumn(name = "user_group_id"), inverseJoinColumns = @JoinColumn(name = "module_id"))
@@ -38,28 +40,36 @@ public class UserGroup extends Trackable {
 		return id;
 	}
 
-	public List<Module> getModules() {
-		return modules;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public List<UserImpl> getUsers() {
-		return users;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public List<Module> getModules() {
+		return modules;
 	}
 
 	public void setModules(List<Module> modules) {
 		this.modules = modules;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public List<UserImpl> getUsers() {
+		return users;
 	}
 
 	public void setUsers(List<UserImpl> users) {

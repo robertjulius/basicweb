@@ -1,12 +1,17 @@
 package com.cjs.basicweb.base.model;
 
-public interface GenericDao<T> {
+import javax.transaction.Transaction;
 
-	public void create(T t);
+import org.hibernate.Session;
 
-	public void delete(Object id);
+import com.googlecode.s2hibernate.struts2.plugin.annotations.SessionTarget;
+import com.googlecode.s2hibernate.struts2.plugin.annotations.TransactionTarget;
 
-	public T getDetail(Object id);
+public abstract class GenericDao<T> {
 
-	public void update(T t);
+	@SessionTarget
+	protected Session session;
+	
+	@TransactionTarget
+	protected Transaction transaction;
 }
