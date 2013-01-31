@@ -1,8 +1,11 @@
 package com.cjs.basicweb.testhibernate;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.cjs.basicweb.base.model.module.Module;
 import com.cjs.basicweb.base.model.module.ModuleDao;
 import com.cjs.basicweb.testmenu.TestGenerateMenu;
 import com.googlecode.s2hibernate.struts2.plugin.annotations.SessionTarget;
@@ -23,7 +26,8 @@ public class TestHibernateAction extends ActionSupport {
 	
 	@Override
 	public String execute() throws Exception {
-		TestGenerateMenu.setModules(moduleDao.getList());
+		List<Module> modules = moduleDao.getList();
+		TestGenerateMenu.setModules(modules);
 		TestGenerateMenu.generateHtmlMenu();
 		String htmlMenu = TestGenerateMenu.getHtmlMenu();
 		System.out.println(htmlMenu);

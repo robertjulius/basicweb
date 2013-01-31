@@ -8,13 +8,13 @@ public class ModuleDao extends GenericDao<Module> {
 
 	@SuppressWarnings("unchecked")
 	public List<Module> getList() {	
-		List<Module> courses = null;
+		List<Module> modules = null;
 		try {
-			courses = session.createQuery("from Module").list();
+			modules = session.createQuery("from Module").list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		return courses;
+		return modules;
 	}
 	
 }

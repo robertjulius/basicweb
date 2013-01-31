@@ -16,7 +16,6 @@ public class TestGenerateMenu {
 			generateChilds(stringBuilder, module);
 			stringBuilder.append("</li>").append("\n");
 		}
-		stringBuilder.append("</ul>").append("\n");
 		
 		htmlMenu = stringBuilder.toString();
 	}
