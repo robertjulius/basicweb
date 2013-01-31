@@ -7,9 +7,10 @@
 
 	<package name="testhibernate" extends="hibernate-default">
 
-		<action name="testHibernate" class="com.cjs.basicweb.testhibernate.TestHibernateAction">
+		<action name="testHibernate" class="com.cjs.basicweb.base.login.action.LoginMainAction">
 			<result name="success">/jsp/login/login.jsp</result>
 		</action>
+		
 	</package>
 
 </struts>

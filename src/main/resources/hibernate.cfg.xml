@@ -14,7 +14,7 @@
 		<property name="use_sql_comments">false</property>
 		<!-- <property name="hibernate.hbm2ddl.auto">create</property> -->
 		<!-- <mapping resource="com/mkyong/customer/hibernate/Customer.hbm.xml" /> -->
-		<mapping class="com.mkyong.customer.model.Customer" />
+		<!-- <mapping class="com.mkyong.customer.model.Customer" /> -->
 		<mapping class="com.cjs.basicweb.base.model.accesspath.AccessPath" />
 		<mapping class="com.cjs.basicweb.base.model.module.Module" />
 		<mapping class="com.cjs.basicweb.base.model.user.UserImpl" />

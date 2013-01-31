@@ -10,9 +10,9 @@
 	<bean id="user" class="com.cjs.basicweb.base.model.user.UserImpl"
 		scope="prototype" />
 	<bean id="userDao" class="com.cjs.basicweb.base.model.user.UserDaoDummy"
-		scope="singleton" />
+		scope="prototype" />
 	<bean id="loginBL" class="com.cjs.basicweb.base.login.logic.LoginBL"
-		scope="singleton">
+		scope="prototype">
 		<constructor-arg ref="userDao" />
 	</bean>
 
@@ -20,6 +20,11 @@
 		scope="prototype">
 		<constructor-arg ref="loginBL" />
 		<property name="user" ref="user" />
+	</bean>
+	
+	<bean id="leftFrameAction" class="com.cjs.basicweb.base.LeftFrameAction"
+		scope="prototype">
+		<constructor-arg ref="loginBL" />
 	</bean>
 
 	<bean id="logoutMainAction" class="com.cjs.basicweb.base.logout.action.LogoutMainAction"

@@ -1,23 +1,24 @@
-package com.cjs.basicweb.testmenu;
+package com.cjs.basicweb.utility;
 
 import java.util.List;
 
 import com.cjs.basicweb.base.model.module.Module;
 
-public class TestGenerateMenu {
-	private static List<Module> modules;
+public class HtmlMenuGenerator {
 
-	private static String htmlMenu;
+	public static String generateHtmlMenu() {
+		return "<li></li>";
+	}
 
-	public static void generateHtmlMenu() {
+	public static String generateHtmlMenu(List<Module> modules) {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (Module module : modules) {
 			stringBuilder.append("<li>").append(module.getName());
 			generateChilds(stringBuilder, module);
-			stringBuilder.append("</li>").append("\n");
+			stringBuilder.append("</li>");
 		}
-		
-		htmlMenu = stringBuilder.toString();
+
+		return stringBuilder.toString();
 	}
 
 	private static void generateChilds(StringBuilder stringBuilder,
@@ -32,21 +33,5 @@ public class TestGenerateMenu {
 			}
 			stringBuilder.append("</ul>").append("\n");
 		}
-	}
-
-	public static List<Module> getModules() {
-		return modules;
-	}
-
-	public static void setModules(List<Module> modules) {
-		TestGenerateMenu.modules = modules;
-	}
-
-	public static String getHtmlMenu() {
-		return htmlMenu;
-	}
-
-	public static void setHtmlMenu(String htmlMenu) {
-		TestGenerateMenu.htmlMenu = htmlMenu;
 	}
 }
