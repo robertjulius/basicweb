@@ -1,11 +1,10 @@
 package com.cjs.basicweb.base.login.action;
 
-import java.util.Map;
-
 import com.cjs.basicweb.base.login.logic.LoginBL;
 import com.cjs.core.User;
+import com.cjs.core.UserSession;
+import com.cjs.core.exception.AppException;
 import com.cjs.core.exception.UserException;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginMainAction extends ActionSupport {
@@ -13,18 +12,17 @@ public class LoginMainAction extends ActionSupport {
 
 	private LoginBL loginBL;
 	private User user;
+	private UserSession userSession;
 
-	public LoginMainAction(LoginBL loginBL) {
+	public LoginMainAction(LoginBL loginBL, UserSession userSession) {
 		this.loginBL = loginBL;
+		this.userSession = userSession;
 	}
 
 	@Override
-	public String execute() {
+	public String execute() throws AppException {
 		try {
-			loginBL.validatePassword(user.getUserId(), user.getPassword());
-			Map<String, Object> session = ActionContext.getContext()
-					.getSession();
-			session.put("htmlMenu", loginBL.getHtmlMenu());
+			loginBL.performLogin(user.getUsername(), user.getPassword(), userSession);
 			return SUCCESS;
 		} catch (UserException e) {
 			addActionError(e.getMessageId());

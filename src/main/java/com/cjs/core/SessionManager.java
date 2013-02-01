@@ -2,12 +2,14 @@ package com.cjs.core;
 
 import javax.servlet.http.HttpSession;
 
+import com.cjs.core.exception.AppException;
+
 public interface SessionManager {
 
-	public HttpSession getHttpSessionById(String sessionId) throws CJSException;
+	public HttpSession getHttpSessionById(String sessionId) throws AppException;
 
 	public void registerHttpSession(HttpSession httpSession)
-			throws CJSException;
+			throws AppException;
 
-	public void unregisterHttpSession(String sessionId) throws CJSException;
+	public void unregisterHttpSession(String sessionId) throws AppException;
 }

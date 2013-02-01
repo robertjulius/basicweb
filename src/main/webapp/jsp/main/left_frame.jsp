@@ -1,3 +1,8 @@
+<%@page import="com.cjs.core.UserSession"%>
+<%@page import="com.cjs.basicweb.base.model.usersession.UserSessionImpl"%>
+<%@page import="com.cjs.basicweb.base.model.user.UserImpl"%>
+<%@page import="com.opensymphony.xwork2.ActionContext"%>
+<%@page import="com.cjs.basicweb.utility.HtmlMenuGenerator"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
@@ -35,7 +40,11 @@
 
 <ul id="tree">
 	<span><strong>Home</strong></span>
-	<%=com.opensymphony.xwork2.ActionContext.getContext().getSession().get("htmlMenu") %>
+	<%
+		UserSession userSession = (UserSessionImpl) ActionContext.getContext().getSession().get("userSession");
+		UserImpl user = (UserImpl) userSession.getUser();
+	%>
+	<%=HtmlMenuGenerator.generateHtmlMenu(user) %>
 </ul>
 </div>
 

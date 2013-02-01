@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import com.cjs.core.exception.AppException;
+
 public class DefaultSessionManager implements SessionManager {
 
 	/*
@@ -19,25 +21,25 @@ public class DefaultSessionManager implements SessionManager {
 		return sessions;
 	}
 
-	public void registerHttpSession(HttpSession httpSession)
-			throws CJSException {
+	public void registerHttpSession(HttpSession httpSession) throws AppException
+			 {
 
 		if (DefaultSessionManager.sessions.containsValue(httpSession)) {
-			throw new CJSException("HttpSession '" + httpSession
+			throw new AppException("HttpSession '" + httpSession
 					+ "' with ID '" + httpSession.getId()
 					+ "' already registered");
 		}
 
 		String sessionId = httpSession.getId();
 		if (DefaultSessionManager.sessions.containsKey(sessionId)) {
-			throw new CJSException("Session ID '" + sessionId
+			throw new AppException("Session ID '" + sessionId
 					+ "' already registered");
 		}
 
 		DefaultSessionManager.sessions.put(sessionId, httpSession);
 	}
 
-	public void unregisterHttpSession(String sessionId) throws CJSException {
+	public void unregisterHttpSession(String sessionId) {
 		DefaultSessionManager.sessions.remove(sessionId);
 	}
 }

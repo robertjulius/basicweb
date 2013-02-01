@@ -1,38 +1,43 @@
 package com.cjs.basicweb.base.login.logic;
 
-import java.util.List;
-
-import com.cjs.basicweb.base.model.module.Module;
-import com.cjs.basicweb.base.model.module.ModuleDao;
 import com.cjs.basicweb.base.model.user.UserDao;
-import com.cjs.basicweb.utility.HtmlMenuGenerator;
+import com.cjs.basicweb.base.model.user.UserDaoImpl;
 import com.cjs.core.User;
+import com.cjs.core.UserSession;
+import com.cjs.core.exception.AppException;
 import com.cjs.core.exception.UserException;
+import com.opensymphony.xwork2.ActionContext;
 
 public class LoginBL {
 
-	private UserDao userDao;
-	private ModuleDao moduleDao = new ModuleDao();
+	private UserDao userDao = new UserDaoImpl();
 
-	public LoginBL(UserDao userDao) {
-		this.userDao = userDao;
+	public User performLogin(String username, String password,
+			UserSession userSession) throws UserException, AppException {
+		User user = userDao.getDetail(username);
+
+		validatePassword(user, username, password);
+		registerUserSession(user, userSession);
+
+		return user;
 	}
 
-	public String getHtmlMenu() {
-		List<Module> modules = moduleDao.getParents();
-		String htmlMenu = HtmlMenuGenerator.generateHtmlMenu(modules);
-		return htmlMenu;
+	private void registerUserSession(User user, UserSession userSession)
+			throws AppException, UserException {
+		userSession.setUser(user);
+		// userSession.registerToHttpSession();
+		ActionContext.getContext().getSession().put("userSession", userSession);
 	}
 
-	public boolean validatePassword(String userId, String password)
+	private void validatePassword(User user, String username, String password)
 			throws UserException {
 
-		User user = userDao.getDetail(userId);
-
-		if (!user.getPassword().equals(password)) {
-			throw new UserException("password.invalid");
+		if (user == null) {
+			throw new UserException("login.username.invalid");
 		}
 
-		return true;
+		if (!user.getPassword().equals(password)) {
+			throw new UserException("login.password.invalid");
+		}
 	}
 }

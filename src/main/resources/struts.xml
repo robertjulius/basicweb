@@ -29,10 +29,9 @@
 		<action name="topFrame">
 			<result>/jsp/main/top_frame.jsp</result>
 		</action>
-
-		<action name="leftFrame" class="leftFrameAction">
-			<interceptor-ref name="defaultStackHibernate" />
-			<result name="success">/jsp/main/left_frame.jsp</result>
+		
+		<action name="leftFrame">
+			<result>/jsp/main/left_frame.jsp</result>
 		</action>
 
 		<action name="home">

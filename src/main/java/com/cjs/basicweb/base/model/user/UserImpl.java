@@ -74,11 +74,11 @@ public class UserImpl extends Trackable implements User {
 	}
 	
 	public String getUserId() {
-		return id;
+		return username;
 	}
 
 	@Override
 	public void setUserId(String userId) {
-		setId(userId);		
+		setUsername(userId);		
 	}
 }

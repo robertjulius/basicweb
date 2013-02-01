@@ -9,22 +9,19 @@
 
 	<bean id="user" class="com.cjs.basicweb.base.model.user.UserImpl"
 		scope="prototype" />
-	<bean id="userDao" class="com.cjs.basicweb.base.model.user.UserDaoDummy"
-		scope="prototype" />
 	<bean id="loginBL" class="com.cjs.basicweb.base.login.logic.LoginBL"
 		scope="prototype">
-		<constructor-arg ref="userDao" />
+	</bean>
+	<bean id="userSession" class="com.cjs.basicweb.base.model.usersession.UserSessionImpl"
+		scope="prototype">
+		<constructor-arg ref="sessionManager" />
 	</bean>
 
 	<bean id="loginMainAction" class="com.cjs.basicweb.base.login.action.LoginMainAction"
 		scope="prototype">
 		<constructor-arg ref="loginBL" />
+		<constructor-arg ref="userSession" />
 		<property name="user" ref="user" />
-	</bean>
-	
-	<bean id="leftFrameAction" class="com.cjs.basicweb.base.LeftFrameAction"
-		scope="prototype">
-		<constructor-arg ref="loginBL" />
 	</bean>
 
 	<bean id="logoutMainAction" class="com.cjs.basicweb.base.logout.action.LogoutMainAction"
