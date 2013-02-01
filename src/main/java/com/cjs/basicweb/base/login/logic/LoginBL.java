@@ -1,7 +1,14 @@
 package com.cjs.basicweb.base.login.logic;
 
+import java.util.TreeMap;
+
+import com.cjs.basicweb.applets.Privilege;
+import com.cjs.basicweb.base.model.module.ModuleDao;
 import com.cjs.basicweb.base.model.user.UserDao;
 import com.cjs.basicweb.base.model.user.UserDaoImpl;
+import com.cjs.basicweb.base.model.user.UserImpl;
+import com.cjs.basicweb.base.model.usersession.UserSessionImpl;
+import com.cjs.basicweb.utility.HtmlMenuGenerator;
 import com.cjs.core.User;
 import com.cjs.core.UserSession;
 import com.cjs.core.exception.AppException;
@@ -10,6 +17,7 @@ import com.opensymphony.xwork2.ActionContext;
 
 public class LoginBL {
 
+	private ModuleDao moduleDao = new ModuleDao();
 	private UserDao userDao = new UserDaoImpl();
 
 	public User performLogin(String username, String password,
@@ -26,6 +34,13 @@ public class LoginBL {
 			throws AppException, UserException {
 		userSession.setUser(user);
 		// userSession.registerToHttpSession();
+		
+		TreeMap<String, Privilege> treeMap = HtmlMenuGenerator.generateTreeMap(
+				((UserImpl) user).getUserGroup().getModules(),
+				moduleDao.getParents());
+		
+		((UserSessionImpl) userSession).setTreeMap(treeMap);
+		
 		ActionContext.getContext().getSession().put("userSession", userSession);
 	}
 

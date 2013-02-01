@@ -11,9 +11,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import com.cjs.basicweb.base.model.Trackable;
 import com.cjs.basicweb.base.model.module.Module;
 import com.cjs.basicweb.base.model.user.UserImpl;
@@ -34,7 +31,6 @@ public class UserGroup extends Trackable {
 
 	@ManyToMany
 	@JoinTable(name = "ms_privilege", joinColumns = @JoinColumn(name = "user_group_id"), inverseJoinColumns = @JoinColumn(name = "module_id"))
-	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Module> modules;
 
 	@OneToMany(mappedBy = "userGroup")

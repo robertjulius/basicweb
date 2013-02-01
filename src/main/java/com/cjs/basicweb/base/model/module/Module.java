@@ -11,9 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import com.cjs.basicweb.base.model.Trackable;
 import com.cjs.basicweb.base.model.accesspath.AccessPath;
 import com.cjs.basicweb.base.model.usergroup.UserGroup;
@@ -40,7 +37,6 @@ public class Module extends Trackable {
 	private Module parent;
 
 	@OneToMany(mappedBy = "parent")
-	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Module> childs;
 
 	@OneToMany(mappedBy = "module")

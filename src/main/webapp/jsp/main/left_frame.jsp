@@ -41,10 +41,10 @@
 <ul id="tree">
 	<span><strong>Home</strong></span>
 	<%
-		UserSession userSession = (UserSessionImpl) ActionContext.getContext().getSession().get("userSession");
+		UserSessionImpl userSession = (UserSessionImpl) ActionContext.getContext().getSession().get("userSession");
 		UserImpl user = (UserImpl) userSession.getUser();
 	%>
-	<%=HtmlMenuGenerator.generateHtmlMenu(user) %>
+	<%=HtmlMenuGenerator.generateHtmlMenu(userSession.getTreeMap()) %>
 </ul>
 </div>
 

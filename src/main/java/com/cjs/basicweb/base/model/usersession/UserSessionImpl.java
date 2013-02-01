@@ -1,7 +1,10 @@
 package com.cjs.basicweb.base.model.usersession;
 
+import java.util.TreeMap;
+
 import javax.servlet.http.HttpSession;
 
+import com.cjs.basicweb.applets.Privilege;
 import com.cjs.core.SessionManager;
 import com.cjs.core.User;
 import com.cjs.core.UserSession;
@@ -11,9 +14,10 @@ public class UserSessionImpl implements UserSession {
 
 	private User user;
 	private String sessionId;
+	private TreeMap<String, Privilege> treeMap;
 
 	private SessionManager sessionManager;
-	
+
 	public UserSessionImpl(SessionManager sessionManager) {
 		this.sessionManager = sessionManager;
 	}
@@ -42,5 +46,13 @@ public class UserSessionImpl implements UserSession {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public TreeMap<String, Privilege> getTreeMap() {
+		return treeMap;
+	}
+
+	public void setTreeMap(TreeMap<String, Privilege> treeMap) {
+		this.treeMap = treeMap;
 	}
 }
