@@ -8,13 +8,14 @@ import java.util.List;
 import java.util.TreeMap;
 
 import com.cjs.basicweb.base.model.module.Module;
+import com.cjs.basicweb.utility.HtmlMenuGenerator;
 
 public class PrivilegeUtils {
 
 	public static TreeMap<String, Privilege> generateTree(
-			String[] privilegeIds, List<Module> modules) {
+			String[] privilegeIds, List<Module> AllModules) {
 		TreeMap<String, Privilege> treeMap = new TreeMap<String, Privilege>();
-		createTreeMap(treeMap, modules);
+		createTreeMap(treeMap, AllModules);
 
 		ArrayList<Privilege> leafs = new ArrayList<Privilege>();
 		getLeafs(leafs, treeMap);
@@ -86,8 +87,8 @@ public class PrivilegeUtils {
 
 	private static void createTreeMap(TreeMap<String, Privilege> treeMap,
 			List<Module> modules) {
-		HashMap<String, Privilege> hashMap = ListOfPrivilege
-				.generateHashMap(modules);
+		HashMap<String, Privilege> hashMap = HtmlMenuGenerator
+				.registerAllModule(modules);
 
 		Iterator<String> iterator = hashMap.keySet().iterator();
 		while (iterator.hasNext()) {

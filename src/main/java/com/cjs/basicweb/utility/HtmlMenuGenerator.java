@@ -1,56 +1,69 @@
 package com.cjs.basicweb.utility;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 
 import com.cjs.basicweb.applets.Privilege;
-import com.cjs.basicweb.applets.PrivilegeUtils;
 import com.cjs.basicweb.base.model.module.Module;
-import com.cjs.core.exception.AppException;
 
 public class HtmlMenuGenerator {
 
-	public static TreeMap<String, Privilege> generateTreeMap(
-			List<Module> userModules, List<Module> completes)
-			throws AppException {
-		List<String> privilegeIds = new ArrayList<String>();
-		for (Module userModule : userModules) {
-			privilegeIds.add(userModule.getId());
-		}
-
-		String[] initialPrivilegeIds = new String[privilegeIds.size()];
-		privilegeIds.toArray(initialPrivilegeIds);
-
-		TreeMap<String, Privilege> treeMap = PrivilegeUtils.generateTree(
-				initialPrivilegeIds, completes);
-
-		return treeMap;
-	}
-
-	public static String generateHtmlMenu(TreeMap<String, Privilege> node) {
+	public static String generateHtmlMenu(TreeMap<String, Privilege> treeMap) {
 		StringBuilder stringBuilder = new StringBuilder();
-		generateTree(stringBuilder, node);
+		generateHtmlMenu(treeMap, stringBuilder);
 		return stringBuilder.toString();
 	}
 
-	private static void generateTree(StringBuilder stringBuilder,
-			TreeMap<String, Privilege> node) {
-		Collection<Privilege> childs = node.values();
-		if (childs.isEmpty()) {
-			return;
+	public static void generateHtmlMenu(TreeMap<String, Privilege> treeMap,
+			StringBuilder stringBuilder) {
+
+		Collection<Privilege> nodes = treeMap.values();
+		Iterator<Privilege> iterator = nodes.iterator();
+		while (iterator.hasNext()) {
+
+			stringBuilder.append("<li>");
+			Privilege privilege = iterator.next();
+			stringBuilder.append(privilege.getName());
+
+			if (!privilege.getChilds().isEmpty()) {
+				stringBuilder.append("<ul>");
+				generateHtmlMenu(privilege.getChilds(), stringBuilder);
+				stringBuilder.append("</ul>");
+			}
+
+			stringBuilder.append("</li>");
 		}
 
-		stringBuilder.append("<ul>");
-		Iterator<Privilege> childIterator = childs.iterator();
-		while (childIterator.hasNext()) {
-			Privilege child = (Privilege) childIterator.next();
-			stringBuilder.append("<li>").append(child.getName());
-			generateTree(stringBuilder, child.getChilds());
-			stringBuilder.append("</li>").append("\n");
+	}
+
+	public static HashMap<String, Privilege> registerAllModule(
+			List<Module> modules) {
+		HashMap<String, Privilege> privileges = new HashMap<>();
+		for (Module module : modules) {
+			registerAllModule(module, privileges);
 		}
-		stringBuilder.append("</ul>").append("\n");
+		return privileges;
+	}
+
+	public static void registerAllModule(Module module,
+			HashMap<String, Privilege> privileges) {
+
+		if (!privileges.containsKey(module.getId())) {
+			String parentId = null;
+			if (module.getParent() != null) {
+				parentId = module.getParent().getId();
+			}
+
+			privileges.put(module.getId(),
+					new Privilege(module.getId(), module.getName(), parentId,
+							module.getAction()));
+		}
+
+		for (Module child : module.getChilds()) {
+			registerAllModule(child, privileges);
+		}
 	}
 }
