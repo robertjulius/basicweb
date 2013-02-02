@@ -1,5 +1,5 @@
 body {
-	font-family: cursive;
+	font-family: Verdana,helvetica,arial,sans-serif;
 	font-size: small;
 }
 
@@ -41,7 +41,9 @@ div.errorMessage {
 	margin-bottom: 20px;
 }
 
-
+.errorMessage {
+	color: #E00000;
+}
 
 
 

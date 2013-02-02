@@ -10,15 +10,17 @@
 <body>
 	<div class="form">
 		<s:form action="executeLogin" method="post">
+			<s:actionerror />  
+			<s:fielderror />  
 			<div class="input">
 				<s:label key="userId" />
 				<br />
-				<s:textfield name="user.userId" />
+				<s:textfield name="userId" />
 			</div>
 			<div class="input">
 				<s:label key="password" />
 				<br />
-				<s:password name="user.password" />
+				<s:password name="password" />
 			</div>
 			<div class="input">
 				<s:submit key="submit" />

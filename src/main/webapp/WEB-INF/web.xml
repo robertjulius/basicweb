@@ -8,13 +8,10 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	<listener>
-		<listener-class>com.cjs.basicweb.base.DefaultHttpSessionListener</listener-class>
-	</listener>
 	
 	<servlet>
 		<servlet-name>ServletStartUp</servlet-name>
-		<servlet-class>com.cjs.basicweb.base.ServletStartUp</servlet-class>
+		<servlet-class>com.cjs.basicweb.utility.ServletStartUp</servlet-class>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
 

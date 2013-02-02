@@ -38,7 +38,7 @@
 			<result>/jsp/main/home.jsp</result>
 		</action>
 
-		<action name="*Login" class="loginMainAction" method="{1}">
+		<action name="executeLogin" class="loginExecuteAction">
 			<interceptor-ref name="defaultStackHibernate" />
 			<result name="input">/jsp/login/login.jsp</result>
 			<result name="success">/jsp/main/main.jsp</result>
