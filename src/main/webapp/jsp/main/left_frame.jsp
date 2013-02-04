@@ -53,7 +53,7 @@
 					User user = userSession.getUser();
 				%>
 				<%= HtmlMenuGenerator.generateHtmlMenu(((SimpleUserSession) userSession)
-					.getTreeMap())%>
+					.getTreeMap(), request.getContextPath())%>
 			</ul>
 		</div>
 

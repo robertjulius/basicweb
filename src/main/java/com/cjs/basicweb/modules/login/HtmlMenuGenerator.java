@@ -10,14 +10,15 @@ import com.cjs.basicweb.model.module.Module;
 
 public class HtmlMenuGenerator {
 
-	public static String generateHtmlMenu(TreeMap<String, Privilege> treeMap) {
+	public static String generateHtmlMenu(TreeMap<String, Privilege> treeMap,
+			String contextPath) {
 		StringBuilder stringBuilder = new StringBuilder();
-		generateHtmlMenu(treeMap, stringBuilder);
+		generateHtmlMenu(treeMap, stringBuilder, contextPath);
 		return stringBuilder.toString();
 	}
 
 	public static void generateHtmlMenu(TreeMap<String, Privilege> treeMap,
-			StringBuilder stringBuilder) {
+			StringBuilder stringBuilder, String contextPath) {
 
 		Collection<Privilege> nodes = treeMap.values();
 		Iterator<Privilege> iterator = nodes.iterator();
@@ -25,11 +26,20 @@ public class HtmlMenuGenerator {
 
 			stringBuilder.append("<li>");
 			Privilege privilege = iterator.next();
-			stringBuilder.append(privilege.getName());
+
+			if (privilege.getAction() != null) {
+				stringBuilder
+						.append("<a href='" + privilege.getAction() + "'>");
+				stringBuilder.append(privilege.getName());
+				stringBuilder.append("</a>");
+			} else {
+				stringBuilder.append(privilege.getName());
+			}
 
 			if (!privilege.getChilds().isEmpty()) {
 				stringBuilder.append("<ul>");
-				generateHtmlMenu(privilege.getChilds(), stringBuilder);
+				generateHtmlMenu(privilege.getChilds(), stringBuilder,
+						contextPath);
 				stringBuilder.append("</ul>");
 			}
 

@@ -2,7 +2,6 @@ package com.cjs.basicweb.modules.login.logic;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.TreeMap;
 
 import com.cjs.basicweb.model.accesspath.AccessPath;
@@ -38,9 +37,22 @@ public class LoginBL {
 
 		validatePassword(user, password);
 		prepareTreeMenu(user, userSession);
-		setAccessPath(user, userSession);
+		((SimpleUserSession) userSession)
+				.setAccessPath(prepareAccessPath(user));
 
 		return user;
+	}
+
+	private String[] prepareAccessPath(User user) {
+		List<String> result = new ArrayList<>();
+		List<Module> modules = ((SimpleUser) user).getUserGroup().getModules();
+		for (Module module : modules) {
+			List<AccessPath> accessPaths = module.getAccessPaths();
+			for (AccessPath accessPath : accessPaths) {
+				result.add(accessPath.getUrl());
+			}
+		}
+		return result.toArray(new String[] {});
 	}
 
 	private void prepareTreeMenu(User user, UserSession userSession) {
@@ -56,21 +68,6 @@ public class LoginBL {
 				privilegeIds.toArray(new String[] {}), moduleDao.getParents());
 
 		((SimpleUserSession) userSession).setTreeMap(treeMap);
-	}
-
-	private void setAccessPath(User user, UserSession userSession) {
-
-		Map<String, String> map = ((SimpleUserSession) userSession)
-				.getAccessPath();
-
-		List<Module> modules = ((SimpleUser) user).getUserGroup().getModules();
-		for (Module module : modules) {
-			List<AccessPath> accessPaths = module.getAccessPaths();
-			for (AccessPath accessPath : accessPaths) {
-				map.put(accessPath.getUrl(), accessPath.getModule().getId());
-			}
-		}
-
 	}
 
 	private void validatePassword(User user, String password)

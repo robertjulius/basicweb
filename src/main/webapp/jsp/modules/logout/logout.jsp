@@ -10,7 +10,7 @@
 <body>
 	<table>
 		<tr>
-			<td>Thank you. Click <s:a href="prepareLogin">here</s:a> to login again.</td>
+			<td>Thank you. Click <a href="<%=request.getContextPath() %>/jsp/modules/login/login.jsp">here</a> to login again.</td>
 		</tr>
 	</table>
 </body>

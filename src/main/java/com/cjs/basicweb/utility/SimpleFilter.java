@@ -1,7 +1,6 @@
 package com.cjs.basicweb.utility;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.LoggerFactory;
 
 import com.cjs.basicweb.modules.login.usersession.SimpleUserSession;
-import com.cjs.basicweb.utility.path.PathUtils;
 import com.cjs.core.UserSession;
 
 public class SimpleFilter implements Filter {
@@ -24,8 +22,9 @@ public class SimpleFilter implements Filter {
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-
+		/*
+		 * Do nothing
+		 */
 	}
 
 	@Override
@@ -35,119 +34,43 @@ public class SimpleFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 
-		StringBuffer stringBuffer = new StringBuffer(request.getRequestURI());
-		stringBuffer.delete(0, request.getContextPath().length());
+		String url = request.getRequestURI();
+		url = url.substring(request.getContextPath().length()).replaceFirst(
+				"/", "");
 
-		String targetPath = stringBuffer.toString();
+		LoggerFactory.getLogger(getClass()).debug("Requested URL:" + url);
 
-		LoggerFactory.getLogger(getClass()).debug(
-				"Requested URL:" + stringBuffer.toString());
-
-		if (PathUtils.isPathNeedSession(targetPath)) {
+		if (isUrlNeedSession(url)) {
 			LoggerFactory.getLogger(getClass()).debug("URL need the session.");
-			if (request.getSession()
-					.getAttribute(GeneralConstants.USER_SESSION) == null) {
-				JSPUtils.forward(request, response,
-						filterConfig.getServletContext(), "session_expired.jsp");
-				return;
-			}
-		}
-
-		
-		
-		
-		if (PathUtils.isModuleNeedPrivilege(accessPath.get(targetPath))) {
-
-			LoggerFactory.getLogger(getClass()).debug("Module need privilege.");
 
 			UserSession userSession = (UserSession) request.getSession()
 					.getAttribute(GeneralConstants.USER_SESSION);
-			Map<String, String> accessPath = ((SimpleUserSession) userSession).getAccessPath();
-			
-			
-			
-			if () == null) {
 
-				JSPUtils.forward(request, response,
-						filterConfig.getServletContext(), "not_authorized.jsp");
-
+			if (userSession == null) {
+				JSPUtils.forward(request, response, filterConfig
+						.getServletContext(), AppContextManager.getPageFail()
+						.getSessionExpiredPage());
 				return;
+			}
+
+			if (isUrlNeedPrivilege(url)) {
+				LoggerFactory.getLogger(getClass()).debug(
+						"Module need privilege.");
+				String[] paths = ((SimpleUserSession) userSession)
+						.getAccessPath();
+				if (!isValidPath(url, paths)) {
+					JSPUtils.forward(request, response, filterConfig
+							.getServletContext(), AppContextManager
+							.getPageFail().getNotAuthorizedPage());
+					return;
+				} else {
+					LoggerFactory.getLogger(getClass()).debug(
+							"URL Authentication result = authorized.");
+				}
 			}
 		}
 
-		// check the path is need privileges validation?
-		if (Arrays.binarySearch(urlDoesntNeedCheckPrivileges,
-				stringBuffer.toString()) >= 0) {
-			chain.doFilter(req, resp);
-			return;
-		}
-		LoggerFactory.getLogger(getClass()).debug(
-				"URL need the privilege authentication.");
-
-		// check if the url is permitted to access
-		if (!UserSession.authenticateUrl(request.getSession(),
-				stringBuffer.toString())) { // if
-			// authentication
-			// failed,
-			// go
-			// to
-			// "not authorized"
-			// page
-			LoggerFactory.getLogger(getClass()).debug(
-					"URL Authentication result= not authorized.");
-			JSPUtils.forward(request, response,
-					filterConfig.getServletContext(),
-					failAuth.getNotAuthorizedUrl());
-			return;
-		}
-
-		// ModuleTracker.addBranch((UserSession)request.getSession().getAttribute("userSession"),
-		// sb.toString());
-		// Boolean successLock =
-		// (Boolean)ModuleTracker.runLock(ModuleTracker.MODE_ADD_BRANCH,
-		// (UserSession)request.getSession().getAttribute("userSession"),
-		// sb.toString(), null);
-		/*
-		 * Object successLock =
-		 * ModuleTracker.runLock(ModuleTracker.MODE_ADD_BRANCH,
-		 * (UserSession)request.getSession().getAttribute("userSession"),
-		 * sb.toString(), null);
-		 * 
-		 * if(successLock instanceof Boolean){ // check whether user has granted
-		 * the access to the targeted module Boolean lockSuccess = (Boolean)
-		 * successLock; if(lockSuccess.equals(Boolean.FALSE)){
-		 * LoggerFactory.getLogger(getClass()).debug(
-		 * "URL Lock Authentication result= currently granted by other user.");
-		 * JSPUtils.forward(request, response, filterConfig.getServletContext(),
-		 * failAuth.getNotGrantedUrl()); return; } } else if(successLock
-		 * instanceof Integer){ // check whether user has granted the access to
-		 * the targeted module based on his hierarchy-level
-		 * (nasional,regional,area,cabang) Integer lockSuccess = (Integer)
-		 * successLock; if(lockSuccess.intValue() ==
-		 * ModuleTracker.NO_ACCESS_GRANTED){
-		 * LogProducer.get(PrivilegeFcd.LOGGER)
-		 * .debug("URL Authentication result= not authorized.");
-		 * JSPUtils.forward(request, response, filterConfig.getServletContext(),
-		 * failAuth.getNotAuthorizedUrl()); return; } } else{
-		 * LogProducer.get(PrivilegeFcd
-		 * .LOGGER).debug("URL Authentication result= not authorized.");
-		 * JSPUtils.forward(request, response, filterConfig.getServletContext(),
-		 * failAuth.getNotAuthorizedUrl()); return; }
-		 */
-
-		/*
-		 * if(successLock.equals(Boolean.FALSE)){
-		 * LoggerFactory.getLogger(getClass()).debug(
-		 * "URL Lock Authentication result= currently granted by other user.");
-		 * JSPUtils.forward(request, response, filterConfig.getServletContext(),
-		 * failAuth.getNotGrantedUrl()); return; }
-		 */
-
-		LoggerFactory.getLogger(getClass()).debug(
-				"URL Authentication result= authorized.");
-		LoggerFactory.getLogger(getClass()).debug(
-				"URL Lock Authentication result= granted lock.");
-		chain.doFilter(req, resp); // by pass
+		chain.doFilter(req, resp);
 	}
 
 	@Override
@@ -155,4 +78,32 @@ public class SimpleFilter implements Filter {
 		this.filterConfig = filterConfig;
 	}
 
+	private boolean isUrlNeedPrivilege(String url) {
+		for (String testUrl : AppContextManager.getPageFail()
+				.getUrlDoesntNeedPrivilege()) {
+			if (testUrl.equals(url)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean isUrlNeedSession(String url) {
+		for (String testUrl : AppContextManager.getPageFail()
+				.getUrlDoesntNeedSession()) {
+			if (testUrl.equals(url)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean isValidPath(String url, String[] paths) {
+		for (String testUrl : paths) {
+			if (testUrl.equals(url)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

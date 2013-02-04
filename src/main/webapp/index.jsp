@@ -6,7 +6,6 @@
 <body>
 	<h2>Hello World!</h2>
 	
-	<p><a href='<s:url action="/jsp/login/login.jsp" />' >Login</a></p>
-	<p><a href='<s:url action="testHibernate" />' >Test Hibernate</a></p>
+	<p><a href="<%=request.getContextPath() %>/jsp/modules/login/login.jsp">Login</a></p>
 </body>
 </html>

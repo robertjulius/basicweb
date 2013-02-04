@@ -1,7 +1,5 @@
 package com.cjs.basicweb.modules.login.usersession;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.TreeMap;
 
 import com.cjs.basicweb.modules.login.Privilege;
@@ -14,9 +12,9 @@ public class SimpleUserSession implements UserSession {
 
 	private User user;
 	private TreeMap<String, Privilege> treeMap;
-	private final Map<String, String> accessPath = new HashMap<String, String>();
+	private String[] accessPath;
 
-	public Map<String, String> getAccessPath() {
+	public String[] getAccessPath() {
 		return accessPath;
 	}
 
@@ -32,6 +30,10 @@ public class SimpleUserSession implements UserSession {
 	@Override
 	public User getUser() {
 		return user;
+	}
+
+	public void setAccessPath(String[] accessPath) {
+		this.accessPath = accessPath;
 	}
 
 	public void setTreeMap(TreeMap<String, Privilege> treeMap) {

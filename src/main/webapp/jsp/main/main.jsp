@@ -185,9 +185,9 @@ iframe#contentFrame {
 <title></title>
 </head>
 <body>
-	<iframe id="topFrame" src="topFrame" name="topFrame"></iframe>
-	<iframe id="leftFrame" src="leftFrame" name="leftFrame"></iframe>
-	<iframe id="contentFrame" src="home" name="contentFrame"></iframe>
+	<iframe id="topFrame" src="topFrame.action" name="topFrame"></iframe>
+	<iframe id="leftFrame" src="leftFrame.action" name="leftFrame"></iframe>
+	<iframe id="contentFrame" src="home.action" name="contentFrame"></iframe>
 	<div id="dragbar">
 		<img id="dotted" src="dotted.png" />
 	</div>

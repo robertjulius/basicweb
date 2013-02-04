@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="form">
-		<s:form action="executeLogin" method="post">
+		<s:form action="executeLogin.action" method="post">
 			<s:actionerror />  
 			<s:fielderror />  
 			<div class="input">

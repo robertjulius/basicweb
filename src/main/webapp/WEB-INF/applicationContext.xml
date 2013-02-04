@@ -26,7 +26,32 @@
 		<constructor-arg ref="userSession" />
 	</bean>
 
-	<bean id="logoutMainAction" class="com.cjs.basicweb.modules.logout.action.LogoutMainAction"
+	<bean id="logoutExecuteAction" class="com.cjs.basicweb.modules.logout.action.LogoutExecuteAction"
 		scope="prototype" />
+
+	<bean id="pageFail" class="com.cjs.basicweb.utility.PageFail"
+		scope="singleton" >
+		<constructor-arg value="/jsp/main/error_session_expired.jsp"/>
+		<constructor-arg value="/jsp/main/error_not_authorized.jsp"/>
+		<constructor-arg value="/jsp/main/error_page.jsp"/>
+		<property name="urlDoesntNeedSession">
+			<list>
+				<value>jsp/modules/login/login.jsp</value>
+				<value>jsp/modules/login/executeLogin.action</value>
+				<value>index.action</value>
+			</list>
+		</property>
+		<property name="urlDoesntNeedPrivilege">
+			<list>
+				<value>jsp/modules/login/leftFrame.action</value>
+				<value>jsp/modules/login/topFrame.action</value>
+				<value>jsp/modules/login/home.action</value>
+				<value>jsp/modules/login/executeLogout.action</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="testFirstEntryAction" class="com.cjs.basicweb.modules.test.action.TestFirstEntryAction"
+		scope="prototype" />	
 
 </beans>

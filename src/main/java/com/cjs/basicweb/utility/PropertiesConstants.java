@@ -15,5 +15,6 @@ public class PropertiesConstants {
 	public static final String ERROR_SESSION_EXPIRED = "error.session.expired";
 	public static final String ERROR_INCONSISTENT_DATABASE = "error.inconsistent.database";
 	public static final String ERROR_DUPLICATE_REGISTER_USERSESSION = "error.duplicate.register.usersession";
+	public static final String ERROR_APPCONFIG_RELOAD = "error.appconfig.reload";
 
 }
