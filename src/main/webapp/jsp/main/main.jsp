@@ -185,9 +185,9 @@ iframe#contentFrame {
 <title></title>
 </head>
 <body>
-	<iframe id="topFrame" src="topFrame.action" name="topFrame"></iframe>
-	<iframe id="leftFrame" src="leftFrame.action" name="leftFrame"></iframe>
-	<iframe id="contentFrame" src="home.action" name="contentFrame"></iframe>
+	<iframe id="topFrame" src="<%=request.getContextPath() %>/main/topFrame.action" name="topFrame"></iframe>
+	<iframe id="leftFrame" src="<%=request.getContextPath() %>/main/leftFrame.action" name="leftFrame"></iframe>
+	<iframe id="contentFrame" src="<%=request.getContextPath() %>/main/home.action" name="contentFrame"></iframe>
 	<div id="dragbar">
 		<img id="dotted" src="dotted.png" />
 	</div>

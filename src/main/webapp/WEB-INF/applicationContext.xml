@@ -36,17 +36,18 @@
 		<constructor-arg value="/jsp/main/error_page.jsp"/>
 		<property name="urlDoesntNeedSession">
 			<list>
-				<value>jsp/modules/login/login.jsp</value>
-				<value>jsp/modules/login/executeLogin.action</value>
-				<value>index.action</value>
+				<value>/jsp/modules/login/login.jsp</value>
+				<value>/modules/login/executeLogin.action</value>
+				<value>/main/index.action</value>
+				<value>/index.action</value>
 			</list>
 		</property>
 		<property name="urlDoesntNeedPrivilege">
 			<list>
-				<value>jsp/modules/login/leftFrame.action</value>
-				<value>jsp/modules/login/topFrame.action</value>
-				<value>jsp/modules/login/home.action</value>
-				<value>jsp/modules/login/executeLogout.action</value>
+				<value>/main/leftFrame.action</value>
+				<value>/main/topFrame.action</value>
+				<value>/main/home.action</value>
+				<value>/modules/logout/executeLogout.action</value>
 			</list>
 		</property>
 	</bean>

@@ -9,9 +9,10 @@
 </head>
 <body>
 	<div class="form">
-		<s:form action="executeLogin.action" method="post">
-			<s:actionerror />  
-			<s:fielderror />  
+		<s:form action="/modules/login/executeLogin.action"
+			method="post">
+			<s:actionerror />
+			<s:fielderror />
 			<div class="input">
 				<s:label key="userId" />
 				<br />

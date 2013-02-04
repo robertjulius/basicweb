@@ -29,7 +29,7 @@ public class HtmlMenuGenerator {
 
 			if (privilege.getAction() != null) {
 				stringBuilder
-						.append("<a href='" + privilege.getAction() + "'>");
+						.append("<a href='" + contextPath + privilege.getAction() + "'>");
 				stringBuilder.append(privilege.getName());
 				stringBuilder.append("</a>");
 			} else {

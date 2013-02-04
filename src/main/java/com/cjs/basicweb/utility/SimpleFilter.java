@@ -35,8 +35,7 @@ public class SimpleFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) resp;
 
 		String url = request.getRequestURI();
-		url = url.substring(request.getContextPath().length()).replaceFirst(
-				"/", "");
+		url = url.substring(request.getContextPath().length());
 
 		LoggerFactory.getLogger(getClass()).debug("Requested URL:" + url);
 

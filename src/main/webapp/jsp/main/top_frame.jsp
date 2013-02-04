@@ -11,7 +11,7 @@
 <body style="background-color: #AA0000">
 	<table>
 		<tr>
-			<td><s:a href="executeLogout.action">Logout</s:a></td>
+			<td><a href="<%=request.getContextPath() %>/modules/logout/executeLogout.action">Logout</a></td>
 		</tr>
 	</table>
 </body>

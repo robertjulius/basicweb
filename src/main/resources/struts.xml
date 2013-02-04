@@ -9,7 +9,7 @@
 	<constant name="struts.custom.i18n.resources" value="global" />
 	<constant name="struts.action.extension" value="action"/>
 
-	<package name="app-default" extends="hibernate-default">
+	<package name="app-default" extends="hibernate-default" namespace="/main">
 		<interceptors>
 			<interceptor-stack name="appDefault">
 				<interceptor-ref name="timer" />
@@ -38,23 +38,17 @@
 		<action name="home">
 			<result>/jsp/main/home.jsp</result>
 		</action>
-
-		<action name="executeLogin" class="loginExecuteAction">
-			<interceptor-ref name="defaultStackHibernate" />
-			<result name="input">/jsp/modules/login/login.jsp</result>
-			<result name="success">/jsp/main/main.jsp</result>
-		</action>
-
-		<action name="executeLogout" class="logoutExecuteAction">
-			<result name="success">/jsp/modules/logout/logout.jsp</result>
-		</action>
 		
 		<action name="testFirstEntry" class="testFirstEntryAction">
 			<result name="success">/jsp/modules/test/test_maintenance_main.jsp</result>
 		</action>
 
 	</package>
-
+	
 	<include file="com/cjs/basicweb/modules/test/test-struts.xml"></include>
+	<include file="com/cjs/basicweb/modules/login/login-struts.xml"></include>
+	<include file="com/cjs/basicweb/modules/logout/logout-struts.xml"></include>
+	
+	
 
 </struts>
