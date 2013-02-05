@@ -29,7 +29,7 @@ div.input {
 div.form {
 	padding: 20px;
 	background-color: #eeeeee;
-	display: inline-block;
+	/*display: inline-block;*/
 }
 
 div.errorMessage {
@@ -46,26 +46,3 @@ div.errorMessage {
 }
 
 
-
-
-
-#boxContainerContainer {
-    background: #fdd;
-    text-align: center;
-}
-
-#boxContainer {
-    display:inline-block;
-    border:thick dotted #060;
-    margin: 0px auto 10px auto;
-    text-align: left;
-}
-
-#box1,
-#box2,
-#box3 {
-    width: 50px;
-    height: 50px;
-    background: #999;
-    display: inline-block;
-}

@@ -8,25 +8,30 @@
 <s:head />
 </head>
 <body>
-	<div class="form">
-		<s:form action="/modules/login/executeLogin.action"
-			method="post">
-			<s:actionerror />
-			<s:fielderror />
-			<div class="input">
-				<s:label key="userId" />
-				<br />
-				<s:textfield name="userId" />
-			</div>
-			<div class="input">
-				<s:label key="password" />
-				<br />
-				<s:password name="password" />
-			</div>
-			<div class="input">
-				<s:submit key="submit" />
-			</div>
-		</s:form>
-	</div>
+	<table>
+		<tr>
+			<td>
+				<div class="form">
+					<s:form action="/modules/login/executeLogin.action" method="post">
+						<s:actionerror />
+						<s:fielderror />
+						<div class="input">
+							<s:label key="userId" />
+							<br />
+							<s:textfield name="userId" />
+						</div>
+						<div class="input">
+							<s:label key="password" />
+							<br />
+							<s:password name="password" />
+						</div>
+						<div class="input">
+							<s:submit key="submit" />
+						</div>
+					</s:form>
+				</div>
+			</td>
+		</tr>
+	</table>
 </body>
 </html>

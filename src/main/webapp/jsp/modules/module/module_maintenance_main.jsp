@@ -14,9 +14,7 @@
 				<div class="form">
 					<s:form action="/modules/module/prepareNew.action"
 						method="post">
-						<div class="input">
-							<s:submit key="Create New" />
-						</div>
+						<s:submit key="Create New" />
 					</s:form>
 				</div>
 			</td>
@@ -24,22 +22,30 @@
 		<tr>
 			<td>
 				<div class="form">
-					<s:form action="/modules/login/executeLogin.action" method="post">
+					<s:form action="/modules/module/search.action" method="post">
 						<s:actionerror />
 						<s:fielderror />
 						<div class="input">
-							<s:label key="userId" />
+							<s:label key="moduleId" />
 							<br />
-							<s:textfield name="userId" />
+							<s:textfield name="moduleId" />
 						</div>
 						<div class="input">
-							<s:label key="password" />
+							<s:label key="moduleName" />
 							<br />
-							<s:password name="password" />
+							<s:textfield name="moduleName" />
 						</div>
 						<div class="input">
-							<s:submit key="submit" />
+							<s:label key="moduleAction" />
+							<br />
+							<s:textfield name="moduleAction" />
 						</div>
+						<div class="input">
+							<s:label key="moduleParent" />
+							<br />
+							<s:textfield name="moduleParent" />
+						</div>
+						<s:submit key="Search" />
 					</s:form>
 				</div>
 			</td>

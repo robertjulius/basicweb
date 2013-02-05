@@ -15,6 +15,14 @@
 			<result name="success">/jsp/modules/module/module_maintenance_new.jsp</result>
 		</action>
 		
+		<action name="search" class="moduleMainAction" method="search">
+			<result name="success">/jsp/modules/module/module_maintenance_search.jsp</result>
+		</action>
+		
+		<action name="confirmNew" class="moduleExecuteAction" method="confirmNew">
+			<result name="success">/jsp/modules/module/module_maintenance_confirm.jsp</result>
+		</action>
+		
 	</package>
 
 </struts>
