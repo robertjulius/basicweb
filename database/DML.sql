@@ -27,4 +27,4 @@ INSERT INTO ms_privilege (user_group_id, module_id) VALUES ('developer', '021mod
 -- MS_ACCESS_PATH
 DELETE FROM ms_access_path;
 INSERT INTO ms_access_path (url, create_by, create_date, update_by, update_date, module_id) VALUES ('/modules/test/testFirstEntry.action', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP, '021module_maintenance');
-
+INSERT INTO ms_access_path (url, create_by, create_date, update_by, update_date, module_id) VALUES ('/modules/module/moduleMaintenanceMain.action', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP, '021module_maintenance');

@@ -1,6 +1,8 @@
 package com.cjs.basicweb.utility;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -10,6 +12,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.LoggerFactory;
 
@@ -33,6 +36,7 @@ public class SimpleFilter implements Filter {
 
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
+		HttpSession session = request.getSession();
 
 		String url = request.getRequestURI();
 		url = url.substring(request.getContextPath().length());
@@ -42,7 +46,7 @@ public class SimpleFilter implements Filter {
 		if (isUrlNeedSession(url)) {
 			LoggerFactory.getLogger(getClass()).debug("URL need the session.");
 
-			UserSession userSession = (UserSession) request.getSession()
+			UserSession userSession = (UserSession) session
 					.getAttribute(GeneralConstants.USER_SESSION);
 
 			if (userSession == null) {
@@ -50,6 +54,20 @@ public class SimpleFilter implements Filter {
 						.getServletContext(), AppContextManager.getPageFail()
 						.getSessionExpiredPage());
 				return;
+			} else {
+				@SuppressWarnings("unchecked")
+				Map<String, Object> moduleSession = (Map<String, Object>) session
+						.getAttribute(GeneralConstants.MODULE_SESSION);
+				if (moduleSession == null) {
+					moduleSession = new ConcurrentHashMap<String, Object>();
+					session.setAttribute(GeneralConstants.MODULE_SESSION,
+							moduleSession);
+				}
+
+				String initial = request.getParameter("initial");
+				if (initial != null && initial.trim().equalsIgnoreCase("true")) {
+					moduleSession.clear();
+				}
 			}
 
 			if (isUrlNeedPrivilege(url)) {
