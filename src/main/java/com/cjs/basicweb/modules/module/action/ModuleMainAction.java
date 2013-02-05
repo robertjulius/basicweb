@@ -1,8 +1,8 @@
 package com.cjs.basicweb.modules.module.action;
 
-import com.cjs.basicweb.utility.BaseAction;
+import com.cjs.basicweb.utility.FormAction;
 
-public class ModuleMainAction extends BaseAction {
+public class ModuleMainAction extends FormAction {
 
 	private static final long serialVersionUID = 8114275581397242184L;
 	

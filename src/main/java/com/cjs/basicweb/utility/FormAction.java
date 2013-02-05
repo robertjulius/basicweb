@@ -9,9 +9,10 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
 
-public abstract class BaseAction extends ActionSupport implements SessionAware,
-		ServletRequestAware {
+public abstract class FormAction<T> extends ActionSupport implements SessionAware,
+		ServletRequestAware, ModelDriven<T> {
 
 	private static final long serialVersionUID = -3643549719278354411L;
 
