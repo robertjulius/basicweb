@@ -1,4 +1,4 @@
-package com.cjs.basicweb.utility;
+package com.cjs.struts2;
 
 import java.util.Map;
 
@@ -8,11 +8,11 @@ import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.cjs.basicweb.utility.GeneralConstants;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 
-public abstract class FormAction<T> extends ActionSupport implements SessionAware,
-		ServletRequestAware, ModelDriven<T> {
+public abstract class BaseAction extends ActionSupport implements SessionAware,
+		ServletRequestAware {
 
 	private static final long serialVersionUID = -3643549719278354411L;
 
@@ -34,7 +34,7 @@ public abstract class FormAction<T> extends ActionSupport implements SessionAwar
 	}
 
 	@Override
-	public void setServletRequest(HttpServletRequest request) {
+	public final void setServletRequest(HttpServletRequest request) {
 		this.request = request;
 	}
 

@@ -54,7 +54,9 @@ public class SimpleFilter implements Filter {
 						.getServletContext(), AppContextManager.getPageFail()
 						.getSessionExpiredPage());
 				return;
+
 			} else {
+
 				@SuppressWarnings("unchecked")
 				Map<String, Object> moduleSession = (Map<String, Object>) session
 						.getAttribute(GeneralConstants.MODULE_SESSION);

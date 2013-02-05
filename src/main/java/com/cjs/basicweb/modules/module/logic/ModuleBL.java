@@ -8,14 +8,12 @@ import com.cjs.basicweb.model.accesspath.AccessPath;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.model.module.ModuleDao;
 import com.cjs.basicweb.model.user.SimpleUser;
-import com.cjs.basicweb.model.user.UserDao;
 import com.cjs.basicweb.modules.login.Privilege;
 import com.cjs.basicweb.modules.login.PrivilegeUtils;
 import com.cjs.basicweb.modules.login.usersession.SimpleUserSession;
 import com.cjs.basicweb.utility.PropertiesConstants;
 import com.cjs.core.User;
 import com.cjs.core.UserSession;
-import com.cjs.core.exception.AppException;
 import com.cjs.core.exception.UserException;
 
 public class ModuleBL {
@@ -25,25 +23,25 @@ public class ModuleBL {
 	public ModuleBL() {
 		moduleDao = new ModuleDao();
 	}
-	
+
 	public void checkDuplicate() {
-		
+
 	}
 
-	public User performLogin(String userId, String password,
-			UserSession userSession) throws UserException, AppException {
-		User user = userDao.getDetail(userId);
-		if (user == null) {
-			throw new UserException(PropertiesConstants.INVALID_LOGIN_USERID);
-		}
-
-		validatePassword(user, password);
-		prepareTreeMenu(user, userSession);
-		((SimpleUserSession) userSession)
-				.setAccessPath(prepareAccessPath(user));
-
-		return user;
-	}
+	// public User performLogin(String userId, String password,
+	// UserSession userSession) throws UserException, AppException {
+	// User user = userDao.getDetail(userId);
+	// if (user == null) {
+	// throw new UserException(PropertiesConstants.INVALID_LOGIN_USERID);
+	// }
+	//
+	// validatePassword(user, password);
+	// prepareTreeMenu(user, userSession);
+	// ((SimpleUserSession) userSession)
+	// .setAccessPath(prepareAccessPath(user));
+	//
+	// return user;
+	// }
 
 	private String[] prepareAccessPath(User user) {
 		List<String> result = new ArrayList<>();

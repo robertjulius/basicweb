@@ -22,8 +22,6 @@
 	<bean id="loginExecuteAction"
 		class="com.cjs.basicweb.modules.login.action.LoginExecuteAction"
 		scope="prototype">
-		<constructor-arg ref="loginBL" />
-		<constructor-arg ref="userSession" />
 	</bean>
 
 	<bean id="logoutExecuteAction" class="com.cjs.basicweb.modules.logout.action.LogoutExecuteAction"
