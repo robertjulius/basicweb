@@ -6,7 +6,7 @@
 	<display-name>Archetype Created Web Application</display-name>
 
 	<listener>
-		<listener-class>com.cjs.basicweb.utility.SimpleHttpSessionListener</listener-class>
+		<listener-class>com.cjs.basicweb.modules.login.usersession.SimpleSessionManager</listener-class>
 	</listener>
 
 	<listener>
@@ -16,6 +16,12 @@
 	<servlet>
 		<servlet-name>ServletStartUp</servlet-name>
 		<servlet-class>com.cjs.basicweb.utility.ServletStartUp</servlet-class>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>AppContextManager</servlet-name>
+		<servlet-class>com.cjs.basicweb.utility.AppContextManager</servlet-class>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
 

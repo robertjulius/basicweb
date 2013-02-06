@@ -3,10 +3,8 @@ package com.cjs.basicweb.modules.login.usersession;
 import java.util.TreeMap;
 
 import com.cjs.basicweb.modules.login.Privilege;
-import com.cjs.basicweb.utility.AppContextManager;
 import com.cjs.core.User;
 import com.cjs.core.UserSession;
-import com.cjs.core.exception.AppException;
 
 public class SimpleUserSession implements UserSession {
 
@@ -16,11 +14,6 @@ public class SimpleUserSession implements UserSession {
 
 	public String[] getAccessPath() {
 		return accessPath;
-	}
-
-	public UserSession getFromSession() throws AppException {
-		return AppContextManager.getUserSessionManager().getById(
-				user.getUserId());
 	}
 
 	public TreeMap<String, Privilege> getTreeMap() {

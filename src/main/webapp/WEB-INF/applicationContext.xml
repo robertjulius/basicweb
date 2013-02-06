@@ -6,7 +6,7 @@
 	http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
 	<bean id="userSessionManager"
-		class="com.cjs.basicweb.modules.login.usersession.SimpleUserSessionManager"
+		class="com.cjs.basicweb.modules.login.usersession.SimpleSessionManager"
 		scope="singleton" />
 
 	<bean id="userSession"

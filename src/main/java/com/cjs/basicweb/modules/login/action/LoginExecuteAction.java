@@ -31,8 +31,7 @@ public class LoginExecuteAction extends FormAction<LoginForm> {
 					.getPassword(), userSession);
 			userSession.setUser(user);
 			getSession().put(GeneralConstants.USER_SESSION, userSession);
-			AppContextManager.getUserSessionManager().registerUserSession(
-					userSession);
+			AppContextManager.getSessionManager().registerSession(getRequest().getSession());
 			return SUCCESS;
 		} catch (UserException e) {
 			addActionError(e.getMessageId());

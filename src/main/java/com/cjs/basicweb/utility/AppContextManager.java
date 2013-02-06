@@ -1,42 +1,46 @@
 package com.cjs.basicweb.utility;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.cjs.core.UserSessionManager;
-import com.cjs.core.exception.AppException;
+import com.cjs.core.SessionManager;
 
-public class AppContextManager {
+public class AppContextManager extends HttpServlet {
+
+	private static final long serialVersionUID = 5224370293529914022L;
 
 	private static AppContextManager instance;
 
-	private UserSessionManager userSessionManager;
+	private SessionManager userSessionManager;
 	private PageFail pageFail;
 
 	public static PageFail getPageFail() {
 		return instance.pageFail;
 	}
 
-	public static UserSessionManager getUserSessionManager() {
+	public static SessionManager getSessionManager() {
 		return instance.userSessionManager;
 	}
 
-	public static void reload(ServletContext context) throws AppException {
-		if (instance == null) {
-			instance = new AppContextManager();
+	private static void load(ServletContext context) {
+		instance = new AppContextManager();
 
-			WebApplicationContext webAppContext = WebApplicationContextUtils
-					.getWebApplicationContext(context);
+		WebApplicationContext webAppContext = WebApplicationContextUtils
+				.getWebApplicationContext(context);
 
-			instance.userSessionManager = (UserSessionManager) webAppContext
-					.getBean("userSessionManager");
+		instance.userSessionManager = (SessionManager) webAppContext
+				.getBean("userSessionManager");
 
-			instance.pageFail = (PageFail) webAppContext.getBean("pageFail");
-
-		} else {
-			throw new AppException(PropertiesConstants.ERROR_APPCONFIG_RELOAD);
-		}
+		instance.pageFail = (PageFail) webAppContext.getBean("pageFail");
+	}
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		AppContextManager.load(config.getServletContext());
 	}
 }

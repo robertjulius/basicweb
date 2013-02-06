@@ -55,21 +55,6 @@ public class SimpleFilter implements Filter {
 						.getSessionExpiredPage());
 				return;
 
-			} else {
-
-				@SuppressWarnings("unchecked")
-				Map<String, Object> moduleSession = (Map<String, Object>) session
-						.getAttribute(GeneralConstants.MODULE_SESSION);
-				if (moduleSession == null) {
-					moduleSession = new ConcurrentHashMap<String, Object>();
-					session.setAttribute(GeneralConstants.MODULE_SESSION,
-							moduleSession);
-				}
-
-				String initial = request.getParameter("initial");
-				if (initial != null && initial.trim().equalsIgnoreCase("true")) {
-					moduleSession.clear();
-				}
 			}
 
 			if (isUrlNeedPrivilege(url)) {
@@ -87,6 +72,20 @@ public class SimpleFilter implements Filter {
 							"URL Authentication result = authorized.");
 				}
 			}
+		}
+		
+		@SuppressWarnings("unchecked")
+		Map<String, Object> moduleSession = (Map<String, Object>) session
+				.getAttribute(GeneralConstants.MODULE_SESSION);
+		if (moduleSession == null) {
+			moduleSession = new ConcurrentHashMap<String, Object>();
+			session.setAttribute(GeneralConstants.MODULE_SESSION,
+					moduleSession);
+		}
+
+		String initial = request.getParameter("initial");
+		if (initial != null && initial.trim().equalsIgnoreCase("true")) {
+			moduleSession.clear();
 		}
 
 		chain.doFilter(req, resp);
