@@ -1,0 +1,12 @@
+.label {
+	font-family: Verdana,helvetica,arial,sans-serif;
+	font-size: small;
+	font-style: normal;
+}
+
+.errorMessage {
+	font-family: Verdana,helvetica,arial,sans-serif;
+	font-size: small;
+    color: red;
+    font-weight: normal;
+}
