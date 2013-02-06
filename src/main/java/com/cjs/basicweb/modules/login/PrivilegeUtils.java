@@ -1,7 +1,6 @@
 package com.cjs.basicweb.modules.login;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -21,7 +20,7 @@ public class PrivilegeUtils {
 
 		while (!isEquals(privilegeIds, leafs)) {
 			for (Privilege leaf : leafs) {
-				if (Arrays.binarySearch(privilegeIds, leaf.getId()) < 0) {
+				if (!isExists(leaf.getId(), privilegeIds)) {
 					Privilege parent = getPrivilegeFromTree(leaf.getParentId(),
 							treeMap);
 					parent.getChilds().remove(leaf.getId());
@@ -100,5 +99,14 @@ public class PrivilegeUtils {
 		}
 
 		return equals == leafs.size();
+	}
+	
+	private static boolean isExists(String string, String[] strings) {
+		for (String temp : strings) {
+			if (string.equals(temp)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

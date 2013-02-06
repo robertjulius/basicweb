@@ -1,0 +1,13 @@
+Step to adding new module
+=========================
+
+-	Tambahin ke dalam ms_module
+-	Tambahin ke dalam ms_access_path
+-	Tambahin ke dalam ms_privilege
+-	Create form bean
+-	Create dao class
+-	Create business logic class
+-	Create related action class with required method in modulename-struts.xml
+-	Create modulename-struts.xml
+-	include modulename-struts.xml ke struts.xml
+-	Create related jsp.files

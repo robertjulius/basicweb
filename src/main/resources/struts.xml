@@ -49,6 +49,7 @@
 	<include file="com/cjs/basicweb/modules/module/module-struts.xml"></include>
 	<include file="com/cjs/basicweb/modules/login/login-struts.xml"></include>
 	<include file="com/cjs/basicweb/modules/logout/logout-struts.xml"></include>
+	<include file="com/cjs/basicweb/modules/resetusersession/resetusersession-struts.xml"></include>
 	
 	
 

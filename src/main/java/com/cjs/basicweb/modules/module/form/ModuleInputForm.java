@@ -2,7 +2,9 @@ package com.cjs.basicweb.modules.module.form;
 
 import com.cjs.basicweb.model.FormBean;
 
-public class ModuleInputForm implements FormBean {
+public class ModuleInputForm extends FormBean {
+
+	private static final long serialVersionUID = 7952657167875968415L;
 
 	private String id;
 	private String name;

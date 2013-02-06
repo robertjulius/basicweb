@@ -18,12 +18,19 @@ public class SimpleUserSessionManager implements UserSessionManager {
 	}
 
 	@Override
+	public Map<String, UserSession> getList() throws AppException {
+		return map;
+	}
+
+	@Override
 	public void registerUserSession(UserSession userSession)
 			throws AppException {
 		if (map.containsKey(userSession.getUser().getUserId())) {
 			throw new AppException(
 					PropertiesConstants.ERROR_DUPLICATE_REGISTER_USERSESSION);
 		}
+
+		map.put(userSession.getUser().getUserId(), userSession);
 	}
 
 	@Override

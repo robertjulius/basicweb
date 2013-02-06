@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
+import org.slf4j.LoggerFactory;
+
 import com.cjs.basicweb.model.accesspath.AccessPath;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.model.module.ModuleDao;
@@ -44,6 +46,9 @@ public class LoginBL {
 	}
 
 	private String[] prepareAccessPath(User user) {
+		
+		LoggerFactory.getLogger(getClass()).debug("Begin to prepare access path");
+		
 		List<String> result = new ArrayList<>();
 		List<Module> modules = ((SimpleUser) user).getUserGroup().getModules();
 		for (Module module : modules) {
@@ -52,11 +57,16 @@ public class LoginBL {
 				result.add(accessPath.getUrl());
 			}
 		}
+		
+		LoggerFactory.getLogger(getClass()).debug("Prepare access path success");
+		
 		return result.toArray(new String[] {});
 	}
 
 	private void prepareTreeMenu(User user, UserSession userSession) {
 
+		LoggerFactory.getLogger(getClass()).debug("Begin to prepare tree menu");
+		
 		List<Module> modules = ((SimpleUser) user).getUserGroup().getModules();
 
 		List<String> privilegeIds = new ArrayList<>();
@@ -68,13 +78,19 @@ public class LoginBL {
 				privilegeIds.toArray(new String[] {}), moduleDao.getParents());
 
 		((SimpleUserSession) userSession).setTreeMap(treeMap);
+		
+		LoggerFactory.getLogger(getClass()).debug("Prepare tree menu success");
 	}
 
 	private void validatePassword(User user, String password)
 			throws UserException {
 
+		LoggerFactory.getLogger(getClass()).debug("Begin to validate password");
+		
 		if (!user.getPassword().equals(password)) {
 			throw new UserException(PropertiesConstants.INVALID_LOGIN_PASSWORD);
 		}
+		
+		LoggerFactory.getLogger(getClass()).debug("Validate password success");
 	}
 }
