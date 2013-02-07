@@ -39,7 +39,12 @@ public class SimpleFilter implements Filter {
 		HttpSession session = request.getSession();
 
 		String url = request.getRequestURI();
-		url = url.substring(request.getContextPath().length());
+		if (url.contains(";jsessionid")) {
+			url = url.substring(request.getContextPath().length(),
+					url.indexOf(";jsessionid"));
+		} else {
+			url = url.substring(request.getContextPath().length());
+		}
 
 		LoggerFactory.getLogger(getClass()).debug("Requested URL:" + url);
 
@@ -73,14 +78,13 @@ public class SimpleFilter implements Filter {
 				}
 			}
 		}
-		
+
 		@SuppressWarnings("unchecked")
 		Map<String, Object> moduleSession = (Map<String, Object>) session
 				.getAttribute(GeneralConstants.MODULE_SESSION);
 		if (moduleSession == null) {
 			moduleSession = new ConcurrentHashMap<String, Object>();
-			session.setAttribute(GeneralConstants.MODULE_SESSION,
-					moduleSession);
+			session.setAttribute(GeneralConstants.MODULE_SESSION, moduleSession);
 		}
 
 		String initial = request.getParameter("initial");

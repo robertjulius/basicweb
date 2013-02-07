@@ -25,3 +25,22 @@ input {
 	font-family: Verdana,helvetica,arial,sans-serif;
 	font-size: 11px;
 }
+
+table.grid {
+	border: thin;
+	border-style: solid;
+}
+
+tr.rowHeader {
+	background-color: blue;
+	color: white;
+	font-weight: bold;
+}
+
+tr.rowOdd {
+	background-color: #F0F0FF;
+}
+
+tr.rowEven {
+	background-color: #E0E0FF;
+}

@@ -17,8 +17,8 @@ INSERT INTO ms_user_group (id, create_by, create_date, update_by, update_date, d
 
 -- MS_USER
 DELETE FROM ms_user;
-INSERT INTO ms_user (id, create_by, create_date, update_by, update_date, full_name, password, user_id, user_group_id) VALUES ('qpalzmwoskxn', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP, 'Robert Julius', '1234', '1234', 'developer');
-INSERT INTO ms_user (id, create_by, create_date, update_by, update_date, full_name, password, user_id, user_group_id) VALUES ('qpalzm', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP, 'Robert 2', '123', '123', 'developer');
+INSERT INTO ms_user (id, create_by, create_date, update_by, update_date, name, password, user_id, user_group_id) VALUES ('qpalzmwoskxn', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP, 'Robert Julius', '1234', '1234', 'developer');
+INSERT INTO ms_user (id, create_by, create_date, update_by, update_date, name, password, user_id, user_group_id) VALUES ('qpalzm', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP, 'Robert 2', '123', '123', 'developer');
 
 -- MS_PRIVILEGE
 DELETE FROM ms_privilege;

@@ -8,14 +8,23 @@
 <s:head />
 </head>
 <body>
-	<table><tr><td>
-		<h1>Reset User Session</h1>
-	</td></tr></table>
 	<table>
-		<s:iterator value="userSessions">
-			<tr>
-				<td><s:property value="user.userId"/></td>
-				<td><s:property value="user.password"/></td>
+		<tr>
+			<td>
+				<h1>Reset User Session</h1>
+			</td>
+		</tr>
+	</table>
+	<table class="grid">
+		<tr class="rowHeader">
+			<td>User Id</td>
+			<td>User Name</td>
+		</tr>
+		<s:iterator value="userSessions" status="rowstatus">
+			<tr
+				class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
+				<td><s:property value="user.userId" /></td>
+				<td><s:property value="user.name" /></td>
 			</tr>
 		</s:iterator>
 	</table>

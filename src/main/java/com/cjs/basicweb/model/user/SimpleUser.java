@@ -23,8 +23,8 @@ public class SimpleUser extends Trackable implements User {
 	@Column(name = "user_id", unique = true, nullable = false)
 	private String userId;
 
-	@Column(name = "full_name", nullable = false)
-	private String fullName;
+	@Column(name = "name", nullable = false)
+	private String name;
 
 	@Column(nullable = false)
 	private String password;
@@ -33,8 +33,8 @@ public class SimpleUser extends Trackable implements User {
 	@JoinColumn(name = "user_group_id")
 	private UserGroup userGroup;
 
-	public String getFullName() {
-		return fullName;
+	public String getName() {
+		return name;
 	}
 
 	public String getId() {
@@ -55,8 +55,8 @@ public class SimpleUser extends Trackable implements User {
 		return userId;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setId(String id) {
