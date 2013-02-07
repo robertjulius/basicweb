@@ -5,17 +5,21 @@
 
 <struts>
 
-	<package name="resetusersession" extends="app-default" namespace="/modules/resetusersession">
-	
-		<action name="initial" class="com.cjs.basicweb.modules.resetusersession.action.ResetUserSessionMainAction" method="initial">
+	<package name="resetusersession" extends="app-default"
+		namespace="/modules/resetusersession">
+
+		<action name="initial"
+			class="com.cjs.basicweb.modules.resetusersession.action.ResetUserSessionMainAction"
+			method="initial">
 			<result name="success">/jsp/modules/resetusersession/reset_user_session_main.jsp</result>
 		</action>
-		
-		<action name="executeReset" class="com.cjs.basicweb.modules.resetusersession.action.ResetUserSessionMainAction" method="executeReset">
-			<result name="success">/jsp/modules/resetusersession/reset_user_session_main.jsp</result>
-			<result name="error">/jsp/modules/resetusersession/reset_user_session_main.jsp</result>
+
+		<action name="executeReset"
+			class="com.cjs.basicweb.modules.resetusersession.action.ResetUserSessionMainAction"
+			method="executeReset">
+			<result name="success" type="redirectAction">initial</result>
 		</action>
-		
+
 	</package>
 
 </struts>

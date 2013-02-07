@@ -16,6 +16,7 @@
 		</action>
 		
 		<action name="search" class="moduleMainAction" method="search">
+			<interceptor-ref name="defaultStackHibernate" />
 			<result name="success">/jsp/modules/module/module_maintenance_search.jsp</result>
 		</action>
 		

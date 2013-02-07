@@ -1,14 +1,18 @@
 package com.cjs.basicweb.modules.module.action;
 
-import com.cjs.basicweb.modules.module.form.ModuleSearchForm;
+import com.cjs.basicweb.modules.module.form.ModuleForm;
+import com.cjs.basicweb.modules.module.logic.ModuleBL;
 import com.cjs.struts2.FormAction;
 
-public class ModuleMainAction extends FormAction<ModuleSearchForm> {
+public class ModuleMainAction extends FormAction<ModuleForm> {
 
 	private static final long serialVersionUID = 8114275581397242184L;
 
+	private ModuleBL moduleBL;
+
 	public ModuleMainAction() {
-		super(ModuleSearchForm.class);
+		super(ModuleForm.class);
+		moduleBL = new ModuleBL();
 	}
 
 	public String initial() {
@@ -20,6 +24,7 @@ public class ModuleMainAction extends FormAction<ModuleSearchForm> {
 	}
 
 	public String search() {
+		moduleBL.search(getForm());
 		return SUCCESS;
 	}
 

@@ -10,19 +10,27 @@
 <body>
 	<table>
 		<tr>
-			<td><s:form action="/modules/module/prepareNew.action"
-					method="post">
-					<s:submit key="Create New" />
+			<td><h1>Module Maintenance</h1></td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<td align="right"><s:form
+					action="/modules/module/prepareNew.action" method="post">
+					<s:submit key="create.new" />
 				</s:form></td>
+		</tr>
+		<tr>
+			<td><hr /></td>
 		</tr>
 		<tr>
 			<td><s:form action="/modules/module/search.action" method="post">
 					<s:actionerror />
 					<s:fielderror />
-					<s:textfield key="moduleId" />
-					<s:textfield key="moduleName" />
-					<s:textfield key="moduleAction" />
-					<s:textfield key="moduleParent" />
+					<s:textfield key="searchId" />
+					<s:textfield key="searchName" />
+					<s:textfield key="searchAction" />
+					<s:textfield key="searchParent" />
 					<s:submit key="Search" />
 				</s:form></td>
 		</tr>

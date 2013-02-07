@@ -1,5 +1,7 @@
 package com.cjs.basicweb.modules.login.action;
 
+import java.sql.Timestamp;
+
 import com.cjs.basicweb.modules.login.form.LoginForm;
 import com.cjs.basicweb.modules.login.logic.LoginBL;
 import com.cjs.basicweb.modules.login.usersession.SimpleUserSession;
@@ -30,8 +32,10 @@ public class LoginExecuteAction extends FormAction<LoginForm> {
 			User user = loginBL.performLogin(getForm().getUserId(), getForm()
 					.getPassword(), userSession);
 			userSession.setUser(user);
+			userSession.setLoginTime(new Timestamp(System.currentTimeMillis()));
 			getSession().put(GeneralConstants.USER_SESSION, userSession);
-			AppContextManager.getSessionManager().registerSession(getRequest().getSession());
+			AppContextManager.getSessionManager().registerSession(
+					getRequest().getSession());
 			return SUCCESS;
 		} catch (UserException e) {
 			addActionError(e.getMessageId());

@@ -15,18 +15,37 @@
 			</td>
 		</tr>
 	</table>
-	<table class="grid">
-		<tr class="rowHeader">
-			<td>User Id</td>
-			<td>User Name</td>
-		</tr>
-		<s:iterator value="userSessions" status="rowstatus">
-			<tr
-				class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
-				<td><s:property value="user.userId" /></td>
-				<td><s:property value="user.name" /></td>
+	<s:form action="/modules/resetusersession/executeReset.action">
+		<s:actionerror />
+		<s:fielderror />
+
+		<s:hidden name="userId" value="" />
+		<table class="grid">
+			<tr class="rowHeader">
+				<td align="center">User Id</td>
+				<td align="center">User Name</td>
+				<td align="center">Login Time</td>
+				<td></td>
 			</tr>
-		</s:iterator>
-	</table>
+			<s:iterator value="userSessions" status="rowstatus">
+				<tr
+					class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
+					<td align="center"><s:property value="user.userId" /></td>
+					<td align="center"><s:property value="user.name" /></td>
+					<td align="center"><s:date name="loginTime"
+							format="dd-MMM-yyyy HH:mm:ss" /></td>
+					<td><input type="button" value="Reset"
+						onclick="userId.value=<s:property value="user.userId" />; if (confirmReset(userId.value)) {submit()}" /></td>
+				</tr>
+			</s:iterator>
+		</table>
+	</s:form>
 </body>
+<script type="text/javascript">
+
+	function confirmReset(userId) {
+		return confirm("Reset " + userId + "?");
+	}
+
+</script>
 </html>

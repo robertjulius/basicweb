@@ -68,7 +68,7 @@ public class HtmlMenuGenerator {
 
 			privileges.put(module.getId(),
 					new Privilege(module.getId(), module.getName(), parentId,
-							module.getAction()));
+							module.getFirstEntry()));
 		}
 
 		for (Module child : module.getChilds()) {

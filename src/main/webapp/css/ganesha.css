@@ -29,6 +29,7 @@ input {
 table.grid {
 	border: thin;
 	border-style: solid;
+	border-color: #AAAAAA;
 }
 
 tr.rowHeader {

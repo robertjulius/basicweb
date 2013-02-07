@@ -6,15 +6,17 @@ import com.cjs.basicweb.model.GenericDao;
 
 public class ModuleDao extends GenericDao<Module> {
 
-	@SuppressWarnings("unchecked")
+	public List<Module> getList(String id, String name, String action,
+			String parent) {
+		@SuppressWarnings("unchecked")
+		List<Module> modules = session.createQuery("from Module module").list();
+		return modules;
+	}
+
 	public List<Module> getParents() {
-		List<Module> modules = null;
-		try {
-			modules = session.createQuery("from Module where parent = null")
-					.list();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		@SuppressWarnings("unchecked")
+		List<Module> modules = session.createQuery(
+				"from Module where parent = null").list();
 		return modules;
 	}
 

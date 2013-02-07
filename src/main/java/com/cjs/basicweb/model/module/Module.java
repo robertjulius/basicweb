@@ -29,8 +29,8 @@ public class Module extends Trackable {
 
 	private String description;
 
-	@Column(unique = true)
-	private String action;
+	@Column(name = "first_entry", unique = true)
+	private String firstEntry;
 
 	@ManyToOne
 	@JoinColumn(name = "parent")
@@ -49,16 +49,16 @@ public class Module extends Trackable {
 		return accessPaths;
 	}
 
-	public String getAction() {
-		return action;
-	}
-
 	public List<Module> getChilds() {
 		return childs;
 	}
 
 	public String getDescription() {
 		return description;
+	}
+
+	public String getFirstEntry() {
+		return firstEntry;
 	}
 
 	public String getId() {
@@ -81,16 +81,16 @@ public class Module extends Trackable {
 		this.accessPaths = accessPaths;
 	}
 
-	public void setAction(String action) {
-		this.action = action;
-	}
-
 	public void setChilds(List<Module> childs) {
 		this.childs = childs;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public void setFirstEntry(String firstEntry) {
+		this.firstEntry = firstEntry;
 	}
 
 	public void setId(String id) {

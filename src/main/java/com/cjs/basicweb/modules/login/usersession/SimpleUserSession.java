@@ -1,5 +1,6 @@
 package com.cjs.basicweb.modules.login.usersession;
 
+import java.sql.Timestamp;
 import java.util.TreeMap;
 
 import com.cjs.basicweb.modules.login.Privilege;
@@ -11,9 +12,15 @@ public class SimpleUserSession implements UserSession {
 	private User user;
 	private TreeMap<String, Privilege> treeMap;
 	private String[] accessPath;
+	private Timestamp loginTime;
 
 	public String[] getAccessPath() {
 		return accessPath;
+	}
+
+	@Override
+	public Timestamp getLoginTime() {
+		return loginTime;
 	}
 
 	public TreeMap<String, Privilege> getTreeMap() {
@@ -27,6 +34,11 @@ public class SimpleUserSession implements UserSession {
 
 	public void setAccessPath(String[] accessPath) {
 		this.accessPath = accessPath;
+	}
+
+	@Override
+	public void setLoginTime(Timestamp loginTime) {
+		this.loginTime = loginTime;
 	}
 
 	public void setTreeMap(TreeMap<String, Privilege> treeMap) {

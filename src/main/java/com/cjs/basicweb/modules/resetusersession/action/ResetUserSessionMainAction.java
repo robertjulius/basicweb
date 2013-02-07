@@ -17,14 +17,13 @@ public class ResetUserSessionMainAction extends
 		resetUserSessionBL = new ResetUserSessionBL();
 	}
 
-	public String initial() throws AppException {
-		getForm().setUserSessions(resetUserSessionBL.getList());
+	public String executeReset() throws AppException {
+		resetUserSessionBL.reset(getForm().getUserId());
 		return SUCCESS;
 	}
 
-	public String executeReset() throws AppException {
-		resetUserSessionBL.reset(getForm().getUserId());
-		addActionError("Test adding error");
-		return ERROR;
+	public String initial() throws AppException {
+		getForm().setUserSessions(resetUserSessionBL.getList());
+		return SUCCESS;
 	}
 }
