@@ -15,4 +15,6 @@ public interface SessionManager {
 	public List<HttpSession> getSessions();
 
 	public void registerSession(HttpSession httpSession) throws AppException;
+	
+	public void unregisterSession(HttpSession httpSession) throws AppException;
 }

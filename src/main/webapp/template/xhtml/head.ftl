@@ -26,4 +26,5 @@
 <#--
 Custom by Robert Julius start here
 -->
-<link rel="stylesheet" href="<@s.url value='/template/xhtml/ganesha.css' includeParams='none' encode='false' />" type="text/css"/>
+<script src="${base}/js/ganesha-ui-0.1.js" type="text/javascript"></script>
+<link rel="stylesheet" href="<@s.url value='/css/ganesha.css' includeParams='none' encode='false' />" type="text/css"/>

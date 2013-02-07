@@ -1,17 +1,12 @@
 package com.cjs.basicweb.modules.login.usersession;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
-
-import org.slf4j.LoggerFactory;
 
 import com.cjs.basicweb.utility.GeneralConstants;
 import com.cjs.basicweb.utility.PropertiesConstants;
@@ -19,8 +14,7 @@ import com.cjs.core.SessionManager;
 import com.cjs.core.UserSession;
 import com.cjs.core.exception.AppException;
 
-public class SimpleSessionManager implements SessionManager,
-		HttpSessionListener {
+public class SimpleSessionManager implements SessionManager {
 
 	private Map<String, HttpSession> mapByUserId = new ConcurrentHashMap<>();
 
@@ -80,36 +74,7 @@ public class SimpleSessionManager implements SessionManager,
 	}
 
 	@Override
-	public void sessionCreated(HttpSessionEvent httpSessionEvent) {
-		HttpSession session = httpSessionEvent.getSession();
-		LoggerFactory.getLogger(getClass()).info(
-				"HttpSession '" + session + "' with ID '" + session.getId()
-						+ "' created");
-	}
-
-	@Override
-	public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
-		HttpSession httpSession = httpSessionEvent.getSession();
-
-		clearSession(httpSession);
-		unregisterSession(httpSession);
-
-		LoggerFactory.getLogger(getClass()).info(
-				"HttpSession '" + httpSession + "' with ID '"
-						+ httpSession.getId() + "' destroyed");
-	}
-
-	private void clearSession(HttpSession httpSession) {
-		synchronized (httpSession) {
-			Enumeration<String> attributeNamesEnum = httpSession
-					.getAttributeNames();
-			while (attributeNamesEnum.hasMoreElements()) {
-				httpSession.removeAttribute(attributeNamesEnum.nextElement());
-			}
-		}
-	}
-
-	private void unregisterSession(HttpSession httpSession) {
+	public void unregisterSession(HttpSession httpSession) {
 		UserSession userSession = (UserSession) httpSession
 				.getAttribute(GeneralConstants.USER_SESSION);
 

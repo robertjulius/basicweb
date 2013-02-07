@@ -10,45 +10,21 @@
 <body>
 	<table>
 		<tr>
-			<td>
-				<div class="form">
-					<s:form action="/modules/module/prepareNew.action"
-						method="post">
-						<s:submit key="Create New" />
-					</s:form>
-				</div>
-			</td>
+			<td><s:form action="/modules/module/prepareNew.action"
+					method="post">
+					<s:submit key="Create New" />
+				</s:form></td>
 		</tr>
 		<tr>
-			<td>
-				<div class="form">
-					<s:form action="/modules/module/search.action" method="post">
-						<s:actionerror />
-						<s:fielderror />
-						<div class="input">
-							<s:label key="moduleId" />
-							<br />
-							<s:textfield name="moduleId" />
-						</div>
-						<div class="input">
-							<s:label key="moduleName" />
-							<br />
-							<s:textfield name="moduleName" />
-						</div>
-						<div class="input">
-							<s:label key="moduleAction" />
-							<br />
-							<s:textfield name="moduleAction" />
-						</div>
-						<div class="input">
-							<s:label key="moduleParent" />
-							<br />
-							<s:textfield name="moduleParent" />
-						</div>
-						<s:submit key="Search" />
-					</s:form>
-				</div>
-			</td>
+			<td><s:form action="/modules/module/search.action" method="post">
+					<s:actionerror />
+					<s:fielderror />
+					<s:textfield key="moduleId" />
+					<s:textfield key="moduleName" />
+					<s:textfield key="moduleAction" />
+					<s:textfield key="moduleParent" />
+					<s:submit key="Search" />
+				</s:form></td>
 		</tr>
 	</table>
 </body>

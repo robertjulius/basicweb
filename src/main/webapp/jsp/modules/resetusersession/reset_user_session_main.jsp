@@ -8,15 +8,14 @@
 <s:head />
 </head>
 <body>
+	<table><tr><td>
+		<h1>Reset User Session</h1>
+	</td></tr></table>
 	<table>
-		<s:iterator value="userSessions" status="userSessionsStatus">
+		<s:iterator value="userSessions">
 			<tr>
-				<s:if test="#userSessionsStatus.even == true">
-					<td style="background: #CCCCCC"><s:property /></td>
-				</s:if>
-				<s:else>
-					<td><s:property /></td>
-				</s:else>
+				<td><s:property value="user.userId"/></td>
+				<td><s:property value="user.password"/></td>
 			</tr>
 		</s:iterator>
 	</table>
