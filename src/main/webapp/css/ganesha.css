@@ -1,28 +1,28 @@
 body {
-	font-family: Verdana,helvetica,arial,sans-serif;
+	font-family: Verdana, helvetica, arial, sans-serif;
 	font-size: 11px;
 }
 
 .tdLabel {
-    text-align: right;
-    vertical-align: middle;
+	text-align: right;
+	vertical-align: middle;
 }
 
 .label {
-	font-family: Verdana,helvetica,arial,sans-serif;
+	font-family: Verdana, helvetica, arial, sans-serif;
 	font-size: 11px;
 	font-style: normal;
 }
 
 .errorMessage {
-	font-family: Verdana,helvetica,arial,sans-serif;
+	font-family: Verdana, helvetica, arial, sans-serif;
 	font-size: 11px;
-    color: red;
-    font-weight: normal;
+	color: red;
+	font-weight: normal;
 }
 
 input {
-	font-family: Verdana,helvetica,arial,sans-serif;
+	font-family: Verdana, helvetica, arial, sans-serif;
 	font-size: 11px;
 }
 
@@ -44,4 +44,15 @@ tr.rowOdd {
 
 tr.rowEven {
 	background-color: #E0E0FF;
+}
+
+.tablePopop .ui-dialog-titlebar {
+	display: none;
+	font-family: Verdana, helvetica, arial, sans-serif;
+	font-size: 11px;
+}
+
+.ui-widget {
+    font-family: Verdana, helvetica, arial, sans-serif;
+	font-size: 11px;
 }
