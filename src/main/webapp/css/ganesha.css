@@ -45,14 +45,3 @@ tr.rowOdd {
 tr.rowEven {
 	background-color: #E0E0FF;
 }
-
-.tablePopop .ui-dialog-titlebar {
-	display: none;
-	font-family: Verdana, helvetica, arial, sans-serif;
-	font-size: 11px;
-}
-
-.ui-widget {
-    font-family: Verdana, helvetica, arial, sans-serif;
-	font-size: 11px;
-}

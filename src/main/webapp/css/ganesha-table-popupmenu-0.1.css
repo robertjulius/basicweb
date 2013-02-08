@@ -1,0 +1,24 @@
+.tablePopop .ui-dialog-titlebar {
+	display: none;
+	font-family: Verdana, helvetica, arial, sans-serif;
+	font-size: 11px;
+}
+
+.ui-widget {
+	font-family: Verdana, helvetica, arial, sans-serif;
+	font-size: 11px;
+	width: auto;
+}
+
+.ui-corner-all,.ui-corner-bottom,.ui-corner-right,.ui-corner-br {
+	border-radius: 0px;
+}
+
+.ui-dialog .ui-dialog-content {
+	padding: 0px;
+}
+
+.tablePopop tr:HOVER {
+	background-color: #5050FF;
+	color: white;
+}

@@ -6,30 +6,39 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<sj:head jqueryui="true" />
 <s:head />
+<sj:head jqueryui="true" />
+<link rel="stylesheet"
+	href="/basicweb/css/ganesha-table-popupmenu-0.1.css" type="text/css" />
 </head>
 <body>
-	<sj:dialog modal="true" id="mydialog3"
-		title="Remote Dialog open on Click" resizable="false" width="auto" dialogClass="tablePopop" height="100">
-		<table width="100">
+	<sj:dialog modal="true" id="popupMenu"
+		title="Remote Dialog open on Click" resizable="false" autoOpen="false"
+		dialogClass="tablePopop" width="auto" minHeight="0">
+		<table cellspacing="0px">
 			<tr>
+				<td width="20px"></td>
 				<td>Detail</td>
+				<td width="50px"></td>
 			</tr>
 			<tr>
+				<td></td>
 				<td>Edit</td>
+				<td></td>
 			</tr>
 			<tr>
+				<td></td>
 				<td>Delete</td>
+				<td></td>
 			</tr>
 			<tr>
-				<td><hr /></td>
-			</tr>
-			<tr>
+				<td></td>
 				<td>Cancel</td>
+				<td></td>
 			</tr>
 		</table>
 	</sj:dialog>
+	<sj:a openDialog="popupMenu">Open</sj:a>
 	<table>
 		<tr>
 			<td><h1>Module Maintenance</h1></td>
