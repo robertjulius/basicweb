@@ -79,18 +79,7 @@ public class SimpleFilter implements Filter {
 			}
 		}
 
-		@SuppressWarnings("unchecked")
-		Map<String, Object> moduleSession = (Map<String, Object>) session
-				.getAttribute(GeneralConstants.MODULE_SESSION);
-		if (moduleSession == null) {
-			moduleSession = new ConcurrentHashMap<String, Object>();
-			session.setAttribute(GeneralConstants.MODULE_SESSION, moduleSession);
-		}
-
-		String initial = request.getParameter("initial");
-		if (initial != null && initial.trim().equalsIgnoreCase("true")) {
-			moduleSession.clear();
-		}
+		prepareModuleSession(request, session);
 
 		chain.doFilter(req, resp);
 	}
@@ -127,5 +116,21 @@ public class SimpleFilter implements Filter {
 			}
 		}
 		return false;
+	}
+
+	private void prepareModuleSession(HttpServletRequest request,
+			HttpSession session) {
+		@SuppressWarnings("unchecked")
+		Map<String, Object> moduleSession = (Map<String, Object>) session
+				.getAttribute(GeneralConstants.MODULE_SESSION);
+		if (moduleSession == null) {
+			moduleSession = new ConcurrentHashMap<String, Object>();
+			session.setAttribute(GeneralConstants.MODULE_SESSION, moduleSession);
+		}
+
+		String initial = request.getParameter("initial");
+		if (initial != null && initial.trim().equalsIgnoreCase("true")) {
+			moduleSession.clear();
+		}
 	}
 }

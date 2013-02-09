@@ -18,10 +18,10 @@
 		</tr>
 	</table>
 	<s:form action="/modules/resetusersession/executeReset.action"
-		theme="simple">
+		theme="simple" onsubmit="return confirmAction();">
 		<s:actionerror />
 		<s:fielderror />
-		<s:hidden name="userId" value="" />
+		<s:hidden key="userId" />
 		<table class="grid">
 			<thead>
 				<tr class="rowHeader">
@@ -33,7 +33,7 @@
 			<tbody class="selectable">
 				<s:iterator value="userSessions" status="rowstatus">
 					<tr
-						onclick="alert('test'); $('[name=\'userId\']').val('<s:property value="user.userId" />'); if (confirmReset($('[name=\'userId\']').val())) {submit()}"
+						onclick="$('[name=\'userId\']').val('<s:property value="user.userId" />'); $('#executeReset').submit()"
 						class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
 						<td align="center"><s:property value="user.userId" /></td>
 						<td align="center"><s:property value="user.name" /></td>
@@ -45,11 +45,4 @@
 		</table>
 	</s:form>
 </body>
-<script type="text/javascript">
-
-	function confirmReset(userId) {
-		return confirm("Reset " + userId + "?");
-	}
-
-</script>
 </html>
