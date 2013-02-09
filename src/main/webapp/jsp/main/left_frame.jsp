@@ -11,6 +11,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
+<s:head />
+
 <link rel="stylesheet"
 	href="/basicweb/js/jquery-treeview/jquery.treeview.css" />
 <link rel="stylesheet" href="/basicweb/js/jquery-treeview/screen.css" />
@@ -32,12 +34,10 @@
 		});
 	})
 </script>
-<base target="contentFrame">
+<base target="contentFrame" />
 </head>
 <body>
-
-	<div id="main" style="width: 300px">
-
+	<div id="main">
 		<div id="sidetree">
 			<div class="treeheader">&nbsp;</div>
 			<div id="sidetreecontrol">
@@ -46,19 +46,18 @@
 			<br />
 
 			<ul id="tree">
-				<span><strong>Home</strong></span>
+				<li><strong>Home</strong></li>
 				<%
 					UserSession userSession = (UserSession) ActionContext.getContext()
 							.getSession().get("userSession");
 					User user = userSession.getUser();
 				%>
-				<%= HtmlMenuGenerator.generateHtmlMenu(((SimpleUserSession) userSession)
-					.getTreeMap(), request.getContextPath())%>
+				<%=HtmlMenuGenerator.generateHtmlMenu(
+					((SimpleUserSession) userSession).getTreeMap(),
+					request.getContextPath())%>
 			</ul>
 		</div>
-
 	</div>
-
 </body>
 
 </html>

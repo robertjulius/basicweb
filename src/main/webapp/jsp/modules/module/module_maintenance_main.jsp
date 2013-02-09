@@ -30,8 +30,8 @@
 					<s:fielderror />
 					<s:textfield key="searchId" />
 					<s:textfield key="searchName" />
-					<s:textfield key="searchAction" />
-					<s:textfield key="searchParent" />
+					<s:textfield key="searchFirstEntry" />
+					<s:textfield key="searchParentId" />
 					<s:submit key="Search" />
 				</s:form></td>
 		</tr>

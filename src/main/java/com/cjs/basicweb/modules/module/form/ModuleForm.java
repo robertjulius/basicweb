@@ -11,8 +11,8 @@ public class ModuleForm extends FormBean {
 
 	private String searchId;
 	private String searchName;
-	private String searchAction;
-	private String searchParent;
+	private String searchFirstEntry;
+	private String searchParentId;
 
 	private String newId;
 	private String newName;
@@ -31,8 +31,8 @@ public class ModuleForm extends FormBean {
 		return newName;
 	}
 
-	public String getSearchAction() {
-		return searchAction;
+	public String getSearchFirstEntry() {
+		return searchFirstEntry;
 	}
 
 	public String getSearchId() {
@@ -43,8 +43,8 @@ public class ModuleForm extends FormBean {
 		return searchName;
 	}
 
-	public String getSearchParent() {
-		return searchParent;
+	public String getSearchParentId() {
+		return searchParentId;
 	}
 
 	public void setModules(List<Module> modules) {
@@ -59,8 +59,8 @@ public class ModuleForm extends FormBean {
 		this.newName = newName;
 	}
 
-	public void setSearchAction(String searchAction) {
-		this.searchAction = searchAction;
+	public void setSearchFirstEntry(String searchFirstEntry) {
+		this.searchFirstEntry = searchFirstEntry;
 	}
 
 	public void setSearchId(String searchId) {
@@ -71,7 +71,7 @@ public class ModuleForm extends FormBean {
 		this.searchName = searchName;
 	}
 
-	public void setSearchParent(String searchParent) {
-		this.searchParent = searchParent;
+	public void setSearchParentId(String searchParentId) {
+		this.searchParentId = searchParentId;
 	}
 }

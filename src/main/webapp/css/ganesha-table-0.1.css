@@ -2,7 +2,7 @@ table.grid {
 	border: thin;
 	border-style: solid;
 	border-color: #AAAAAA;
-	white-space: nowrap;
+	border-collapse: separate;
 }
 
 tr.rowOdd {
