@@ -26,21 +26,21 @@
 		<s:hidden name="newId" value="" />
 		<table class="grid">
 			<thead>
-				<tr class="rowHeader">
-					<td align="center">Module ID</td>
-					<td align="center">Module Name</td>
-					<td align="center">Action</td>
-					<td align="center">Parent</td>
+				<tr align="center">
+					<td>Module ID</td>
+					<td>Module Name</td>
+					<td>Action</td>
+					<td>Parent</td>
 				</tr>
 			</thead>
 			<tbody class="selectable">
 				<s:iterator value="modules" status="rowstatus">
 					<tr
 						class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
-						<td align="center"><s:property value="id" /></td>
-						<td align="center"><s:property value="name" /></td>
-						<td align="center"><s:property value="firstEntry" /></td>
-						<td align="center"><s:property value="parent.id" /></td>
+						<td><s:property value="id" /></td>
+						<td><s:property value="name" /></td>
+						<td><s:property value="firstEntry" /></td>
+						<td><s:property value="parent.id" /></td>
 					</tr>
 				</s:iterator>
 			</tbody>

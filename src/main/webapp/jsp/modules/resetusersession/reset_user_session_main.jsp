@@ -24,10 +24,10 @@
 		<s:hidden key="userId" />
 		<table class="grid">
 			<thead>
-				<tr class="rowHeader">
-					<td align="center">User Id</td>
-					<td align="center">User Name</td>
-					<td align="center">Login Time</td>
+				<tr align="center">
+					<td>User Id</td>
+					<td>User Name</td>
+					<td>Login Time</td>
 				</tr>
 			</thead>
 			<tbody class="selectable">
@@ -35,9 +35,9 @@
 					<tr
 						onclick="$('[name=\'userId\']').val('<s:property value="user.userId" />'); $('#executeReset').submit()"
 						class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
-						<td align="center"><s:property value="user.userId" /></td>
-						<td align="center"><s:property value="user.name" /></td>
-						<td align="center"><s:date name="loginTime"
+						<td><s:property value="user.userId" /></td>
+						<td><s:property value="user.name" /></td>
+						<td><s:date name="loginTime"
 								format="dd-MMM-yyyy HH:mm:ss" /></td>
 					</tr>
 				</s:iterator>

@@ -2,6 +2,7 @@ table.grid {
 	border: thin;
 	border-style: solid;
 	border-color: #AAAAAA;
+	white-space: nowrap;
 }
 
 tr.rowOdd {
@@ -15,4 +16,9 @@ tr.rowEven {
 tbody.selectable tr:HOVER {
 	background-color: #BBBBDD;
 	cursor: hand; cursor: pointer;
+}
+
+table.grid td {
+	padding-left:10px;
+	padding-right:10px;
 }
