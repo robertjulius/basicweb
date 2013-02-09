@@ -1,0 +1,15 @@
+body {
+	font-family: Verdana, helvetica, arial, sans-serif;
+	font-size: 11px;
+}
+
+input {
+	font-family: Verdana, helvetica, arial, sans-serif;
+	font-size: 11px;
+}
+
+thead {
+	background-color: blue;
+	color: white;
+	font-weight: bold;
+}

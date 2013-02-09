@@ -19,35 +19,32 @@
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/resetusersession/prepareEdit.action">
+	<s:form action="/modules/resetusersession/prepareEdit.action"
+		theme="simple">
 		<s:actionerror />
 		<s:fielderror />
 		<s:hidden name="newId" value="" />
-		<tr>
-			<td>
-				<table class="grid">
-					<thead>
-						<tr class="rowHeader">
-							<td align="center">Module ID</td>
-							<td align="center">Module Name</td>
-							<td align="center">Action</td>
-							<td align="center">Parent</td>
-						</tr>
-					</thead>
-					<tbody class="selectable">
-						<s:iterator value="modules" status="rowstatus">
-							<tr
-								class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
-								<td align="center"><s:property value="id" /></td>
-								<td align="center"><s:property value="name" /></td>
-								<td align="center"><s:property value="firstEntry" /></td>
-								<td align="center"><s:property value="parent.id" /></td>
-							</tr>
-						</s:iterator>
-					</tbody>
-				</table>
-			</td>
-		</tr>
+		<table class="grid">
+			<thead>
+				<tr class="rowHeader">
+					<td align="center">Module ID</td>
+					<td align="center">Module Name</td>
+					<td align="center">Action</td>
+					<td align="center">Parent</td>
+				</tr>
+			</thead>
+			<tbody class="selectable">
+				<s:iterator value="modules" status="rowstatus">
+					<tr
+						class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
+						<td align="center"><s:property value="id" /></td>
+						<td align="center"><s:property value="name" /></td>
+						<td align="center"><s:property value="firstEntry" /></td>
+						<td align="center"><s:property value="parent.id" /></td>
+					</tr>
+				</s:iterator>
+			</tbody>
+		</table>
 	</s:form>
 	<s:form action="/modules/module/initial.action">
 		<s:submit key="back" />

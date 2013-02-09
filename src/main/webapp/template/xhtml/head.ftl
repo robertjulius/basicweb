@@ -27,4 +27,6 @@
 Custom by Robert Julius start here
 -->
 <script src="${base}/js/ganesha-ui-0.1.js" type="text/javascript"></script>
-<link rel="stylesheet" href="<@s.url value='/css/ganesha.css' includeParams='none' encode='false' />" type="text/css"/>
+<link rel="stylesheet" href="<@s.url value='/css/ganesha-common-0,1.css' includeParams='none' encode='false' />" type="text/css"/>
+<link rel="stylesheet" href="<@s.url value='/css/ganesha-struts2-0,1.css' includeParams='none' encode='false' />" type="text/css"/>
+<link rel="stylesheet" href="<@s.url value='/css/ganesha-table-0,1.css' includeParams='none' encode='false' />" type="text/css"/>

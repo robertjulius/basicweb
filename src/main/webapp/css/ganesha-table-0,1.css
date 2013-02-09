@@ -1,0 +1,18 @@
+table.grid {
+	border: thin;
+	border-style: solid;
+	border-color: #AAAAAA;
+}
+
+tr.rowOdd {
+	background-color: #F0F0FF;
+}
+
+tr.rowEven {
+	background-color: #E0E0FF;
+}
+
+tbody.selectable tr:HOVER {
+	background-color: #BBBBDD;
+	cursor: hand; cursor: pointer;
+}
