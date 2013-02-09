@@ -14,6 +14,12 @@
 			<result name="success">/jsp/modules/resetusersession/reset_user_session_main.jsp</result>
 		</action>
 
+		<action name="prepareDetail"
+			class="com.cjs.basicweb.modules.resetusersession.action.ResetUserSessionMainAction"
+			method="prepareDetail">
+			<result name="success">/jsp/modules/resetusersession/reset_user_session_detail.jsp</result>
+		</action>
+
 		<action name="executeReset"
 			class="com.cjs.basicweb.modules.resetusersession.action.ResetUserSessionMainAction"
 			method="executeReset">

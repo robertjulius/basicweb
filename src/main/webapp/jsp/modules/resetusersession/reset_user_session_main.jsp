@@ -17,8 +17,8 @@
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/resetusersession/executeReset.action"
-		theme="simple" onsubmit="return confirmAction();">
+	<s:form action="/modules/resetusersession/prepareDetail.action"
+		theme="simple">
 		<s:actionerror />
 		<s:fielderror />
 		<s:hidden key="userId" />
@@ -33,12 +33,11 @@
 			<tbody class="selectable">
 				<s:iterator value="userSessions" status="rowstatus">
 					<tr
-						onclick="$('[name=\'userId\']').val('<s:property value="user.userId" />'); $('#executeReset').submit()"
+						onclick="$('[name=\'userId\']').val('<s:property value="user.userId" />'); $('#prepareDetail').submit()"
 						class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
 						<td><s:property value="user.userId" /></td>
 						<td><s:property value="user.name" /></td>
-						<td><s:date name="loginTime"
-								format="dd-MMM-yyyy HH:mm:ss" /></td>
+						<td><s:date name="loginTime" format="dd-MMM-yyyy HH:mm:ss" /></td>
 					</tr>
 				</s:iterator>
 			</tbody>

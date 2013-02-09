@@ -6,10 +6,17 @@ import java.util.List;
 import com.cjs.basicweb.modules.login.usersession.SimpleSessionManager;
 import com.cjs.basicweb.modules.login.usersession.SimpleUserSession;
 import com.cjs.basicweb.utility.AppContextManager;
+import com.cjs.basicweb.utility.GeneralConstants;
 import com.cjs.core.UserSession;
 import com.cjs.core.exception.AppException;
 
 public class ResetUserSessionBL {
+
+	public SimpleUserSession getDetail(String userId) {
+		return (SimpleUserSession) AppContextManager.getSessionManager()
+				.getByUserId(userId)
+				.getAttribute(GeneralConstants.USER_SESSION);
+	}
 
 	public List<SimpleUserSession> getList() throws AppException {
 		List<UserSession> userSessions = ((SimpleSessionManager) AppContextManager
