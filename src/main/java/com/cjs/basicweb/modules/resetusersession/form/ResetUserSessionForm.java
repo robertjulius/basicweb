@@ -9,7 +9,7 @@ public class ResetUserSessionForm extends FormBean {
 
 	private static final long serialVersionUID = -497930027977555847L;
 
-	private String userId;
+	private String userId = "toest";
 	private List<SimpleUserSession> userSessions;
 	private SimpleUserSession tobeReset;
 
@@ -36,4 +36,5 @@ public class ResetUserSessionForm extends FormBean {
 	public void setUserSessions(List<SimpleUserSession> userSessions) {
 		this.userSessions = userSessions;
 	}
+
 }

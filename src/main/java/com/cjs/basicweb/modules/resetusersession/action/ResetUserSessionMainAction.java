@@ -30,7 +30,8 @@ public class ResetUserSessionMainAction extends
 	}
 
 	public String prepareDetail() throws AppException {
-		UserSession userSession = resetUserSessionBL.getDetail(getForm().getUserId());
+		UserSession userSession = resetUserSessionBL.getDetail(getForm()
+				.getUserId());
 		getForm().setTobeReset((SimpleUserSession) userSession);
 		return SUCCESS;
 	}

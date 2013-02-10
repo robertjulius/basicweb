@@ -13,40 +13,73 @@
 	<table>
 		<tr>
 			<td>
-				<h1>Reset User Session</h1>
+				<h1>
+					<s:text name="resource.page.title" />
+				</h1>
 			</td>
 		</tr>
 	</table>
 	<s:form action="/modules/resetusersession/executeReset.action"
 		theme="simple">
+		<s:if test="hasActionErrors()">
+			<table>
+				<s:actionerror />
+				<s:fielderror />
+			</table>
+		</s:if>
 		<table>
 			<tr>
-				<td><s:actionerror /> <s:fielderror /> <s:hidden key="userId" />
+				<td>
 					<table class="grid">
 						<thead>
 							<tr>
-								<td colspan="2"><s:text name="userSessionInformation" /></td>
+								<td colspan="2"><s:text
+										name="resource.userSessionInformation" /></td>
 							</tr>
 						</thead>
 						<tbody>
-							<s:label key="userId" name="tobeReset.user.userId" theme="xhtml" />
-							<s:label key="userName" name="tobeReset.user.name" theme="xhtml" />
-							<s:set var="loginTime">
-								<s:date name="tobeReset.loginTime" format="dd-MMM-yyyy HH:mm:ss" />
-							</s:set>
-							<s:label name="tobeReset.loginTime" label="Login Time"
-								value="%{loginTime}" theme="xhtml" />
+							<tr>
+								<td align="right"><s:text name="resource.userId" /></td>
+								<td align="left"><s:label name="tobeReset.user.userId" /></td>
+							</tr>
+							<tr>
+								<td align="right"><s:text name="resource.userName" /></td>
+								<td align="left"><s:label name="tobeReset.user.name" /></td>
+							</tr>
+							<tr>
+								<td align="right"><s:text name="resource.userGroupName" /></td>
+								<td align="left"><s:label
+										name="tobeReset.user.userGroup.name" /></td>
+							</tr>
+							<tr>
+								<td align="right"><s:text
+										name="resource.userGroupDescription" /></td>
+								<td align="left"><s:label
+										name="tobeReset.user.userGroup.description" /></td>
+							</tr>
+							<tr>
+								<s:set var="login">
+									<s:date name="tobeReset.loginTime"
+										format="dd-MMM-yyyy HH:mm:ss" />
+								</s:set>
+								<td align="right"><s:text name="resource.loginTime" /></td>
+								<td align="left"><s:label name="tobeReset.loginTime"
+										value="%{login}" /></td>
+							</tr>
 						</tbody>
-					</table></td>
+					</table>
+				</td>
 			</tr>
 			<tr align="center">
 				<td>
 					<table>
 						<tr>
-							<td><input type="button" value="<s:text name="back"/>"
-								onclick="$('#executeReset').get(0).setAttribute('action', '<%=request.getContextPath()%>/modules/resetusersession/initial.action'); $('#executeReset').submit();" /></td>
-							<td><input type="button" value="<s:text name="reset"/>"
-								onclick="if (confirmAction()) {$('#executeReset').submit();}" /></td>
+							<td><input type="button"
+								value="<s:text name="resource.back"/>"
+								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/resetusersession/initial.action'); $(this).closest('form').submit();" /></td>
+							<td><input type="button"
+								value="<s:text name="resource.reset"/>"
+								onclick="if (confirmAction()) {$(this).closest('form').submit();}" /></td>
 						</tr>
 					</table>
 				</td>
@@ -54,4 +87,9 @@
 		</table>
 	</s:form>
 </body>
+<script type="text/javascript">
+	window.onload = function() {
+		stripeTable($('table.grid'));
+	}
+</script>
 </html>

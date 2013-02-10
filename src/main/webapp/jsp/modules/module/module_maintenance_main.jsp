@@ -11,28 +11,31 @@
 <body>
 	<table>
 		<tr>
-			<td><h1>Module Maintenance</h1></td>
+			<td><h1>
+					<s:text name="resource.page.title" />
+				</h1></td>
 		</tr>
 	</table>
 	<table>
 		<tr>
 			<td align="right"><s:form
 					action="/modules/module/prepareNew.action" method="post">
-					<s:submit key="create.new" />
+					<s:submit key="resource.create.new" />
 				</s:form></td>
 		</tr>
 		<tr>
 			<td><hr /></td>
 		</tr>
 		<tr>
-			<td><s:form action="/modules/module/search.action" method="post">
+			<td><s:form action="/modules/module/search.action"
+					method="post">
 					<s:actionerror />
 					<s:fielderror />
-					<s:textfield key="searchId" />
-					<s:textfield key="searchName" />
-					<s:textfield key="searchFirstEntry" />
-					<s:textfield key="searchParentId" />
-					<s:submit key="Search" />
+					<s:textfield key="resource.moduleId" name="searchId"/>
+					<s:textfield key="resource.moduleName" name="searchName"/>
+					<s:textfield key="resource.firstEntry" name="searchFirstEntry" />
+					<s:textfield key="resource.parentId" name="searchParentId"/>
+					<s:submit key="resource.search" />
 				</s:form></td>
 		</tr>
 	</table>

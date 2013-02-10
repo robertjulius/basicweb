@@ -1,1 +1,6 @@
 Semuanya bisa di-handle di pom.xml, tapi javaee.jar dan hibernate-annotations.jar masih harus set classpath manual dulu.
+
+linux
+/home/robert/glassfish-3.1/glassfish/lib/javaee.jar
+
+windows

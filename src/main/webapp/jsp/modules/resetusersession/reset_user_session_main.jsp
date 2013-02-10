@@ -8,40 +8,57 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <s:head />
 <sj:head />
+<link rel="stylesheet"
+	href="/basicweb/css/ganesha-table-popupmenu-0.1.css" type="text/css" />
 </head>
 <body>
 	<table>
 		<tr>
 			<td>
-				<h1>Reset User Session</h1>
+				<h1>
+					<s:text name="resource.page.title" />
+				</h1>
 			</td>
 		</tr>
 	</table>
 	<s:form action="/modules/resetusersession/prepareDetail.action"
 		theme="simple">
-		<s:actionerror />
-		<s:fielderror />
-		<s:hidden key="userId" />
-		<table class="grid">
-			<thead>
-				<tr align="center">
-					<td>User Id</td>
-					<td>User Name</td>
-					<td>Login Time</td>
-				</tr>
-			</thead>
-			<tbody class="selectable">
-				<s:iterator value="userSessions" status="rowstatus">
-					<tr
-						onclick="$('[name=\'userId\']').val('<s:property value="user.userId" />'); $('#prepareDetail').submit()"
-						class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
-						<td><s:property value="user.userId" /></td>
-						<td><s:property value="user.name" /></td>
-						<td><s:date name="loginTime" format="dd-MMM-yyyy HH:mm:ss" /></td>
-					</tr>
-				</s:iterator>
-			</tbody>
+		<s:if test="hasActionErrors()">
+			<table>
+				<s:actionerror />
+				<s:fielderror />
+			</table>
+		</s:if>
+		<s:hidden name="userId"/>
+		<table>
+			<tr>
+				<td>
+					<table class="grid">
+						<thead>
+							<tr align="center">
+								<td><s:text name="resource.userId" /></td>
+								<td><s:text name="resource.userName" /></td>
+								<td><s:text name="resource.loginTime" /></td>
+							</tr>
+						</thead>
+						<tbody class="selectable">
+							<s:iterator value="userSessions" status="rowstatus">
+								<tr
+									onclick="$(this).closest('form').find('input#prepareDetail_userId').val('<s:property value="user.userId" />'); $(this).closest('form').submit();"
+									class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
+									<td><s:property value="user.userId" /></td>
+									<td><s:property value="user.name" /></td>
+									<td><s:date name="loginTime" format="dd-MMM-yyyy HH:mm:ss" /></td>
+								</tr>
+							</s:iterator>
+						</tbody>
+					</table>
+				</td>
+			</tr>
 		</table>
 	</s:form>
 </body>
+<script type="text/javascript">
+	
+</script>
 </html>

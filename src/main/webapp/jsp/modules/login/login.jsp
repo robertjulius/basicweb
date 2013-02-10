@@ -11,9 +11,9 @@
 	<s:form action="/modules/login/executeLogin.action">
 		<s:actionerror />
 		<s:fielderror />
-		<s:textfield key="userId" />
-		<s:password key="password" />
-		<s:submit key="submit" />
+		<s:textfield key="resource.userId" name="userId" />
+		<s:password key="resource.password" name="password"/>
+		<s:submit key="resource.submit" />
 	</s:form>
 </body>
 </html>

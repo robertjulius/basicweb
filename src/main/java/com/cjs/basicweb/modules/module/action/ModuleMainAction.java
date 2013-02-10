@@ -1,7 +1,9 @@
 package com.cjs.basicweb.modules.module.action;
 
+import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.modules.module.form.ModuleForm;
 import com.cjs.basicweb.modules.module.logic.ModuleBL;
+import com.cjs.core.exception.AppException;
 import com.cjs.struts2.FormAction;
 
 public class ModuleMainAction extends FormAction<ModuleForm> {
@@ -19,6 +21,13 @@ public class ModuleMainAction extends FormAction<ModuleForm> {
 		return SUCCESS;
 	}
 
+	public String prepareDetail() throws AppException {
+		String oldId = getForm().getOldId();
+		Module module = moduleBL.getDetail(oldId);
+		getForm().assignFromEntity("old", module);
+		return SUCCESS;
+	}
+
 	public String prepareNew() {
 		return SUCCESS;
 	}
@@ -27,5 +36,4 @@ public class ModuleMainAction extends FormAction<ModuleForm> {
 		moduleBL.search(getForm());
 		return SUCCESS;
 	}
-
 }

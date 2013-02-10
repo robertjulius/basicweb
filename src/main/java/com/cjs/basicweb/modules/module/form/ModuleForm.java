@@ -16,11 +16,22 @@ public class ModuleForm extends FormBean {
 
 	private String newId;
 	private String newName;
+	private String newFirstEntry;
+	private Module newParent;
+
+	private String oldId = "test";
+	private String oldName;
+	private String oldFirstEntry;
+	private Module oldParent;
 
 	private List<Module> modules;
 
 	public List<Module> getModules() {
 		return modules;
+	}
+
+	public String getNewFirstEntry() {
+		return newFirstEntry;
 	}
 
 	public String getNewId() {
@@ -29,6 +40,26 @@ public class ModuleForm extends FormBean {
 
 	public String getNewName() {
 		return newName;
+	}
+
+	public Module getNewParent() {
+		return newParent;
+	}
+
+	public String getOldFirstEntry() {
+		return oldFirstEntry;
+	}
+
+	public String getOldId() {
+		return oldId;
+	}
+
+	public String getOldName() {
+		return oldName;
+	}
+
+	public Module getOldParent() {
+		return oldParent;
 	}
 
 	public String getSearchFirstEntry() {
@@ -51,12 +82,36 @@ public class ModuleForm extends FormBean {
 		this.modules = modules;
 	}
 
+	public void setNewFirstEntry(String newFirstEntry) {
+		this.newFirstEntry = newFirstEntry;
+	}
+
 	public void setNewId(String newId) {
 		this.newId = newId;
 	}
 
 	public void setNewName(String newName) {
 		this.newName = newName;
+	}
+
+	public void setNewParent(Module newParent) {
+		this.newParent = newParent;
+	}
+
+	public void setOldFirstEntry(String oldFirstEntry) {
+		this.oldFirstEntry = oldFirstEntry;
+	}
+
+	public void setOldId(String oldId) {
+		this.oldId = oldId;
+	}
+
+	public void setOldName(String oldName) {
+		this.oldName = oldName;
+	}
+
+	public void setOldParent(Module oldParent) {
+		this.oldParent = oldParent;
 	}
 
 	public void setSearchFirstEntry(String searchFirstEntry) {
