@@ -28,28 +28,26 @@
 				<s:fielderror />
 			</table>
 		</s:if>
-		<s:hidden name="oldId"/>
+		<s:hidden name="selectedId"/>
 		<table>
 			<tr>
 				<td>
 					<table class="grid">
 						<thead>
 							<tr align="center">
-								<td><s:text name="resource.moduleId"/></td>
 								<td><s:text name="resource.moduleName"/></td>
 								<td><s:text name="resource.firstEntry"/></td>
-								<td><s:text name="resource.parentId"/></td>
+								<td><s:text name="resource.parent"/></td>
 							</tr>
 						</thead>
 						<tbody class="selectable">
 							<s:iterator value="modules" status="rowstatus">
 								<tr
-									onclick="$(this).closest('form').find('input#prepareDetail_oldId').val('<s:property value="id" />'); $(this).closest('form').submit();"
+									onclick="$(this).closest('form').find('input#prepareDetail_selectedId').val('<s:property value="id" />'); $(this).closest('form').submit();"
 									class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
-									<td><s:property value="id" /></td>
 									<td><s:property value="name" /></td>
 									<td><s:property value="firstEntry" /></td>
-									<td><s:property value="parent.id" /></td>
+									<td><s:property value="parent.name" /></td>
 								</tr>
 							</s:iterator>
 						</tbody>

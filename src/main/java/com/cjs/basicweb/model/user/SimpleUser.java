@@ -33,12 +33,12 @@ public class SimpleUser extends Trackable implements User {
 	@JoinColumn(name = "user_group_id")
 	private UserGroup userGroup;
 
-	public String getName() {
-		return name;
-	}
-
 	public String getId() {
 		return id;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	@Override
@@ -55,12 +55,12 @@ public class SimpleUser extends Trackable implements User {
 		return userId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override

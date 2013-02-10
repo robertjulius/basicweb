@@ -31,7 +31,6 @@
 					method="post">
 					<s:actionerror />
 					<s:fielderror />
-					<s:textfield key="resource.moduleId" name="searchId"/>
 					<s:textfield key="resource.moduleName" name="searchName"/>
 					<s:textfield key="resource.firstEntry" name="searchFirstEntry" />
 					<s:textfield key="resource.parentId" name="searchParentId"/>

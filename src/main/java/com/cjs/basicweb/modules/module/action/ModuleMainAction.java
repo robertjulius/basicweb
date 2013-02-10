@@ -22,9 +22,9 @@ public class ModuleMainAction extends FormAction<ModuleForm> {
 	}
 
 	public String prepareDetail() throws AppException {
-		String oldId = getForm().getOldId();
-		Module module = moduleBL.getDetail(oldId);
-		getForm().assignFromEntity("old", module);
+		String selectedId = getForm().getSelectedId();
+		Module module = moduleBL.getDetail(selectedId);
+		getForm().setSelected(module);
 		return SUCCESS;
 	}
 

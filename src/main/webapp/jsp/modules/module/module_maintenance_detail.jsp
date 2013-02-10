@@ -37,20 +37,35 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td align="right"><s:text name="resource.moduleId" /></td>
-								<td align="left"><s:label name="oldId" /></td>
-							</tr>
-							<tr>
 								<td align="right"><s:text name="resource.moduleName" /></td>
-								<td align="left"><s:label name="oldName" /></td>
+								<td align="left"><s:label name="selected.name" /></td>
 							</tr>
 							<tr>
 								<td align="right"><s:text name="resource.firstEntry" /></td>
-								<td align="left"><s:label name="oldFirstEntry" /></td>
+								<td align="left"><s:label name="selected.firstEntry" /></td>
 							</tr>
 							<tr>
-								<td align="right"><s:text name="resource.parentId" /></td>
-								<td align="left"><s:label name="oldParent.Id" /></td>
+								<td align="right"><s:text name="resource.parent" /></td>
+								<td align="left"><s:label name="selected.parent.name" /></td>
+							</tr>
+							<tr>
+								<td align="center" colspan="2">
+									<table bordercolor="#FFFFFF" border="2px" width="100%">
+										<thead>
+											<tr bgcolor="#9090FF">
+												<td><s:text name="resource.accessPaths" /></td>
+											</tr>
+										</thead>
+										<tbody>
+											<s:iterator value="selected.accessPaths" status="rowstatus">
+												<tr
+													class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
+													<td><s:property value="url" /></td>
+												</tr>
+											</s:iterator>
+										</tbody>
+									</table>
+								</td>
 							</tr>
 						</tbody>
 					</table>
