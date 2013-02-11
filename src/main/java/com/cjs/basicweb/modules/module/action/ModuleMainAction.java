@@ -1,6 +1,6 @@
 package com.cjs.basicweb.modules.module.action;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.cjs.basicweb.model.Item;
 import com.cjs.basicweb.model.module.Module;
@@ -32,12 +32,9 @@ public class ModuleMainAction extends FormAction<ModuleForm> {
 	}
 	
 	public String prepareEdit() throws AppException {
-		
-		getForm().setListParent(new ArrayList<Item>());
-		getForm().getListParent().add(new Item("01", "Satu"));
-		getForm().getListParent().add(new Item("02", "Dua"));
-		getForm().getListParent().add(new Item("03", "Tiga"));
-		
+		String selectedId = getForm().getSelected().getId();
+		List<Item> items = moduleBL.getItems(selectedId);
+		getForm().setListParent(items);
 		return SUCCESS;
 	}
 

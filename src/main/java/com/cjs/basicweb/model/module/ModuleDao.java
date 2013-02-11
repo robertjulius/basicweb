@@ -12,6 +12,8 @@ import com.cjs.core.exception.AppException;
 public class ModuleDao extends GenericDao<Module> {
 
 	public Module getDetail(String id) throws AppException {
+		Module module = null;
+		
 		if (id == null || id.trim().isEmpty()) {
 			throw new AppException(
 					PropertiesConstants.ERROR_PRIMARY_KEY_REQUIRED);
@@ -19,7 +21,16 @@ public class ModuleDao extends GenericDao<Module> {
 
 		Criteria criteria = session.createCriteria(Module.class);
 		criteria.add(Restrictions.eq("id", id));
-		return (Module) criteria.list().get(0);
+		
+		List<?> modules = criteria.list();
+		if (modules.size() > 1) {
+			throw new AppException(
+					PropertiesConstants.ERROR_INCONSISTENT_DATABASE);
+		} else if (modules.size() == 1) {
+			module = (Module) modules.get(0);
+		}
+		
+		return module;
 	}
 
 	public List<Module> getList(String id, String name, String firstEntry,

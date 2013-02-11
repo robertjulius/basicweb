@@ -32,20 +32,20 @@
 			<tr>
 				<td>
 					<table class="grid">
-						<s:textfield key="resource.???" themes="xhtml"/>
-						<s:textfield key="resource.???" themes="xhtml"/>
-						<s:textfield key="resource.???" themes="xhtml"/>
-						<s:textfield key="resource.???" themes="xhtml"/>
+						<s:textfield key="resource.???" themes="xhtml" />
+						<s:textfield key="resource.???" themes="xhtml" />
+						<s:textfield key="resource.???" themes="xhtml" />
+						<s:textfield key="resource.???" themes="xhtml" />
 					</table>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<table>
+					<table align="right">
 						<tr>
 							<td><input type="button"
-								value="<s:text name="resource.back"/>"
-								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/???/prepareDetail.action'); $(this).closest('form').submit();" /></td>
+								value="<s:text name="resource.cancel"/>"
+								onclick="if (!confirmCancel()) {return;} $(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/???/prepareDetail.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.submit"/>"
 								onclick="if (confirmAction() {$(this).closest('form').submit();}" /></td>

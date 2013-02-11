@@ -15,6 +15,11 @@ input {
 	font-size: 11px;
 }
 
+select {
+	font-family: Verdana, helvetica, arial, sans-serif;
+	font-size: 11px;
+}
+
 thead {
 	background-color: blue;
 	color: white;

@@ -9,6 +9,10 @@ public class Item implements Serializable {
 	private String key;
 	private Object value;
 
+	public Item() {
+
+	}
+
 	public Item(String key, Object value) {
 		this.key = key;
 		this.value = value;

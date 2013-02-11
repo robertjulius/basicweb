@@ -34,6 +34,7 @@
 		<action name="prepareEdit"
 			class="com.cjs.basicweb.modules.module.action.ModuleMainAction"
 			method="prepareEdit">
+			<interceptor-ref name="defaultStackHibernate" />
 			<result name="success">/jsp/modules/module/module_maintenance_edit.jsp</result>
 		</action>
 

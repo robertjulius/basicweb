@@ -7,6 +7,10 @@ function confirmAction() {
 	return confirm("Are you sure want to perform this action?");
 }
 
+function confirmCancel() {
+	return confirm("If you leave this page you will lost all data that already inputed. Are you sure want to leave this page? ");
+}
+
 function stripeTable(table) {
 	var tableBody = table.children("tbody");
 	var rows = tableBody.children("tr");

@@ -41,7 +41,7 @@
 							</tr>
 						</thead>
 						<tbody class="selectable">
-							<s:iterator value="modules" status="rowstatus">
+							<s:iterator value="searchResult" status="rowstatus">
 								<tr
 									onclick="$(this).closest('form').find('input#prepareDetail_selectedId').val('<s:property value="id" />'); $(this).closest('form').submit();"
 									class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">

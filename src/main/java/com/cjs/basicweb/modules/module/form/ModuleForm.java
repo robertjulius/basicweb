@@ -16,7 +16,7 @@ public class ModuleForm extends FormBean {
 	private String searchParentId;
 	private String selectedId;
 	private Module selected;
-	private List<Module> modules;
+	private List<Module> searchResult;
 
 	private String newId;
 	private String newFirstEntry;
@@ -30,8 +30,8 @@ public class ModuleForm extends FormBean {
 		return listParent;
 	}
 
-	public List<Module> getModules() {
-		return modules;
+	public List<Module> getSearchResult() {
+		return searchResult;
 	}
 
 	public String getNewDescription() {
@@ -82,8 +82,8 @@ public class ModuleForm extends FormBean {
 		this.listParent = listParent;
 	}
 
-	public void setModules(List<Module> modules) {
-		this.modules = modules;
+	public void setSearchResult(List<Module> searchResult) {
+		this.searchResult = searchResult;
 	}
 
 	public void setNewDescription(String newDescription) {

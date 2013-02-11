@@ -1,5 +1,9 @@
 package com.cjs.basicweb.modules.module.logic;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.cjs.basicweb.model.Item;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.model.module.ModuleDao;
 import com.cjs.basicweb.modules.module.form.ModuleForm;
@@ -19,8 +23,21 @@ public class ModuleBL {
 	}
 
 	public void search(ModuleForm form) {
-		form.setModules(moduleDao.getList(form.getSearchId(),
+		form.setSearchResult(moduleDao.getList(form.getSearchId(),
 				form.getSearchName(), form.getSearchFirstEntry(),
 				form.getSearchParentId()));
+	}
+
+	public List<Item> getItems(String id) {
+		List<Item> items = new ArrayList<>();
+		List<Module> modules = moduleDao.getList(null, null, null, null);
+		for (Module module : modules) {
+			if (module.getId().equals(id)) {
+				continue;
+			} else {
+				items.add(new Item(module.getId(), module.getName()));
+			}
+		}
+		return items;
 	}
 }
