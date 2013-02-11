@@ -41,7 +41,7 @@
 			</tr>
 			<tr>
 				<td>
-					<table align="right">
+					<table>
 						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.cancel"/>"

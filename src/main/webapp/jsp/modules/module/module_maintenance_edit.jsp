@@ -46,7 +46,7 @@
 			</tr>
 			<tr>
 				<td>
-					<table>
+					<table width="100%">
 						<tr>
 							<td><hr /></td>
 						</tr>
@@ -55,29 +55,22 @@
 						<tr>
 							<td><b>Access Paths</b></td>
 						</tr>
+						<s:iterator value="selected.accessPaths" status="rowstatus">
+							<tr>
+								<td><s:textfield name="url" value="%{url}" /></td>
+								<td><input type="button" value="Remove" /></td>
+							</tr>
+						</s:iterator>
 						<tr>
-							<td>&#149; http://www.google.co.id</td>
-							<td><input type="button" value="Remove" /></td>
-						</tr>
-						<tr>
-							<td>&#149; http://www.google.co.id</td>
-							<td><input type="button" value="Remove" /></td>
-						</tr>
-						<tr>
-							<td>&#149; http://www.google.co.id</td>
-							<td><input type="button" value="Remove" /></td>
-						</tr>
-						<tr>
-							<td><input type="text" /></td>
-							<td><input type="button" value="Add" /></td>
+							<td align="center" colspan="2"><input type="button" value="Add" /></td>
 						</tr>
 					</table>
-					<table>
+					<table width="100%">
 						<tr>
 							<td><hr /></td>
 						</tr>
 					</table>
-					<table align="right">
+					<table>
 						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.cancel"/>"

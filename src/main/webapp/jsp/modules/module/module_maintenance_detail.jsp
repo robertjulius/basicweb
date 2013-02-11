@@ -52,25 +52,18 @@
 								<td align="right"><s:text name="resource.parent" /></td>
 								<td align="left"><s:label name="selected.parent.name" /></td>
 							</tr>
-						</tbody>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<table class="grid">
-						<thead>
 							<tr>
-								<td><s:text name="resource.accessPaths" /></td>
+								<td align="left" colspan="2">
+									<table>
+										<tr><td><b><s:text name="resource.accessPaths" /></b></td></tr>
+										<s:iterator value="selected.accessPaths" status="rowstatus">
+											<tr>
+												<td>&#149; <s:property value="url" /></td>
+											</tr>
+										</s:iterator>
+									</table>
+								</td>
 							</tr>
-						</thead>
-						<tbody>
-							<s:iterator value="selected.accessPaths" status="rowstatus">
-								<tr
-									class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
-									<td><s:property value="url" /></td>
-								</tr>
-							</s:iterator>
 						</tbody>
 					</table>
 				</td>
