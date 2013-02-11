@@ -3,6 +3,7 @@ package com.cjs.basicweb.modules.module.form;
 import java.util.List;
 
 import com.cjs.basicweb.model.FormBean;
+import com.cjs.basicweb.model.Item;
 import com.cjs.basicweb.model.module.Module;
 
 public class ModuleForm extends FormBean {
@@ -17,8 +18,40 @@ public class ModuleForm extends FormBean {
 	private Module selected;
 	private List<Module> modules;
 
+	private String newId;
+	private String newFirstEntry;
+	private String newName;
+	private String newDescription;
+	private String newParentId;
+
+	private List<Item> listParent;
+
+	public List<Item> getListParent() {
+		return listParent;
+	}
+
 	public List<Module> getModules() {
 		return modules;
+	}
+
+	public String getNewDescription() {
+		return newDescription;
+	}
+
+	public String getNewFirstEntry() {
+		return newFirstEntry;
+	}
+
+	public String getNewId() {
+		return newId;
+	}
+
+	public String getNewName() {
+		return newName;
+	}
+
+	public String getNewParentId() {
+		return newParentId;
 	}
 
 	public String getSearchFirstEntry() {
@@ -45,8 +78,32 @@ public class ModuleForm extends FormBean {
 		return selectedId;
 	}
 
+	public void setListParent(List<Item> listParent) {
+		this.listParent = listParent;
+	}
+
 	public void setModules(List<Module> modules) {
 		this.modules = modules;
+	}
+
+	public void setNewDescription(String newDescription) {
+		this.newDescription = newDescription;
+	}
+
+	public void setNewFirstEntry(String newFirstEntry) {
+		this.newFirstEntry = newFirstEntry;
+	}
+
+	public void setNewId(String newId) {
+		this.newId = newId;
+	}
+
+	public void setNewName(String newName) {
+		this.newName = newName;
+	}
+
+	public void setNewParentId(String newParentId) {
+		this.newParentId = newParentId;
 	}
 
 	public void setSearchFirstEntry(String searchFirstEntry) {

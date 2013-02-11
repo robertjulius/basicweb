@@ -41,6 +41,10 @@
 								<td align="left"><s:label name="selected.name" /></td>
 							</tr>
 							<tr>
+								<td align="right"><s:text name="resource.description" /></td>
+								<td align="left"><s:label name="selected.description" /></td>
+							</tr>
+							<tr>
 								<td align="right"><s:text name="resource.firstEntry" /></td>
 								<td align="left"><s:label name="selected.firstEntry" /></td>
 							</tr>

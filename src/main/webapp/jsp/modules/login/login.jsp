@@ -8,12 +8,16 @@
 <s:head />
 </head>
 <body>
-	<s:form action="/modules/login/executeLogin.action">
-		<s:actionerror />
-		<s:fielderror />
-		<s:textfield key="resource.userId" name="userId" />
-		<s:password key="resource.password" name="password"/>
-		<s:submit key="resource.submit" />
-	</s:form>
+	<table class="form">
+		<tr>
+			<td><s:form action="/modules/login/executeLogin.action">
+					<s:actionerror />
+					<s:fielderror />
+					<s:textfield key="resource.userId" name="userId" />
+					<s:password key="resource.password" name="password" />
+					<s:submit key="resource.submit" />
+				</s:form></td>
+		</tr>
+	</table>
 </body>
 </html>

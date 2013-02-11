@@ -30,6 +30,12 @@
 			<interceptor-ref name="defaultStackHibernate" />
 			<result name="success">/jsp/modules/module/module_maintenance_detail.jsp</result>
 		</action>
+		
+		<action name="prepareEdit"
+			class="com.cjs.basicweb.modules.module.action.ModuleMainAction"
+			method="prepareEdit">
+			<result name="success">/jsp/modules/module/module_maintenance_edit.jsp</result>
+		</action>
 
 	</package>
 

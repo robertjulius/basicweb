@@ -32,26 +32,10 @@
 			<tr>
 				<td>
 					<table class="grid">
-						<thead>
-							<tr align="center">
-								<td><s:text name="resource.???" /></td>
-								<td><s:text name="resource.???" /></td>
-								<td><s:text name="resource.???" /></td>
-								<td><s:text name="resource.???" /></td>
-							</tr>
-						</thead>
-						<tbody class="selectable">
-							<s:iterator value="???" status="rowstatus">
-								<tr
-									onclick="$(this).closest('form').find('input#executeEdit_???').val('<s:property value="???" />'); $(this).closest('form').submit();"
-									class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
-									<td><s:property value="???" /></td>
-									<td><s:property value="???" /></td>
-									<td><s:property value="???" /></td>
-									<td><s:property value="???" /></td>
-								</tr>
-							</s:iterator>
-						</tbody>
+						<s:textfield key="resource.???" themes="xhtml"/>
+						<s:textfield key="resource.???" themes="xhtml"/>
+						<s:textfield key="resource.???" themes="xhtml"/>
+						<s:textfield key="resource.???" themes="xhtml"/>
 					</table>
 				</td>
 			</tr>
@@ -61,7 +45,7 @@
 						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.back"/>"
-								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/???/initial.action'); $(this).closest('form').submit();" /></td>
+								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/???/prepareDetail.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.submit"/>"
 								onclick="if (confirmAction() {$(this).closest('form').submit();}" /></td>

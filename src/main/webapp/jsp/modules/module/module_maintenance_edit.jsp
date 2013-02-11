@@ -21,22 +21,22 @@
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/???/executeEdit.action" theme="simple">
+	<s:form action="/modules/module/executeEdit.action" theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
 				<s:actionerror />
 				<s:fielderror />
 			</table>
 		</s:if>
+		<s:hidden name="newId" value="%{selected.id}"/>
 		<table class="form">
 			<tr>
 				<td>
-					<table class="grid">
-						<s:textfield key="resource.???" />
-						<s:textfield key="resource.???" />
-						<s:textfield key="resource.???" />
-						<s:textfield key="resource.???" />
-						<s:submit key="resource.search" />
+					<table>
+						<s:textfield key="resource.moduleName" name="newName" value="%{selected.name}" theme="xhtml"/>
+						<s:textfield key="resource.description" name="newDescription" value="%{selected.description}" theme="xhtml"/>
+						<s:textfield key="resource.firstEntry" name="newFirstEntry" value="%{selected.firstEntry}" theme="xhtml"/>
+						<s:select key="resource.parent" list="listParent" listKey="key" listValue="value" theme="xhtml"/>
 					</table>
 				</td>
 			</tr>
@@ -46,7 +46,7 @@
 						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.back"/>"
-								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/???/initial.action'); $(this).closest('form').submit();" /></td>
+								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/prepareDetail.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.submit"/>"
 								onclick="if (confirmAction() {$(this).closest('form').submit();}" /></td>
