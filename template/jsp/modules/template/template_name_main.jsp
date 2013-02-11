@@ -16,7 +16,7 @@
 				</h1></td>
 		</tr>
 	</table>
-	<table>
+	<table class="form">
 		<tr>
 			<td align="right"><s:form
 					action="/modules/???/prepareNew.action" method="post">

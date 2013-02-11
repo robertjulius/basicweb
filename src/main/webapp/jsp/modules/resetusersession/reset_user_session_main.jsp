@@ -30,7 +30,7 @@
 			</table>
 		</s:if>
 		<s:hidden name="userId"/>
-		<table>
+		<table class="form">
 			<tr>
 				<td>
 					<table class="grid">

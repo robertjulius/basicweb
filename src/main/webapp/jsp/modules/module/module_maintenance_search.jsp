@@ -28,16 +28,16 @@
 				<s:fielderror />
 			</table>
 		</s:if>
-		<s:hidden name="selectedId"/>
-		<table>
+		<s:hidden name="selectedId" />
+		<table class="form">
 			<tr>
 				<td>
 					<table class="grid">
 						<thead>
 							<tr align="center">
-								<td><s:text name="resource.moduleName"/></td>
-								<td><s:text name="resource.firstEntry"/></td>
-								<td><s:text name="resource.parent"/></td>
+								<td><s:text name="resource.moduleName" /></td>
+								<td><s:text name="resource.firstEntry" /></td>
+								<td><s:text name="resource.parent" /></td>
 							</tr>
 						</thead>
 						<tbody class="selectable">
@@ -58,7 +58,8 @@
 				<td>
 					<table>
 						<tr>
-							<td><input type="button" value="<s:text name="resource.back"/>"
+							<td><input type="button"
+								value="<s:text name="resource.back"/>"
 								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/initial.action'); $(this).closest('form').submit();" /></td>
 						</tr>
 					</table>

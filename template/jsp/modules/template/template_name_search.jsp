@@ -29,7 +29,7 @@
 			</table>
 		</s:if>
 		<s:hidden name="???"/>
-		<table>
+		<table class="form">
 			<tr>
 				<td>
 					<table class="grid">
@@ -56,7 +56,7 @@
 					</table>
 				</td>
 			</tr>
-			<tr align="center">
+			<tr>
 				<td>
 					<table>
 						<tr>

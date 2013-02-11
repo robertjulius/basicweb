@@ -26,7 +26,7 @@
 				<s:fielderror />
 			</table>
 		</s:if>
-		<table>
+		<table class="form">
 			<tr>
 				<td>
 					<table class="grid">
@@ -48,30 +48,30 @@
 								<td align="right"><s:text name="resource.parent" /></td>
 								<td align="left"><s:label name="selected.parent.name" /></td>
 							</tr>
-							<tr>
-								<td align="center" colspan="2">
-									<table bordercolor="#FFFFFF" border="2px" width="100%">
-										<thead>
-											<tr bgcolor="#9090FF">
-												<td><s:text name="resource.accessPaths" /></td>
-											</tr>
-										</thead>
-										<tbody>
-											<s:iterator value="selected.accessPaths" status="rowstatus">
-												<tr
-													class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
-													<td><s:property value="url" /></td>
-												</tr>
-											</s:iterator>
-										</tbody>
-									</table>
-								</td>
-							</tr>
 						</tbody>
 					</table>
 				</td>
 			</tr>
-			<tr align="center">
+			<tr>
+				<td>
+					<table class="grid">
+						<thead>
+							<tr>
+								<td><s:text name="resource.accessPaths" /></td>
+							</tr>
+						</thead>
+						<tbody>
+							<s:iterator value="selected.accessPaths" status="rowstatus">
+								<tr
+									class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
+									<td><s:property value="url" /></td>
+								</tr>
+							</s:iterator>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr>
 				<td>
 					<table>
 						<tr>

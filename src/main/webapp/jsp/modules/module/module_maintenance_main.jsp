@@ -9,6 +9,7 @@
 <s:head />
 </head>
 <body>
+
 	<table>
 		<tr>
 			<td><h1>
@@ -16,7 +17,7 @@
 				</h1></td>
 		</tr>
 	</table>
-	<table>
+	<table class="form">
 		<tr>
 			<td align="right"><s:form
 					action="/modules/module/prepareNew.action" method="post">
@@ -27,13 +28,12 @@
 			<td><hr /></td>
 		</tr>
 		<tr>
-			<td><s:form action="/modules/module/search.action"
-					method="post">
+			<td><s:form action="/modules/module/search.action" method="post">
 					<s:actionerror />
 					<s:fielderror />
-					<s:textfield key="resource.moduleName" name="searchName"/>
+					<s:textfield key="resource.moduleName" name="searchName" />
 					<s:textfield key="resource.firstEntry" name="searchFirstEntry" />
-					<s:textfield key="resource.parentId" name="searchParentId"/>
+					<s:textfield key="resource.parent" name="searchParentId" />
 					<s:submit key="resource.search" />
 				</s:form></td>
 		</tr>

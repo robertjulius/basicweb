@@ -26,7 +26,7 @@
 				<s:fielderror />
 			</table>
 		</s:if>
-		<table>
+		<table class="form">
 			<tr>
 				<td>
 					<table class="grid">
@@ -56,7 +56,7 @@
 					</table>
 				</td>
 			</tr>
-			<tr align="center">
+			<tr>
 				<td>
 					<table>
 						<tr>

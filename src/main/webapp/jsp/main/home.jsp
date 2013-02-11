@@ -18,7 +18,7 @@
 						<td class="pageGuide"><strong>Home</strong></td>
 					</tr>
 				</table> <br> <!-- start content table -->
-				<table width="90%" border="0" align="center" cellpadding="0"
+				<table width="90%" border="0" cellpadding="0"
 					cellspacing="0">
 					<tr>
 						<td>

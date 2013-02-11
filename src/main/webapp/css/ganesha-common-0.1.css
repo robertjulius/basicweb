@@ -2,10 +2,12 @@ body {
 	font-family: Verdana, helvetica, arial, sans-serif;
 	font-size: 11px;
 	white-space: nowrap;
+	background-color: #BBBBBB;
 }
 
 table {
 	border-collapse: collapse;
+	margin: auto;
 }
 
 input {

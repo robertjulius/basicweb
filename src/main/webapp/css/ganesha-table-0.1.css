@@ -1,8 +1,19 @@
 table.grid {
 	border: thin;
 	border-style: solid;
-	border-color: #AAAAAA;
+	border-color: #000000;
 	border-collapse: separate;
+	width: 100%;
+	background-color: #FFFFFF;
+}
+
+table.form {
+	/*
+	border: thin;
+	border-style: solid;
+	background-color: #A0A0D0;
+	border-color: #000000;
+	*/
 }
 
 tr.rowOdd {
@@ -14,11 +25,12 @@ tr.rowEven {
 }
 
 tbody.selectable tr:HOVER {
-	background-color: #BBBBDD;
-	cursor: hand; cursor: pointer;
+	background-color: #FFFFAA;
+	cursor: hand;
+	cursor: pointer;
 }
 
 table.grid td {
-	padding-left:5px;
-	padding-right:5px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
