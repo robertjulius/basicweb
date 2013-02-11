@@ -28,20 +28,55 @@
 				<s:fielderror />
 			</table>
 		</s:if>
-		<s:hidden name="newId" value="%{selected.id}"/>
+		<s:hidden name="newId" value="%{selected.id}" />
 		<table class="form">
 			<tr>
 				<td>
 					<table>
-						<s:textfield key="resource.moduleName" name="newName" value="%{selected.name}" theme="xhtml"/>
-						<s:textfield key="resource.description" name="newDescription" value="%{selected.description}" theme="xhtml"/>
-						<s:textfield key="resource.firstEntry" name="newFirstEntry" value="%{selected.firstEntry}" theme="xhtml"/>
-						<s:select key="resource.parent" list="listParent" listKey="key" listValue="value" theme="xhtml"/>
+						<s:textfield key="resource.moduleName" name="newName"
+							value="%{selected.name}" theme="xhtml" />
+						<s:textfield key="resource.description" name="newDescription"
+							value="%{selected.description}" theme="xhtml" />
+						<s:textfield key="resource.firstEntry" name="newFirstEntry"
+							value="%{selected.firstEntry}" theme="xhtml" />
+						<s:select key="resource.parent" list="listParent" listKey="key"
+							listValue="value" theme="xhtml" />
 					</table>
 				</td>
 			</tr>
 			<tr>
 				<td>
+					<table>
+						<tr>
+							<td><hr /></td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td><b>Access Paths</b></td>
+						</tr>
+						<tr>
+							<td>&#149; http://www.google.co.id</td>
+							<td><input type="button" value="Remove" /></td>
+						</tr>
+						<tr>
+							<td>&#149; http://www.google.co.id</td>
+							<td><input type="button" value="Remove" /></td>
+						</tr>
+						<tr>
+							<td>&#149; http://www.google.co.id</td>
+							<td><input type="button" value="Remove" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" /></td>
+							<td><input type="button" value="Add" /></td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td><hr /></td>
+						</tr>
+					</table>
 					<table align="right">
 						<tr>
 							<td><input type="button"
