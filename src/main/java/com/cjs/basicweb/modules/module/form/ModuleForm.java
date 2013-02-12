@@ -23,6 +23,7 @@ public class ModuleForm extends FormBean {
 	private String newName;
 	private String newDescription;
 	private String newParentId;
+	private List<String> newAccessPaths;
 
 	private List<Item> listParent;
 
@@ -30,8 +31,8 @@ public class ModuleForm extends FormBean {
 		return listParent;
 	}
 
-	public List<Module> getSearchResult() {
-		return searchResult;
+	public List<String> getNewAccessPaths() {
+		return newAccessPaths;
 	}
 
 	public String getNewDescription() {
@@ -70,6 +71,10 @@ public class ModuleForm extends FormBean {
 		return searchParentId;
 	}
 
+	public List<Module> getSearchResult() {
+		return searchResult;
+	}
+
 	public Module getSelected() {
 		return selected;
 	}
@@ -82,8 +87,8 @@ public class ModuleForm extends FormBean {
 		this.listParent = listParent;
 	}
 
-	public void setSearchResult(List<Module> searchResult) {
-		this.searchResult = searchResult;
+	public void setNewAccessPaths(List<String> newAccessPaths) {
+		this.newAccessPaths = newAccessPaths;
 	}
 
 	public void setNewDescription(String newDescription) {
@@ -120,6 +125,10 @@ public class ModuleForm extends FormBean {
 
 	public void setSearchParentId(String searchParentId) {
 		this.searchParentId = searchParentId;
+	}
+
+	public void setSearchResult(List<Module> searchResult) {
+		this.searchResult = searchResult;
 	}
 
 	public void setSelected(Module selected) {

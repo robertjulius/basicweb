@@ -7,35 +7,55 @@
 
 	<package name="module" extends="app-default" namespace="/modules/module">
 
-		<action name="initial" class="moduleMainAction" method="initial">
-			<result name="success">/jsp/modules/module/module_maintenance_main.jsp</result>
+		<action name="initial"
+			class="com.cjs.basicweb.modules.module.action.ModuleMainAction" method="initial">
+			<result name="success">/jsp/modules/module/module_maintenance_main.jsp
+			</result>
 		</action>
 
-		<action name="prepareNew" class="moduleMainAction" method="prepareNew">
-			<result name="success">/jsp/modules/module/module_maintenance_new.jsp</result>
+		<action name="prepareNew"
+			class="com.cjs.basicweb.modules.module.action.ModuleMainAction"
+			method="prepareNew">
+			<result name="success">/jsp/modules/module/module_maintenance_new.jsp
+			</result>
 		</action>
 
-		<action name="confirmNew" class="moduleExecuteAction" method="confirmNew">
-			<result name="success">/jsp/modules/module/module_maintenance_confirm.jsp</result>
+		<action name="confirmNew"
+			class="com.cjs.basicweb.modules.module.action.ModuleExecuteAction"
+			method="confirmNew">
+			<result name="success">/jsp/modules/module/module_maintenance_confirm.jsp
+			</result>
 		</action>
 
-		<action name="search" class="moduleMainAction" method="search">
+		<action name="search"
+			class="com.cjs.basicweb.modules.module.action.ModuleMainAction"
+			method="search">
 			<interceptor-ref name="defaultStackHibernate" />
-			<result name="success">/jsp/modules/module/module_maintenance_search.jsp</result>
+			<result name="success">/jsp/modules/module/module_maintenance_search.jsp
+			</result>
 		</action>
 
 		<action name="prepareDetail"
 			class="com.cjs.basicweb.modules.module.action.ModuleMainAction"
 			method="prepareDetail">
 			<interceptor-ref name="defaultStackHibernate" />
-			<result name="success">/jsp/modules/module/module_maintenance_detail.jsp</result>
+			<result name="success">/jsp/modules/module/module_maintenance_detail.jsp
+			</result>
 		</action>
-		
+
 		<action name="prepareEdit"
 			class="com.cjs.basicweb.modules.module.action.ModuleMainAction"
 			method="prepareEdit">
 			<interceptor-ref name="defaultStackHibernate" />
-			<result name="success">/jsp/modules/module/module_maintenance_edit.jsp</result>
+			<result name="success">/jsp/modules/module/module_maintenance_edit.jsp
+			</result>
+		</action>
+
+		<action name="confirmEdit"
+			class="com.cjs.basicweb.modules.module.action.ModuleExecuteAction"
+			method="confirmEdit">
+			<result name="success">/jsp/modules/module/module_maintenance_edit.jsp
+			</result>
 		</action>
 
 	</package>

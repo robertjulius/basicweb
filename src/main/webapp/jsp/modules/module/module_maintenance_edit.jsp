@@ -1,3 +1,4 @@
+<%@page import="com.cjs.basicweb.utility.GeneralConstants"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
@@ -21,7 +22,7 @@
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/module/executeEdit.action" theme="simple">
+	<s:form action="/modules/module/confirmEdit.action" theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
 				<s:actionerror />
@@ -39,8 +40,8 @@
 							value="%{selected.description}" theme="xhtml" />
 						<s:textfield key="resource.firstEntry" name="newFirstEntry"
 							value="%{selected.firstEntry}" theme="xhtml" />
-						<s:select key="resource.parent" list="listParent" listKey="key"
-							listValue="value" theme="xhtml" />
+						<s:select key="resource.parent" name="newParent" list="listParent"
+							listKey="key" listValue="value" theme="xhtml" />
 					</table>
 				</td>
 			</tr>
@@ -55,14 +56,17 @@
 						<tr>
 							<td><b>Access Paths</b></td>
 						</tr>
-						<s:iterator value="selected.accessPaths" status="rowstatus">
+						<s:iterator value="listAccessPaths" status="rowstatus">
 							<tr>
-								<td><s:textfield name="url" value="%{url}" /></td>
-								<td><input type="button" value="Remove" /></td>
+								<td><s:textfield name="newAccessPaths[%{#rowstatus.index}]"
+										id="newAccessPaths%{#rowstatus.index}" value="%{url}" /></td>
+								<td><input type="button" value="Remove"
+									onclick="$(newAccessPaths<s:property value="%{#rowstatus.index}"/>).val('<%=GeneralConstants.NULL_VALUE%>'); $(this).closest('tr').hide()" /></td>
 							</tr>
 						</s:iterator>
 						<tr>
-							<td align="center" colspan="2"><input type="button" value="Add" /></td>
+							<td align="center" colspan="2"><input type="button"
+								value="Add" /></td>
 						</tr>
 					</table>
 					<table width="100%">
@@ -77,7 +81,7 @@
 								onclick="if (!confirmCancel()) {return;} $(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/prepareDetail.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.submit"/>"
-								onclick="if (confirmAction() {$(this).closest('form').submit();}" /></td>
+								onclick="if (confirmAction()) {$(this).closest('form').submit();}" /></td>
 						</tr>
 					</table>
 				</td>

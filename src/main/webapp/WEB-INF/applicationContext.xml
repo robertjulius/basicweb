@@ -52,12 +52,5 @@
 	
 	<bean id="testFirstEntryAction" class="com.cjs.basicweb.modules.test.action.TestFirstEntryAction"
 		scope="prototype" />
-		
-	<bean id="moduleMainAction" class="com.cjs.basicweb.modules.module.action.ModuleMainAction"
-		scope="prototype" />	
-	<bean id="modulePrepareAction" class="com.cjs.basicweb.modules.module.action.ModulePrepareAction"
-		scope="prototype" />
-	<bean id="moduleExecuteAction" class="com.cjs.basicweb.modules.module.action.ModuleExecuteAction"
-		scope="prototype" />
 
 </beans>

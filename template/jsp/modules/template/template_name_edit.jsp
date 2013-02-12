@@ -48,7 +48,7 @@
 								onclick="if (!confirmCancel()) {return;} $(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/???/prepareDetail.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.submit"/>"
-								onclick="if (confirmAction() {$(this).closest('form').submit();}" /></td>
+								onclick="if (confirmAction()) {$(this).closest('form').submit();}" /></td>
 						</tr>
 					</table>
 				</td>
