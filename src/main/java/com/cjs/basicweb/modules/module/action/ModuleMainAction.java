@@ -30,14 +30,14 @@ public class ModuleMainAction extends FormAction<ModuleForm> {
 		getForm().setSelected(module);
 		return SUCCESS;
 	}
-	
+
 	public String prepareEdit() throws AppException {
 		String selectedId = getForm().getSelected().getId();
 		List<Item> items = moduleBL.getItems(selectedId);
 		getForm().setListParent(items);
 		return SUCCESS;
 	}
-
+	
 	public String prepareNew() {
 		return SUCCESS;
 	}

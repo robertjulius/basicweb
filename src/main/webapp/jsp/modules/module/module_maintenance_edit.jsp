@@ -56,12 +56,12 @@
 						<tr>
 							<td><b>Access Paths</b></td>
 						</tr>
-						<s:iterator value="listAccessPaths" status="rowstatus">
+						<s:iterator value="selected.accessPaths" status="rowstatus">
 							<tr>
-								<td><s:textfield name="newAccessPaths[%{#rowstatus.index}]"
-										id="newAccessPaths%{#rowstatus.index}" value="%{url}" /></td>
+								<td><s:textfield name="listAccessPaths[%{#rowstatus.index}]"
+										id="listAccessPaths%{#rowstatus.index}" value="%{url}" /></td>
 								<td><input type="button" value="Remove"
-									onclick="$(newAccessPaths<s:property value="%{#rowstatus.index}"/>).val('<%=GeneralConstants.NULL_VALUE%>'); $(this).closest('tr').hide()" /></td>
+									onclick="$(this).closest('tr').remove()" /></td>
 							</tr>
 						</s:iterator>
 						<tr>
