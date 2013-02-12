@@ -8,7 +8,8 @@
 	<package name="module" extends="app-default" namespace="/modules/module">
 
 		<action name="initial"
-			class="com.cjs.basicweb.modules.module.action.ModuleMainAction" method="initial">
+			class="com.cjs.basicweb.modules.module.action.ModuleMainAction"
+			method="initial">
 			<result name="success">/jsp/modules/module/module_maintenance_main.jsp
 			</result>
 		</action>

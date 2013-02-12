@@ -1,17 +1,18 @@
 package com.cjs.basicweb.model.accesspath;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.cjs.basicweb.model.Trackable;
 import com.cjs.basicweb.model.module.Module;
 
 @Entity
 @Table(name = "ms_access_path")
-public class AccessPath extends Trackable {
+public class AccessPath implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

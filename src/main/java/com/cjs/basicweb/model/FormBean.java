@@ -45,7 +45,7 @@ public abstract class FormBean implements Serializable {
 				if (method.getName().startsWith("set")) {
 					if (method.getParameterTypes().length != 1) {
 						throw new AppException(
-								PropertiesConstants.ERROR_GENERIC);
+								PropertiesConstants.ERROR_REFLECTION);
 					}
 
 					String name = method.getName().substring(3, 4)
@@ -57,7 +57,7 @@ public abstract class FormBean implements Serializable {
 							&& !method.getParameterTypes()[0]
 									.isAssignableFrom(value.getClass())) {
 						throw new AppException(
-								PropertiesConstants.ERROR_GENERIC);
+								PropertiesConstants.ERROR_REFLECTION);
 					}
 					method.invoke(this, value);
 				}
@@ -80,7 +80,7 @@ public abstract class FormBean implements Serializable {
 				if (method.getName().startsWith("get")) {
 					if (method.getParameterTypes().length != 0) {
 						throw new AppException(
-								PropertiesConstants.ERROR_GENERIC);
+								PropertiesConstants.ERROR_REFLECTION);
 					}
 
 					Object value = method.invoke(entity);

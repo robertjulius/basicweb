@@ -40,4 +40,8 @@ public class ModuleBL {
 		}
 		return items;
 	}
+	
+	public void validateForm() {
+		
+	}
 }

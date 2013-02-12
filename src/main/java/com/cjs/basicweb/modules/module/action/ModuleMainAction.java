@@ -32,12 +32,12 @@ public class ModuleMainAction extends FormAction<ModuleForm> {
 	}
 
 	public String prepareEdit() throws AppException {
-		String selectedId = getForm().getSelected().getId();
-		List<Item> items = moduleBL.getItems(selectedId);
+		List<Item> items = moduleBL.getItems(getForm().getSelectedId());
 		getForm().setListParent(items);
+		getForm().assignFromEntity("new", getForm().getSelected());
 		return SUCCESS;
 	}
-	
+
 	public String prepareNew() {
 		return SUCCESS;
 	}

@@ -16,7 +16,7 @@ public class PropertiesConstants {
 	public static final String ERROR_INCONSISTENT_DATABASE = "error.inconsistent.database";
 	public static final String ERROR_DUPLICATE_REGISTER_USERSESSION = "error.duplicate.register.usersession";
 	public static final String ERROR_APPCONFIG_RELOAD = "error.appconfig.reload";
-	public static final String ERROR_GENERIC = "error.generic";
+	public static final String ERROR_REFLECTION = "error.generic";
 	public static final String ERROR_PRIMARY_KEY_REQUIRED = "error.primary.key.required";
 
 }

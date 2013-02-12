@@ -29,12 +29,12 @@ INSERT INTO ms_privilege (user_group_id, module_id) VALUES ('developer', '013res
 
 -- MS_ACCESS_PATH
 DELETE FROM ms_access_path;
-INSERT INTO ms_access_path (url, create_by, create_date, update_by, update_date, module_id) VALUES ('/modules/module/initial.action', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP, '021module_maintenance');
-INSERT INTO ms_access_path (url, create_by, create_date, update_by, update_date, module_id) VALUES ('/modules/module/prepareNew.action', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP, '021module_maintenance');
-INSERT INTO ms_access_path (url, create_by, create_date, update_by, update_date, module_id) VALUES ('/modules/module/search.action', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP, '021module_maintenance');
-INSERT INTO ms_access_path (url, create_by, create_date, update_by, update_date, module_id) VALUES ('/modules/module/prepareDetail.action', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP, '021module_maintenance');
-INSERT INTO ms_access_path (url, create_by, create_date, update_by, update_date, module_id) VALUES ('/modules/module/prepareEdit.action', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP, '021module_maintenance');
-INSERT INTO ms_access_path (url, create_by, create_date, update_by, update_date, module_id) VALUES ('/modules/module/confirmEdit.action', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP, '021module_maintenance');
-INSERT INTO ms_access_path (url, create_by, create_date, update_by, update_date, module_id) VALUES ('/modules/resetusersession/initial.action', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP, '013reset_user_session');
-INSERT INTO ms_access_path (url, create_by, create_date, update_by, update_date, module_id) VALUES ('/modules/resetusersession/prepareDetail.action', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP, '013reset_user_session');
-INSERT INTO ms_access_path (url, create_by, create_date, update_by, update_date, module_id) VALUES ('/modules/resetusersession/executeReset.action', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP, '013reset_user_session');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/initial.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/prepareNew.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/search.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/prepareDetail.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/prepareEdit.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/confirmEdit.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/resetusersession/initial.action', '013reset_user_session');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/resetusersession/prepareDetail.action', '013reset_user_session');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/resetusersession/executeReset.action', '013reset_user_session');

@@ -35,13 +35,11 @@
 				<td>
 					<table>
 						<s:textfield key="resource.moduleName" name="newName"
-							value="%{selected.name}" theme="xhtml" />
+							theme="xhtml" />
 						<s:textfield key="resource.description" name="newDescription"
-							value="%{selected.description}" theme="xhtml" />
+							theme="xhtml" />
 						<s:textfield key="resource.firstEntry" name="newFirstEntry"
-							value="%{selected.firstEntry}" theme="xhtml" />
-						<s:select key="resource.parent" name="newParent" list="listParent"
-							listKey="key" listValue="value" theme="xhtml" />
+							theme="xhtml" />
 					</table>
 				</td>
 			</tr>
@@ -58,7 +56,8 @@
 						</tr>
 						<s:iterator value="selected.accessPaths" status="rowstatus">
 							<tr>
-								<td><s:textfield name="listAccessPaths[%{#rowstatus.index}]"
+								<td><s:textfield
+										name="listAccessPaths[%{#rowstatus.index}]"
 										id="listAccessPaths%{#rowstatus.index}" value="%{url}" /></td>
 								<td><input type="button" value="Remove"
 									onclick="$(this).closest('tr').remove()" /></td>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.cjs.basicweb.model.FormBean;
 import com.cjs.basicweb.model.Item;
+import com.cjs.basicweb.model.accesspath.AccessPath;
 import com.cjs.basicweb.model.module.Module;
 
 public class ModuleForm extends FormBean {
@@ -23,7 +24,7 @@ public class ModuleForm extends FormBean {
 	private String newName;
 	private String newDescription;
 	private String newParentId;
-	private List<String> newAccessPaths;
+	private List<AccessPath> newAccessPaths;
 
 	private List<Item> listParent;
 
@@ -31,7 +32,7 @@ public class ModuleForm extends FormBean {
 		return listParent;
 	}
 
-	public List<String> getNewAccessPaths() {
+	public List<AccessPath> getNewAccessPaths() {
 		return newAccessPaths;
 	}
 
@@ -87,7 +88,7 @@ public class ModuleForm extends FormBean {
 		this.listParent = listParent;
 	}
 
-	public void setNewAccessPaths(List<String> newAccessPaths) {
+	public void setNewAccessPaths(List<AccessPath> newAccessPaths) {
 		this.newAccessPaths = newAccessPaths;
 	}
 
