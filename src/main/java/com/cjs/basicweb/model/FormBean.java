@@ -52,14 +52,16 @@ public abstract class FormBean implements Serializable {
 							.toLowerCase()
 							+ method.getName().substring(4);
 
-					Object value = hashMap.get(name);
-					if (value != null
-							&& !method.getParameterTypes()[0]
-									.isAssignableFrom(value.getClass())) {
-						throw new AppException(
-								PropertiesConstants.ERROR_REFLECTION);
+					if (hashMap.containsKey(name)) {
+						Object value = hashMap.get(name);
+						if (value != null
+								&& !method.getParameterTypes()[0]
+										.isAssignableFrom(value.getClass())) {
+							throw new AppException(
+									PropertiesConstants.ERROR_REFLECTION);
+						}
+						method.invoke(this, value);
 					}
-					method.invoke(this, value);
 				}
 			}
 		} catch (IllegalAccessException e) {

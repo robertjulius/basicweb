@@ -16,21 +16,18 @@ public class ModuleForm extends FormBean {
 	private String searchFirstEntry;
 	private String searchParentId;
 	private String selectedId;
-	private Module selected;
 	private List<Module> searchResult;
+
+	private Module old;
 
 	private String newId;
 	private String newFirstEntry;
 	private String newName;
 	private String newDescription;
-	private String newParentId;
+	private Module newParent;
 	private List<AccessPath> newAccessPaths;
 
-	private List<Item> listParent;
-
-	public List<Item> getListParent() {
-		return listParent;
-	}
+	private List<Item> selectListParent;
 
 	public List<AccessPath> getNewAccessPaths() {
 		return newAccessPaths;
@@ -52,8 +49,12 @@ public class ModuleForm extends FormBean {
 		return newName;
 	}
 
-	public String getNewParentId() {
-		return newParentId;
+	public Module getNewParent() {
+		return newParent;
+	}
+
+	public Module getOld() {
+		return old;
 	}
 
 	public String getSearchFirstEntry() {
@@ -76,16 +77,12 @@ public class ModuleForm extends FormBean {
 		return searchResult;
 	}
 
-	public Module getSelected() {
-		return selected;
-	}
-
 	public String getSelectedId() {
 		return selectedId;
 	}
 
-	public void setListParent(List<Item> listParent) {
-		this.listParent = listParent;
+	public List<Item> getSelectListParent() {
+		return selectListParent;
 	}
 
 	public void setNewAccessPaths(List<AccessPath> newAccessPaths) {
@@ -108,8 +105,12 @@ public class ModuleForm extends FormBean {
 		this.newName = newName;
 	}
 
-	public void setNewParentId(String newParentId) {
-		this.newParentId = newParentId;
+	public void setNewParent(Module newParent) {
+		this.newParent = newParent;
+	}
+
+	public void setOld(Module old) {
+		this.old = old;
 	}
 
 	public void setSearchFirstEntry(String searchFirstEntry) {
@@ -132,11 +133,11 @@ public class ModuleForm extends FormBean {
 		this.searchResult = searchResult;
 	}
 
-	public void setSelected(Module selected) {
-		this.selected = selected;
-	}
-
 	public void setSelectedId(String selectedId) {
 		this.selectedId = selectedId;
+	}
+
+	public void setSelectListParent(List<Item> selectListParent) {
+		this.selectListParent = selectListParent;
 	}
 }

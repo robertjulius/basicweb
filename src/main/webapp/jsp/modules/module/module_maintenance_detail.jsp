@@ -38,25 +38,25 @@
 						<tbody>
 							<tr>
 								<td align="right"><s:text name="resource.moduleName" /></td>
-								<td align="left"><s:label name="selected.name" /></td>
+								<td align="left"><s:label name="old.name" /></td>
 							</tr>
 							<tr>
 								<td align="right"><s:text name="resource.description" /></td>
-								<td align="left"><s:label name="selected.description" /></td>
+								<td align="left"><s:label name="old.description" /></td>
 							</tr>
 							<tr>
 								<td align="right"><s:text name="resource.firstEntry" /></td>
-								<td align="left"><s:label name="selected.firstEntry" /></td>
+								<td align="left"><s:label name="old.firstEntry" /></td>
 							</tr>
 							<tr>
 								<td align="right"><s:text name="resource.parent" /></td>
-								<td align="left"><s:label name="selected.parent.name" /></td>
+								<td align="left"><s:label name="old.parent.name" /></td>
 							</tr>
 							<tr>
 								<td align="left" colspan="2">
 									<table>
 										<tr><td><b><s:text name="resource.accessPaths" /></b></td></tr>
-										<s:iterator value="selected.accessPaths" status="rowstatus">
+										<s:iterator value="old.accessPaths" status="rowstatus">
 											<tr>
 												<td>&#149; <s:property value="url" /></td>
 											</tr>

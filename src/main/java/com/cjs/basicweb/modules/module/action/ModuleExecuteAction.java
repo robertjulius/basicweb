@@ -20,6 +20,9 @@ public class ModuleExecuteAction extends FormAction<ModuleForm> {
 	public String confirmEdit() {
 		getForm().setNewAccessPaths(new ArrayList<AccessPath>());
 		for (String url : listAccessPaths) {
+			if (url == null) {
+				continue;
+			}
 			AccessPath accessPath = new AccessPath();
 			accessPath.setUrl(url);
 			/*

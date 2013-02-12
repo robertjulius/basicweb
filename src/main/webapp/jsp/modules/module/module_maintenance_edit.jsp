@@ -29,7 +29,6 @@
 				<s:fielderror />
 			</table>
 		</s:if>
-		<s:hidden name="newId" value="%{selected.id}" />
 		<table class="form">
 			<tr>
 				<td>
@@ -54,19 +53,22 @@
 						<tr>
 							<td><b>Access Paths</b></td>
 						</tr>
-						<s:iterator value="selected.accessPaths" status="rowstatus">
+						<tbody>
+							<s:iterator value="newAccessPaths" status="rowstatus">
+								<tr>
+									<td><s:textfield
+											name="listAccessPaths[%{#rowstatus.index}]" value="%{url}" /></td>
+									<td><input type="button" value="Remove"
+										class="buttonRemove" /></td>
+								</tr>
+							</s:iterator>
+						</tbody>
+						<tfoot>
 							<tr>
-								<td><s:textfield
-										name="listAccessPaths[%{#rowstatus.index}]"
-										id="listAccessPaths%{#rowstatus.index}" value="%{url}" /></td>
-								<td><input type="button" value="Remove"
-									onclick="$(this).closest('tr').remove()" /></td>
+								<td align="center" colspan="2"><input type="button"
+									value="Add" onclick="addRow($(this).closest('table'));" /></td>
 							</tr>
-						</s:iterator>
-						<tr>
-							<td align="center" colspan="2"><input type="button"
-								value="Add" /></td>
-						</tr>
+						</tfoot>
 					</table>
 					<table width="100%">
 						<tr>
@@ -88,4 +90,19 @@
 		</table>
 	</s:form>
 </body>
+<script type="text/javascript">
+	$(function() {
+		$('.buttonRemove').click(function() {
+			$(this).closest('tr').remove();
+		});
+	});
+
+	var rowSize = <s:property value="newAccessPaths.size"/>;
+	function addRow(table) {
+		var td1 = '<td><input type="text" name="listAccessPaths[' + rowSize + ']" /></td>';
+		var td2 = '<td><input type="button" value="Remove" />';
+		table.find('tbody:last').append('<tr>' + td1 + td2 + '</tr>');
+		++rowSize;
+	}
+</script>
 </html>

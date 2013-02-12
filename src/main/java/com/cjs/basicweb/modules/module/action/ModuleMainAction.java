@@ -27,14 +27,14 @@ public class ModuleMainAction extends FormAction<ModuleForm> {
 	public String prepareDetail() throws AppException {
 		String selectedId = getForm().getSelectedId();
 		Module module = moduleBL.getDetail(selectedId);
-		getForm().setSelected(module);
+		getForm().setOld(module);
 		return SUCCESS;
 	}
 
 	public String prepareEdit() throws AppException {
 		List<Item> items = moduleBL.getItems(getForm().getSelectedId());
-		getForm().setListParent(items);
-		getForm().assignFromEntity("new", getForm().getSelected());
+		getForm().setSelectListParent(items);
+		getForm().assignFromEntity("new", getForm().getOld());
 		return SUCCESS;
 	}
 
