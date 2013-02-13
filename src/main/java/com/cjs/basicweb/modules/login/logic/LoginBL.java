@@ -75,7 +75,7 @@ public class LoginBL {
 		}
 
 		TreeMap<String, Privilege> treeMap = PrivilegeUtils.generateTree(
-				privilegeIds.toArray(new String[] {}), moduleDao.getParents());
+				privilegeIds.toArray(new String[] {}), moduleDao.getRoots());
 
 		((SimpleUserSession) userSession).setTreeMap(treeMap);
 		

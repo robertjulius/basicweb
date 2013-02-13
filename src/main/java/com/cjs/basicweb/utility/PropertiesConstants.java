@@ -18,5 +18,6 @@ public class PropertiesConstants {
 	public static final String ERROR_APPCONFIG_RELOAD = "error.appconfig.reload";
 	public static final String ERROR_REFLECTION = "error.generic";
 	public static final String ERROR_PRIMARY_KEY_REQUIRED = "error.primary.key.required";
+	public static final String ERROR_CRITERIA_KEY_REQUIRED = "error.criteria.key.required";
 
 }

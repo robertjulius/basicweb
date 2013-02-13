@@ -24,6 +24,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/robert/glassfish-3.1/glassfish/lib/javaee.jar"/>
+	<classpathentry kind="lib" path="C:/glassfish3Eclipse/glassfish3/glassfish/lib/javaee.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

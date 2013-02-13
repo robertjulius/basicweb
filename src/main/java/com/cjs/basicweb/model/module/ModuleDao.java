@@ -3,6 +3,7 @@ package com.cjs.basicweb.model.module;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 
 import com.cjs.basicweb.model.GenericDao;
@@ -12,8 +13,7 @@ import com.cjs.core.exception.AppException;
 public class ModuleDao extends GenericDao<Module> {
 
 	public Module getDetail(String id) throws AppException {
-		Module module = null;
-		
+
 		if (id == null || id.trim().isEmpty()) {
 			throw new AppException(
 					PropertiesConstants.ERROR_PRIMARY_KEY_REQUIRED);
@@ -21,46 +21,39 @@ public class ModuleDao extends GenericDao<Module> {
 
 		Criteria criteria = session.createCriteria(Module.class);
 		criteria.add(Restrictions.eq("id", id));
-		
-		List<?> modules = criteria.list();
-		if (modules.size() > 1) {
-			throw new AppException(
-					PropertiesConstants.ERROR_INCONSISTENT_DATABASE);
-		} else if (modules.size() == 1) {
-			module = (Module) modules.get(0);
-		}
-		
-		return module;
+
+		return (Module) criteria.uniqueResult();
 	}
 
-	public List<Module> getList(String id, String name, String firstEntry,
-			String parentId) {
+	public List<Module> getList(String name, String firstEntry, String parentId) {
 
-		Criteria criteria = session.createCriteria(Module.class);
-
-		if (id != null && !id.trim().isEmpty()) {
-			criteria.add(Restrictions.like("id", "%" + id + "%"));
-		}
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder
+				.append("select module.id, module.name, module.description, module.firstEntry, module.parent.id, module.parent.name");
+		stringBuilder.append(" from Module module where 1=1");
 
 		if (name != null && !name.trim().isEmpty()) {
-			criteria.add(Restrictions.like("name", "%" + name + "%"));
+			stringBuilder.append(" and lower(module.name) like %" + name + "%");
 		}
 
 		if (firstEntry != null && !firstEntry.trim().isEmpty()) {
-			criteria.add(Restrictions
-					.like("firstEntry", "%" + firstEntry + "%"));
+			stringBuilder.append(" and lower(module.firstEntry) like %lower("
+					+ firstEntry + ")%");
 		}
 
 		if (parentId != null && !parentId.trim().isEmpty()) {
-			criteria.add(Restrictions.like("parent.id", "%" + parentId + "%"));
+			stringBuilder.append(" and lower(module.parent.id) like %lower("
+					+ parentId + ")%");
 		}
 
+		Query query = session.createQuery(stringBuilder.toString());
+
 		@SuppressWarnings("unchecked")
-		List<Module> modules = criteria.list();
+		List<Module> modules = query.list();
 		return modules;
 	}
 
-	public List<Module> getParents() {
+	public List<Module> getRoots() {
 		@SuppressWarnings("unchecked")
 		List<Module> modules = session.createQuery(
 				"from Module where parent = null").list();
