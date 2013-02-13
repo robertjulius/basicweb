@@ -20,7 +20,7 @@ public class LoginExecuteAction extends FormAction<LoginForm> {
 	private LoginBL loginBL;
 	private UserSession userSession;
 
-	public LoginExecuteAction() {
+	public LoginExecuteAction() throws AppException {
 		super(LoginForm.class);
 		loginBL = new LoginBL();
 		userSession = new SimpleUserSession();

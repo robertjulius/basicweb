@@ -3,7 +3,9 @@ package com.cjs.basicweb.model.module;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 
 import com.cjs.basicweb.model.GenericDao;
 import com.cjs.basicweb.utility.PropertiesConstants;
@@ -24,25 +26,56 @@ public class ModuleDao extends GenericDao<Module> {
 		return (Module) criteria.uniqueResult();
 	}
 
+	// public List<Module> getList(String name, String firstEntry, String
+	// parentId) {
+	//
+	// Criteria criteria = session.createCriteria(Module.class);
+	//
+	// if (name != null && !name.trim().isEmpty()) {
+	// criteria.add(Restrictions.like("name", "%" + name + "%"));
+	// }
+	//
+	// if (firstEntry != null && !firstEntry.trim().isEmpty()) {
+	// criteria.add(Restrictions
+	// .like("firstEntry", "%" + firstEntry + "%"));
+	// }
+	//
+	// if (parentId != null && !parentId.trim().isEmpty()) {
+	// criteria.add(Restrictions.like("parent.id", "%" + parentId + "%"));
+	// }
+	//
+	// @SuppressWarnings("unchecked")
+	// List<Module> modules = criteria.list();
+	// return modules;
+	// }
+
 	public List<Module> getList(String name, String firstEntry, String parentId) {
 
-		Criteria criteria = session.createCriteria(Module.class);
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder
+				.append("select module.id, module.name, module.description, module.firstEntry, module.parent.id, module.parent.name");
+		stringBuilder.append(" from Module module where 1=1");
 
 		if (name != null && !name.trim().isEmpty()) {
-			criteria.add(Restrictions.like("name", "%" + name + "%"));
+			stringBuilder.append(" and lower(module.name) like %" + name + "%");
 		}
 
 		if (firstEntry != null && !firstEntry.trim().isEmpty()) {
-			criteria.add(Restrictions
-					.like("firstEntry", "%" + firstEntry + "%"));
+			stringBuilder.append(" and lower(module.firstEntry) like %lower("
+					+ firstEntry + ")%");
 		}
 
 		if (parentId != null && !parentId.trim().isEmpty()) {
-			criteria.add(Restrictions.like("parent.id", "%" + parentId + "%"));
+			stringBuilder.append(" and lower(module.parent.id) like %lower("
+					+ parentId + ")%");
 		}
 
+		Query query = session.createQuery(stringBuilder.toString());
+		
+		query.setResultTransformer(Transformers.aliasToBean(Module.class));
+
 		@SuppressWarnings("unchecked")
-		List<Module> modules = criteria.list();
+		List<Module> modules = query.list();
 		return modules;
 	}
 

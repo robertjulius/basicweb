@@ -15,7 +15,7 @@ public class ModuleMainAction extends FormAction<ModuleForm> {
 
 	private ModuleBL moduleBL;
 
-	public ModuleMainAction() {
+	public ModuleMainAction() throws AppException {
 		super(ModuleForm.class);
 		moduleBL = new ModuleBL();
 	}

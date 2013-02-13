@@ -14,7 +14,7 @@ public class ResetUserSessionMainAction extends
 
 	private ResetUserSessionBL resetUserSessionBL;
 
-	public ResetUserSessionMainAction() {
+	public ResetUserSessionMainAction() throws AppException {
 		super(ResetUserSessionForm.class);
 		resetUserSessionBL = new ResetUserSessionBL();
 	}

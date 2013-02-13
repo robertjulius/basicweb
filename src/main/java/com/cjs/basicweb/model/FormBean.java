@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import com.cjs.basicweb.utility.PropertiesConstants;
 import com.cjs.core.exception.AppException;
+import com.cjs.core.exception.UserException;
 
 public abstract class FormBean implements Serializable {
 
@@ -35,6 +36,10 @@ public abstract class FormBean implements Serializable {
 
 	public <T> T assignToEntity(T entity) {
 		return assignToEntity(null, entity);
+	}
+
+	public void validate() throws AppException, UserException {
+		
 	}
 
 	private void fromHashMap(HashMap<String, Object> hashMap)
@@ -72,7 +77,7 @@ public abstract class FormBean implements Serializable {
 			throw new AppException(e);
 		}
 	}
-
+	
 	private <T> HashMap<String, Object> toHashMap(String prefix, T entity)
 			throws AppException {
 		try {

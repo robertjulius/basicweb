@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.cjs.basicweb.model.accesspath.AccessPath;
 import com.cjs.basicweb.modules.module.form.ModuleForm;
+import com.cjs.core.exception.AppException;
 import com.cjs.struts2.FormAction;
 
 public class ModuleExecuteAction extends FormAction<ModuleForm> {
@@ -13,7 +14,7 @@ public class ModuleExecuteAction extends FormAction<ModuleForm> {
 
 	private List<String> listAccessPaths;
 
-	public ModuleExecuteAction() {
+	public ModuleExecuteAction() throws AppException {
 		super(ModuleForm.class);
 	}
 

@@ -4,6 +4,9 @@ import java.util.Map;
 
 import org.slf4j.LoggerFactory;
 
+import com.cjs.basicweb.model.FormBean;
+import com.cjs.basicweb.utility.PropertiesConstants;
+import com.cjs.core.exception.AppException;
 import com.opensymphony.xwork2.ModelDriven;
 
 public abstract class FormAction<T> extends BaseAction implements
@@ -13,8 +16,12 @@ public abstract class FormAction<T> extends BaseAction implements
 
 	private Class<T> clazz;
 
-	public FormAction(Class<T> clazz) {
-		this.clazz = clazz;
+	public FormAction(Class<T> clazz) throws AppException {
+		if (FormBean.class.isAssignableFrom(clazz)) {
+			this.clazz = clazz;
+		} else {
+			throw new AppException(PropertiesConstants.ERROR_CREATE_FORM_BEAN);
+		}
 	}
 
 	public final T getForm() {
