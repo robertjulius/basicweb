@@ -22,7 +22,7 @@
 		</action>
 
 		<action name="confirmNew"
-			class="com.cjs.basicweb.modules.module.action.ModuleExecuteAction"
+			class="com.cjs.basicweb.modules.module.action.ModuleMainAction"
 			method="confirmNew">
 			<result name="success">/jsp/modules/module/module_maintenance_confirm.jsp
 			</result>
@@ -53,7 +53,7 @@
 		</action>
 
 		<action name="confirmEdit"
-			class="com.cjs.basicweb.modules.module.action.ModuleExecuteAction"
+			class="com.cjs.basicweb.modules.module.action.ModuleMainAction"
 			method="confirmEdit">
 			<result name="success">/jsp/modules/module/module_maintenance_edit.jsp
 			</result>

@@ -23,19 +23,14 @@ public abstract class FormBean implements Serializable {
 		assignFromEntity(null, entity);
 	}
 
-	public <T> T assignToEntity(String prefix, T entity) {
+	public <T> void assignToEntity(String prefix, T entity) {
 
 		Class<?> clazz = entity.getClass();
 		System.out.println(clazz.getName());
-
-		/*
-		 * TODO
-		 */
-		return null;
 	}
 
-	public <T> T assignToEntity(T entity) {
-		return assignToEntity(null, entity);
+	public <T> void assignToEntity(T entity) {
+		assignToEntity(null, entity);
 	}
 
 	public void validate() throws AppException, UserException {

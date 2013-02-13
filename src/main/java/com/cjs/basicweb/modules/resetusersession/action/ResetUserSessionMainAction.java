@@ -8,30 +8,26 @@ import com.cjs.core.exception.AppException;
 import com.cjs.struts2.FormAction;
 
 public class ResetUserSessionMainAction extends
-		FormAction<ResetUserSessionForm> {
+		FormAction<ResetUserSessionForm, ResetUserSessionBL> {
 
 	private static final long serialVersionUID = 8924100755506310829L;
 
-	private ResetUserSessionBL resetUserSessionBL;
-
 	public ResetUserSessionMainAction() throws AppException {
-		super(ResetUserSessionForm.class);
-		resetUserSessionBL = new ResetUserSessionBL();
+		super(ResetUserSessionForm.class, ResetUserSessionBL.class);
 	}
 
 	public String executeReset() throws AppException {
-		resetUserSessionBL.reset(getForm().getUserId());
+		getBL().reset(getForm().getUserId());
 		return SUCCESS;
 	}
 
 	public String initial() throws AppException {
-		getForm().setUserSessions(resetUserSessionBL.getList());
+		getForm().setUserSessions(getBL().getList());
 		return SUCCESS;
 	}
 
 	public String prepareDetail() throws AppException {
-		UserSession userSession = resetUserSessionBL.getDetail(getForm()
-				.getUserId());
+		UserSession userSession = getBL().getDetail(getForm().getUserId());
 		getForm().setTobeReset((SimpleUserSession) userSession);
 		return SUCCESS;
 	}

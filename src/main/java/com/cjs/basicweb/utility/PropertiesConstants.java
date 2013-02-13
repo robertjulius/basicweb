@@ -20,5 +20,8 @@ public class PropertiesConstants {
 	public static final String ERROR_PRIMARY_KEY_REQUIRED = "error.primary.key.required";
 	public static final String ERROR_CRITERIA_KEY_REQUIRED = "error.criteria.key.required";
 	public static final String ERROR_CREATE_FORM_BEAN = "error.create.form.bean";
+	public static final String ERROR_CREATE_BUSINESS_LOGIC = "error.create.business.logic";
+	public static final String ERROR_COMMIT_BUSINESS_LOGIC = "error.commit.business.logic";
+	public static final String ERROR_ROLLBACK_BUSINESS_LOGIC = "error.rollback.business.logic";
 
 }

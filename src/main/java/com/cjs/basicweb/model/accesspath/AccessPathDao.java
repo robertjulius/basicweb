@@ -6,7 +6,7 @@ import com.cjs.basicweb.model.GenericDao;
 import com.cjs.basicweb.utility.PropertiesConstants;
 import com.cjs.core.exception.AppException;
 
-public class AccessPathDao extends GenericDao<AccessPath> {
+public class AccessPathDao extends GenericDao {
 
 	public int deleteByModule(String moduleId) throws AppException {
 		if (moduleId == null || moduleId.trim().isEmpty()) {
@@ -17,7 +17,7 @@ public class AccessPathDao extends GenericDao<AccessPath> {
 		Query query = session
 				.createQuery("delete AccessPath accessPath where accessPath.moduleId = :moduleId");
 		query.setString("moduleId", moduleId);
-		
+
 		return query.executeUpdate();
 	}
 

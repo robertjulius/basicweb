@@ -4,17 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cjs.basicweb.model.Item;
+import com.cjs.basicweb.model.accesspath.AccessPath;
+import com.cjs.basicweb.model.accesspath.AccessPathDao;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.model.module.ModuleDao;
+import com.cjs.basicweb.modules.BusinessLogic;
 import com.cjs.basicweb.modules.module.form.ModuleForm;
 import com.cjs.core.exception.AppException;
 
-public class ModuleBL {
+public class ModuleBL extends BusinessLogic {
 
 	private ModuleDao moduleDao;
+	private AccessPathDao accessPathDao;
 
 	public ModuleBL() {
 		moduleDao = new ModuleDao();
+		accessPathDao = new AccessPathDao();
 	}
 
 	public Module getDetail(String moduleId) throws AppException {
@@ -40,7 +45,19 @@ public class ModuleBL {
 		return items;
 	}
 
-	public void validateForm() {
-
+	public void udpate(ModuleForm form) throws AppException {
+		Module newModule = new Module();
+		form.assignToEntity("new", newModule);
+		
+		accessPathDao.deleteByModule(newModule.getId());
+		
+		List<AccessPath> accessPaths = form.getNewAccessPaths();
+		for (AccessPath accessPath : accessPaths) {
+			accessPath.setModule(newModule);
+		}
+		
+		moduleDao.create(newModule);
+		
+		commit();
 	}
 }

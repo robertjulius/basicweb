@@ -11,6 +11,7 @@ import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.model.module.ModuleDao;
 import com.cjs.basicweb.model.user.SimpleUser;
 import com.cjs.basicweb.model.user.UserDao;
+import com.cjs.basicweb.modules.BusinessLogic;
 import com.cjs.basicweb.modules.login.Privilege;
 import com.cjs.basicweb.modules.login.PrivilegeUtils;
 import com.cjs.basicweb.modules.login.usersession.SimpleUserSession;
@@ -20,7 +21,7 @@ import com.cjs.core.UserSession;
 import com.cjs.core.exception.AppException;
 import com.cjs.core.exception.UserException;
 
-public class LoginBL {
+public class LoginBL extends BusinessLogic {
 
 	private ModuleDao moduleDao;
 	private UserDao userDao;

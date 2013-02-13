@@ -9,16 +9,17 @@ import com.cjs.basicweb.utility.PropertiesConstants;
 import com.cjs.core.exception.AppException;
 import com.opensymphony.xwork2.ModelDriven;
 
-public abstract class FormAction<T> extends BaseAction implements
+public abstract class FormAction<T, U> extends BaseAction<U> implements
 		ModelDriven<T> {
 
 	private static final long serialVersionUID = -3643549719278354411L;
 
 	private Class<T> clazz;
 
-	public FormAction(Class<T> clazz) throws AppException {
-		if (FormBean.class.isAssignableFrom(clazz)) {
-			this.clazz = clazz;
+	public FormAction(Class<T> formClass, Class<U> logicClass) throws AppException {
+		super(logicClass);
+		if (FormBean.class.isAssignableFrom(formClass)) {
+			this.clazz = formClass;
 		} else {
 			throw new AppException(PropertiesConstants.ERROR_CREATE_FORM_BEAN);
 		}

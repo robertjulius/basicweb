@@ -8,16 +8,41 @@ import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.cjs.basicweb.modules.BusinessLogic;
 import com.cjs.basicweb.utility.GeneralConstants;
+import com.cjs.basicweb.utility.PropertiesConstants;
+import com.cjs.core.exception.AppException;
 import com.opensymphony.xwork2.ActionSupport;
 
-public abstract class BaseAction extends ActionSupport implements SessionAware,
-		ServletRequestAware {
+public abstract class BaseAction<T> extends ActionSupport implements
+		SessionAware, ServletRequestAware {
 
 	private static final long serialVersionUID = -3643549719278354411L;
 
 	private SessionMap<String, Object> sessionMap;
 	private HttpServletRequest request;
+	private T logic;
+
+	public BaseAction(Class<T> clazz) throws AppException {
+		try {
+			if (BusinessLogic.class.isAssignableFrom(clazz)) {
+				this.logic = clazz.newInstance();
+			} else {
+				throw new AppException(
+						PropertiesConstants.ERROR_CREATE_BUSINESS_LOGIC);
+			}
+		} catch (InstantiationException e) {
+			throw new AppException(
+					PropertiesConstants.ERROR_CREATE_BUSINESS_LOGIC);
+		} catch (IllegalAccessException e) {
+			throw new AppException(
+					PropertiesConstants.ERROR_CREATE_BUSINESS_LOGIC);
+		}
+	}
+
+	public T getBL() {
+		return logic;
+	}
 
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> getModuleSession() {

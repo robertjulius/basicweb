@@ -13,24 +13,22 @@ import com.cjs.core.exception.AppException;
 import com.cjs.core.exception.UserException;
 import com.cjs.struts2.FormAction;
 
-public class LoginExecuteAction extends FormAction<LoginForm> {
+public class LoginExecuteAction extends FormAction<LoginForm, LoginBL> {
 
 	private static final long serialVersionUID = -3643549719278354411L;
 
-	private LoginBL loginBL;
 	private UserSession userSession;
 
 	public LoginExecuteAction() throws AppException {
-		super(LoginForm.class);
-		loginBL = new LoginBL();
+		super(LoginForm.class, LoginBL.class);
 		userSession = new SimpleUserSession();
 	}
 
 	@Override
 	public String execute() throws AppException {
 		try {
-			User user = loginBL.performLogin(getForm().getUserId(), getForm()
-					.getPassword(), userSession);
+			User user = getBL().performLogin(getForm().getUserId(),
+					getForm().getPassword(), userSession);
 			userSession.setUser(user);
 			userSession.setLoginTime(new Timestamp(System.currentTimeMillis()));
 			getSession().put(GeneralConstants.USER_SESSION, userSession);
