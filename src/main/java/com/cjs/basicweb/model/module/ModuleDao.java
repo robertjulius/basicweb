@@ -3,7 +3,6 @@ package com.cjs.basicweb.model.module;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 
 import com.cjs.basicweb.model.GenericDao;
@@ -27,29 +26,23 @@ public class ModuleDao extends GenericDao<Module> {
 
 	public List<Module> getList(String name, String firstEntry, String parentId) {
 
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder
-				.append("select module.id, module.name, module.description, module.firstEntry, module.parent.id, module.parent.name");
-		stringBuilder.append(" from Module module where 1=1");
+		Criteria criteria = session.createCriteria(Module.class);
 
 		if (name != null && !name.trim().isEmpty()) {
-			stringBuilder.append(" and lower(module.name) like %" + name + "%");
+			criteria.add(Restrictions.like("name", "%" + name + "%"));
 		}
 
 		if (firstEntry != null && !firstEntry.trim().isEmpty()) {
-			stringBuilder.append(" and lower(module.firstEntry) like %lower("
-					+ firstEntry + ")%");
+			criteria.add(Restrictions
+					.like("firstEntry", "%" + firstEntry + "%"));
 		}
 
 		if (parentId != null && !parentId.trim().isEmpty()) {
-			stringBuilder.append(" and lower(module.parent.id) like %lower("
-					+ parentId + ")%");
+			criteria.add(Restrictions.like("parent.id", "%" + parentId + "%"));
 		}
 
-		Query query = session.createQuery(stringBuilder.toString());
-
 		@SuppressWarnings("unchecked")
-		List<Module> modules = query.list();
+		List<Module> modules = criteria.list();
 		return modules;
 	}
 
