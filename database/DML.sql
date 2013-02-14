@@ -35,6 +35,7 @@ INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/search.acti
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/prepareDetail.action', '021module_maintenance');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/prepareEdit.action', '021module_maintenance');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/confirmEdit.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/executeEdit.action', '021module_maintenance');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/resetusersession/initial.action', '013reset_user_session');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/resetusersession/prepareDetail.action', '013reset_user_session');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/resetusersession/executeReset.action', '013reset_user_session');

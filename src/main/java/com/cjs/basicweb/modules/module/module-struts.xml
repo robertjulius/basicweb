@@ -55,7 +55,14 @@
 		<action name="confirmEdit"
 			class="com.cjs.basicweb.modules.module.action.ModuleMainAction"
 			method="confirmEdit">
-			<result name="success">/jsp/modules/module/module_maintenance_edit.jsp
+			<result name="success">/jsp/modules/module/module_maintenance_confirm_edit.jsp
+			</result>
+		</action>
+		
+		<action name="executeEdit"
+			class="com.cjs.basicweb.modules.module.action.ModuleMainAction"
+			method="executeEdit">
+			<result name="success">/jsp/modules/module/module_maintenance_main.jsp
 			</result>
 		</action>
 
