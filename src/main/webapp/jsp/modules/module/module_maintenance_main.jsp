@@ -34,7 +34,7 @@
 					<s:textfield key="resource.moduleName" name="searchName" />
 					<s:textfield key="resource.firstEntry" name="searchFirstEntry" />
 					<s:textfield key="resource.parent" name="searchParentId" />
-					<s:submit name="%{resource.back}"/>
+					<s:submit key="resource.search" name="%{resource.search}"/>
 				</s:form></td>
 		</tr>
 	</table>

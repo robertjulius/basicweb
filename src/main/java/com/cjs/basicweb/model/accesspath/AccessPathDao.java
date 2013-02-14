@@ -14,8 +14,9 @@ public class AccessPathDao extends GenericDao {
 					PropertiesConstants.ERROR_CRITERIA_KEY_REQUIRED);
 		}
 
-		Query query = session
-				.createQuery("delete AccessPath accessPath where accessPath.moduleId = :moduleId");
+		Query query = getSession()
+				.createQuery(
+						"delete AccessPath accessPath where accessPath.moduleId = :moduleId");
 		query.setString("moduleId", moduleId);
 
 		return query.executeUpdate();

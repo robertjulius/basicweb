@@ -45,7 +45,7 @@ public class ModuleBL extends BusinessLogic {
 		return items;
 	}
 
-	public void udpate(ModuleForm form) throws AppException {
+	public void update(ModuleForm form) throws AppException {
 		Module newModule = new Module();
 		form.assignToEntity("new", newModule);
 		

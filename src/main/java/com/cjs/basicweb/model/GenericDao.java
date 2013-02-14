@@ -2,10 +2,11 @@ package com.cjs.basicweb.model;
 
 import org.hibernate.Session;
 
-import com.googlecode.s2hibernate.struts2.plugin.annotations.SessionTarget;
+import com.googlecode.s2hibernate.struts2.plugin.util.HibernateSessionFactory;
 
 public abstract class GenericDao {
 
-	@SessionTarget
-	protected Session session;
+	protected Session getSession() {
+		return HibernateSessionFactory.getSession();
+	}
 }

@@ -17,7 +17,7 @@ public class UserDao extends GenericDao {
 					PropertiesConstants.ERROR_PRIMARY_KEY_REQUIRED);
 		}
 
-		Criteria criteria = session.createCriteria(User.class);
+		Criteria criteria = getSession().createCriteria(User.class);
 		criteria.add(Restrictions.eq("userId", userId).ignoreCase());
 
 		return (User) criteria.uniqueResult();

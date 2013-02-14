@@ -21,10 +21,6 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 		super(ModuleForm.class, ModuleBL.class);
 	}
 
-	public void update(ModuleForm form) {
-
-	}
-
 	public String confirmEdit() {
 		getForm().setNewAccessPaths(new ArrayList<AccessPath>());
 		for (String url : listAccessPaths) {
@@ -63,10 +59,9 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 		return SUCCESS;
 	}
 
-	public String executeEdit() {
+	public String executeEdit() throws AppException {
 
-		Module newModule = null;
-		getBL().update(oldModule, newModule);
+		getBL().update(getForm());
 
 		return SUCCESS;
 	}

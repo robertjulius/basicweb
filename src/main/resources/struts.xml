@@ -12,6 +12,7 @@
 	<package name="app-default" extends="hibernate-default" namespace="/main">
 		<interceptors>
 			<interceptor-stack name="appDefault">
+				<interceptor-ref name="defaultStackHibernate" />
 				<interceptor-ref name="timer" />
 				<interceptor-ref name="logger" />
 				<interceptor-ref name="defaultStack">

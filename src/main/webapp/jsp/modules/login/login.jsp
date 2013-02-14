@@ -15,7 +15,7 @@
 					<s:fielderror />
 					<s:textfield key="resource.userId" name="userId" />
 					<s:password key="resource.password" name="password" />
-					<s:submit key="resource.submit" />
+					<s:submit key="resource.submit" name="%{resource.submit}" />
 				</s:form></td>
 		</tr>
 	</table>

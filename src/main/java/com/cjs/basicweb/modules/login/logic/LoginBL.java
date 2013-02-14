@@ -23,13 +23,8 @@ import com.cjs.core.exception.UserException;
 
 public class LoginBL extends BusinessLogic {
 
-	private ModuleDao moduleDao;
-	private UserDao userDao;
-
-	public LoginBL() {
-		moduleDao = new ModuleDao();
-		userDao = new UserDao();
-	}
+	private ModuleDao moduleDao = new ModuleDao();
+	private UserDao userDao = new UserDao();
 
 	public User performLogin(String userId, String password,
 			UserSession userSession) throws UserException, AppException {

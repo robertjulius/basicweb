@@ -18,19 +18,19 @@ public class ModuleDao extends GenericDao {
 					PropertiesConstants.ERROR_PRIMARY_KEY_REQUIRED);
 		}
 
-		Criteria criteria = session.createCriteria(Module.class);
+		Criteria criteria = getSession().createCriteria(Module.class);
 		criteria.add(Restrictions.eq("id", id));
 
 		return (Module) criteria.uniqueResult();
 	}
-	
+
 	public void create(Module module) {
-		session.save(module);
+		getSession().save(module);
 	}
 
 	public List<Module> getList(String name, String firstEntry, String parentId) {
 
-		Criteria criteria = session.createCriteria(Module.class);
+		Criteria criteria = getSession().createCriteria(Module.class);
 
 		if (name != null && !name.trim().isEmpty()) {
 			criteria.add(Restrictions.like("name", "%" + name + "%"));
@@ -52,7 +52,7 @@ public class ModuleDao extends GenericDao {
 
 	public List<Module> getRoots() {
 		@SuppressWarnings("unchecked")
-		List<Module> modules = session.createQuery(
+		List<Module> modules = getSession().createQuery(
 				"from Module where parent = null").list();
 		return modules;
 	}

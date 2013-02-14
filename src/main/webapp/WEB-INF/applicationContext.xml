@@ -49,8 +49,5 @@
 			</list>
 		</property>
 	</bean>
-	
-	<bean id="testFirstEntryAction" class="com.cjs.basicweb.modules.test.action.TestFirstEntryAction"
-		scope="prototype" />
 
 </beans>
