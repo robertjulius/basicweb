@@ -39,6 +39,8 @@
 							theme="xhtml" />
 						<s:textfield key="resource.firstEntry" name="newFirstEntry"
 							theme="xhtml" />
+						<s:select key="resource.parent" name="selectedParentId" list="selectListParent"
+							listKey="key" listValue="value" theme="xhtml" />
 					</table>
 				</td>
 			</tr>

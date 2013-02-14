@@ -44,6 +44,11 @@ public class ModuleBL extends BusinessLogic {
 				form.getSearchFirstEntry(), form.getSearchParentId()));
 	}
 
+	public void setParent(ModuleForm form) {
+		Module newParent = moduleDao.load(form.getSelectedParentId());
+		form.setNewParent(newParent);
+	}
+
 	public void update(ModuleForm form) throws AppException {
 		beginTransaction();
 
@@ -57,6 +62,9 @@ public class ModuleBL extends BusinessLogic {
 			accessPath.setModule(module);
 			accessPathDao.save(accessPath);
 		}
+
+		Module parent = moduleDao.load(form.getSelectedParentId());
+		module.setParent(parent);
 
 		moduleDao.save(module);
 

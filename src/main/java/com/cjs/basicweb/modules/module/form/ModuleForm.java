@@ -28,6 +28,7 @@ public class ModuleForm extends FormBean {
 	private List<AccessPath> newAccessPaths;
 
 	private List<Item> selectListParent;
+	private String selectedParentId;
 
 	public List<AccessPath> getNewAccessPaths() {
 		return newAccessPaths;
@@ -79,6 +80,10 @@ public class ModuleForm extends FormBean {
 
 	public String getSelectedId() {
 		return selectedId;
+	}
+
+	public String getSelectedParentId() {
+		return selectedParentId;
 	}
 
 	public List<Item> getSelectListParent() {
@@ -135,6 +140,10 @@ public class ModuleForm extends FormBean {
 
 	public void setSelectedId(String selectedId) {
 		this.selectedId = selectedId;
+	}
+
+	public void setSelectedParentId(String selectedParentId) {
+		this.selectedParentId = selectedParentId;
 	}
 
 	public void setSelectListParent(List<Item> selectListParent) {

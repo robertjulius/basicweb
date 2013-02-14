@@ -34,6 +34,12 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 			 */
 			getForm().getNewAccessPaths().add(accessPath);
 		}
+		getBL().setParent(getForm());
+		return SUCCESS;
+	}
+
+	public String executeEdit() throws AppException {
+		getBL().update(getForm());
 		return SUCCESS;
 	}
 
@@ -49,6 +55,7 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 		String selectedId = getForm().getSelectedId();
 		Module module = getBL().getDetail(selectedId);
 		getForm().setOld(module);
+		getForm().setSelectedParentId(module.getParent().getId());
 		return SUCCESS;
 	}
 
@@ -56,13 +63,6 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 		List<Item> items = getBL().getItems(getForm().getSelectedId());
 		getForm().setSelectListParent(items);
 		getForm().assignFromEntity("new", getForm().getOld());
-		return SUCCESS;
-	}
-
-	public String executeEdit() throws AppException {
-
-		getBL().update(getForm());
-
 		return SUCCESS;
 	}
 
