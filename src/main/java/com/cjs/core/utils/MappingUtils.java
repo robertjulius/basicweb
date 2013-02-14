@@ -15,6 +15,55 @@ import com.cjs.core.exception.AppException;
 
 public class MappingUtils {
 
+	public static <T> T mapToPojo(Map<String, Object> map, Class<T> clazz)
+			throws AppException {
+		try {
+			T newInstance = clazz.newInstance();
+			mapToPojo(map, newInstance);
+			return newInstance;
+		} catch (InstantiationException e) {
+			throw new AppException(e);
+		} catch (IllegalAccessException e) {
+			throw new AppException(e);
+		}
+	}
+
+	public static <T> void mapToPojo(Map<String, Object> map, T pojo)
+			throws AppException {
+		try {
+			Method[] methods = pojo.getClass().getMethods();
+			for (Method method : methods) {
+				if (method.getName().startsWith("set")) {
+					if (method.getParameterTypes().length != 1) {
+						throw new AppException(
+								PropertiesConstants.ERROR_REFLECTION);
+					}
+
+					String name = method.getName().substring(3, 4)
+							.toLowerCase()
+							+ method.getName().substring(4);
+
+					if (map.containsKey(name)) {
+						Object value = map.get(name);
+						if (value != null
+								&& !method.getParameterTypes()[0]
+										.isAssignableFrom(value.getClass())) {
+							throw new AppException(
+									PropertiesConstants.ERROR_REFLECTION);
+						}
+						method.invoke(pojo, value);
+					}
+				}
+			}
+		} catch (IllegalAccessException e) {
+			throw new AppException(e);
+		} catch (IllegalArgumentException e) {
+			throw new AppException(e);
+		} catch (InvocationTargetException e) {
+			throw new AppException(e);
+		}
+	}
+
 	public static Map<String, Object> pojoToMap(Object pojo)
 			throws AppException {
 		try {
@@ -44,57 +93,6 @@ public class MappingUtils {
 		}
 	}
 
-	public static <T> T mapToPojo(Map<String, Object> map, Class<T> clazz)
-			throws AppException {
-		try {
-			T newInstance = clazz.newInstance();
-			Method[] methods = clazz.getMethods();
-			for (Method method : methods) {
-				if (method.getName().startsWith("set")) {
-					if (method.getParameterTypes().length != 1) {
-						throw new AppException(
-								PropertiesConstants.ERROR_REFLECTION);
-					}
-
-					String name = method.getName().substring(3, 4)
-							.toLowerCase()
-							+ method.getName().substring(4);
-
-					if (map.containsKey(name)) {
-						Object value = map.get(name);
-						if (value != null
-								&& !method.getParameterTypes()[0]
-										.isAssignableFrom(value.getClass())) {
-							throw new AppException(
-									PropertiesConstants.ERROR_REFLECTION);
-						}
-						method.invoke(newInstance, value);
-					}
-				}
-			}
-			return newInstance;
-		} catch (IllegalAccessException e) {
-			throw new AppException(e);
-		} catch (IllegalArgumentException e) {
-			throw new AppException(e);
-		} catch (InvocationTargetException e) {
-			throw new AppException(e);
-		} catch (InstantiationException e) {
-			throw new AppException(e);
-		}
-	}
-
-	public static <T> List<T> resultSetToPojo(ResultSet resultSet,
-			Class<T> clazz) throws AppException, SQLException {
-		List<T> pojos = new ArrayList<>();
-		List<Map<String, Object>> maps = resultSetToMap(resultSet);
-		for (Map<String, Object> map : maps) {
-			T pojo = mapToPojo(map, clazz);
-			pojos.add(pojo);
-		}
-		return pojos;
-	}
-
 	public static List<Map<String, Object>> resultSetToMap(ResultSet resultSet)
 			throws AppException, SQLException {
 
@@ -115,5 +113,16 @@ public class MappingUtils {
 			result.add(map);
 		}
 		return result;
+	}
+
+	public static <T> List<T> resultSetToPojo(ResultSet resultSet,
+			Class<T> clazz) throws AppException, SQLException {
+		List<T> pojos = new ArrayList<>();
+		List<Map<String, Object>> maps = resultSetToMap(resultSet);
+		for (Map<String, Object> map : maps) {
+			T pojo = mapToPojo(map, clazz);
+			pojos.add(pojo);
+		}
+		return pojos;
 	}
 }

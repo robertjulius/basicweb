@@ -28,7 +28,7 @@ public class LoginBL extends BusinessLogic {
 
 	public User performLogin(String userId, String password,
 			UserSession userSession) throws UserException, AppException {
-		User user = userDao.getDetail(userId);
+		User user = userDao.getByUserId(userId);
 		if (user == null) {
 			throw new UserException(PropertiesConstants.INVALID_LOGIN_USERID);
 		}

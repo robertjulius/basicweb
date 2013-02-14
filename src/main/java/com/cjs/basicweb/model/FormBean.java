@@ -4,79 +4,51 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.Map;
 
 import com.cjs.basicweb.utility.PropertiesConstants;
 import com.cjs.core.exception.AppException;
 import com.cjs.core.exception.UserException;
+import com.cjs.core.utils.MappingUtils;
 
 public abstract class FormBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private enum PrefixMode {
+		ADD, REMOVE;
+	}
+
+	private static final long serialVersionUID = 1L;;
 
 	public <T> void assignFromEntity(String prefix, T entity)
 			throws AppException {
-		HashMap<String, Object> hashMap = toHashMap(prefix, entity);
-		fromHashMap(hashMap);
+		Map<String, Object> map = toMap(entity, PrefixMode.ADD, prefix);
+		MappingUtils.mapToPojo(map, this);
 	}
 
 	public <T> void assignFromEntity(T entity) throws AppException {
 		assignFromEntity(null, entity);
 	}
 
-	public <T> void assignToEntity(String prefix, T entity) {
+	public <T> void assignToEntity(String prefix, T entity) throws AppException {
 
-		Class<?> clazz = entity.getClass();
-		System.out.println(clazz.getName());
+		Map<String, Object> map = toMap(this, PrefixMode.REMOVE, prefix);
+		MappingUtils.mapToPojo(map, entity);
 	}
 
-	public <T> void assignToEntity(T entity) {
+	public <T> void assignToEntity(T entity) throws AppException {
 		assignToEntity(null, entity);
 	}
 
 	public void validate() throws AppException, UserException {
-		
+		/*
+		 * Do nothing. Lets the subclass implement it.
+		 */
 	}
 
-	private void fromHashMap(HashMap<String, Object> hashMap)
-			throws AppException {
+	private <T> Map<String, Object> toMap(T entity, PrefixMode prefixMode,
+			String prefix) throws AppException {
 		try {
-			Method[] methods = this.getClass().getMethods();
-			for (Method method : methods) {
-				if (method.getName().startsWith("set")) {
-					if (method.getParameterTypes().length != 1) {
-						throw new AppException(
-								PropertiesConstants.ERROR_REFLECTION);
-					}
-
-					String name = method.getName().substring(3, 4)
-							.toLowerCase()
-							+ method.getName().substring(4);
-
-					if (hashMap.containsKey(name)) {
-						Object value = hashMap.get(name);
-						if (value != null
-								&& !method.getParameterTypes()[0]
-										.isAssignableFrom(value.getClass())) {
-							throw new AppException(
-									PropertiesConstants.ERROR_REFLECTION);
-						}
-						method.invoke(this, value);
-					}
-				}
-			}
-		} catch (IllegalAccessException e) {
-			throw new AppException(e);
-		} catch (IllegalArgumentException e) {
-			throw new AppException(e);
-		} catch (InvocationTargetException e) {
-			throw new AppException(e);
-		}
-	}
-	
-	private <T> HashMap<String, Object> toHashMap(String prefix, T entity)
-			throws AppException {
-		try {
-			HashMap<String, Object> hashMap = new HashMap<>();
+			Map<String, Object> map = new HashMap<>();
 			Method[] methods = entity.getClass().getMethods();
 			for (Method method : methods) {
 				if (method.getName().startsWith("get")) {
@@ -86,11 +58,25 @@ public abstract class FormBean implements Serializable {
 					}
 
 					Object value = method.invoke(entity);
-					String name = prefix + method.getName().substring(3);
-					hashMap.put(name, value);
+					String name = method.getName().substring(3);
+
+					if (prefixMode == PrefixMode.ADD) {
+						name = prefix + name;
+					} else if (prefixMode == PrefixMode.REMOVE) {
+						name = name.substring(0, 1).toLowerCase()
+								+ name.substring(1);
+						name = name.replaceFirst(prefix, "");
+						name = name.substring(0, 1).toLowerCase()
+								+ name.substring(1);
+					} else {
+						throw new AppException(
+								PropertiesConstants.ERROR_REFLECTION);
+					}
+
+					map.put(name, value);
 				}
 			}
-			return hashMap;
+			return map;
 		} catch (IllegalAccessException e) {
 			throw new AppException(e);
 		} catch (IllegalArgumentException e) {

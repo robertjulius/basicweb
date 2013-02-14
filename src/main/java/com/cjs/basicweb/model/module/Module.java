@@ -17,6 +17,7 @@ import com.cjs.basicweb.model.usergroup.UserGroup;
 
 @Entity
 @Table(name = "ms_module")
+@org.hibernate.annotations.Entity(dynamicUpdate = true)
 public class Module extends Trackable {
 
 	private static final long serialVersionUID = 1L;

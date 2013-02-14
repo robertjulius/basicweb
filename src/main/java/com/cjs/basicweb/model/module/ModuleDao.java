@@ -6,26 +6,11 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
 import com.cjs.basicweb.model.GenericDao;
-import com.cjs.basicweb.utility.PropertiesConstants;
-import com.cjs.core.exception.AppException;
 
-public class ModuleDao extends GenericDao {
+public class ModuleDao extends GenericDao<Module> {
 
-	public Module getDetail(String id) throws AppException {
-
-		if (id == null || id.trim().isEmpty()) {
-			throw new AppException(
-					PropertiesConstants.ERROR_PRIMARY_KEY_REQUIRED);
-		}
-
-		Criteria criteria = getSession().createCriteria(Module.class);
-		criteria.add(Restrictions.eq("id", id));
-
-		return (Module) criteria.uniqueResult();
-	}
-
-	public void create(Module module) {
-		getSession().save(module);
+	public ModuleDao() {
+		super(Module.class);
 	}
 
 	public List<Module> getList(String name, String firstEntry, String parentId) {
@@ -56,5 +41,4 @@ public class ModuleDao extends GenericDao {
 				"from Module where parent = null").list();
 		return modules;
 	}
-
 }

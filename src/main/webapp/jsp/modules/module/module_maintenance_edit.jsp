@@ -59,7 +59,7 @@
 									<td><s:textfield
 											name="listAccessPaths[%{#rowstatus.index}]" value="%{url}" /></td>
 									<td><input type="button" value="Remove"
-										class="buttonRemove" /></td>
+										onclick="removeRow($(this))" /></td>
 								</tr>
 							</s:iterator>
 						</tbody>
@@ -91,16 +91,15 @@
 	</s:form>
 </body>
 <script type="text/javascript">
-	$(function() {
-		$('.buttonRemove').click(function() {
-			$(this).closest('tr').remove();
-		});
-	});
+	
+	function removeRow(button) {
+		button.closest('tr').remove();
+	}
 
 	var rowSize = <s:property value="newAccessPaths.size"/>;
 	function addRow(table) {
 		var td1 = '<td><input type="text" name="listAccessPaths[' + rowSize + ']" /></td>';
-		var td2 = '<td><input type="button" value="Remove" />';
+		var td2 = '<td><input type="button" value="Remove" onclick="removeRow($(this))" />';
 		table.find('tbody:last').append('<tr>' + td1 + td2 + '</tr>');
 		++rowSize;
 	}

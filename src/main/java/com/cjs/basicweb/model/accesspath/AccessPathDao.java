@@ -6,9 +6,13 @@ import com.cjs.basicweb.model.GenericDao;
 import com.cjs.basicweb.utility.PropertiesConstants;
 import com.cjs.core.exception.AppException;
 
-public class AccessPathDao extends GenericDao {
+public class AccessPathDao extends GenericDao<AccessPath> {
 
-	public int deleteByModule(String moduleId) throws AppException {
+	public AccessPathDao() {
+		super(AccessPath.class);
+	}
+
+	public int deleteByModuleId(String moduleId) throws AppException {
 		if (moduleId == null || moduleId.trim().isEmpty()) {
 			throw new AppException(
 					PropertiesConstants.ERROR_CRITERIA_KEY_REQUIRED);
@@ -16,7 +20,7 @@ public class AccessPathDao extends GenericDao {
 
 		Query query = getSession()
 				.createQuery(
-						"delete AccessPath accessPath where accessPath.moduleId = :moduleId");
+						"delete AccessPath accessPath where accessPath.module.id = :moduleId");
 		query.setString("moduleId", moduleId);
 
 		return query.executeUpdate();

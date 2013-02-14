@@ -13,6 +13,7 @@ import com.cjs.core.User;
 
 @Entity
 @Table(name = "ms_user")
+@org.hibernate.annotations.Entity(dynamicUpdate = true)
 public class SimpleUser extends Trackable implements User {
 
 	private static final long serialVersionUID = -1218882314919256632L;

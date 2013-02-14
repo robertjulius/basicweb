@@ -8,9 +8,13 @@ import com.cjs.basicweb.utility.PropertiesConstants;
 import com.cjs.core.User;
 import com.cjs.core.exception.AppException;
 
-public class UserDao extends GenericDao {
+public class UserDao extends GenericDao<User> {
 
-	public User getDetail(String userId) throws AppException {
+	public UserDao() {
+		super(User.class);
+	}
+
+	public User getByUserId(String userId) throws AppException {
 
 		if (userId == null || userId.trim().isEmpty()) {
 			throw new AppException(

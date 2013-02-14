@@ -23,13 +23,7 @@ public class ModuleBL extends BusinessLogic {
 	}
 
 	public Module getDetail(String moduleId) throws AppException {
-		Module module = moduleDao.getDetail(moduleId);
-		return module;
-	}
-
-	public void search(ModuleForm form) {
-		form.setSearchResult(moduleDao.getList(form.getSearchName(),
-				form.getSearchFirstEntry(), form.getSearchParentId()));
+		return moduleDao.get(moduleId);
 	}
 
 	public List<Item> getItems(String id) {
@@ -45,19 +39,27 @@ public class ModuleBL extends BusinessLogic {
 		return items;
 	}
 
+	public void search(ModuleForm form) {
+		form.setSearchResult(moduleDao.getList(form.getSearchName(),
+				form.getSearchFirstEntry(), form.getSearchParentId()));
+	}
+
 	public void update(ModuleForm form) throws AppException {
-		Module newModule = new Module();
-		form.assignToEntity("new", newModule);
-		
-		accessPathDao.deleteByModule(newModule.getId());
-		
+		beginTransaction();
+
+		Module module = moduleDao.load(form.getSelectedId());
+		form.assignToEntity("new", module);
+
+		accessPathDao.deleteByModuleId(module.getId());
+
 		List<AccessPath> accessPaths = form.getNewAccessPaths();
 		for (AccessPath accessPath : accessPaths) {
-			accessPath.setModule(newModule);
+			accessPath.setModule(module);
+			accessPathDao.save(accessPath);
 		}
-		
-		moduleDao.create(newModule);
-		
+
+		moduleDao.save(module);
+
 		commit();
 	}
 }
