@@ -28,6 +28,8 @@ public class ModuleBL extends BusinessLogic {
 
 	public List<Item> getItems(String id) {
 		List<Item> items = new ArrayList<>();
+		items.add(new Item(null, null));
+		
 		List<Module> modules = moduleDao.getList(null, null, null);
 		for (Module module : modules) {
 			if (module.getId().equals(id)) {

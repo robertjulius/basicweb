@@ -29,9 +29,6 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 			}
 			AccessPath accessPath = new AccessPath();
 			accessPath.setUrl(url);
-			/*
-			 * TODO accessPath.setModule();
-			 */
 			getForm().getNewAccessPaths().add(accessPath);
 		}
 		getBL().setParent(getForm());
