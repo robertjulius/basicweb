@@ -18,12 +18,18 @@ public class PrivilegeUtils {
 		ArrayList<Privilege> leafs = new ArrayList<Privilege>();
 		getLeafs(leafs, treeMap);
 
+		privilegeIds = getValidPrivilegeIds(privilegeIds, leafs);
+
 		while (!isEquals(privilegeIds, leafs)) {
 			for (Privilege leaf : leafs) {
 				if (!isExists(leaf.getId(), privilegeIds)) {
-					Privilege parent = getPrivilegeFromTree(leaf.getParentId(),
-							treeMap);
-					parent.getChilds().remove(leaf.getId());
+					if (leaf.getParentId() == null) {
+						treeMap.remove(leaf.getId());
+					} else {
+						Privilege parent = getPrivilegeFromTree(
+								leaf.getParentId(), treeMap);
+						parent.getChilds().remove(leaf.getId());
+					}
 				}
 			}
 			leafs.clear();
@@ -82,6 +88,20 @@ public class PrivilegeUtils {
 		return null;
 	}
 
+	private static String[] getValidPrivilegeIds(String[] privilegeIds,
+			ArrayList<Privilege> leafs) {
+		List<String> valid = new ArrayList<>();
+		for (String privilegeId : privilegeIds) {
+			for (Privilege leaf : leafs) {
+				if (privilegeId.equals(leaf.getId())) {
+					valid.add(privilegeId);
+					break;
+				}
+			}
+		}
+		return valid.toArray(new String[] {});
+	}
+
 	private static boolean isEquals(String[] privilegeIds,
 			ArrayList<Privilege> leafs) {
 		if (privilegeIds.length != leafs.size()) {
@@ -100,7 +120,7 @@ public class PrivilegeUtils {
 
 		return equals == leafs.size();
 	}
-	
+
 	private static boolean isExists(String string, String[] strings) {
 		for (String temp : strings) {
 			if (string.equals(temp)) {
