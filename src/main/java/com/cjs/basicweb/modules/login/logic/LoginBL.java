@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.LoggerFactory;
 
 import com.cjs.basicweb.model.accesspath.AccessPath;
 import com.cjs.basicweb.model.module.Module;
-import com.cjs.basicweb.model.module.ModuleDao;
 import com.cjs.basicweb.model.user.SimpleUser;
-import com.cjs.basicweb.model.user.UserDao;
 import com.cjs.basicweb.modules.BusinessLogic;
 import com.cjs.basicweb.modules.login.Privilege;
 import com.cjs.basicweb.modules.login.PrivilegeUtils;
@@ -23,28 +23,47 @@ import com.cjs.core.exception.UserException;
 
 public class LoginBL extends BusinessLogic {
 
-	private ModuleDao moduleDao = new ModuleDao();
-	private UserDao userDao = new UserDao();
+	public User getByUserId(String userId) throws AppException {
+		if (userId == null || userId.trim().isEmpty()) {
+			throw new AppException(
+					PropertiesConstants.ERROR_PRIMARY_KEY_REQUIRED);
+		}
+
+		Criteria criteria = getSession().createCriteria(User.class);
+		criteria.add(Restrictions.eq("userId", userId).ignoreCase());
+
+		return (User) criteria.uniqueResult();
+	}
 
 	public User performLogin(String userId, String password,
 			UserSession userSession) throws UserException, AppException {
-		User user = userDao.getByUserId(userId);
-		if (user == null) {
-			throw new UserException(PropertiesConstants.INVALID_LOGIN_USERID);
-		}
+
+		User user = getByUserId(userId);
 
 		validatePassword(user, password);
+
 		prepareTreeMenu(user, userSession);
+
 		((SimpleUserSession) userSession)
 				.setAccessPath(prepareAccessPath(user));
 
 		return user;
 	}
 
+	private List<Module> getModuleRoots() {
+		Criteria criteria = getSession().createCriteria(Module.class);
+		criteria.add(Restrictions.isNull("parent.id"));
+
+		@SuppressWarnings("unchecked")
+		List<Module> modules = criteria.list();
+		return modules;
+	}
+
 	private String[] prepareAccessPath(User user) {
-		
-		LoggerFactory.getLogger(getClass()).debug("Begin to prepare access path");
-		
+
+		LoggerFactory.getLogger(getClass()).debug(
+				"Begin to prepare access path");
+
 		List<String> result = new ArrayList<>();
 		List<Module> modules = ((SimpleUser) user).getUserGroup().getModules();
 		for (Module module : modules) {
@@ -53,16 +72,17 @@ public class LoginBL extends BusinessLogic {
 				result.add(accessPath.getUrl());
 			}
 		}
-		
-		LoggerFactory.getLogger(getClass()).debug("Prepare access path success");
-		
+
+		LoggerFactory.getLogger(getClass())
+				.debug("Prepare access path success");
+
 		return result.toArray(new String[] {});
 	}
 
 	private void prepareTreeMenu(User user, UserSession userSession) {
 
 		LoggerFactory.getLogger(getClass()).debug("Begin to prepare tree menu");
-		
+
 		List<Module> modules = ((SimpleUser) user).getUserGroup().getModules();
 
 		List<String> privilegeIds = new ArrayList<>();
@@ -71,10 +91,10 @@ public class LoginBL extends BusinessLogic {
 		}
 
 		TreeMap<String, Privilege> treeMap = PrivilegeUtils.generateTree(
-				privilegeIds.toArray(new String[] {}), moduleDao.getRoots());
+				privilegeIds.toArray(new String[] {}), getModuleRoots());
 
 		((SimpleUserSession) userSession).setTreeMap(treeMap);
-		
+
 		LoggerFactory.getLogger(getClass()).debug("Prepare tree menu success");
 	}
 
@@ -82,11 +102,11 @@ public class LoginBL extends BusinessLogic {
 			throws UserException {
 
 		LoggerFactory.getLogger(getClass()).debug("Begin to validate password");
-		
+
 		if (!user.getPassword().equals(password)) {
 			throw new UserException(PropertiesConstants.INVALID_LOGIN_PASSWORD);
 		}
-		
+
 		LoggerFactory.getLogger(getClass()).debug("Validate password success");
 	}
 }

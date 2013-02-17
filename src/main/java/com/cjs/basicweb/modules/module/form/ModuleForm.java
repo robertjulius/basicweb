@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.cjs.basicweb.model.FormBean;
 import com.cjs.basicweb.model.Item;
-import com.cjs.basicweb.model.accesspath.AccessPath;
 import com.cjs.basicweb.model.module.Module;
 
 public class ModuleForm extends FormBean {
@@ -24,13 +23,14 @@ public class ModuleForm extends FormBean {
 	private String newFirstEntry;
 	private String newName;
 	private String newDescription;
-	private Module newParent;
-	private List<AccessPath> newAccessPaths;
+	private String newParentId;
+	private String newParentName;
+	private List<String> newAccessPaths;
 
 	private List<Item> selectListParent;
 	private String selectedParentId;
 
-	public List<AccessPath> getNewAccessPaths() {
+	public List<String> getNewAccessPaths() {
 		return newAccessPaths;
 	}
 
@@ -50,8 +50,12 @@ public class ModuleForm extends FormBean {
 		return newName;
 	}
 
-	public Module getNewParent() {
-		return newParent;
+	public String getNewParentId() {
+		return newParentId;
+	}
+
+	public String getNewParentName() {
+		return newParentName;
 	}
 
 	public Module getOld() {
@@ -90,7 +94,7 @@ public class ModuleForm extends FormBean {
 		return selectListParent;
 	}
 
-	public void setNewAccessPaths(List<AccessPath> newAccessPaths) {
+	public void setNewAccessPaths(List<String> newAccessPaths) {
 		this.newAccessPaths = newAccessPaths;
 	}
 
@@ -110,8 +114,12 @@ public class ModuleForm extends FormBean {
 		this.newName = newName;
 	}
 
-	public void setNewParent(Module newParent) {
-		this.newParent = newParent;
+	public void setNewParentId(String newParentId) {
+		this.newParentId = newParentId;
+	}
+
+	public void setNewParentName(String newParentName) {
+		this.newParentName = newParentName;
 	}
 
 	public void setOld(Module old) {

@@ -3,35 +3,29 @@ package com.cjs.basicweb.modules.module.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
+
 import com.cjs.basicweb.model.Item;
-import com.cjs.basicweb.model.accesspath.AccessPath;
-import com.cjs.basicweb.model.accesspath.AccessPathDao;
 import com.cjs.basicweb.model.module.Module;
-import com.cjs.basicweb.model.module.ModuleDao;
 import com.cjs.basicweb.modules.BusinessLogic;
-import com.cjs.basicweb.modules.module.form.ModuleForm;
 import com.cjs.core.exception.AppException;
 
 public class ModuleBL extends BusinessLogic {
 
-	private ModuleDao moduleDao;
-	private AccessPathDao accessPathDao;
-
-	public ModuleBL() {
-		moduleDao = new ModuleDao();
-		accessPathDao = new AccessPathDao();
-	}
-
 	public Module getDetail(String moduleId) throws AppException {
-		return moduleDao.get(moduleId);
+		Module load = (Module) getSession().get(Module.class, moduleId);
+		return load;
 	}
 
-	public List<Item> getItems(String id) {
+	public List<Item> getItemsForSelectList(String id) {
 		List<Item> items = new ArrayList<>();
 		items.add(new Item(null, null));
-		
-		List<Module> modules = moduleDao.getList(null, null, null);
-		for (Module module : modules) {
+
+		Criteria criteria = getSession().createCriteria(Module.class);
+		List<?> list = criteria.list();
+		for (Object object : list) {
+			Module module = (Module) object;
 			if (module.getId().equals(id)) {
 				continue;
 			} else {
@@ -41,35 +35,52 @@ public class ModuleBL extends BusinessLogic {
 		return items;
 	}
 
-	public void search(ModuleForm form) {
-		form.setSearchResult(moduleDao.getList(form.getSearchName(),
-				form.getSearchFirstEntry(), form.getSearchParentId()));
-	}
-
-	public void setParent(ModuleForm form) {
-		Module newParent = moduleDao.load(form.getSelectedParentId());
-		form.setNewParent(newParent);
-	}
-
-	public void update(ModuleForm form) throws AppException {
-		beginTransaction();
-
-		Module module = moduleDao.load(form.getSelectedId());
-		form.assignToEntity("new", module);
-
-		accessPathDao.deleteByModuleId(module.getId());
-
-		List<AccessPath> accessPaths = form.getNewAccessPaths();
-		for (AccessPath accessPath : accessPaths) {
-			accessPath.setModule(module);
-			accessPathDao.save(accessPath);
+	public List<Module> search(String name, String firstEntry, String parentId) {
+		Criteria criteria = getSession().createCriteria(Module.class);
+		if (name != null && !name.trim().isEmpty()) {
+			criteria.add(Restrictions.like("name", "%" + name + "%"));
 		}
 
-		Module parent = moduleDao.load(form.getSelectedParentId());
-		module.setParent(parent);
+		if (firstEntry != null && !firstEntry.trim().isEmpty()) {
+			criteria.add(Restrictions
+					.like("firstEntry", "%" + firstEntry + "%"));
+		}
 
-		moduleDao.save(module);
+		if (parentId != null && !parentId.trim().isEmpty()) {
+			criteria.add(Restrictions.like("parent.id", "%" + parentId + "%"));
+		}
 
+		@SuppressWarnings("unchecked")
+		List<Module> modules = criteria.list();
+		return modules;
+	}
+
+	public void update(String id, String newFirstEntry, String newName,
+			String newDescription, String newParentId,
+			List<String> newAccesssPaths) throws AppException {
+
+		beginTransaction();
+
+		Module module = (Module) getSession().load(Module.class, id);
+		module.setFirstEntry(newFirstEntry);
+		module.setName(newName);
+		module.setDescription(newDescription);
+		module.setParent(null);
+
+		getSession().save(module);
 		commit();
+
+		// accessPathDao.deleteByModuleId(module.getId());
+		//
+		// List<AccessPath> accessPaths = form.getNewAccessPaths();
+		// for (AccessPath accessPath : accessPaths) {
+		// accessPath.setModule(module);
+		// accessPathDao.save(accessPath);
+		// }
+		//
+		// Module parent = moduleDao.load(form.getSelectedParentId());
+		// module.setParent(parent);
+
+		// moduleDao.save(module);
 	}
 }

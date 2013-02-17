@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cjs.basicweb.model.Item;
-import com.cjs.basicweb.model.accesspath.AccessPath;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.modules.module.form.ModuleForm;
 import com.cjs.basicweb.modules.module.logic.ModuleBL;
@@ -21,22 +20,22 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 		super(ModuleForm.class, ModuleBL.class);
 	}
 
-	public String confirmEdit() {
-		getForm().setNewAccessPaths(new ArrayList<AccessPath>());
+	public String confirmEdit() throws AppException {
+		getForm().setNewAccessPaths(new ArrayList<String>());
 		for (String url : listAccessPaths) {
 			if (url == null) {
 				continue;
 			}
-			AccessPath accessPath = new AccessPath();
-			accessPath.setUrl(url);
-			getForm().getNewAccessPaths().add(accessPath);
+			getForm().getNewAccessPaths().add(url);
 		}
-		getBL().setParent(getForm());
 		return SUCCESS;
 	}
 
 	public String executeEdit() throws AppException {
-		getBL().update(getForm());
+		ModuleForm form = getForm();
+		getBL().update(form.getNewId(), form.getNewFirstEntry(),
+				form.getNewName(), form.getNewDescription(),
+				form.getNewParentId(), form.getNewAccessPaths());
 		return SUCCESS;
 	}
 
@@ -52,14 +51,22 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 		String selectedId = getForm().getSelectedId();
 		Module module = getBL().getDetail(selectedId);
 		getForm().setOld(module);
-		getForm().setSelectedParentId(module.getParent().getId());
 		return SUCCESS;
 	}
 
 	public String prepareEdit() throws AppException {
-		List<Item> items = getBL().getItems(getForm().getSelectedId());
-		getForm().setSelectListParent(items);
-		getForm().assignFromEntity("new", getForm().getOld());
+		ModuleForm form = getForm();
+
+		List<Item> items = getBL().getItemsForSelectList(form.getSelectedId());
+		form.setSelectListParent(items);
+
+		form.assignFromEntity("new", form.getOld());
+
+		if (form.getOld().getParent() != null) {
+			form.setNewParentId(form.getOld().getParent().getId());
+		}
+		form.setNewParentName(form.getOld().getParent().getName());
+
 		return SUCCESS;
 	}
 
@@ -68,7 +75,12 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 	}
 
 	public String search() {
-		getBL().search(getForm());
+		String name = getForm().getSearchName();
+		String firstEntry = getForm().getSearchFirstEntry();
+		String parentId = getForm().getSearchParentId();
+
+		List<Module> modules = getBL().search(name, firstEntry, parentId);
+		getForm().setSearchResult(modules);
 		return SUCCESS;
 	}
 
