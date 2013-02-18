@@ -24,8 +24,9 @@ INSERT INTO ms_user (id, create_by, create_date, update_by, update_date, name, p
 -- MS_PRIVILEGE
 DELETE FROM ms_privilege;
 INSERT INTO ms_privilege (user_group_id, module_id) VALUES ('developer', '011user_maintenace');
-INSERT INTO ms_privilege (user_group_id, module_id) VALUES ('developer', '021module_maintenance');
+INSERT INTO ms_privilege (user_group_id, module_id) VALUES ('developer', '012usergroup_maintenace');
 INSERT INTO ms_privilege (user_group_id, module_id) VALUES ('developer', '013reset_user_session');
+INSERT INTO ms_privilege (user_group_id, module_id) VALUES ('developer', '021module_maintenance');
 
 -- MS_ACCESS_PATH
 DELETE FROM ms_access_path;

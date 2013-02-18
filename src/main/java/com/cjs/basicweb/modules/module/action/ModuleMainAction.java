@@ -30,10 +30,22 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 		}
 		return SUCCESS;
 	}
+	
+	public String confirmNew() throws AppException {
+		return confirmEdit();
+	}
 
 	public String executeEdit() throws AppException {
 		ModuleForm form = getForm();
 		getBL().update(form.getNewId(), form.getNewFirstEntry(),
+				form.getNewName(), form.getNewDescription(),
+				form.getNewParentId(), form.getNewAccessPaths());
+		return SUCCESS;
+	}
+	
+	public String executeNew() throws AppException {
+		ModuleForm form = getForm();
+		getBL().create(form.getNewId(), form.getNewFirstEntry(),
 				form.getNewName(), form.getNewDescription(),
 				form.getNewParentId(), form.getNewAccessPaths());
 		return SUCCESS;
@@ -73,7 +85,17 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 		return SUCCESS;
 	}
 
-	public String prepareNew() {
+	public String prepareNew() throws AppException {
+		ModuleForm form = getForm();
+
+		List<Item> items = getBL().getItemsForSelectList(form.getSelectedId());
+		form.setSelectListParent(items);
+
+		form.assignFromEntity("new", new Module());
+
+		form.setNewParentId(null);
+		form.setNewParentName(null);
+
 		return SUCCESS;
 	}
 

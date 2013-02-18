@@ -20,7 +20,7 @@
 	<table class="form">
 		<tr>
 			<td align="right"><s:form
-					action="/modules/module/prepareNew.action" method="post">
+					action="/modules/usergroupmaintenance/prepareNew.action" method="post">
 					<s:submit key="resource.create.new" name="%{resource.create.new}"/>
 				</s:form></td>
 		</tr>
@@ -28,12 +28,11 @@
 			<td><hr /></td>
 		</tr>
 		<tr>
-			<td><s:form action="/modules/module/search.action" method="post">
+			<td><s:form action="/modules/usergroupmaintenance/search.action" method="post">
 					<s:actionerror />
 					<s:fielderror />
-					<s:textfield key="resource.moduleName" name="searchName" />
-					<s:textfield key="resource.firstEntry" name="searchFirstEntry" />
-					<s:textfield key="resource.parent" name="searchParentId" />
+					<s:textfield key="resource.userGroupName" name="searchName" />
+					<s:textfield key="resource.description" name="searchDescription" />
 					<s:submit key="resource.search" name="%{resource.search}"/>
 				</s:form></td>
 		</tr>

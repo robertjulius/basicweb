@@ -16,8 +16,8 @@ import com.cjs.core.exception.AppException;
 public class ModuleBL extends BusinessLogic {
 
 	public Module getDetail(String moduleId) throws AppException {
-		Module load = (Module) getSession().get(Module.class, moduleId);
-		return load;
+		Module module = (Module) getSession().get(Module.class, moduleId);
+		return module;
 	}
 
 	public List<Item> getItemsForSelectList(String id) {
@@ -77,6 +77,36 @@ public class ModuleBL extends BusinessLogic {
 		}
 
 		deleteMsAccessPath(id);
+		for (String url : newAccesssPaths) {
+			AccessPath accessPath = new AccessPath();
+			accessPath.setModule(module);
+			accessPath.setUrl(url);
+			getSession().save(accessPath);
+		}
+
+		getSession().save(module);
+		commit();
+	}
+	
+	public void create(String id, String newFirstEntry, String newName,
+			String newDescription, String newParentId,
+			List<String> newAccesssPaths) throws AppException {
+
+		beginTransaction();
+
+		Module module = new Module();
+		module.setFirstEntry(newFirstEntry);
+		module.setName(newName);
+		module.setDescription(newDescription);
+
+		if (newParentId == null || newParentId.trim().isEmpty()) {
+			module.setParent(null);
+		} else {
+			Module parent = (Module) getSession().load(Module.class,
+					newParentId);
+			module.setParent(parent);
+		}
+
 		for (String url : newAccesssPaths) {
 			AccessPath accessPath = new AccessPath();
 			accessPath.setModule(module);
