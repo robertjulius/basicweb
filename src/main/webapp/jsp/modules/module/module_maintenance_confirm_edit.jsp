@@ -91,7 +91,7 @@
 							</tr>
 							<tr>
 								<td align="right"><s:text name="resource.parent" /></td>
-								<td align="left"><s:label name="newParent.name" /></td>
+								<td align="left"><s:label name="newParentName" /></td>
 							</tr>
 							<tr>
 								<td align="left" colspan="2">
@@ -99,7 +99,7 @@
 										<tr><td><b><s:text name="resource.accessPaths" /></b></td></tr>
 										<s:iterator value="newAccessPaths" status="rowstatus">
 											<tr>
-												<td>&#149; <s:property value="url" /></td>
+												<td>&#149; <s:property /></td>
 											</tr>
 										</s:iterator>
 									</table>

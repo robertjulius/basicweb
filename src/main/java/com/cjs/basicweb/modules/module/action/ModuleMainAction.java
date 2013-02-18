@@ -64,8 +64,11 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 
 		if (form.getOld().getParent() != null) {
 			form.setNewParentId(form.getOld().getParent().getId());
+			form.setNewParentName(form.getOld().getParent().getName());
+		} else {
+			form.setNewParentId(null);
+			form.setNewParentName(null);
 		}
-		form.setNewParentName(form.getOld().getParent().getName());
 
 		return SUCCESS;
 	}

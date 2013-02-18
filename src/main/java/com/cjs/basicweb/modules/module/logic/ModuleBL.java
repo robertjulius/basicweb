@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.criterion.Restrictions;
 
 import com.cjs.basicweb.model.Item;
+import com.cjs.basicweb.model.accesspath.AccessPath;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.modules.BusinessLogic;
 import com.cjs.core.exception.AppException;
@@ -65,22 +67,30 @@ public class ModuleBL extends BusinessLogic {
 		module.setFirstEntry(newFirstEntry);
 		module.setName(newName);
 		module.setDescription(newDescription);
-		module.setParent(null);
+
+		if (newParentId == null || newParentId.trim().isEmpty()) {
+			module.setParent(null);
+		} else {
+			Module parent = (Module) getSession().load(Module.class,
+					newParentId);
+			module.setParent(parent);
+		}
+
+		deleteMsAccessPath(id);
+		for (String url : newAccesssPaths) {
+			AccessPath accessPath = new AccessPath();
+			accessPath.setModule(module);
+			accessPath.setUrl(url);
+			getSession().save(accessPath);
+		}
 
 		getSession().save(module);
 		commit();
-
-		// accessPathDao.deleteByModuleId(module.getId());
-		//
-		// List<AccessPath> accessPaths = form.getNewAccessPaths();
-		// for (AccessPath accessPath : accessPaths) {
-		// accessPath.setModule(module);
-		// accessPathDao.save(accessPath);
-		// }
-		//
-		// Module parent = moduleDao.load(form.getSelectedParentId());
-		// module.setParent(parent);
-
-		// moduleDao.save(module);
+	}
+	
+	private void deleteMsAccessPath(String moduleId) {
+		SQLQuery sqlQuery = getSession().createSQLQuery("DELETE FROM ms_access_path WHERE module_id = :moduleId");
+		sqlQuery.setString("moduleId", moduleId);
+		sqlQuery.executeUpdate();
 	}
 }

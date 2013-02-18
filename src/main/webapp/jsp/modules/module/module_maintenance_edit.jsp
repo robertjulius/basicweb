@@ -39,8 +39,10 @@
 							theme="xhtml" />
 						<s:textfield key="resource.firstEntry" name="newFirstEntry"
 							theme="xhtml" />
-						<s:select key="resource.parent" name="selectedParentId" list="selectListParent"
-							listKey="key" listValue="value" theme="xhtml" />
+						<s:select key="resource.parent" name="newParentId"
+							id="newParentId" list="selectListParent" listKey="key"
+							listValue="value" theme="xhtml" />
+						<s:hidden name="newParentName" id="newParentName" />
 					</table>
 				</td>
 			</tr>
@@ -93,7 +95,15 @@
 	</s:form>
 </body>
 <script type="text/javascript">
-	
+	$(function() {
+		$('#newParentId').change(
+				function() {
+					$(newParentName).val(
+							$(this).children("option").filter(":selected")
+									.text());
+				});
+	});
+
 	function removeRow(button) {
 		button.closest('tr').remove();
 	}
