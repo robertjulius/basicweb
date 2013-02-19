@@ -1,3 +1,8 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.TreeMap"%>
+<%@page import="com.cjs.basicweb.modules.login.Privilege"%>
+<%@page
+	import="com.cjs.basicweb.modules.usergroupmaintenance.HtmlPrivilegeTreeGenerator"%>
 <%@page import="com.cjs.basicweb.utility.GeneralConstants"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -9,8 +14,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <s:head />
 <sj:head />
-<link rel="stylesheet"
-	href="/basicweb/css/ganesha-table-popupmenu-0.1.css" type="text/css" />
+
+<style type="text/css">
+ul {
+	list-style-type: none;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+</style>
+
 </head>
 <body>
 	<table>
@@ -22,7 +34,7 @@
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/usergroupmaintenance/confirmEdit.action"
+	<s:form action="/modules/usergroupmaintenance/prepareEdit.action"
 		theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
@@ -38,6 +50,29 @@
 							theme="xhtml" />
 						<s:textfield key="resource.description" name="newDescription"
 							theme="xhtml" />
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table width="100%">
+						<tr>
+							<td><hr /></td>
+						</tr>
+					</table>
+					<table border="1px" bordercolor="#CCCCFF" bgcolor="#FFFFFF">
+						<tr>
+							<td><b><s:text name="resource.privileges" /></b></td>
+						</tr>
+						<tbody>
+							<tr>
+								<td>
+									<ul>
+										<%=HtmlPrivilegeTreeGenerator.generateHtmlCheckBox((TreeMap<String, Privilege>) request.getAttribute("treeMap"), (List<String>) request.getAttribute("initialModuleIds"))%>
+									</ul>
+								</td>
+							</tr>
+						</tbody>
 					</table>
 				</td>
 			</tr>
@@ -84,7 +119,5 @@
 		table.find('tbody:last').append('<tr>' + td1 + td2 + '</tr>');
 		++rowSize;
 	}
-
-	
 </script>
 </html>

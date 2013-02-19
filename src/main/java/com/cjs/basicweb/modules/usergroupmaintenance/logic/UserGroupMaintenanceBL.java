@@ -1,12 +1,10 @@
 package com.cjs.basicweb.modules.usergroupmaintenance.logic;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
-import com.cjs.basicweb.model.Item;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.model.usergroup.UserGroup;
 import com.cjs.basicweb.modules.BusinessLogic;
@@ -20,21 +18,14 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 		return userGroup;
 	}
 
-	public List<Item> getChildModules() {
-		List<Item> items = new ArrayList<>();
-
+	public List<Module> getChildModules() {
 		Criteria criteria = getSession().createCriteria(Module.class);
 		criteria.add(Restrictions.or(Restrictions.isNull("childs"),
 				Restrictions.isEmpty("childs")));
 
 		@SuppressWarnings("unchecked")
 		List<Module> modules = criteria.list();
-		for (Module module : modules) {
-			Item item = new Item(module.getId(), module.getName());
-			items.add(item);
-		}
-
-		return items;
+		return modules;
 	}
 	
 	public List<Module> getRootModules() {

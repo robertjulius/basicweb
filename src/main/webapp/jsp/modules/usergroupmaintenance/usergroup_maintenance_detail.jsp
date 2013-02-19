@@ -12,6 +12,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <s:head />
 <sj:head />
+
+<style type="text/css">
+ul {
+	list-style-type: none;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+</style>
+
 </head>
 <body>
 	<table>
@@ -56,16 +65,22 @@
 			</tr>
 			<tr>
 				<td>
-					<table>
-						<tr>
-							<td>
-							
-							<%=
-									HtmlPrivilegeTreeGenerator
-									.generateHtmlTree((TreeMap<String, Privilege>) request.getAttribute("treeMap"))
-							%>
-</td>
-						</tr>
+					<table class="grid">
+						<thead>
+							<tr>
+								<td colspan="2"><s:text name="resource.privileges" /></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<ul>
+										<%=HtmlPrivilegeTreeGenerator
+									.generateHtmlTree((TreeMap<String, Privilege>) request.getAttribute("treeMap"))%>
+									</ul>
+								</td>
+							</tr>
+						</tbody>
 					</table>
 				</td>
 			</tr>

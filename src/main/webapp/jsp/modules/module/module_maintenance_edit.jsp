@@ -9,8 +9,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <s:head />
 <sj:head />
-<link rel="stylesheet"
-	href="/basicweb/css/ganesha-table-popupmenu-0.1.css" type="text/css" />
 </head>
 <body>
 	<table>

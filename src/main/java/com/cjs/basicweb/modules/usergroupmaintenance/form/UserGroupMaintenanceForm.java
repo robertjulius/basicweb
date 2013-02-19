@@ -21,7 +21,7 @@ public class UserGroupMaintenanceForm extends FormBean {
 	private String newId;
 	private String newName;
 	private String newDescription;
-	private List<String> newModules;
+	private List<String> newModuleIds;
 
 	private List<Item> allModules;
 
@@ -37,8 +37,8 @@ public class UserGroupMaintenanceForm extends FormBean {
 		return newId;
 	}
 
-	public List<String> getNewModules() {
-		return newModules;
+	public List<String> getNewModuleIds() {
+		return newModuleIds;
 	}
 
 	public String getNewName() {
@@ -81,8 +81,8 @@ public class UserGroupMaintenanceForm extends FormBean {
 		this.newId = newId;
 	}
 
-	public void setNewModules(List<String> newModules) {
-		this.newModules = newModules;
+	public void setNewModuleIds(List<String> newModuleIds) {
+		this.newModuleIds = newModuleIds;
 	}
 
 	public void setNewName(String newName) {

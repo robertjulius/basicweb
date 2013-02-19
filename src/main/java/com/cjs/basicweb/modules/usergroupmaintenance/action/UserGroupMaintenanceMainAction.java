@@ -33,7 +33,7 @@ public class UserGroupMaintenanceMainAction extends
 	public String executeEdit() throws AppException {
 		UserGroupMaintenanceForm form = getForm();
 		getBL().update(form.getSelectedId(), form.getNewName(),
-				form.getNewDescription(), form.getNewModules());
+				form.getNewDescription(), form.getNewModuleIds());
 		return SUCCESS;
 	}
 
@@ -42,8 +42,6 @@ public class UserGroupMaintenanceMainAction extends
 	}
 
 	public String initial() {
-		UserGroupMaintenanceForm form = getForm();
-		List<Module> rootModules = getBL().getRootModules();
 		return SUCCESS;
 	}
 
@@ -53,12 +51,10 @@ public class UserGroupMaintenanceMainAction extends
 		getForm().setOld(userGroup);
 		
 		List<Module> modules = getForm().getOld().getModules();
-		
 		List<String> privilegeIds = new ArrayList<>();
 		for (Module module : modules) {
 			privilegeIds.add(module.getId());
 		}
-		
 		TreeMap<String, Privilege> treeMap = PrivilegeUtils.generateTree(
 				privilegeIds.toArray(new String[] {}), getBL().getRootModules());
 		getRequest().setAttribute("treeMap", treeMap);
@@ -68,7 +64,22 @@ public class UserGroupMaintenanceMainAction extends
 
 	public String prepareEdit() throws AppException {
 		UserGroupMaintenanceForm form = getForm();
-		form.assignFromEntity("new", form.getOld());
+		form.assignFromEntity("new", form.getOld());		
+		
+		List<Module> modules = getBL().getChildModules();
+		List<String> privilegeIds = new ArrayList<>();
+		for (Module module : modules) {
+			privilegeIds.add(module.getId());
+		}
+		TreeMap<String, Privilege> treeMap = PrivilegeUtils.generateTree(
+				privilegeIds.toArray(new String[] {}), getBL().getRootModules());
+		getRequest().setAttribute("treeMap", treeMap);
+		
+		List<String> initialModuleIds = new ArrayList<>();
+		for (Module module : form.getOld().getModules()) {
+			initialModuleIds.add(module.getId());
+		}
+		getRequest().setAttribute("initialModuleIds", initialModuleIds);
 
 		return SUCCESS;
 	}
