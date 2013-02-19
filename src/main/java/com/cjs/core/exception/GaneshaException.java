@@ -7,6 +7,10 @@ public abstract class GaneshaException extends Exception {
 		super();
 	}
 
+	public GaneshaException(String message) {
+		super(message);
+	}
+
 	public GaneshaException(Throwable cause) {
 		super(cause);
 	}

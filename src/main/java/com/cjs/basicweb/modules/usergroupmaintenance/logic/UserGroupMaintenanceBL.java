@@ -12,10 +12,23 @@ import com.cjs.core.exception.AppException;
 
 public class UserGroupMaintenanceBL extends BusinessLogic {
 
-	public UserGroup getDetail(String userGroupId) throws AppException {
-		UserGroup userGroup = (UserGroup) getSession().get(UserGroup.class,
-				userGroupId);
-		return userGroup;
+	public void create(String id, String newName, String newDescription,
+			List<String> newModules) throws AppException {
+
+		beginTransaction();
+
+		UserGroup userGroup = new UserGroup();
+		userGroup.setName(newName);
+		userGroup.setDescription(newDescription);
+
+		userGroup.getModules().clear();
+		for (String moduleId : newModules) {
+			Module module = (Module) getSession().load(Module.class, moduleId);
+			userGroup.getModules().add(module);
+		}
+
+		getSession().save(userGroup);
+		commit();
 	}
 
 	public List<Module> getChildModules() {
@@ -27,7 +40,13 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 		List<Module> modules = criteria.list();
 		return modules;
 	}
-	
+
+	public UserGroup getDetail(String userGroupId) throws AppException {
+		UserGroup userGroup = (UserGroup) getSession().get(UserGroup.class,
+				userGroupId);
+		return userGroup;
+	}
+
 	public List<Module> getRootModules() {
 		Criteria criteria = getSession().createCriteria(Module.class);
 		criteria.add(Restrictions.isNull("parent.id"));
@@ -60,25 +79,6 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 
 		UserGroup userGroup = (UserGroup) getSession()
 				.load(UserGroup.class, id);
-		userGroup.setName(newName);
-		userGroup.setDescription(newDescription);
-
-//		userGroup.getModules().clear();
-//		for (String moduleId : newModules) {
-//			Module module = (Module) getSession().load(Module.class, moduleId);
-//			userGroup.getModules().add(module);
-//		}
-
-		getSession().save(userGroup);
-		commit();
-	}
-
-	public void create(String id, String newName, String newDescription,
-			List<String> newModules) throws AppException {
-
-		beginTransaction();
-
-		UserGroup userGroup = new UserGroup();
 		userGroup.setName(newName);
 		userGroup.setDescription(newDescription);
 

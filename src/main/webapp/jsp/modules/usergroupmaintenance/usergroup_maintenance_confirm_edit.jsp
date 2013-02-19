@@ -1,3 +1,7 @@
+<%@page import="java.util.TreeMap"%>
+<%@page import="com.cjs.basicweb.modules.login.Privilege"%>
+<%@page
+	import="com.cjs.basicweb.modules.usergroupmaintenance.HtmlPrivilegeTreeGenerator"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
@@ -8,6 +12,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <s:head />
 <sj:head />
+
+<style type="text/css">
+ul {
+	list-style-type: none;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+</style>
+
 </head>
 <body>
 	<table>
@@ -19,7 +32,8 @@
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/usergroupmaintenance/executeEdit.action" theme="simple">
+	<s:form action="/modules/usergroupmaintenance/executeEdit.action"
+		theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
 				<s:actionerror />
@@ -29,10 +43,11 @@
 		<table class="form">
 			<tr>
 				<td>
-					<table class="grid">
+					<table class="grid" id="grid1">
 						<thead>
 							<tr>
-								<td colspan="2"><s:text name="resource.userGroupInformation" /></td>
+								<td colspan="2"><s:text
+										name="resource.userGroupInformation" /></td>
 							</tr>
 						</thead>
 						<tbody>
@@ -44,16 +59,24 @@
 								<td align="right"><s:text name="resource.description" /></td>
 								<td align="left"><s:label name="old.description" /></td>
 							</tr>
+							<tr>
+								<td colspan="2">
+									<ul>
+										<%=HtmlPrivilegeTreeGenerator.generateHtmlTree((TreeMap<String, Privilege>) request.getAttribute("oldTreeMap"))%>
+									</ul>
+								</td>
+							</tr>
 						</tbody>
 					</table>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<table class="grid">
+					<table class="grid" id="grid2">
 						<thead>
 							<tr>
-								<td colspan="2"><s:text name="resource.userGroupInformation" /></td>
+								<td colspan="2"><s:text
+										name="resource.userGroupInformation" /></td>
 							</tr>
 						</thead>
 						<tbody>
@@ -64,6 +87,13 @@
 							<tr>
 								<td align="right"><s:text name="resource.description" /></td>
 								<td align="left"><s:label name="newDescription" /></td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<ul>
+										<%=HtmlPrivilegeTreeGenerator.generateHtmlTree((TreeMap<String, Privilege>) request.getAttribute("newTreeMap"))%>
+									</ul>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -88,7 +118,8 @@
 </body>
 <script type="text/javascript">
 	window.onload = function() {
-		stripeTable($('table.grid'));
+		stripeTable($('table#grid1'));
+		stripeTable($('table#grid2'));
 	}
 </script>
 </html>

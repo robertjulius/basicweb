@@ -56,10 +56,10 @@
 							<td><b>Access Paths</b></td>
 						</tr>
 						<tbody>
-							<s:iterator value="newAccessPaths" status="rowstatus">
+							<s:iterator value="newURLs" status="rowstatus">
 								<tr>
 									<td><s:textfield
-											name="listAccessPaths[%{#rowstatus.index}]" value="%{url}" /></td>
+											name="listAccessPaths[%{#rowstatus.index}]" value="%{newURLs[#rowstatus.index]}" /></td>
 									<td><input type="button" value="Remove"
 										onclick="removeRow($(this))" /></td>
 								</tr>
@@ -100,7 +100,7 @@
 	$(function() {
 		$('#newParentId').change(
 				function() {
-					$(newParentName).val(
+					$('#newParentName').val(
 							$(this).children("option").filter(":selected")
 									.text());
 				});
@@ -110,14 +110,12 @@
 		button.closest('tr').remove();
 	}
 
-	var rowSize = <s:property value="newAccessPaths.size"/>;
+	var rowSize = <s:property value="newURLs.size"/>;
 	function addRow(table) {
 		var td1 = '<td><input type="text" name="listAccessPaths[' + rowSize + ']" /></td>';
 		var td2 = '<td><input type="button" value="Remove" onclick="removeRow($(this))" />';
 		table.find('tbody:last').append('<tr>' + td1 + td2 + '</tr>');
 		++rowSize;
 	}
-
-	
 </script>
 </html>

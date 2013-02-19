@@ -34,7 +34,7 @@ ul {
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/usergroupmaintenance/prepareEdit.action"
+	<s:form action="/modules/usergroupmaintenance/confirmEdit.action"
 		theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
@@ -60,7 +60,7 @@ ul {
 							<td><hr /></td>
 						</tr>
 					</table>
-					<table border="1px" bordercolor="#CCCCFF" bgcolor="#FFFFFF">
+					<table border="1px" bordercolor="#CCCCFF">
 						<tr>
 							<td><b><s:text name="resource.privileges" /></b></td>
 						</tr>
@@ -68,7 +68,7 @@ ul {
 							<tr>
 								<td>
 									<ul>
-										<%=HtmlPrivilegeTreeGenerator.generateHtmlCheckBox((TreeMap<String, Privilege>) request.getAttribute("treeMap"), (List<String>) request.getAttribute("initialModuleIds"))%>
+										<%=HtmlPrivilegeTreeGenerator.generateHtmlCheckBox((TreeMap<String, Privilege>) request.getAttribute("treeMap"), (List<String>) request.getAttribute("newModuleIds"))%>
 									</ul>
 								</td>
 							</tr>
@@ -98,26 +98,4 @@ ul {
 		</table>
 	</s:form>
 </body>
-<script type="text/javascript">
-	$(function() {
-		$('#newParentId').change(
-				function() {
-					$(newParentName).val(
-							$(this).children("option").filter(":selected")
-									.text());
-				});
-	});
-
-	function removeRow(button) {
-		button.closest('tr').remove();
-	}
-
-	var rowSize = <s:property value="newAccessPaths.size"/>;
-	function addRow(table) {
-		var td1 = '<td><input type="text" name="listAccessPaths[' + rowSize + ']" /></td>';
-		var td2 = '<td><input type="button" value="Remove" onclick="removeRow($(this))" />';
-		table.find('tbody:last').append('<tr>' + td1 + td2 + '</tr>');
-		++rowSize;
-	}
-</script>
 </html>

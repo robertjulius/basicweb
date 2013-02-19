@@ -3,6 +3,7 @@ package com.cjs.basicweb.modules.module.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cjs.basicweb.model.accesspath.AccessPath;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.modules.module.form.ModuleForm;
 import com.cjs.basicweb.modules.module.logic.ModuleBL;
@@ -21,12 +22,12 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 
 	public String confirmEdit() throws AppException {
 		if (validateForm()) {
-			getForm().setNewAccessPaths(new ArrayList<String>());
+			getForm().setNewURLs(new ArrayList<String>());
 			for (String url : listAccessPaths) {
-				if (url == null) {
+				if (url == null || url.trim().isEmpty()) {
 					continue;
 				}
-				getForm().getNewAccessPaths().add(url);
+				getForm().getNewURLs().add(url);
 			}
 			return SUCCESS;
 		} else {
@@ -42,7 +43,7 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 		ModuleForm form = getForm();
 		getBL().update(form.getSelectedId(), form.getNewFirstEntry(),
 				form.getNewName(), form.getNewDescription(),
-				form.getNewParentId(), form.getNewAccessPaths());
+				form.getNewParentId(), form.getNewURLs());
 		return SUCCESS;
 	}
 
@@ -50,7 +51,7 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 		ModuleForm form = getForm();
 		getBL().create(form.getSelectedId(), form.getNewFirstEntry(),
 				form.getNewName(), form.getNewDescription(),
-				form.getNewParentId(), form.getNewAccessPaths());
+				form.getNewParentId(), form.getNewURLs());
 		return SUCCESS;
 	}
 
@@ -61,15 +62,28 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 	public String initial() {
 		ModuleForm form = getForm();
 		List<Module> modules = getBL().getAllModules(form.getSelectedId());
-		modules.add(0, null);
+		modules.add(0, new Module());
 		form.setSelectListParent(modules);
 		return SUCCESS;
 	}
 
 	public String prepareDetail() throws AppException {
 		String selectedId = getForm().getSelectedId();
+
 		Module module = getBL().getDetail(selectedId);
-		getForm().setOld(module);
+		ModuleForm form = getForm();
+		form.setOld(module);
+
+		if (form.getNewURLs() == null) {
+			form.setNewURLs(new ArrayList<String>());
+		} else {
+			form.getNewURLs().clear();
+		}
+
+		for (AccessPath accessPath : module.getAccessPaths()) {
+			form.getNewURLs().add(accessPath.getUrl());
+		}
+
 		return SUCCESS;
 	}
 

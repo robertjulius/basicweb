@@ -13,17 +13,47 @@ import com.cjs.core.exception.AppException;
 
 public class ModuleBL extends BusinessLogic {
 
-	public Module getDetail(String moduleId) throws AppException {
-		Module module = (Module) getSession().get(Module.class, moduleId);
-		return module;
+	public void create(String id, String newFirstEntry, String newName,
+			String newDescription, String newParentId,
+			List<String> newAccesssPaths) throws AppException {
+
+		beginTransaction();
+
+		Module module = new Module();
+		module.setFirstEntry(newFirstEntry);
+		module.setName(newName);
+		module.setDescription(newDescription);
+
+		if (newParentId == null || newParentId.trim().isEmpty()) {
+			module.setParent(null);
+		} else {
+			Module parent = (Module) getSession().load(Module.class,
+					newParentId);
+			module.setParent(parent);
+		}
+
+		for (String url : newAccesssPaths) {
+			AccessPath accessPath = new AccessPath();
+			accessPath.setModule(module);
+			accessPath.setUrl(url);
+			getSession().save(accessPath);
+		}
+
+		getSession().save(module);
+		commit();
 	}
 
 	public List<Module> getAllModules(String id) {
 		Criteria criteria = getSession().createCriteria(Module.class);
-		
+
 		@SuppressWarnings("unchecked")
-		List<Module> modules = criteria.list();		
+		List<Module> modules = criteria.list();
 		return modules;
+	}
+
+	public Module getDetail(String moduleId) throws AppException {
+		Module module = (Module) getSession().get(Module.class, moduleId);
+		return module;
 	}
 
 	public List<Module> search(String name, String firstEntry, String parentId) {
@@ -76,39 +106,10 @@ public class ModuleBL extends BusinessLogic {
 		getSession().save(module);
 		commit();
 	}
-	
-	public void create(String id, String newFirstEntry, String newName,
-			String newDescription, String newParentId,
-			List<String> newAccesssPaths) throws AppException {
 
-		beginTransaction();
-
-		Module module = new Module();
-		module.setFirstEntry(newFirstEntry);
-		module.setName(newName);
-		module.setDescription(newDescription);
-
-		if (newParentId == null || newParentId.trim().isEmpty()) {
-			module.setParent(null);
-		} else {
-			Module parent = (Module) getSession().load(Module.class,
-					newParentId);
-			module.setParent(parent);
-		}
-
-		for (String url : newAccesssPaths) {
-			AccessPath accessPath = new AccessPath();
-			accessPath.setModule(module);
-			accessPath.setUrl(url);
-			getSession().save(accessPath);
-		}
-
-		getSession().save(module);
-		commit();
-	}
-	
 	private void deleteMsAccessPath(String moduleId) {
-		SQLQuery sqlQuery = getSession().createSQLQuery("DELETE FROM ms_access_path WHERE module_id = :moduleId");
+		SQLQuery sqlQuery = getSession().createSQLQuery(
+				"DELETE FROM ms_access_path WHERE module_id = :moduleId");
 		sqlQuery.setString("moduleId", moduleId);
 		sqlQuery.executeUpdate();
 	}

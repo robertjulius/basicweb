@@ -29,7 +29,7 @@
 		<table class="form">
 			<tr>
 				<td>
-					<table class="grid">
+					<table class="grid" id="grid1">
 						<thead>
 							<tr>
 								<td colspan="2"><s:text name="resource.moduleInformation" /></td>
@@ -70,7 +70,7 @@
 			</tr>
 			<tr>
 				<td>
-					<table class="grid">
+					<table class="grid" id="grid2">
 						<thead>
 							<tr>
 								<td colspan="2"><s:text name="resource.moduleInformation" /></td>
@@ -97,7 +97,7 @@
 								<td align="left" colspan="2">
 									<table>
 										<tr><td><b><s:text name="resource.accessPaths" /></b></td></tr>
-										<s:iterator value="newAccessPaths" status="rowstatus">
+										<s:iterator value="newURLs" status="rowstatus">
 											<tr>
 												<td>&#149; <s:property /></td>
 											</tr>
@@ -128,7 +128,8 @@
 </body>
 <script type="text/javascript">
 	window.onload = function() {
-		stripeTable($('table.grid'));
+		stripeTable($('table#grid1'));
+		stripeTable($('table#grid2'));
 	}
 </script>
 </html>

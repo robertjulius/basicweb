@@ -25,12 +25,12 @@ public class ModuleForm extends FormBean {
 	private String newDescription;
 	private String newParentId;
 	private String newParentName;
-	private List<String> newAccessPaths;
+	private List<String> newURLs;
 
 	private List<Module> selectListParent;
 
-	public List<String> getNewAccessPaths() {
-		return newAccessPaths;
+	public List<String> getNewURLs() {
+		return newURLs;
 	}
 
 	public String getNewDescription() {
@@ -85,8 +85,8 @@ public class ModuleForm extends FormBean {
 		return selectListParent;
 	}
 
-	public void setNewAccessPaths(List<String> newAccessPaths) {
-		this.newAccessPaths = newAccessPaths;
+	public void setNewURLs(List<String> newURLs) {
+		this.newURLs = newURLs;
 	}
 
 	public void setNewDescription(String newDescription) {

@@ -40,11 +40,23 @@ public class MappingUtils {
 
 					if (map.containsKey(name)) {
 						Object value = map.get(name);
-						if (value != null
-								&& !value.getClass().isAssignableFrom(
-										method.getParameterTypes()[0])) {
-							throw new AppException(
-									PropertiesConstants.ERROR_REFLECTION);
+						if (value != null) {
+							Class<?> valueClass = value.getClass();
+							Class<?> paramClass = method.getParameterTypes()[0];
+							if (!paramClass.isAssignableFrom(valueClass)) {
+								StringBuilder message = new StringBuilder();
+								message.append("Method ").append(
+										method.getName());
+								message.append("(")
+										.append(paramClass.getSimpleName())
+										.append(") ")
+										.append("cannot be applied for ");
+								message.append(method.getName()).append("(")
+										.append(valueClass.getSimpleName())
+										.append(") ");
+
+								throw new AppException(message.toString());
+							}
 						}
 						method.invoke(pojo, value);
 					}

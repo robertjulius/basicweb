@@ -54,16 +54,28 @@ public class HtmlPrivilegeTreeGenerator {
 				stringBuilder.append("</ul>");
 
 			} else {
-				stringBuilder
+				StringBuilder checkBoxBuilder = new StringBuilder();
+				checkBoxBuilder
 						.append("<input type='checkbox' name='newModuleIds' value='"
-								+ privilege.getId() + "' " );
+								+ privilege.getId() + "' ");
 				if (initialModuleIds.contains(privilege.getId())) {
-					stringBuilder.append("checked='checked'");
+					checkBoxBuilder.append("checked='checked'");
 				}
-				stringBuilder.append("/>");
+				checkBoxBuilder.append("/>");
+				checkBoxBuilder.append(privilege.getName());
 
 				stringBuilder.append("<label>");
-				stringBuilder.append(privilege.getName());
+				if (privilege.getParentId() == null
+						|| privilege.getParentId().trim().isEmpty()) {
+					stringBuilder.append("<b>");
+					stringBuilder.append("<hr />");
+					stringBuilder.append("<font color='#0000BB'>");
+					stringBuilder.append(checkBoxBuilder);
+					stringBuilder.append("</font>");
+					stringBuilder.append("<b>");
+				} else {
+					stringBuilder.append(checkBoxBuilder);
+				}
 				stringBuilder.append("</label>");
 			}
 
@@ -78,11 +90,11 @@ public class HtmlPrivilegeTreeGenerator {
 		Iterator<Privilege> iterator = nodes.iterator();
 		while (iterator.hasNext()) {
 
-			stringBuilder.append("<li>");
 			Privilege privilege = iterator.next();
 
-			if (!privilege.getChilds().isEmpty()) {
+			stringBuilder.append("<li>");
 
+			if (!privilege.getChilds().isEmpty()) {
 				stringBuilder.append("<b>");
 				if (privilege.getParentId() == null
 						|| privilege.getParentId().trim().isEmpty()) {
@@ -100,7 +112,17 @@ public class HtmlPrivilegeTreeGenerator {
 				stringBuilder.append("</ul>");
 
 			} else {
-				stringBuilder.append(privilege.getName());
+				if (privilege.getParentId() == null
+						|| privilege.getParentId().trim().isEmpty()) {
+					stringBuilder.append("<b>");
+					stringBuilder.append("<hr />");
+					stringBuilder.append("<font color='#0000BB'>");
+					stringBuilder.append(privilege.getName());
+					stringBuilder.append("</font>");
+					stringBuilder.append("<b>");
+				} else {
+					stringBuilder.append(privilege.getName());
+				}
 			}
 
 			stringBuilder.append("</li>");
