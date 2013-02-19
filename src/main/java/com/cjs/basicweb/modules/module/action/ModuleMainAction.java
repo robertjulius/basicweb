@@ -3,7 +3,6 @@ package com.cjs.basicweb.modules.module.action;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cjs.basicweb.model.Item;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.modules.module.form.ModuleForm;
 import com.cjs.basicweb.modules.module.logic.ModuleBL;
@@ -21,31 +20,35 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 	}
 
 	public String confirmEdit() throws AppException {
-		getForm().setNewAccessPaths(new ArrayList<String>());
-		for (String url : listAccessPaths) {
-			if (url == null) {
-				continue;
+		if (validateForm()) {
+			getForm().setNewAccessPaths(new ArrayList<String>());
+			for (String url : listAccessPaths) {
+				if (url == null) {
+					continue;
+				}
+				getForm().getNewAccessPaths().add(url);
 			}
-			getForm().getNewAccessPaths().add(url);
+			return SUCCESS;
+		} else {
+			return ERROR;
 		}
-		return SUCCESS;
 	}
-	
+
 	public String confirmNew() throws AppException {
 		return confirmEdit();
 	}
 
 	public String executeEdit() throws AppException {
 		ModuleForm form = getForm();
-		getBL().update(form.getNewId(), form.getNewFirstEntry(),
+		getBL().update(form.getSelectedId(), form.getNewFirstEntry(),
 				form.getNewName(), form.getNewDescription(),
 				form.getNewParentId(), form.getNewAccessPaths());
 		return SUCCESS;
 	}
-	
+
 	public String executeNew() throws AppException {
 		ModuleForm form = getForm();
-		getBL().create(form.getNewId(), form.getNewFirstEntry(),
+		getBL().create(form.getSelectedId(), form.getNewFirstEntry(),
 				form.getNewName(), form.getNewDescription(),
 				form.getNewParentId(), form.getNewAccessPaths());
 		return SUCCESS;
@@ -56,6 +59,10 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 	}
 
 	public String initial() {
+		ModuleForm form = getForm();
+		List<Module> modules = getBL().getAllModules(form.getSelectedId());
+		modules.add(0, null);
+		form.setSelectListParent(modules);
 		return SUCCESS;
 	}
 
@@ -68,10 +75,6 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 
 	public String prepareEdit() throws AppException {
 		ModuleForm form = getForm();
-
-		List<Item> items = getBL().getItemsForSelectList(form.getSelectedId());
-		form.setSelectListParent(items);
-
 		form.assignFromEntity("new", form.getOld());
 
 		if (form.getOld().getParent() != null) {
@@ -87,10 +90,6 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 
 	public String prepareNew() throws AppException {
 		ModuleForm form = getForm();
-
-		List<Item> items = getBL().getItemsForSelectList(form.getSelectedId());
-		form.setSelectListParent(items);
-
 		form.assignFromEntity("new", new Module());
 
 		form.setNewParentId(null);

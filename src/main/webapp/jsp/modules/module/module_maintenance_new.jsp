@@ -40,8 +40,8 @@
 						<s:textfield key="resource.firstEntry" name="newFirstEntry"
 							theme="xhtml" />
 						<s:select key="resource.parent" name="newParentId"
-							id="newParentId" list="selectListParent" listKey="key"
-							listValue="value" theme="xhtml" />
+							id="newParentId" list="selectListParent" listKey="id"
+							listValue="name" theme="xhtml" />
 						<s:hidden name="newParentName" id="newParentName" />
 					</table>
 				</td>

@@ -22,7 +22,8 @@
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/module/confirmEdit.action" theme="simple">
+	<s:form action="/modules/usergroupmaintenance/confirmEdit.action"
+		theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
 				<s:actionerror />
@@ -33,16 +34,10 @@
 			<tr>
 				<td>
 					<table>
-						<s:textfield key="resource.moduleName" name="newName"
+						<s:textfield key="resource.userGroupName" name="newName"
 							theme="xhtml" />
 						<s:textfield key="resource.description" name="newDescription"
 							theme="xhtml" />
-						<s:textfield key="resource.firstEntry" name="newFirstEntry"
-							theme="xhtml" />
-						<s:select key="resource.parent" name="newParentId"
-							id="newParentId" list="selectListParent" listKey="key"
-							listValue="value" theme="xhtml" />
-						<s:hidden name="newParentName" id="newParentName" />
 					</table>
 				</td>
 			</tr>
@@ -55,35 +50,9 @@
 					</table>
 					<table>
 						<tr>
-							<td><b>Access Paths</b></td>
-						</tr>
-						<tbody>
-							<s:iterator value="newAccessPaths" status="rowstatus">
-								<tr>
-									<td><s:textfield
-											name="listAccessPaths[%{#rowstatus.index}]" value="%{url}" /></td>
-									<td><input type="button" value="Remove"
-										onclick="removeRow($(this))" /></td>
-								</tr>
-							</s:iterator>
-						</tbody>
-						<tfoot>
-							<tr>
-								<td align="center" colspan="2"><input type="button"
-									value="Add" onclick="addRow($(this).closest('table'));" /></td>
-							</tr>
-						</tfoot>
-					</table>
-					<table width="100%">
-						<tr>
-							<td><hr /></td>
-						</tr>
-					</table>
-					<table>
-						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.cancel"/>"
-								onclick="if (!confirmCancel()) {return;} $(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/prepareDetail.action'); $(this).closest('form').submit();" /></td>
+								onclick="if (!confirmCancel()) {return;} $(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usergroupmaintenance/prepareDetail.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.submit"/>"
 								onclick="if (confirmAction()) {$(this).closest('form').submit();}" /></td>
@@ -115,5 +84,7 @@
 		table.find('tbody:last').append('<tr>' + td1 + td2 + '</tr>');
 		++rowSize;
 	}
+
+	
 </script>
 </html>

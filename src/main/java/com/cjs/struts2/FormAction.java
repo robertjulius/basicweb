@@ -16,17 +16,14 @@ public abstract class FormAction<T, U> extends BaseAction<U> implements
 
 	private Class<T> clazz;
 
-	public FormAction(Class<T> formClass, Class<U> logicClass) throws AppException {
+	public FormAction(Class<T> formClass, Class<U> logicClass)
+			throws AppException {
 		super(logicClass);
 		if (FormBean.class.isAssignableFrom(formClass)) {
 			this.clazz = formClass;
 		} else {
 			throw new AppException(PropertiesConstants.ERROR_CREATE_FORM_BEAN);
 		}
-	}
-
-	public final T getForm() {
-		return getModel();
 	}
 
 	@Override
@@ -48,6 +45,19 @@ public abstract class FormAction<T, U> extends BaseAction<U> implements
 		}
 
 		return formBean;
+	}
+
+	protected final T getForm() {
+		return getModel();
+	}
+
+	protected final boolean validateForm() throws AppException {
+		((FormBean) getForm()).validate(this);
+		if (hasErrors()) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	private T getFromModuleSession(Class<T> clazz) {

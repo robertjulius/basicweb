@@ -50,7 +50,7 @@ public class LoginBL extends BusinessLogic {
 		return user;
 	}
 
-	private List<Module> getModuleRoots() {
+	private List<Module> getRootModules() {
 		Criteria criteria = getSession().createCriteria(Module.class);
 		criteria.add(Restrictions.isNull("parent.id"));
 
@@ -91,7 +91,7 @@ public class LoginBL extends BusinessLogic {
 		}
 
 		TreeMap<String, Privilege> treeMap = PrivilegeUtils.generateTree(
-				privilegeIds.toArray(new String[] {}), getModuleRoots());
+				privilegeIds.toArray(new String[] {}), getRootModules());
 
 		((SimpleUserSession) userSession).setTreeMap(treeMap);
 

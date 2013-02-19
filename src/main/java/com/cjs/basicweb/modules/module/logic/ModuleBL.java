@@ -1,13 +1,11 @@
 package com.cjs.basicweb.modules.module.logic;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.criterion.Restrictions;
 
-import com.cjs.basicweb.model.Item;
 import com.cjs.basicweb.model.accesspath.AccessPath;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.modules.BusinessLogic;
@@ -20,21 +18,12 @@ public class ModuleBL extends BusinessLogic {
 		return module;
 	}
 
-	public List<Item> getItemsForSelectList(String id) {
-		List<Item> items = new ArrayList<>();
-		items.add(new Item(null, null));
-
+	public List<Module> getAllModules(String id) {
 		Criteria criteria = getSession().createCriteria(Module.class);
-		List<?> list = criteria.list();
-		for (Object object : list) {
-			Module module = (Module) object;
-			if (module.getId().equals(id)) {
-				continue;
-			} else {
-				items.add(new Item(module.getId(), module.getName()));
-			}
-		}
-		return items;
+		
+		@SuppressWarnings("unchecked")
+		List<Module> modules = criteria.list();		
+		return modules;
 	}
 
 	public List<Module> search(String name, String firstEntry, String parentId) {

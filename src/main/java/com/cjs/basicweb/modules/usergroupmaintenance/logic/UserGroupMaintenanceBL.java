@@ -36,6 +36,15 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 
 		return items;
 	}
+	
+	public List<Module> getRootModules() {
+		Criteria criteria = getSession().createCriteria(Module.class);
+		criteria.add(Restrictions.isNull("parent.id"));
+
+		@SuppressWarnings("unchecked")
+		List<Module> modules = criteria.list();
+		return modules;
+	}
 
 	public List<UserGroup> search(String name, String description) {
 		Criteria criteria = getSession().createCriteria(UserGroup.class);
@@ -63,11 +72,11 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 		userGroup.setName(newName);
 		userGroup.setDescription(newDescription);
 
-		userGroup.getModules().clear();
-		for (String moduleId : newModules) {
-			Module module = (Module) getSession().load(Module.class, moduleId);
-			userGroup.getModules().add(module);
-		}
+//		userGroup.getModules().clear();
+//		for (String moduleId : newModules) {
+//			Module module = (Module) getSession().load(Module.class, moduleId);
+//			userGroup.getModules().add(module);
+//		}
 
 		getSession().save(userGroup);
 		commit();

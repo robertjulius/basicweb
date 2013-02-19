@@ -24,7 +24,9 @@
 		<action name="confirmNew"
 			class="com.cjs.basicweb.modules.module.action.ModuleMainAction"
 			method="confirmNew">
-			<result name="success">/jsp/modules/module/module_maintenance_confirm.jsp
+			<result name="success">/jsp/modules/module/module_maintenance_confirm_new.jsp
+			</result>
+			<result name="error">/jsp/modules/module/module_maintenance_new.jsp
 			</result>
 		</action>
 		
@@ -60,6 +62,8 @@
 			class="com.cjs.basicweb.modules.module.action.ModuleMainAction"
 			method="confirmEdit">
 			<result name="success">/jsp/modules/module/module_maintenance_confirm_edit.jsp
+			</result>
+			<result name="error">/jsp/modules/module/module_maintenance_edit.jsp
 			</result>
 		</action>
 		

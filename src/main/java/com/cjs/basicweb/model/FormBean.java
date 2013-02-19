@@ -8,8 +8,8 @@ import java.util.Map;
 
 import com.cjs.basicweb.utility.PropertiesConstants;
 import com.cjs.core.exception.AppException;
-import com.cjs.core.exception.UserException;
 import com.cjs.core.utils.MappingUtils;
+import com.opensymphony.xwork2.ActionSupport;
 
 public abstract class FormBean implements Serializable {
 
@@ -39,7 +39,7 @@ public abstract class FormBean implements Serializable {
 		assignToEntity(null, entity);
 	}
 
-	public void validate() throws AppException, UserException {
+	public void validate(ActionSupport action) throws AppException {
 		/*
 		 * Do nothing. Lets the subclass implement it.
 		 */

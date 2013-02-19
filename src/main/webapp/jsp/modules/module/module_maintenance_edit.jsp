@@ -40,8 +40,8 @@
 						<s:textfield key="resource.firstEntry" name="newFirstEntry"
 							theme="xhtml" />
 						<s:select key="resource.parent" name="newParentId"
-							id="newParentId" list="selectListParent" listKey="key"
-							listValue="value" theme="xhtml" />
+							id="newParentId" list="selectListParent" listKey="id"
+							listValue="name" theme="xhtml" />
 						<s:hidden name="newParentName" id="newParentName" />
 					</table>
 				</td>
@@ -74,6 +74,10 @@
 							</tr>
 						</tfoot>
 					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
 					<table width="100%">
 						<tr>
 							<td><hr /></td>
@@ -115,5 +119,7 @@
 		table.find('tbody:last').append('<tr>' + td1 + td2 + '</tr>');
 		++rowSize;
 	}
+
+	
 </script>
 </html>

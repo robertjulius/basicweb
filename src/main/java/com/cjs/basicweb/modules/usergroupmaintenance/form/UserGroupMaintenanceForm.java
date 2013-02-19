@@ -13,6 +13,7 @@ public class UserGroupMaintenanceForm extends FormBean {
 	private String searchId;
 	private String searchName;
 	private String searchDescription;
+	private String selectedId;
 	private List<UserGroup> searchResult;
 
 	private UserGroup old;
@@ -24,83 +25,92 @@ public class UserGroupMaintenanceForm extends FormBean {
 
 	private List<Item> allModules;
 
-	public String getSearchId() {
-		return searchId;
-	}
-
-	public void setSearchId(String searchId) {
-		this.searchId = searchId;
-	}
-
-	public String getSearchName() {
-		return searchName;
-	}
-
-	public void setSearchName(String searchName) {
-		this.searchName = searchName;
-	}
-
-	public String getSearchDescription() {
-		return searchDescription;
-	}
-
-	public void setSearchDescription(String searchDescription) {
-		this.searchDescription = searchDescription;
-	}
-
-	public List<UserGroup> getSearchResult() {
-		return searchResult;
-	}
-
-	public void setSearchResult(List<UserGroup> searchResult) {
-		this.searchResult = searchResult;
-	}
-
-	public UserGroup getOld() {
-		return old;
-	}
-
-	public void setOld(UserGroup old) {
-		this.old = old;
-	}
-
-	public String getNewId() {
-		return newId;
-	}
-
-	public void setNewId(String newId) {
-		this.newId = newId;
-	}
-
-	public String getNewName() {
-		return newName;
-	}
-
-	public void setNewName(String newName) {
-		this.newName = newName;
+	public List<Item> getAllModules() {
+		return allModules;
 	}
 
 	public String getNewDescription() {
 		return newDescription;
 	}
 
-	public void setNewDescription(String newDescription) {
-		this.newDescription = newDescription;
+	public String getNewId() {
+		return newId;
 	}
 
 	public List<String> getNewModules() {
 		return newModules;
 	}
 
-	public void setNewModules(List<String> newModules) {
-		this.newModules = newModules;
+	public String getNewName() {
+		return newName;
 	}
 
-	public List<Item> getAllModules() {
-		return allModules;
+	public UserGroup getOld() {
+		return old;
+	}
+
+	public String getSearchDescription() {
+		return searchDescription;
+	}
+
+	public String getSearchId() {
+		return searchId;
+	}
+
+	public String getSearchName() {
+		return searchName;
+	}
+
+	public List<UserGroup> getSearchResult() {
+		return searchResult;
+	}
+
+	public String getSelectedId() {
+		return selectedId;
 	}
 
 	public void setAllModules(List<Item> allModules) {
 		this.allModules = allModules;
 	}
+
+	public void setNewDescription(String newDescription) {
+		this.newDescription = newDescription;
+	}
+
+	public void setNewId(String newId) {
+		this.newId = newId;
+	}
+
+	public void setNewModules(List<String> newModules) {
+		this.newModules = newModules;
+	}
+
+	public void setNewName(String newName) {
+		this.newName = newName;
+	}
+
+	public void setOld(UserGroup old) {
+		this.old = old;
+	}
+
+	public void setSearchDescription(String searchDescription) {
+		this.searchDescription = searchDescription;
+	}
+
+	public void setSearchId(String searchId) {
+		this.searchId = searchId;
+	}
+
+	public void setSearchName(String searchName) {
+		this.searchName = searchName;
+	}
+
+	public void setSearchResult(List<UserGroup> searchResult) {
+		this.searchResult = searchResult;
+	}
+
+	public void setSelectedId(String selectedId) {
+		this.selectedId = selectedId;
+	}
+
 }

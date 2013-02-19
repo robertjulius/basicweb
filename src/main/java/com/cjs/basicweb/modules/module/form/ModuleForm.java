@@ -3,8 +3,9 @@ package com.cjs.basicweb.modules.module.form;
 import java.util.List;
 
 import com.cjs.basicweb.model.FormBean;
-import com.cjs.basicweb.model.Item;
 import com.cjs.basicweb.model.module.Module;
+import com.cjs.core.exception.AppException;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class ModuleForm extends FormBean {
 
@@ -19,7 +20,6 @@ public class ModuleForm extends FormBean {
 
 	private Module old;
 
-	private String newId;
 	private String newFirstEntry;
 	private String newName;
 	private String newDescription;
@@ -27,7 +27,7 @@ public class ModuleForm extends FormBean {
 	private String newParentName;
 	private List<String> newAccessPaths;
 
-	private List<Item> selectListParent;
+	private List<Module> selectListParent;
 
 	public List<String> getNewAccessPaths() {
 		return newAccessPaths;
@@ -39,10 +39,6 @@ public class ModuleForm extends FormBean {
 
 	public String getNewFirstEntry() {
 		return newFirstEntry;
-	}
-
-	public String getNewId() {
-		return newId;
 	}
 
 	public String getNewName() {
@@ -85,7 +81,7 @@ public class ModuleForm extends FormBean {
 		return selectedId;
 	}
 
-	public List<Item> getSelectListParent() {
+	public List<Module> getSelectListParent() {
 		return selectListParent;
 	}
 
@@ -99,10 +95,6 @@ public class ModuleForm extends FormBean {
 
 	public void setNewFirstEntry(String newFirstEntry) {
 		this.newFirstEntry = newFirstEntry;
-	}
-
-	public void setNewId(String newId) {
-		this.newId = newId;
 	}
 
 	public void setNewName(String newName) {
@@ -145,7 +137,14 @@ public class ModuleForm extends FormBean {
 		this.selectedId = selectedId;
 	}
 
-	public void setSelectListParent(List<Item> selectListParent) {
+	public void setSelectListParent(List<Module> selectListParent) {
 		this.selectListParent = selectListParent;
+	}
+	
+	@Override
+	public void validate(ActionSupport action) throws AppException {
+		if (newParentId.equals(selectedId)) {
+			action.addFieldError("newParentId", action.getText("resource.fieldError.parent"));
+		}
 	}
 }

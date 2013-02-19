@@ -17,7 +17,16 @@ public class HtmlMenuGenerator {
 		return stringBuilder.toString();
 	}
 
-	public static void generateHtmlMenu(TreeMap<String, Privilege> treeMap,
+	public static HashMap<String, Privilege> registerAllModule(
+			List<Module> modules) {
+		HashMap<String, Privilege> privileges = new HashMap<>();
+		for (Module module : modules) {
+			registerAllModule(module, privileges);
+		}
+		return privileges;
+	}
+
+	private static void generateHtmlMenu(TreeMap<String, Privilege> treeMap,
 			StringBuilder stringBuilder, String contextPath) {
 
 		Collection<Privilege> nodes = treeMap.values();
@@ -28,8 +37,8 @@ public class HtmlMenuGenerator {
 			Privilege privilege = iterator.next();
 
 			if (privilege.getAction() != null) {
-				stringBuilder
-						.append("<a href='" + contextPath + privilege.getAction() + "?initial=true" + "'>");
+				stringBuilder.append("<a href='" + contextPath
+						+ privilege.getAction() + "?initial=true" + "'>");
 				stringBuilder.append(privilege.getName());
 				stringBuilder.append("</a>");
 			} else {
@@ -48,16 +57,7 @@ public class HtmlMenuGenerator {
 
 	}
 
-	public static HashMap<String, Privilege> registerAllModule(
-			List<Module> modules) {
-		HashMap<String, Privilege> privileges = new HashMap<>();
-		for (Module module : modules) {
-			registerAllModule(module, privileges);
-		}
-		return privileges;
-	}
-
-	public static void registerAllModule(Module module,
+	private static void registerAllModule(Module module,
 			HashMap<String, Privilege> privileges) {
 
 		if (!privileges.containsKey(module.getId())) {

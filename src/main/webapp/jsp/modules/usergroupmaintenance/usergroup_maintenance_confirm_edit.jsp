@@ -19,7 +19,7 @@
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/module/executeEdit.action" theme="simple">
+	<s:form action="/modules/usergroupmaintenance/executeEdit.action" theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
 				<s:actionerror />
@@ -32,37 +32,17 @@
 					<table class="grid">
 						<thead>
 							<tr>
-								<td colspan="2"><s:text name="resource.moduleInformation" /></td>
+								<td colspan="2"><s:text name="resource.userGroupInformation" /></td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td align="right"><s:text name="resource.moduleName" /></td>
+								<td align="right"><s:text name="resource.userGroupName" /></td>
 								<td align="left"><s:label name="old.name" /></td>
 							</tr>
 							<tr>
 								<td align="right"><s:text name="resource.description" /></td>
 								<td align="left"><s:label name="old.description" /></td>
-							</tr>
-							<tr>
-								<td align="right"><s:text name="resource.firstEntry" /></td>
-								<td align="left"><s:label name="old.firstEntry" /></td>
-							</tr>
-							<tr>
-								<td align="right"><s:text name="resource.parent" /></td>
-								<td align="left"><s:label name="old.parent.name" /></td>
-							</tr>
-							<tr>
-								<td align="left" colspan="2">
-									<table>
-										<tr><td><b><s:text name="resource.accessPaths" /></b></td></tr>
-										<s:iterator value="old.accessPaths" status="rowstatus">
-											<tr>
-												<td>&#149; <s:property value="url" /></td>
-											</tr>
-										</s:iterator>
-									</table>
-								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -73,37 +53,17 @@
 					<table class="grid">
 						<thead>
 							<tr>
-								<td colspan="2"><s:text name="resource.moduleInformation" /></td>
+								<td colspan="2"><s:text name="resource.userGroupInformation" /></td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td align="right"><s:text name="resource.moduleName" /></td>
+								<td align="right"><s:text name="resource.userGroupName" /></td>
 								<td align="left"><s:label name="newName" /></td>
 							</tr>
 							<tr>
 								<td align="right"><s:text name="resource.description" /></td>
 								<td align="left"><s:label name="newDescription" /></td>
-							</tr>
-							<tr>
-								<td align="right"><s:text name="resource.firstEntry" /></td>
-								<td align="left"><s:label name="newFirstEntry" /></td>
-							</tr>
-							<tr>
-								<td align="right"><s:text name="resource.parent" /></td>
-								<td align="left"><s:label name="newParentName" /></td>
-							</tr>
-							<tr>
-								<td align="left" colspan="2">
-									<table>
-										<tr><td><b><s:text name="resource.accessPaths" /></b></td></tr>
-										<s:iterator value="newAccessPaths" status="rowstatus">
-											<tr>
-												<td>&#149; <s:property /></td>
-											</tr>
-										</s:iterator>
-									</table>
-								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -115,7 +75,7 @@
 						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.back"/>"
-								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/prepareEdit.action'); $(this).closest('form').submit();" /></td>
+								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usergroupmaintenance/prepareEdit.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.submit"/>"
 								onclick="$(this).closest('form').submit();" /></td>

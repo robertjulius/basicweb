@@ -21,7 +21,7 @@
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/module/prepareDetail.action" theme="simple">
+	<s:form action="/modules/usergroupmaintenance/prepareDetail.action" theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
 				<s:actionerror />
@@ -35,9 +35,8 @@
 					<table class="grid">
 						<thead>
 							<tr align="center">
-								<td><s:text name="resource.moduleName" /></td>
-								<td><s:text name="resource.firstEntry" /></td>
-								<td><s:text name="resource.parent" /></td>
+								<td><s:text name="resource.userGroupName" /></td>
+								<td><s:text name="resource.description" /></td>
 							</tr>
 						</thead>
 						<tbody class="selectable">
@@ -46,8 +45,7 @@
 									onclick="$(this).closest('form').find('input#prepareDetail_selectedId').val('<s:property value="id" />'); $(this).closest('form').submit();"
 									class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
 									<td><s:property value="name" /></td>
-									<td><s:property value="firstEntry" /></td>
-									<td><s:property value="parent.name" /></td>
+									<td><s:property value="description" /></td>
 								</tr>
 							</s:iterator>
 						</tbody>
@@ -60,7 +58,7 @@
 						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.back"/>"
-								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/initial.action'); $(this).closest('form').submit();" /></td>
+								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usergroupmaintenance/initial.action'); $(this).closest('form').submit();" /></td>
 						</tr>
 					</table>
 				</td>

@@ -1,3 +1,7 @@
+<%@page import="java.util.TreeMap"%>
+<%@page import="com.cjs.basicweb.modules.login.Privilege"%>
+<%@page
+	import="com.cjs.basicweb.modules.usergroupmaintenance.HtmlPrivilegeTreeGenerator"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
@@ -19,7 +23,8 @@
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/module/prepareEdit.action" theme="simple">
+	<s:form action="/modules/usergroupmaintenance/prepareEdit.action"
+		theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
 				<s:actionerror />
@@ -32,37 +37,18 @@
 					<table class="grid">
 						<thead>
 							<tr>
-								<td colspan="2"><s:text name="resource.moduleInformation" /></td>
+								<td colspan="2"><s:text
+										name="resource.userGroupInformation" /></td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td align="right"><s:text name="resource.moduleName" /></td>
+								<td align="right"><s:text name="resource.userGroupName" /></td>
 								<td align="left"><s:label name="old.name" /></td>
 							</tr>
 							<tr>
 								<td align="right"><s:text name="resource.description" /></td>
 								<td align="left"><s:label name="old.description" /></td>
-							</tr>
-							<tr>
-								<td align="right"><s:text name="resource.firstEntry" /></td>
-								<td align="left"><s:label name="old.firstEntry" /></td>
-							</tr>
-							<tr>
-								<td align="right"><s:text name="resource.parent" /></td>
-								<td align="left"><s:label name="old.parent.name" /></td>
-							</tr>
-							<tr>
-								<td align="left" colspan="2">
-									<table>
-										<tr><td><b><s:text name="resource.accessPaths" /></b></td></tr>
-										<s:iterator value="old.accessPaths" status="rowstatus">
-											<tr>
-												<td>&#149; <s:property value="url" /></td>
-											</tr>
-										</s:iterator>
-									</table>
-								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -72,15 +58,30 @@
 				<td>
 					<table>
 						<tr>
+							<td>
+							
+							<%=
+									HtmlPrivilegeTreeGenerator
+									.generateHtmlTree((TreeMap<String, Privilege>) request.getAttribute("treeMap"))
+							%>
+</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table>
+						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.back"/>"
-								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/search.action'); $(this).closest('form').submit();" /></td>
+								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usergroupmaintenance/search.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.edit"/>"
 								onclick="$(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.delete"/>"
-								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/executeDelete.action'); if (confirmAction()) {$(this).closest('form').submit();}" /></td>
+								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usergroupmaintenance/executeDelete.action'); if (confirmAction()) {$(this).closest('form').submit();}" /></td>
 						</tr>
 					</table>
 				</td>
