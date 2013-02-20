@@ -1,7 +1,6 @@
 package com.cjs.basicweb.modules.module.action;
 
 import com.cjs.basicweb.modules.module.ModuleForm;
-import com.cjs.basicweb.modules.module.action.ModuleMaintenanceAction;
 import com.cjs.core.exception.AppException;
 
 public class ModuleMaintenanceDeleteAction extends ModuleMaintenanceAction {
@@ -14,9 +13,7 @@ public class ModuleMaintenanceDeleteAction extends ModuleMaintenanceAction {
 
 	public String executeDelete() throws AppException {
 		ModuleForm form = getForm();
-		getBL().update(form.getSelectedId(), form.getNewFirstEntry(),
-				form.getNewName(), form.getNewDescription(),
-				form.getNewParentId(), form.getNewURLs());
+		getBL().delete(form.getSelectedId());
 		return SUCCESS;
 	}
 }

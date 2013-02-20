@@ -1,5 +1,6 @@
 package com.cjs.basicweb.modules.module;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -13,17 +14,21 @@ import com.cjs.core.exception.AppException;
 
 public class ModuleBL extends BusinessLogic {
 
-	public void create(String id, String newFirstEntry, String newName,
+	public void create(String newFirstEntry, String newName,
 			String newDescription, String newParentId,
-			List<String> newAccesssPaths) throws AppException {
+			List<String> newAccesssPaths, String createBy, Timestamp createDate)
+			throws AppException {
 
 		beginTransaction();
 
 		Module module = new Module();
-		module.setId(id);
 		module.setFirstEntry(newFirstEntry);
 		module.setName(newName);
 		module.setDescription(newDescription);
+		module.setCreateBy(createBy);
+		module.setCreateDate(createDate);
+		module.setUpdateBy(module.getCreateBy());
+		module.setUpdateDate(module.getCreateDate());
 
 		if (newParentId == null || newParentId.trim().isEmpty()) {
 			module.setParent(null);
@@ -33,7 +38,6 @@ public class ModuleBL extends BusinessLogic {
 			module.setParent(parent);
 		}
 
-		deleteMsAccessPath(id);
 		for (String url : newAccesssPaths) {
 			AccessPath accessPath = new AccessPath();
 			accessPath.setModule(module);
@@ -87,7 +91,8 @@ public class ModuleBL extends BusinessLogic {
 
 	public void update(String id, String newFirstEntry, String newName,
 			String newDescription, String newParentId,
-			List<String> newAccesssPaths) throws AppException {
+			List<String> newAccesssPaths, String updateBy, Timestamp updateDate)
+			throws AppException {
 
 		beginTransaction();
 
@@ -95,6 +100,8 @@ public class ModuleBL extends BusinessLogic {
 		module.setFirstEntry(newFirstEntry);
 		module.setName(newName);
 		module.setDescription(newDescription);
+		module.setUpdateBy(updateBy);
+		module.setUpdateDate(updateDate);
 
 		if (newParentId == null || newParentId.trim().isEmpty()) {
 			module.setParent(null);

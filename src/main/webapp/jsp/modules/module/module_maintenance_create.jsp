@@ -20,7 +20,7 @@
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/module/confirmCreate.action" theme="simple">
+	<s:form action="/modules/module/validateCreate.action" theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
 				<s:actionerror />
@@ -86,7 +86,7 @@
 						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.cancel"/>"
-								onclick="if (!confirmCancel()) {return;} $(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/detail.action'); $(this).closest('form').submit();" /></td>
+								onclick="if (!confirmCancel()) {return;} $(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/main.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.submit"/>"
 								onclick="if (confirmAction()) {$(this).closest('form').submit();}" /></td>
