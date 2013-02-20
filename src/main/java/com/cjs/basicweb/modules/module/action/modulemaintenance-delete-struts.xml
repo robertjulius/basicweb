@@ -10,15 +10,15 @@
 		<action name="executeDelete"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceDeleteAction"
 			method="executeDelete">
-			<result name="success" type="redirectAction">summaryDelete
+			<result name="success" type="chain">summaryDelete
 			</result>
-			<result name="error" type="redirectAction">detail
+			<result name="error" type="chain">detail
 			</result>
 		</action>
 
 		<action name="summaryDelete"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceDeleteAction"
-			method="redirectAction">
+			method="chainAction">
 			<result name="success">/jsp/modules/module/module_maintenance_main.jsp
 			</result>
 		</action>

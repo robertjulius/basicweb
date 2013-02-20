@@ -10,13 +10,13 @@
 		<action name="prepareUpdate"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceUpdateAction"
 			method="prepareUpdate">
-			<result name="success" type="redirectAction">update
+			<result name="success" type="chain">update
 			</result>
 		</action>
 
 		<action name="update"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceUpdateAction"
-			method="redirectAction">
+			method="chainAction">
 			<result name="success">/jsp/modules/module/module_maintenance_update.jsp
 			</result>
 		</action>
@@ -24,15 +24,15 @@
 		<action name="validateUpdate"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceUpdateAction"
 			method="validateUpdate">
-			<result name="success" type="redirectAction">confirmUpdate
+			<result name="success" type="chain">confirmUpdate
 			</result>
-			<result name="error" type="redirectAction">update
+			<result name="error" type="chain">update
 			</result>
 		</action>
 
 		<action name="confirmUpdate"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceUpdateAction"
-			method="redirectAction">
+			method="chainAction">
 			<result name="success">/jsp/modules/module/module_maintenance_confirm_update.jsp
 			</result>
 		</action>
@@ -40,15 +40,15 @@
 		<action name="executeUpdate"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceUpdateAction"
 			method="executeUpdate">
-			<result name="success" type="redirectAction">summaryUpdate
+			<result name="success" type="chain">summaryUpdate
 			</result>
-			<result name="error" type="redirectAction">confirmUpdate
+			<result name="error" type="chain">confirmUpdate
 			</result>
 		</action>
 
 		<action name="summaryUpdate"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceUpdateAction"
-			method="redirectAction">
+			method="chainAction">
 			<result name="success">/jsp/modules/module/module_maintenance_main.jsp
 			</result>
 		</action>

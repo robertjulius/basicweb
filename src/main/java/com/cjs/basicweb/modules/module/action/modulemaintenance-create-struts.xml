@@ -10,13 +10,13 @@
 		<action name="prepareCreate"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceCreateAction"
 			method="prepareCreate">
-			<result name="success" type="redirectAction">create
+			<result name="success" type="chain">create
 			</result>
 		</action>
 
 		<action name="create"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceCreateAction"
-			method="redirectAction">
+			method="chainAction">
 			<result name="success">/jsp/modules/module/module_maintenance_create.jsp
 			</result>
 		</action>
@@ -24,15 +24,15 @@
 		<action name="validateCreate"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceCreateAction"
 			method="validateCreate">
-			<result name="success" type="redirectAction">confirmCreate
+			<result name="success" type="chain">confirmCreate
 			</result>
-			<result name="error" type="redirectAction">create
+			<result name="error" type="chain">create
 			</result>
 		</action>
 
 		<action name="confirmCreate"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceCreateAction"
-			method="redirectAction">
+			method="chainAction">
 			<result name="success">/jsp/modules/module/module_maintenance_confirm_create.jsp
 			</result>
 		</action>
@@ -40,15 +40,15 @@
 		<action name="executeCreate"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceCreateAction"
 			method="executeCreate">
-			<result name="success" type="redirectAction">summaryCreate
+			<result name="success" type="chain">summaryCreate
 			</result>
-			<result name="error" type="redirectAction">confirmCreate
+			<result name="error" type="chain">confirmCreate
 			</result>
 		</action>
 
 		<action name="summaryCreate"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceCreateAction"
-			method="redirectAction">
+			method="chainAction">
 			<result name="success">/jsp/modules/module/module_maintenance_main.jsp
 			</result>
 		</action>

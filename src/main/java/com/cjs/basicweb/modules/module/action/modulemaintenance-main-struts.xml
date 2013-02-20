@@ -10,13 +10,13 @@
 		<action name="initial"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceMainAction"
 			method="initial">
-			<result name="success" type="redirectAction">main
+			<result name="success" type="chain">main
 			</result>
 		</action>
 
 		<action name="main"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceMainAction"
-			method="redirectAction">
+			method="chainAction">
 			<result name="success">/jsp/modules/module/module_maintenance_main.jsp
 			</result>
 		</action>
@@ -24,13 +24,13 @@
 		<action name="search"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceMainAction"
 			method="search">
-			<result name="success" type="redirectAction">searchResult
+			<result name="success" type="chain">searchResult
 			</result>
 		</action>
 
 		<action name="searchResult"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceMainAction"
-			method="redirectAction">
+			method="chainAction">
 			<result name="success">/jsp/modules/module/module_maintenance_search.jsp
 			</result>
 		</action>
@@ -38,13 +38,13 @@
 		<action name="prepareDetail"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceMainAction"
 			method="prepareDetail">
-			<result name="success" type="redirectAction">detail
+			<result name="success" type="chain">detail
 			</result>
 		</action>
 
 		<action name="detail"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceMainAction"
-			method="redirectAction">
+			method="chainAction">
 			<result name="success">/jsp/modules/module/module_maintenance_detail.jsp
 			</result>
 		</action>

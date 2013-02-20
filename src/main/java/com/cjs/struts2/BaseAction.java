@@ -61,6 +61,10 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	public final String redirectAction() {
 		return SUCCESS;
 	}
+	
+	public final String chainAction() {
+		return SUCCESS;
+	}
 
 	@Override
 	public final void setServletRequest(HttpServletRequest request) {
