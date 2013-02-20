@@ -20,7 +20,7 @@
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/module/confirmEdit.action" theme="simple">
+	<s:form action="/modules/module/confirmCreate.action" theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
 				<s:actionerror />
@@ -86,7 +86,7 @@
 						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.cancel"/>"
-								onclick="if (!confirmCancel()) {return;} $(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/prepareDetail.action'); $(this).closest('form').submit();" /></td>
+								onclick="if (!confirmCancel()) {return;} $(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/detail.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.submit"/>"
 								onclick="if (confirmAction()) {$(this).closest('form').submit();}" /></td>
@@ -113,12 +113,10 @@
 
 	var rowSize = <s:property value="newURLs.size"/>;
 	function addRow(table) {
-		var td1 = '<td><input type="text" name="listAccessPaths[' + rowSize + ']" /></td>';
+		var td1 = '<td><input type="text" name="listAccessPaths[' + rowSize + ']" size="50px" /></td>';
 		var td2 = '<td><input type="button" value="Remove" onclick="removeRow($(this))" />';
 		table.find('tbody:last').append('<tr>' + td1 + td2 + '</tr>');
 		++rowSize;
 	}
-
-	
 </script>
 </html>

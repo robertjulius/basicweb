@@ -109,6 +109,13 @@ public class ModuleBL extends BusinessLogic {
 		commit();
 	}
 
+	public void delete(String id) throws AppException {
+		beginTransaction();
+		Module module = (Module) getSession().load(Module.class, id);
+		getSession().delete(module);
+		commit();
+	}
+
 	private void deleteMsAccessPath(String moduleId) {
 		SQLQuery sqlQuery = getSession().createSQLQuery(
 				"DELETE FROM ms_access_path WHERE module_id = :moduleId");

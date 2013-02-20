@@ -30,13 +30,29 @@ INSERT INTO ms_privilege (user_group_id, module_id) VALUES ('developer', '021mod
 
 -- MS_ACCESS_PATH
 DELETE FROM ms_access_path;
+
+-- MODULE
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/initial.action', '021module_maintenance');
-INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/prepareNew.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/main.action', '021module_maintenance');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/search.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/searchResult.action', '021module_maintenance');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/prepareDetail.action', '021module_maintenance');
-INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/prepareEdit.action', '021module_maintenance');
-INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/confirmEdit.action', '021module_maintenance');
-INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/executeEdit.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/detail.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/prepareUpdate.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/update.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/validateUpdate.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/confirmUpdate.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/executeUpdate.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/summaryUpdate.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/prepareCreate.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/create.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/validateCreate.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/confirmCreate.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/executeCreate.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/summaryCreate.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/executeDelete.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/summaryDelete.action', '021module_maintenance');
+
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/resetusersession/initial.action', '013reset_user_session');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/resetusersession/prepareDetail.action', '013reset_user_session');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/resetusersession/executeReset.action', '013reset_user_session');

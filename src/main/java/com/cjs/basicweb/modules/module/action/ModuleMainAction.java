@@ -104,8 +104,7 @@ public class ModuleMainAction extends FormAction<ModuleForm, ModuleBL> {
 
 	public String prepareNew() throws AppException {
 		ModuleForm form = getForm();
-		form.assignFromEntity("new", new Module());
-
+		form.clearForm("new");
 		form.setNewParentId(null);
 		form.setNewParentName(null);
 

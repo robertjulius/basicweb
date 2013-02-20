@@ -39,7 +39,7 @@ public abstract class BaseAction<T> extends ActionSupport implements
 					PropertiesConstants.ERROR_CREATE_BUSINESS_LOGIC);
 		}
 	}
-
+	
 	public T getBL() {
 		return logic;
 	}
@@ -56,6 +56,10 @@ public abstract class BaseAction<T> extends ActionSupport implements
 
 	public SessionMap<String, Object> getSession() {
 		return sessionMap;
+	}
+
+	public final String redirectAction() {
+		return SUCCESS;
 	}
 
 	@Override

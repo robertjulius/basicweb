@@ -17,7 +17,30 @@ public abstract class FormBean implements Serializable {
 		ADD, REMOVE;
 	}
 
-	private static final long serialVersionUID = 1L;;
+	private static final long serialVersionUID = 1L;
+
+	public void clearForm(String prefix) throws AppException {
+		try {
+			Method[] methods = this.getClass().getMethods();
+			for (Method method : methods) {
+				if (method.getParameterTypes().length == 1) {
+					if (method.getName().startsWith(
+							"set" + prefix.substring(0, 1).toUpperCase()
+									+ prefix.substring(1))) {
+						Object[] params = new Object[1];
+						params[0] = null;
+						method.invoke(this, params);
+					}
+				}
+			}
+		} catch (IllegalAccessException e) {
+			throw new AppException(e);
+		} catch (IllegalArgumentException e) {
+			throw new AppException(e);
+		} catch (InvocationTargetException e) {
+			throw new AppException(e);
+		}
+	}
 
 	public <T> void assignFromEntity(String prefix, T entity)
 			throws AppException {

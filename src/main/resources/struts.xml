@@ -49,9 +49,15 @@
 	<include file="com/cjs/basicweb/modules/login/login-struts.xml"></include>
 	<include file="com/cjs/basicweb/modules/logout/logout-struts.xml"></include>
 	<include file="com/cjs/basicweb/modules/resetusersession/resetusersession-struts.xml"></include>
-	<include file="com/cjs/basicweb/modules/module/module-struts.xml"></include>
-	<include file="com/cjs/basicweb/modules/module/module-struts.xml"></include>
+	
+	<include file="com/cjs/basicweb/modules/module/action/modulemaintenance-main-struts.xml"></include>
+	<include file="com/cjs/basicweb/modules/module/action/modulemaintenance-create-struts.xml"></include>
+	<include file="com/cjs/basicweb/modules/module/action/modulemaintenance-update-struts.xml"></include>
+	<include file="com/cjs/basicweb/modules/module/action/modulemaintenance-delete-struts.xml"></include>
+	
 	<include file="com/cjs/basicweb/modules/usergroupmaintenance/usergroupmaintenance-struts.xml"></include>
+	
+	
 	
 	
 

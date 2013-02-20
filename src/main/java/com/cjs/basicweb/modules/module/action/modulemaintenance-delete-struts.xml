@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<package name="module-delete" extends="app-default" namespace="/modules/module">
+
+		<action name="executeDelete"
+			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceDeleteAction"
+			method="executeDelete">
+			<result name="success" type="redirectAction">summaryDelete
+			</result>
+			<result name="error" type="redirectAction">detail
+			</result>
+		</action>
+
+		<action name="summaryDelete"
+			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceDeleteAction"
+			method="redirectAction">
+			<result name="success">/jsp/modules/module/module_maintenance_main.jsp
+			</result>
+		</action>
+
+	</package>
+</struts>

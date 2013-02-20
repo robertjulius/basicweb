@@ -19,7 +19,7 @@
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/module/prepareEdit.action" theme="simple">
+	<s:form action="/modules/module/prepareUpdate.action" theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
 				<s:actionerror />
@@ -74,7 +74,7 @@
 						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.back"/>"
-								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/search.action'); $(this).closest('form').submit();" /></td>
+								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/searchResult.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.edit"/>"
 								onclick="$(this).closest('form').submit();" /></td>
