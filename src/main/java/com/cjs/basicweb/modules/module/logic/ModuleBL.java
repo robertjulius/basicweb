@@ -20,6 +20,7 @@ public class ModuleBL extends BusinessLogic {
 		beginTransaction();
 
 		Module module = new Module();
+		module.setId(id);
 		module.setFirstEntry(newFirstEntry);
 		module.setName(newName);
 		module.setDescription(newDescription);
@@ -32,6 +33,7 @@ public class ModuleBL extends BusinessLogic {
 			module.setParent(parent);
 		}
 
+		deleteMsAccessPath(id);
 		for (String url : newAccesssPaths) {
 			AccessPath accessPath = new AccessPath();
 			accessPath.setModule(module);

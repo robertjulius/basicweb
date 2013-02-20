@@ -9,8 +9,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <s:head />
 <sj:head />
-<link rel="stylesheet"
-	href="/basicweb/css/ganesha-table-popupmenu-0.1.css" type="text/css" />
 </head>
 <body>
 	<table>
@@ -34,11 +32,11 @@
 				<td>
 					<table>
 						<s:textfield key="resource.moduleName" name="newName"
-							theme="xhtml" />
+							theme="xhtml" size="30px" />
 						<s:textfield key="resource.description" name="newDescription"
-							theme="xhtml" />
+							theme="xhtml" size="30px" />
 						<s:textfield key="resource.firstEntry" name="newFirstEntry"
-							theme="xhtml" />
+							theme="xhtml" size="30px" />
 						<s:select key="resource.parent" name="newParentId"
 							id="newParentId" list="selectListParent" listKey="id"
 							listValue="name" theme="xhtml" />
@@ -58,10 +56,11 @@
 							<td><b>Access Paths</b></td>
 						</tr>
 						<tbody>
-							<s:iterator value="newAccessPaths" status="rowstatus">
+							<s:iterator value="newURLs" status="rowstatus">
 								<tr>
 									<td><s:textfield
-											name="listAccessPaths[%{#rowstatus.index}]" value="%{url}" /></td>
+											name="listAccessPaths[%{#rowstatus.index}]"
+											value="%{newURLs[#rowstatus.index]}" size="50px" /></td>
 									<td><input type="button" value="Remove"
 										onclick="removeRow($(this))" /></td>
 								</tr>
@@ -74,6 +73,10 @@
 							</tr>
 						</tfoot>
 					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
 					<table width="100%">
 						<tr>
 							<td><hr /></td>
@@ -83,7 +86,7 @@
 						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.cancel"/>"
-								onclick="if (!confirmCancel()) {return;} $(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/initial.action'); $(this).closest('form').submit();" /></td>
+								onclick="if (!confirmCancel()) {return;} $(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/prepareDetail.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.submit"/>"
 								onclick="if (confirmAction()) {$(this).closest('form').submit();}" /></td>
@@ -98,7 +101,7 @@
 	$(function() {
 		$('#newParentId').change(
 				function() {
-					$(newParentName).val(
+					$('#newParentName').val(
 							$(this).children("option").filter(":selected")
 									.text());
 				});
@@ -108,12 +111,14 @@
 		button.closest('tr').remove();
 	}
 
-	var rowSize = <s:property value="newAccessPaths.size"/>;
+	var rowSize = <s:property value="newURLs.size"/>;
 	function addRow(table) {
 		var td1 = '<td><input type="text" name="listAccessPaths[' + rowSize + ']" /></td>';
 		var td2 = '<td><input type="button" value="Remove" onclick="removeRow($(this))" />';
 		table.find('tbody:last').append('<tr>' + td1 + td2 + '</tr>');
 		++rowSize;
 	}
+
+	
 </script>
 </html>

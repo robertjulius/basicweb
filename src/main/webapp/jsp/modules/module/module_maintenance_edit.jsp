@@ -32,11 +32,11 @@
 				<td>
 					<table>
 						<s:textfield key="resource.moduleName" name="newName"
-							theme="xhtml" />
+							theme="xhtml" size="30px" />
 						<s:textfield key="resource.description" name="newDescription"
-							theme="xhtml" />
+							theme="xhtml" size="30px" />
 						<s:textfield key="resource.firstEntry" name="newFirstEntry"
-							theme="xhtml" />
+							theme="xhtml" size="30px" />
 						<s:select key="resource.parent" name="newParentId"
 							id="newParentId" list="selectListParent" listKey="id"
 							listValue="name" theme="xhtml" />
@@ -59,7 +59,8 @@
 							<s:iterator value="newURLs" status="rowstatus">
 								<tr>
 									<td><s:textfield
-											name="listAccessPaths[%{#rowstatus.index}]" value="%{newURLs[#rowstatus.index]}" /></td>
+											name="listAccessPaths[%{#rowstatus.index}]"
+											value="%{newURLs[#rowstatus.index]}" size="50px" /></td>
 									<td><input type="button" value="Remove"
 										onclick="removeRow($(this))" /></td>
 								</tr>
@@ -117,5 +118,7 @@
 		table.find('tbody:last').append('<tr>' + td1 + td2 + '</tr>');
 		++rowSize;
 	}
+
+	
 </script>
 </html>
