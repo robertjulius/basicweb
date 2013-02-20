@@ -1,4 +1,4 @@
-package com.cjs.basicweb.modules.module.logic;
+package com.cjs.basicweb.modules.module;
 
 import java.util.List;
 
@@ -42,6 +42,13 @@ public class ModuleBL extends BusinessLogic {
 		}
 
 		getSession().save(module);
+		commit();
+	}
+
+	public void delete(String id) throws AppException {
+		beginTransaction();
+		Module module = (Module) getSession().load(Module.class, id);
+		getSession().delete(module);
 		commit();
 	}
 
@@ -106,13 +113,6 @@ public class ModuleBL extends BusinessLogic {
 		}
 
 		getSession().save(module);
-		commit();
-	}
-
-	public void delete(String id) throws AppException {
-		beginTransaction();
-		Module module = (Module) getSession().load(Module.class, id);
-		getSession().delete(module);
 		commit();
 	}
 

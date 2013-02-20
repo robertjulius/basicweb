@@ -1,22 +1,17 @@
 package com.cjs.basicweb.modules.module.action;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import com.cjs.basicweb.modules.module.form.ModuleForm;
-import com.cjs.basicweb.modules.module.logic.ModuleBL;
+import com.cjs.basicweb.model.accesspath.AccessPath;
+import com.cjs.basicweb.modules.module.ModuleForm;
 import com.cjs.core.exception.AppException;
-import com.cjs.struts2.FormAction;
 
-public class ModuleMaintenanceUpdateAction extends
-		FormAction<ModuleForm, ModuleBL> {
+public class ModuleMaintenanceUpdateAction extends ModuleMaintenanceAction {
 
 	private static final long serialVersionUID = 8114275581397242184L;
 
-	private List<String> listAccessPaths;
-
 	public ModuleMaintenanceUpdateAction() throws AppException {
-		super(ModuleForm.class, ModuleBL.class);
+		super();
 	}
 
 	public String executeUpdate() throws AppException {
@@ -27,12 +22,9 @@ public class ModuleMaintenanceUpdateAction extends
 		return SUCCESS;
 	}
 
-	public List<String> getListAccessPaths() {
-		return listAccessPaths;
-	}
-
 	public String prepareUpdate() throws AppException {
 		ModuleForm form = getForm();
+		form.clearForm("new");
 		form.assignFromEntity("new", form.getOld());
 
 		if (form.getOld().getParent() != null) {
@@ -43,17 +35,23 @@ public class ModuleMaintenanceUpdateAction extends
 			form.setNewParentName(null);
 		}
 
-		return SUCCESS;
-	}
+		if (form.getNewURLs() == null) {
+			form.setNewURLs(new ArrayList<String>());
+		} else {
+			form.getNewURLs().clear();
+		}
 
-	public void setListAccessPaths(List<String> listAccessPaths) {
-		this.listAccessPaths = listAccessPaths;
+		for (AccessPath accessPath : form.getOld().getAccessPaths()) {
+			form.getNewURLs().add(accessPath.getUrl());
+		}
+
+		return SUCCESS;
 	}
 
 	public String validateUpdate() throws AppException {
 		if (validateForm()) {
 			getForm().setNewURLs(new ArrayList<String>());
-			for (String url : listAccessPaths) {
+			for (String url : getListAccessPaths()) {
 				if (url == null || url.trim().isEmpty()) {
 					continue;
 				}

@@ -60,7 +60,7 @@
 						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.back"/>"
-								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/search.action'); $(this).closest('form').submit();" /></td>
+								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/main.action'); $(this).closest('form').submit();" /></td>
 						</tr>
 					</table>
 				</td>

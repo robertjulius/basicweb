@@ -39,13 +39,13 @@ INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/searchResul
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/prepareDetail.action', '021module_maintenance');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/detail.action', '021module_maintenance');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/prepareUpdate.action', '021module_maintenance');
-INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/update.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/formUpdate.action', '021module_maintenance');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/validateUpdate.action', '021module_maintenance');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/confirmUpdate.action', '021module_maintenance');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/executeUpdate.action', '021module_maintenance');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/summaryUpdate.action', '021module_maintenance');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/prepareCreate.action', '021module_maintenance');
-INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/create.action', '021module_maintenance');
+INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/formCreate.action', '021module_maintenance');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/validateCreate.action', '021module_maintenance');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/confirmCreate.action', '021module_maintenance');
 INSERT INTO ms_access_path (url, module_id) VALUES ('/modules/module/executeCreate.action', '021module_maintenance');

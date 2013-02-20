@@ -1,17 +1,15 @@
 package com.cjs.basicweb.modules.module.action;
 
-import com.cjs.basicweb.modules.module.form.ModuleForm;
-import com.cjs.basicweb.modules.module.logic.ModuleBL;
+import com.cjs.basicweb.modules.module.ModuleForm;
+import com.cjs.basicweb.modules.module.action.ModuleMaintenanceAction;
 import com.cjs.core.exception.AppException;
-import com.cjs.struts2.FormAction;
 
-public class ModuleMaintenanceDeleteAction extends
-		FormAction<ModuleForm, ModuleBL> {
+public class ModuleMaintenanceDeleteAction extends ModuleMaintenanceAction {
 
 	private static final long serialVersionUID = 8114275581397242184L;
 
 	public ModuleMaintenanceDeleteAction() throws AppException {
-		super(ModuleForm.class, ModuleBL.class);
+		super();
 	}
 
 	public String executeDelete() throws AppException {

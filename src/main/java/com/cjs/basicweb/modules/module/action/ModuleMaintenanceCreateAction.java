@@ -1,22 +1,17 @@
 package com.cjs.basicweb.modules.module.action;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import com.cjs.basicweb.modules.module.form.ModuleForm;
-import com.cjs.basicweb.modules.module.logic.ModuleBL;
+import com.cjs.basicweb.modules.module.ModuleForm;
+import com.cjs.basicweb.modules.module.action.ModuleMaintenanceAction;
 import com.cjs.core.exception.AppException;
-import com.cjs.struts2.FormAction;
 
-public class ModuleMaintenanceCreateAction extends
-		FormAction<ModuleForm, ModuleBL> {
+public class ModuleMaintenanceCreateAction extends ModuleMaintenanceAction {
 
 	private static final long serialVersionUID = 8114275581397242184L;
 
-	private List<String> listAccessPaths;
-
 	public ModuleMaintenanceCreateAction() throws AppException {
-		super(ModuleForm.class, ModuleBL.class);
+		super();
 	}
 
 	public String executeCreate() throws AppException {
@@ -25,10 +20,6 @@ public class ModuleMaintenanceCreateAction extends
 				form.getNewName(), form.getNewDescription(),
 				form.getNewParentId(), form.getNewURLs());
 		return SUCCESS;
-	}
-
-	public List<String> getListAccessPaths() {
-		return listAccessPaths;
 	}
 
 	public String prepareCreate() throws AppException {
@@ -40,14 +31,10 @@ public class ModuleMaintenanceCreateAction extends
 		return SUCCESS;
 	}
 
-	public void setListAccessPaths(List<String> listAccessPaths) {
-		this.listAccessPaths = listAccessPaths;
-	}
-
 	public String validateCreate() throws AppException {
 		if (validateForm()) {
 			getForm().setNewURLs(new ArrayList<String>());
-			for (String url : listAccessPaths) {
+			for (String url : getListAccessPaths()) {
 				if (url == null || url.trim().isEmpty()) {
 					continue;
 				}

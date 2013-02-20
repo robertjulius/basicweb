@@ -74,7 +74,7 @@
 						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.back"/>"
-								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/create.action'); $(this).closest('form').submit();" /></td>
+								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/formCreate.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.submit"/>"
 								onclick="$(this).closest('form').submit();" /></td>

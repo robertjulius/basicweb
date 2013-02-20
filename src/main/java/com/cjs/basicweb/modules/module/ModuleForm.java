@@ -1,4 +1,4 @@
-package com.cjs.basicweb.modules.module.form;
+package com.cjs.basicweb.modules.module;
 
 import java.util.List;
 
@@ -29,10 +29,6 @@ public class ModuleForm extends FormBean {
 
 	private List<Module> selectListParent;
 
-	public List<String> getNewURLs() {
-		return newURLs;
-	}
-
 	public String getNewDescription() {
 		return newDescription;
 	}
@@ -51,6 +47,10 @@ public class ModuleForm extends FormBean {
 
 	public String getNewParentName() {
 		return newParentName;
+	}
+
+	public List<String> getNewURLs() {
+		return newURLs;
 	}
 
 	public Module getOld() {
@@ -85,10 +85,6 @@ public class ModuleForm extends FormBean {
 		return selectListParent;
 	}
 
-	public void setNewURLs(List<String> newURLs) {
-		this.newURLs = newURLs;
-	}
-
 	public void setNewDescription(String newDescription) {
 		this.newDescription = newDescription;
 	}
@@ -107,6 +103,10 @@ public class ModuleForm extends FormBean {
 
 	public void setNewParentName(String newParentName) {
 		this.newParentName = newParentName;
+	}
+
+	public void setNewURLs(List<String> newURLs) {
+		this.newURLs = newURLs;
 	}
 
 	public void setOld(Module old) {
@@ -140,11 +140,12 @@ public class ModuleForm extends FormBean {
 	public void setSelectListParent(List<Module> selectListParent) {
 		this.selectListParent = selectListParent;
 	}
-	
+
 	@Override
 	public void validate(ActionSupport action) throws AppException {
 		if (newParentId.equals(selectedId)) {
-			action.addFieldError("newParentId", action.getText("resource.fieldError.parent"));
+			action.addFieldError("newParentId",
+					action.getText("resource.fieldError.parent"));
 		}
 	}
 }
