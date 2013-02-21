@@ -32,7 +32,7 @@ ul {
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/usergroupmaintenance/executeEdit.action"
+	<s:form action="/modules/usergroupmaintenance/executeUpdate.action"
 		theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
@@ -62,7 +62,11 @@ ul {
 							<tr>
 								<td colspan="2">
 									<ul>
-										<%=HtmlPrivilegeTreeGenerator.generateHtmlTree((TreeMap<String, Privilege>) request.getAttribute("oldTreeMap"))%>
+										<%
+												@SuppressWarnings("unchecked")
+												TreeMap<String, Privilege> oldTreeMap = (TreeMap<String, Privilege>) request.getAttribute("oldTreeMap");
+												out.write(HtmlPrivilegeTreeGenerator.generateHtmlTree(oldTreeMap));
+										%>
 									</ul>
 								</td>
 							</tr>
@@ -91,7 +95,11 @@ ul {
 							<tr>
 								<td colspan="2">
 									<ul>
-										<%=HtmlPrivilegeTreeGenerator.generateHtmlTree((TreeMap<String, Privilege>) request.getAttribute("newTreeMap"))%>
+										<%
+												@SuppressWarnings("unchecked")
+												TreeMap<String, Privilege> newTreeMap = (TreeMap<String, Privilege>) request.getAttribute("newTreeMap");
+												out.write(HtmlPrivilegeTreeGenerator.generateHtmlTree(newTreeMap));
+										%>
 									</ul>
 								</td>
 							</tr>
@@ -105,7 +113,7 @@ ul {
 						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.back"/>"
-								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usergroupmaintenance/prepareEdit.action'); $(this).closest('form').submit();" /></td>
+								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usergroupmaintenance/formUpdate.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.submit"/>"
 								onclick="$(this).closest('form').submit();" /></td>

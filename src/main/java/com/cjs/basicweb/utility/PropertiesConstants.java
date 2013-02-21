@@ -8,6 +8,7 @@ public class PropertiesConstants {
 	public static final String INVALID_LOGIN_PASSWORD = "invalid.login.password";
 	public static final String INVALID_LOGIN_USERID = "invalid.login.userid";
 	public static final String INVALID_LOGIN_USERID_PASSWORD = "invalid.login.userid.password";
+	public static final String USERGROUP_MAINTENANCE_DELETE_FAILED_USERS = "usergroup_maintenance.delete.failed.users";
 
 	/*
 	 * For AppException

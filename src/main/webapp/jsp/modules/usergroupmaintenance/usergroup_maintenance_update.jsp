@@ -34,7 +34,7 @@ ul {
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/usergroupmaintenance/confirmEdit.action"
+	<s:form action="/modules/usergroupmaintenance/validateUpdate.action"
 		theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
@@ -68,7 +68,20 @@ ul {
 							<tr>
 								<td>
 									<ul>
-										<%=HtmlPrivilegeTreeGenerator.generateHtmlCheckBox((TreeMap<String, Privilege>) request.getAttribute("treeMap"), (List<String>) request.getAttribute("newModuleIds"))%>
+										<%
+											@SuppressWarnings("unchecked")
+												List<String> newModuleIds = (List<String>) request
+														.getAttribute("newModuleIds");
+
+												@SuppressWarnings("unchecked")
+												TreeMap<String, Privilege> treeMap = (TreeMap<String, Privilege>) request
+														.getAttribute("treeMap");
+
+												String html = HtmlPrivilegeTreeGenerator.generateHtmlCheckBox(
+														treeMap, newModuleIds);
+
+												out.write(html);
+										%>
 									</ul>
 								</td>
 							</tr>
@@ -87,7 +100,7 @@ ul {
 						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.cancel"/>"
-								onclick="if (!confirmCancel()) {return;} $(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usergroupmaintenance/prepareDetail.action'); $(this).closest('form').submit();" /></td>
+								onclick="if (!confirmCancel()) {return;} $(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usergroupmaintenance/detail.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.submit"/>"
 								onclick="if (confirmAction()) {$(this).closest('form').submit();}" /></td>

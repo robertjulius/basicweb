@@ -5,7 +5,8 @@
 
 <struts>
 
-	<package name="module-main" extends="app-default" namespace="/modules/module">
+	<package name="modulemaintenance" extends="app-default"
+		namespace="/modules/module">
 
 		<!-- =================================== -->
 		<!-- ModuleMaintenanceMainAction : BEGIN -->

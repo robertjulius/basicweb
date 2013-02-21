@@ -23,12 +23,19 @@ public abstract class Trackable implements Serializable {
 	@Column(name = "update_date", nullable = false)
 	private Timestamp updateDate;
 
+	@Column(name = "rec_status", nullable = false)
+	private String recStatus;
+
 	public String getCreateBy() {
 		return createBy;
 	}
 
 	public Timestamp getCreateDate() {
 		return createDate;
+	}
+
+	public String getRecStatus() {
+		return recStatus;
 	}
 
 	public String getUpdateBy() {
@@ -45,6 +52,10 @@ public abstract class Trackable implements Serializable {
 
 	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
+	}
+
+	public void setRecStatus(String recStatus) {
+		this.recStatus = recStatus;
 	}
 
 	public void setUpdateBy(String updateBy) {

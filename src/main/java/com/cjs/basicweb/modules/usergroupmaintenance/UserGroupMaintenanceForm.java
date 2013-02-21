@@ -1,10 +1,11 @@
-package com.cjs.basicweb.modules.usergroupmaintenance.form;
+package com.cjs.basicweb.modules.usergroupmaintenance;
 
 import java.util.List;
+import java.util.TreeMap;
 
 import com.cjs.basicweb.model.FormBean;
-import com.cjs.basicweb.model.Item;
 import com.cjs.basicweb.model.usergroup.UserGroup;
+import com.cjs.basicweb.modules.login.Privilege;
 
 public class UserGroupMaintenanceForm extends FormBean {
 
@@ -23,11 +24,8 @@ public class UserGroupMaintenanceForm extends FormBean {
 	private String newDescription;
 	private List<String> newModuleIds;
 
-	private List<Item> allModules;
-
-	public List<Item> getAllModules() {
-		return allModules;
-	}
+	private TreeMap<String, Privilege> treeMap;
+	private TreeMap<String, Privilege> oldTreeMap;
 
 	public String getNewDescription() {
 		return newDescription;
@@ -47,6 +45,10 @@ public class UserGroupMaintenanceForm extends FormBean {
 
 	public UserGroup getOld() {
 		return old;
+	}
+
+	public TreeMap<String, Privilege> getOldTreeMap() {
+		return oldTreeMap;
 	}
 
 	public String getSearchDescription() {
@@ -69,8 +71,8 @@ public class UserGroupMaintenanceForm extends FormBean {
 		return selectedId;
 	}
 
-	public void setAllModules(List<Item> allModules) {
-		this.allModules = allModules;
+	public TreeMap<String, Privilege> getTreeMap() {
+		return treeMap;
 	}
 
 	public void setNewDescription(String newDescription) {
@@ -93,6 +95,10 @@ public class UserGroupMaintenanceForm extends FormBean {
 		this.old = old;
 	}
 
+	public void setOldTreeMap(TreeMap<String, Privilege> oldTreeMap) {
+		this.oldTreeMap = oldTreeMap;
+	}
+
 	public void setSearchDescription(String searchDescription) {
 		this.searchDescription = searchDescription;
 	}
@@ -111,6 +117,10 @@ public class UserGroupMaintenanceForm extends FormBean {
 
 	public void setSelectedId(String selectedId) {
 		this.selectedId = selectedId;
+	}
+
+	public void setTreeMap(TreeMap<String, Privilege> treeMap) {
+		this.treeMap = treeMap;
 	}
 
 }

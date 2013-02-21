@@ -1,5 +1,6 @@
-package com.cjs.basicweb.modules.usergroupmaintenance.logic;
+package com.cjs.basicweb.modules.usergroupmaintenance;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -8,18 +9,26 @@ import org.hibernate.criterion.Restrictions;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.model.usergroup.UserGroup;
 import com.cjs.basicweb.modules.BusinessLogic;
+import com.cjs.basicweb.utility.GeneralConstants;
+import com.cjs.basicweb.utility.PropertiesConstants;
 import com.cjs.core.exception.AppException;
+import com.cjs.core.exception.UserException;
 
 public class UserGroupMaintenanceBL extends BusinessLogic {
 
-	public void create(String id, String newName, String newDescription,
-			List<String> newModules) throws AppException {
+	public void create(String newName, String newDescription, String createBy,
+			Timestamp createDate, List<String> newModules) throws AppException {
 
 		beginTransaction();
 
 		UserGroup userGroup = new UserGroup();
 		userGroup.setName(newName);
 		userGroup.setDescription(newDescription);
+		userGroup.setCreateBy(createBy);
+		userGroup.setCreateDate(createDate);
+		userGroup.setUpdateBy(createBy);
+		userGroup.setUpdateDate(createDate);
+		userGroup.setRecStatus(GeneralConstants.REC_STATUS_ACTIVE);
 
 		userGroup.getModules().clear();
 		for (String moduleId : newModules) {
@@ -28,6 +37,24 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 		}
 
 		getSession().save(userGroup);
+		commit();
+	}
+
+	public void delete(String id, String updateBy, Timestamp updateDate)
+			throws UserException {
+		beginTransaction();
+		UserGroup userGroup = (UserGroup) getSession()
+				.load(UserGroup.class, id);
+
+		if (!userGroup.getUsers().isEmpty()) {
+			throw new UserException(
+					PropertiesConstants.USERGROUP_MAINTENANCE_DELETE_FAILED_USERS);
+		}
+
+		userGroup.setUpdateBy(updateBy);
+		userGroup.setUpdateDate(updateDate);
+		userGroup.setRecStatus(GeneralConstants.REC_STATUS_NONACTIVE);
+		getSession().update(userGroup);
 		commit();
 	}
 
@@ -73,7 +100,8 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 	}
 
 	public void update(String id, String newName, String newDescription,
-			List<String> newModules) throws AppException {
+			String updateBy, Timestamp updateDate, List<String> newModules)
+			throws AppException {
 
 		beginTransaction();
 
@@ -81,6 +109,8 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 				.load(UserGroup.class, id);
 		userGroup.setName(newName);
 		userGroup.setDescription(newDescription);
+		userGroup.setUpdateBy(updateBy);
+		userGroup.setUpdateDate(updateDate);
 
 		userGroup.getModules().clear();
 		for (String moduleId : newModules) {

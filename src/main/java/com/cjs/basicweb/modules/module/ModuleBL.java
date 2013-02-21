@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import com.cjs.basicweb.model.accesspath.AccessPath;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.modules.BusinessLogic;
+import com.cjs.basicweb.utility.GeneralConstants;
 import com.cjs.core.exception.AppException;
 
 public class ModuleBL extends BusinessLogic {
@@ -27,8 +28,9 @@ public class ModuleBL extends BusinessLogic {
 		module.setDescription(newDescription);
 		module.setCreateBy(createBy);
 		module.setCreateDate(createDate);
-		module.setUpdateBy(module.getCreateBy());
-		module.setUpdateDate(module.getCreateDate());
+		module.setUpdateBy(createBy);
+		module.setUpdateDate(createDate);
+		module.setRecStatus(GeneralConstants.REC_STATUS_ACTIVE);
 
 		if (newParentId == null || newParentId.trim().isEmpty()) {
 			module.setParent(null);
@@ -49,8 +51,9 @@ public class ModuleBL extends BusinessLogic {
 		commit();
 	}
 
-	public void delete(String id) throws AppException {
+	public void delete(String id) {
 		beginTransaction();
+		deleteMsAccessPath(id);
 		Module module = (Module) getSession().load(Module.class, id);
 		getSession().delete(module);
 		commit();

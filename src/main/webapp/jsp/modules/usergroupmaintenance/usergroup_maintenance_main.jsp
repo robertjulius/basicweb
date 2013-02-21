@@ -20,7 +20,7 @@
 	<table class="form">
 		<tr>
 			<td align="right"><s:form
-					action="/modules/usergroupmaintenance/prepareNew.action" method="post">
+					action="/modules/usergroupmaintenance/prepareCreate.action" method="post">
 					<s:submit key="resource.create.new" name="%{resource.create.new}"/>
 				</s:form></td>
 		</tr>

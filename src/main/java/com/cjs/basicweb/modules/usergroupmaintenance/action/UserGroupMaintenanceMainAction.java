@@ -8,68 +8,42 @@ import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.model.usergroup.UserGroup;
 import com.cjs.basicweb.modules.login.Privilege;
 import com.cjs.basicweb.modules.login.PrivilegeUtils;
-import com.cjs.basicweb.modules.usergroupmaintenance.form.UserGroupMaintenanceForm;
-import com.cjs.basicweb.modules.usergroupmaintenance.logic.UserGroupMaintenanceBL;
+import com.cjs.basicweb.modules.usergroupmaintenance.UserGroupMaintenanceForm;
 import com.cjs.core.exception.AppException;
-import com.cjs.struts2.FormAction;
 
-public class UserGroupMaintenanceMainAction extends
-		FormAction<UserGroupMaintenanceForm, UserGroupMaintenanceBL> {
+public class UserGroupMaintenanceMainAction extends UserGroupMaintenanceAction {
 
 	private static final long serialVersionUID = 8114275581397242184L;
 
 	public UserGroupMaintenanceMainAction() throws AppException {
-		super(UserGroupMaintenanceForm.class, UserGroupMaintenanceBL.class);
-	}
-
-	public String confirmEdit() throws AppException {
-		if (validateForm()) {
-
-			List<Module> rootModules = getBL().getRootModules();
-
-			List<Module> oldModules = getForm().getOld().getModules();
-			List<String> privilegeIds = new ArrayList<>();
-			for (Module module : oldModules) {
-				privilegeIds.add(module.getId());
-			}
-			TreeMap<String, Privilege> oldTreeMap = PrivilegeUtils
-					.generateTree(privilegeIds.toArray(new String[] {}),
-							rootModules);
-			getRequest().setAttribute("oldTreeMap", oldTreeMap);
-
-			List<String> newModuleIds = getForm().getNewModuleIds();
-			TreeMap<String, Privilege> newTreeMap = PrivilegeUtils
-					.generateTree(newModuleIds.toArray(new String[] {}),
-							rootModules);
-			getRequest().setAttribute("newTreeMap", newTreeMap);
-
-			return SUCCESS;
-		} else {
-			return ERROR;
-		}
-	}
-
-	public String confirmNew() throws AppException {
-		return confirmEdit();
-	}
-
-	public String executeEdit() throws AppException {
-		UserGroupMaintenanceForm form = getForm();
-		getBL().update(form.getSelectedId(), form.getNewName(),
-				form.getNewDescription(), form.getNewModuleIds());
-		return SUCCESS;
-	}
-
-	public String executeNew() throws AppException {
-		return SUCCESS;
+		super();
 	}
 
 	public String initial() {
+
+		List<Module> rootModules = getBL().getRootModules();
+
+		List<Module> modules = getBL().getChildModules();
+		List<String> privilegeIds = new ArrayList<>();
+		for (Module module : modules) {
+			privilegeIds.add(module.getId());
+		}
+		TreeMap<String, Privilege> treeMap = PrivilegeUtils.generateTree(
+				privilegeIds.toArray(new String[] {}), rootModules);
+
+		getForm().setTreeMap(treeMap);
+		getModuleSession().put("rootModules", rootModules);
+
 		return SUCCESS;
 	}
 
 	public String prepareDetail() throws AppException {
+
+		@SuppressWarnings("unchecked")
+		List<Module> rootModules = (List<Module>) getModuleSession().get(
+				"rootModules");
 		String selectedId = getForm().getSelectedId();
+
 		UserGroup userGroup = getBL().getDetail(selectedId);
 		UserGroupMaintenanceForm form = getForm();
 		form.setOld(userGroup);
@@ -79,42 +53,10 @@ public class UserGroupMaintenanceMainAction extends
 		for (Module module : modules) {
 			privilegeIds.add(module.getId());
 		}
-		TreeMap<String, Privilege> treeMap = PrivilegeUtils
-				.generateTree(privilegeIds.toArray(new String[] {}), getBL()
-						.getRootModules());
-		getRequest().setAttribute("treeMap", treeMap);
+		TreeMap<String, Privilege> oldTreeMap = PrivilegeUtils.generateTree(
+				privilegeIds.toArray(new String[] {}), rootModules);
+		getForm().setOldTreeMap(oldTreeMap);
 
-		if (form.getNewModuleIds() == null) {
-			form.setNewModuleIds(new ArrayList<String>());
-		} else {
-			form.getNewModuleIds().clear();
-		}
-		for (Module module : form.getOld().getModules()) {
-			form.getNewModuleIds().add(module.getId());
-		}
-
-		return SUCCESS;
-	}
-
-	public String prepareEdit() throws AppException {
-		UserGroupMaintenanceForm form = getForm();
-		form.assignFromEntity("new", form.getOld());
-
-		List<Module> modules = getBL().getChildModules();
-		List<String> privilegeIds = new ArrayList<>();
-		for (Module module : modules) {
-			privilegeIds.add(module.getId());
-		}
-		TreeMap<String, Privilege> treeMap = PrivilegeUtils
-				.generateTree(privilegeIds.toArray(new String[] {}), getBL()
-						.getRootModules());
-		getRequest().setAttribute("treeMap", treeMap);
-		getRequest().setAttribute("newModuleIds", form.getNewModuleIds());
-
-		return SUCCESS;
-	}
-
-	public String prepareNew() throws AppException {
 		return SUCCESS;
 	}
 

@@ -32,7 +32,7 @@ ul {
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/usergroupmaintenance/prepareEdit.action"
+	<s:form action="/modules/usergroupmaintenance/prepareUpdate.action"
 		theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
@@ -75,8 +75,15 @@ ul {
 							<tr>
 								<td>
 									<ul>
-										<%=HtmlPrivilegeTreeGenerator
-									.generateHtmlTree((TreeMap<String, Privilege>) request.getAttribute("treeMap"))%>
+										<%
+												@SuppressWarnings("unchecked")
+												TreeMap<String, Privilege> oldTreeMap = (TreeMap<String, Privilege>) request.getAttribute("oldTreeMap");
+
+												String html = HtmlPrivilegeTreeGenerator.generateHtmlTree(
+														oldTreeMap);
+
+												out.write(html);
+										%>
 									</ul>
 								</td>
 							</tr>
@@ -90,7 +97,7 @@ ul {
 						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.back"/>"
-								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usergroupmaintenance/search.action'); $(this).closest('form').submit();" /></td>
+								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usergroupmaintenance/searchResult.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.edit"/>"
 								onclick="$(this).closest('form').submit();" /></td>
