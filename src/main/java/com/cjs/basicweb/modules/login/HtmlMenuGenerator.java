@@ -36,7 +36,9 @@ public class HtmlMenuGenerator {
 			stringBuilder.append("<li>");
 			Privilege privilege = iterator.next();
 
-			if (privilege.getAction() != null) {
+			if (privilege.getAction() != null
+					&& !privilege.getAction().trim().isEmpty()
+					&& privilege.getChilds().isEmpty()) {
 				stringBuilder.append("<a href='" + contextPath
 						+ privilege.getAction() + "?initial=true" + "'>");
 				stringBuilder.append(privilege.getName());

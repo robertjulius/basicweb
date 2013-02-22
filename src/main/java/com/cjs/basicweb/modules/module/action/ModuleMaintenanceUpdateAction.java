@@ -60,11 +60,13 @@ public class ModuleMaintenanceUpdateAction extends ModuleMaintenanceAction {
 	public String validateUpdate() throws AppException {
 		if (validateForm()) {
 			getForm().setNewURLs(new ArrayList<String>());
-			for (String url : getListAccessPaths()) {
-				if (url == null || url.trim().isEmpty()) {
-					continue;
+			if (getListAccessPaths() != null) {
+				for (String url : getListAccessPaths()) {
+					if (url == null || url.trim().isEmpty()) {
+						continue;
+					}
+					getForm().getNewURLs().add(url);
 				}
-				getForm().getNewURLs().add(url);
 			}
 			return SUCCESS;
 		} else {

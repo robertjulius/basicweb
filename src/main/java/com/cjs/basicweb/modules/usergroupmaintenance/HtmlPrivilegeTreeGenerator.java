@@ -72,7 +72,7 @@ public class HtmlPrivilegeTreeGenerator {
 					stringBuilder.append("<font color='#0000BB'>");
 					stringBuilder.append(checkBoxBuilder);
 					stringBuilder.append("</font>");
-					stringBuilder.append("<b>");
+					stringBuilder.append("</b>");
 				} else {
 					stringBuilder.append(checkBoxBuilder);
 				}

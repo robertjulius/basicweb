@@ -39,6 +39,10 @@ public class LoginBL extends BusinessLogic {
 			UserSession userSession) throws UserException, AppException {
 
 		User user = getByUserId(userId);
+		if (user == null) {
+			throw new AppException(
+					PropertiesConstants.INVALID_LOGIN_USERID);
+		}
 
 		validatePassword(user, password);
 

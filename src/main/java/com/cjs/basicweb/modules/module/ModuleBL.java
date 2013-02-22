@@ -1,5 +1,6 @@
 package com.cjs.basicweb.modules.module;
 
+import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -11,7 +12,9 @@ import com.cjs.basicweb.model.accesspath.AccessPath;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.modules.BusinessLogic;
 import com.cjs.basicweb.utility.GeneralConstants;
+import com.cjs.basicweb.utility.PropertiesConstants;
 import com.cjs.core.exception.AppException;
+import com.cjs.core.exception.UserException;
 
 public class ModuleBL extends BusinessLogic {
 
@@ -23,6 +26,9 @@ public class ModuleBL extends BusinessLogic {
 		beginTransaction();
 
 		Module module = new Module();
+		if (newFirstEntry != null && newFirstEntry.trim().isEmpty()) {
+			newFirstEntry = null;
+		}
 		module.setFirstEntry(newFirstEntry);
 		module.setName(newName);
 		module.setDescription(newDescription);
@@ -51,11 +57,18 @@ public class ModuleBL extends BusinessLogic {
 		commit();
 	}
 
-	public void delete(String id) {
+	public void delete(String id) throws UserException {
+		checkDependencyToMsPrivilege(id);
+
 		beginTransaction();
+
 		deleteMsAccessPath(id);
+
 		Module module = (Module) getSession().load(Module.class, id);
+
+		recursiveDeleteChilds(module);
 		getSession().delete(module);
+
 		commit();
 	}
 
@@ -100,6 +113,9 @@ public class ModuleBL extends BusinessLogic {
 		beginTransaction();
 
 		Module module = (Module) getSession().load(Module.class, id);
+		if (newFirstEntry != null && newFirstEntry.trim().isEmpty()) {
+			newFirstEntry = null;
+		}
 		module.setFirstEntry(newFirstEntry);
 		module.setName(newName);
 		module.setDescription(newDescription);
@@ -126,10 +142,32 @@ public class ModuleBL extends BusinessLogic {
 		commit();
 	}
 
+	private void checkDependencyToMsPrivilege(String moduleId)
+			throws UserException {
+		SQLQuery sqlQuery = getSession()
+				.createSQLQuery(
+						"select COUNT(1) FROM ms_privilege WHERE module_id = :moduleId");
+		sqlQuery.setString("moduleId", moduleId);
+		BigInteger count = (BigInteger) sqlQuery.list().get(0);
+		if (count.intValue() > 0) {
+			throw new UserException(
+					PropertiesConstants.MODULE_MAINTENANCE_DELETE_FAILED_DEPENDENCY_ACCESSPATH);
+		}
+	}
+
 	private void deleteMsAccessPath(String moduleId) {
 		SQLQuery sqlQuery = getSession().createSQLQuery(
 				"DELETE FROM ms_access_path WHERE module_id = :moduleId");
 		sqlQuery.setString("moduleId", moduleId);
 		sqlQuery.executeUpdate();
+	}
+
+	private void recursiveDeleteChilds(Module module) throws UserException {
+		if (!module.getChilds().isEmpty()) {
+			List<Module> childs = module.getChilds();
+			for (Module child : childs) {
+				delete(child.getId());
+			}
+		}
 	}
 }

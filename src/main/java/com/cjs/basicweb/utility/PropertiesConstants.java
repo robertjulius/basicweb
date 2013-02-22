@@ -8,7 +8,8 @@ public class PropertiesConstants {
 	public static final String INVALID_LOGIN_PASSWORD = "invalid.login.password";
 	public static final String INVALID_LOGIN_USERID = "invalid.login.userid";
 	public static final String INVALID_LOGIN_USERID_PASSWORD = "invalid.login.userid.password";
-	public static final String USERGROUP_MAINTENANCE_DELETE_FAILED_USERS = "usergroup_maintenance.delete.failed.users";
+	public static final String USERGROUP_MAINTENANCE_DELETE_FAILED_USERS = "usergroup_maintenance.delete.failed.dependency.users";
+	public static final String MODULE_MAINTENANCE_DELETE_FAILED_DEPENDENCY_ACCESSPATH = "module.maintenance.delete.failed.dependency.accesspath";
 
 	/*
 	 * For AppException
