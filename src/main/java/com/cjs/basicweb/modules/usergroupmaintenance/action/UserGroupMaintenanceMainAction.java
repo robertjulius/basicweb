@@ -19,7 +19,7 @@ public class UserGroupMaintenanceMainAction extends UserGroupMaintenanceAction {
 		super();
 	}
 
-	public String initial() {
+	public String initial() throws AppException {
 
 		List<Module> rootModules = getBL().getRootModules();
 
@@ -60,7 +60,7 @@ public class UserGroupMaintenanceMainAction extends UserGroupMaintenanceAction {
 		return SUCCESS;
 	}
 
-	public String search() {
+	public String search() throws AppException {
 		String name = getForm().getSearchName();
 		String description = getForm().getSearchDescription();
 

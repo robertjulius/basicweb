@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.criterion.Restrictions;
 
@@ -57,22 +58,18 @@ public class ModuleBL extends BusinessLogic {
 		commit();
 	}
 
-	public void delete(String id) throws UserException {
+	public void delete(String id) throws UserException, AppException {
 		checkDependencyToMsPrivilege(id);
 
 		beginTransaction();
 
-		deleteMsAccessPath(id);
-
 		Module module = (Module) getSession().load(Module.class, id);
-
-		recursiveDeleteChilds(module);
-		getSession().delete(module);
+		recursiveDelete(module);
 
 		commit();
 	}
 
-	public List<Module> getAllModules(String id) {
+	public List<Module> getAllModules(String id) throws AppException {
 		Criteria criteria = getSession().createCriteria(Module.class);
 
 		@SuppressWarnings("unchecked")
@@ -85,7 +82,8 @@ public class ModuleBL extends BusinessLogic {
 		return module;
 	}
 
-	public List<Module> search(String name, String firstEntry, String parentId) {
+	public List<Module> search(String name, String firstEntry, String parentId)
+			throws AppException {
 		Criteria criteria = getSession().createCriteria(Module.class);
 		if (name != null && !name.trim().isEmpty()) {
 			criteria.add(Restrictions.like("name", "%" + name + "%"));
@@ -143,7 +141,7 @@ public class ModuleBL extends BusinessLogic {
 	}
 
 	private void checkDependencyToMsPrivilege(String moduleId)
-			throws UserException {
+			throws UserException, AppException {
 		SQLQuery sqlQuery = getSession()
 				.createSQLQuery(
 						"select COUNT(1) FROM ms_privilege WHERE module_id = :moduleId");
@@ -155,19 +153,23 @@ public class ModuleBL extends BusinessLogic {
 		}
 	}
 
-	private void deleteMsAccessPath(String moduleId) {
+	private void deleteMsAccessPath(String moduleId) throws HibernateException,
+			AppException {
 		SQLQuery sqlQuery = getSession().createSQLQuery(
 				"DELETE FROM ms_access_path WHERE module_id = :moduleId");
 		sqlQuery.setString("moduleId", moduleId);
 		sqlQuery.executeUpdate();
 	}
 
-	private void recursiveDeleteChilds(Module module) throws UserException {
+	private void recursiveDelete(Module module) throws UserException,
+			AppException {
 		if (!module.getChilds().isEmpty()) {
 			List<Module> childs = module.getChilds();
 			for (Module child : childs) {
-				delete(child.getId());
+				recursiveDelete(child);
 			}
 		}
+		deleteMsAccessPath(module.getId());
+		getSession().delete(module);
 	}
 }

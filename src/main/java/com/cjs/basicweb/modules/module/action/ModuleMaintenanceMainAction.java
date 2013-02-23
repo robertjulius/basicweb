@@ -14,7 +14,7 @@ public class ModuleMaintenanceMainAction extends ModuleMaintenanceAction {
 		super();
 	}
 
-	public String initial() {
+	public String initial() throws AppException {
 		ModuleForm form = getForm();
 		List<Module> modules = getBL().getAllModules(form.getSelectedId());
 		modules.add(0, new Module());
@@ -32,7 +32,7 @@ public class ModuleMaintenanceMainAction extends ModuleMaintenanceAction {
 		return SUCCESS;
 	}
 
-	public String search() {
+	public String search() throws AppException {
 		String name = getForm().getSearchName();
 		String firstEntry = getForm().getSearchFirstEntry();
 		String parentId = getForm().getSearchParentId();

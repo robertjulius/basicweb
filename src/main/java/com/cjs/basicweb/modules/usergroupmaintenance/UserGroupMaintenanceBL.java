@@ -41,7 +41,7 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 	}
 
 	public void delete(String id, String updateBy, Timestamp updateDate)
-			throws UserException {
+			throws UserException, AppException {
 		beginTransaction();
 		UserGroup userGroup = (UserGroup) getSession()
 				.load(UserGroup.class, id);
@@ -58,7 +58,7 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 		commit();
 	}
 
-	public List<Module> getChildModules() {
+	public List<Module> getChildModules() throws AppException {
 		Criteria criteria = getSession().createCriteria(Module.class);
 		criteria.add(Restrictions.or(Restrictions.isNull("childs"),
 				Restrictions.isEmpty("childs")));
@@ -74,7 +74,7 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 		return userGroup;
 	}
 
-	public List<Module> getRootModules() {
+	public List<Module> getRootModules() throws AppException {
 		Criteria criteria = getSession().createCriteria(Module.class);
 		criteria.add(Restrictions.isNull("parent.id"));
 
@@ -83,7 +83,8 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 		return modules;
 	}
 
-	public List<UserGroup> search(String name, String description) {
+	public List<UserGroup> search(String name, String description)
+			throws AppException {
 		Criteria criteria = getSession().createCriteria(UserGroup.class);
 		if (name != null && !name.trim().isEmpty()) {
 			criteria.add(Restrictions.like("name", "%" + name + "%"));

@@ -54,7 +54,7 @@ public class LoginBL extends BusinessLogic {
 		return user;
 	}
 
-	private List<Module> getRootModules() {
+	private List<Module> getRootModules() throws AppException {
 		Criteria criteria = getSession().createCriteria(Module.class);
 		criteria.add(Restrictions.isNull("parent.id"));
 
@@ -83,7 +83,7 @@ public class LoginBL extends BusinessLogic {
 		return result.toArray(new String[] {});
 	}
 
-	private void prepareTreeMenu(User user, UserSession userSession) {
+	private void prepareTreeMenu(User user, UserSession userSession) throws AppException {
 
 		LoggerFactory.getLogger(getClass()).debug("Begin to prepare tree menu");
 

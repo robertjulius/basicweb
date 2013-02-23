@@ -41,6 +41,8 @@ public class ModuleMaintenanceCreateAction extends ModuleMaintenanceAction {
 		} else {
 			form.getNewURLs().clear();
 		}
+		
+		form.setSelectedId(null);
 
 		return SUCCESS;
 	}
