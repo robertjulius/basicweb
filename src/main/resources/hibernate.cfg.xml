@@ -19,5 +19,6 @@
 		<mapping class="com.cjs.basicweb.model.module.Module" />
 		<mapping class="com.cjs.basicweb.model.user.SimpleUser" />
 		<mapping class="com.cjs.basicweb.model.usergroup.UserGroup" />
+		<mapping class="com.cjs.basicweb.model.activitylog.ActivityLog" />
 	</session-factory>
 </hibernate-configuration>

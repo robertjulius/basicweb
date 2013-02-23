@@ -1,7 +1,5 @@
 package com.cjs.struts2;
 
-import java.util.Map;
-
 import org.slf4j.LoggerFactory;
 
 import com.cjs.basicweb.model.FormBean;
@@ -35,8 +33,6 @@ public abstract class FormAction<T, U> extends BaseAction<U> implements
 			try {
 				formBean = clazz.newInstance();
 				getModuleSession().put(clazz.getName(), formBean);
-				Map<String, Object> moduleSession = getModuleSession();
-				System.out.println(moduleSession);
 			} catch (InstantiationException e) {
 				LoggerFactory.getLogger(getClass()).error(e.getMessage(), e);
 			} catch (IllegalAccessException e) {

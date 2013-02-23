@@ -8,7 +8,7 @@ import com.googlecode.s2hibernate.struts2.plugin.util.HibernateSessionFactory;
 
 public abstract class BusinessLogic {
 
-	protected void beginTransaction() throws AppException {
+	public void beginTransaction() throws AppException {
 		try {
 			HibernateSessionFactory.getSession().getTransaction().begin();
 		} catch (HibernateException e) {
@@ -16,7 +16,7 @@ public abstract class BusinessLogic {
 		}
 	}
 
-	protected void commit() throws AppException {
+	public final void commit() throws AppException {
 		try {
 			HibernateSessionFactory.getSession().getTransaction().commit();
 		} catch (HibernateException e) {
@@ -24,7 +24,7 @@ public abstract class BusinessLogic {
 		}
 	}
 
-	protected Session getSession() throws AppException {
+	public final Session getSession() throws AppException {
 		try {
 			return HibernateSessionFactory.getSession();
 		} catch (HibernateException e) {
@@ -32,7 +32,7 @@ public abstract class BusinessLogic {
 		}
 	}
 
-	protected void rollback() throws AppException {
+	public final void rollback() throws AppException {
 		try {
 			HibernateSessionFactory.getSession().getTransaction().rollback();
 		} catch (HibernateException e) {

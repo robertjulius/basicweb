@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.criterion.Restrictions;
 
@@ -19,7 +18,7 @@ import com.cjs.core.exception.UserException;
 
 public class ModuleBL extends BusinessLogic {
 
-	public void create(String newFirstEntry, String newName,
+	public Module create(String newFirstEntry, String newName,
 			String newDescription, String newParentId,
 			List<String> newAccesssPaths, String createBy, Timestamp createDate)
 			throws AppException {
@@ -56,6 +55,8 @@ public class ModuleBL extends BusinessLogic {
 
 		getSession().save(module);
 		commit();
+
+		return module;
 	}
 
 	public void delete(String id) throws UserException, AppException {
@@ -103,7 +104,7 @@ public class ModuleBL extends BusinessLogic {
 		return modules;
 	}
 
-	public void update(String id, String newFirstEntry, String newName,
+	public Module update(String id, String newFirstEntry, String newName,
 			String newDescription, String newParentId,
 			List<String> newAccesssPaths, String updateBy, Timestamp updateDate)
 			throws AppException {
@@ -138,6 +139,8 @@ public class ModuleBL extends BusinessLogic {
 
 		getSession().save(module);
 		commit();
+
+		return module;
 	}
 
 	private void checkDependencyToMsPrivilege(String moduleId)
@@ -153,8 +156,7 @@ public class ModuleBL extends BusinessLogic {
 		}
 	}
 
-	private void deleteMsAccessPath(String moduleId) throws HibernateException,
-			AppException {
+	private void deleteMsAccessPath(String moduleId) throws AppException {
 		SQLQuery sqlQuery = getSession().createSQLQuery(
 				"DELETE FROM ms_access_path WHERE module_id = :moduleId");
 		sqlQuery.setString("moduleId", moduleId);

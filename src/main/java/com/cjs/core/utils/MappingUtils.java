@@ -2,6 +2,7 @@ package com.cjs.core.utils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +10,50 @@ import com.cjs.basicweb.utility.PropertiesConstants;
 import com.cjs.core.exception.AppException;
 
 public class MappingUtils {
+
+	public static String getObjectValues(Object object) throws AppException {
+		StringBuilder stringBuilder = new StringBuilder();
+		try {
+			Method[] methods = object.getClass().getMethods();
+			for (Method method : methods) {
+				if (method.getName().startsWith("get")) {
+
+					if (method.getName().equals("getHibernateLazyInitializer")
+							|| method.getName().equals("getClass")) {
+						continue;
+					}
+
+					if (method.getParameterTypes().length != 0) {
+						throw new AppException(
+								PropertiesConstants.ERROR_REFLECTION);
+					}
+
+					String name = method.getName().substring(3, 4)
+							.toLowerCase()
+							+ method.getName().substring(4);
+
+					stringBuilder.append(";").append(name).append("=");
+
+					Object value = method.invoke(object);
+					if (Collection.class.isAssignableFrom(value.getClass())) {
+						stringBuilder.append("#")
+								.append(value.getClass().getSimpleName())
+								.append("#");
+					} else {
+						stringBuilder.append(value);
+					}
+				}
+			}
+		} catch (IllegalAccessException e) {
+			throw new AppException(e);
+		} catch (IllegalArgumentException e) {
+			throw new AppException(e);
+		} catch (InvocationTargetException e) {
+			throw new AppException(e);
+		}
+
+		return stringBuilder.toString().replaceFirst(";", "");
+	}
 
 	public static <T> T mapToPojo(Map<String, Object> map, Class<T> clazz)
 			throws AppException {

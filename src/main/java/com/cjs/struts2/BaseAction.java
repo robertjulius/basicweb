@@ -8,10 +8,17 @@ import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.cjs.basicweb.model.activitylog.ActivityLog;
+import com.cjs.basicweb.model.user.SimpleUser;
 import com.cjs.basicweb.modules.BusinessLogic;
+import com.cjs.basicweb.modules.ModuleSession;
+import com.cjs.basicweb.utility.CommonUtils;
 import com.cjs.basicweb.utility.GeneralConstants;
+import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.basicweb.utility.PropertiesConstants;
+import com.cjs.core.UserSession;
 import com.cjs.core.exception.AppException;
+import com.cjs.core.utils.MappingUtils;
 import com.opensymphony.xwork2.ActionSupport;
 
 public abstract class BaseAction<T> extends ActionSupport implements
@@ -39,15 +46,17 @@ public abstract class BaseAction<T> extends ActionSupport implements
 					PropertiesConstants.ERROR_CREATE_BUSINESS_LOGIC);
 		}
 	}
-	
+
+	public final String chainAction() {
+		return SUCCESS;
+	}
+
 	public T getBL() {
 		return logic;
 	}
 
-	@SuppressWarnings("unchecked")
-	public Map<String, Object> getModuleSession() {
-		return (Map<String, Object>) sessionMap
-				.get(GeneralConstants.MODULE_SESSION);
+	public ModuleSession getModuleSession() {
+		return (ModuleSession) sessionMap.get(GeneralConstants.MODULE_SESSION);
 	}
 
 	public HttpServletRequest getRequest() {
@@ -58,12 +67,38 @@ public abstract class BaseAction<T> extends ActionSupport implements
 		return sessionMap;
 	}
 
+	public UserSession getUserSession() {
+		return (UserSession) getSession().get(GeneralConstants.USER_SESSION);
+	}
+
 	public final String redirectAction() {
 		return SUCCESS;
 	}
-	
-	public final String chainAction() {
-		return SUCCESS;
+
+	public final void saveActivityLog(ActionType actionType,
+			Object affectedObject) throws AppException {
+		String description = MappingUtils.getObjectValues(affectedObject);
+		saveActivityLog(actionType, description);
+	}
+
+	public final void saveActivityLog(ActionType actionType, String description)
+			throws AppException {
+
+		SimpleUser user = (SimpleUser) getUserSession().getUser();
+
+		ActivityLog log = new ActivityLog();
+		log.setUser(user.getId());
+		log.setUserId(user.getUserId());
+		log.setUserName(user.getName());
+		log.setActionClass(this.getClass().getSimpleName());
+		log.setActionType(String.valueOf(actionType));
+		log.setDescription(description);
+		log.setActionDate(CommonUtils.getCurrentTimestamp());
+
+		BusinessLogic businessLogic = (BusinessLogic) getBL();
+		businessLogic.beginTransaction();
+		businessLogic.getSession().save(log);
+		businessLogic.commit();
 	}
 
 	@Override

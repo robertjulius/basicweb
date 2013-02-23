@@ -3,6 +3,7 @@ package com.cjs.basicweb.modules.resetusersession.action;
 import com.cjs.basicweb.modules.login.usersession.SimpleUserSession;
 import com.cjs.basicweb.modules.resetusersession.form.ResetUserSessionForm;
 import com.cjs.basicweb.modules.resetusersession.logic.ResetUserSessionBL;
+import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.core.UserSession;
 import com.cjs.core.exception.AppException;
 import com.cjs.struts2.FormAction;
@@ -18,6 +19,10 @@ public class ResetUserSessionMainAction extends
 
 	public String executeReset() throws AppException {
 		getBL().reset(getForm().getUserId());
+
+		saveActivityLog(ActionType.OTHER, "Reset user session with id "
+				+ getForm().getUserId());
+
 		return SUCCESS;
 	}
 

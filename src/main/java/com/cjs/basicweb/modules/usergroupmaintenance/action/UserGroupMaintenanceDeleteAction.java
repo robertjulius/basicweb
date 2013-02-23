@@ -1,11 +1,9 @@
 package com.cjs.basicweb.modules.usergroupmaintenance.action;
 
-import java.sql.Timestamp;
-
 import com.cjs.basicweb.model.user.SimpleUser;
 import com.cjs.basicweb.modules.usergroupmaintenance.UserGroupMaintenanceForm;
-import com.cjs.basicweb.utility.GeneralConstants;
-import com.cjs.core.UserSession;
+import com.cjs.basicweb.utility.CommonUtils;
+import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.core.exception.AppException;
 import com.cjs.core.exception.UserException;
 
@@ -19,15 +17,16 @@ public class UserGroupMaintenanceDeleteAction extends
 	}
 
 	public String executeDelete() throws AppException {
-		UserSession userSession = (UserSession) getSession().get(
-				GeneralConstants.USER_SESSION);
-
-		SimpleUser user = (SimpleUser) userSession.getUser();
+		SimpleUser user = (SimpleUser) getUserSession().getUser();
 
 		UserGroupMaintenanceForm form = getForm();
 		try {
 			getBL().delete(form.getSelectedId(), user.getId(),
-					new Timestamp(System.currentTimeMillis()));
+					CommonUtils.getCurrentTimestamp());
+
+			saveActivityLog(ActionType.DELETE, "Delete usergroup with id "
+					+ form.getSelectedId());
+
 			return SUCCESS;
 		} catch (UserException e) {
 			addActionError(e.getMessageId());

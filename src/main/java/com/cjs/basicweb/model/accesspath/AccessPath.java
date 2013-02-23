@@ -14,7 +14,7 @@ import com.cjs.basicweb.model.module.Module;
 @Table(name = "ms_access_path")
 public class AccessPath implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -2855686542697649307L;
 
 	@Id
 	private String url;

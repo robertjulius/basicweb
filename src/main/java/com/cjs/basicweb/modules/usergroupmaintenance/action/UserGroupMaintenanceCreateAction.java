@@ -1,18 +1,17 @@
 package com.cjs.basicweb.modules.usergroupmaintenance.action;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.model.user.SimpleUser;
+import com.cjs.basicweb.model.usergroup.UserGroup;
 import com.cjs.basicweb.modules.login.Privilege;
 import com.cjs.basicweb.modules.login.PrivilegeUtils;
-import com.cjs.basicweb.modules.login.usersession.SimpleUserSession;
 import com.cjs.basicweb.modules.usergroupmaintenance.UserGroupMaintenanceForm;
-import com.cjs.basicweb.utility.GeneralConstants;
-import com.cjs.core.UserSession;
+import com.cjs.basicweb.utility.CommonUtils;
+import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.core.exception.AppException;
 
 public class UserGroupMaintenanceCreateAction extends
@@ -25,14 +24,15 @@ public class UserGroupMaintenanceCreateAction extends
 	}
 
 	public String executeCreate() throws AppException {
-		UserSession userSession = (SimpleUserSession) getSession().get(
-				GeneralConstants.USER_SESSION);
-		SimpleUser user = (SimpleUser) userSession.getUser();
+		SimpleUser user = (SimpleUser) getUserSession().getUser();
 
 		UserGroupMaintenanceForm form = getForm();
-		getBL().create(form.getNewName(), form.getNewDescription(),
-				user.getId(), new Timestamp(System.currentTimeMillis()),
-				form.getNewModuleIds());
+		UserGroup userGroup = getBL().create(form.getNewName(),
+				form.getNewDescription(), user.getId(),
+				CommonUtils.getCurrentTimestamp(), form.getNewModuleIds());
+
+		saveActivityLog(ActionType.CREATE, userGroup);
+
 		return SUCCESS;
 	}
 

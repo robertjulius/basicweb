@@ -17,8 +17,9 @@ import com.cjs.core.exception.UserException;
 
 public class UserGroupMaintenanceBL extends BusinessLogic {
 
-	public void create(String newName, String newDescription, String createBy,
-			Timestamp createDate, List<String> newModules) throws AppException {
+	public UserGroup create(String newName, String newDescription,
+			String createBy, Timestamp createDate, List<String> newModules)
+			throws AppException {
 
 		beginTransaction();
 
@@ -39,6 +40,8 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 
 		getSession().save(userGroup);
 		commit();
+
+		return userGroup;
 	}
 
 	public void delete(String id, String updateBy, Timestamp updateDate)
@@ -101,7 +104,7 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 		return userGroups;
 	}
 
-	public void update(String id, String newName, String newDescription,
+	public UserGroup update(String id, String newName, String newDescription,
 			String updateBy, Timestamp updateDate, List<String> newModules)
 			throws AppException {
 
@@ -122,5 +125,7 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 
 		getSession().save(userGroup);
 		commit();
+
+		return userGroup;
 	}
 }

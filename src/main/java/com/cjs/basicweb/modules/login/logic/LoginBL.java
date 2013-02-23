@@ -23,7 +23,7 @@ import com.cjs.core.exception.UserException;
 
 public class LoginBL extends BusinessLogic {
 
-	public User getByUserId(String userId) throws AppException {
+	public SimpleUser getByUserId(String userId) throws AppException {
 		if (userId == null || userId.trim().isEmpty()) {
 			throw new AppException(
 					PropertiesConstants.ERROR_PRIMARY_KEY_REQUIRED);
@@ -32,16 +32,15 @@ public class LoginBL extends BusinessLogic {
 		Criteria criteria = getSession().createCriteria(User.class);
 		criteria.add(Restrictions.eq("userId", userId).ignoreCase());
 
-		return (User) criteria.uniqueResult();
+		return (SimpleUser) criteria.uniqueResult();
 	}
 
-	public User performLogin(String userId, String password,
+	public SimpleUser performLogin(String userId, String password,
 			UserSession userSession) throws UserException, AppException {
 
-		User user = getByUserId(userId);
+		SimpleUser user = getByUserId(userId);
 		if (user == null) {
-			throw new AppException(
-					PropertiesConstants.INVALID_LOGIN_USERID);
+			throw new AppException(PropertiesConstants.INVALID_LOGIN_USERID);
 		}
 
 		validatePassword(user, password);
@@ -83,7 +82,8 @@ public class LoginBL extends BusinessLogic {
 		return result.toArray(new String[] {});
 	}
 
-	private void prepareTreeMenu(User user, UserSession userSession) throws AppException {
+	private void prepareTreeMenu(User user, UserSession userSession)
+			throws AppException {
 
 		LoggerFactory.getLogger(getClass()).debug("Begin to prepare tree menu");
 

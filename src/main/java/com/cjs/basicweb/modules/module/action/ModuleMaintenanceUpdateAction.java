@@ -1,13 +1,13 @@
 package com.cjs.basicweb.modules.module.action;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import com.cjs.basicweb.model.accesspath.AccessPath;
+import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.model.user.SimpleUser;
 import com.cjs.basicweb.modules.module.ModuleForm;
-import com.cjs.basicweb.utility.GeneralConstants;
-import com.cjs.core.UserSession;
+import com.cjs.basicweb.utility.CommonUtils;
+import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.core.exception.AppException;
 
 public class ModuleMaintenanceUpdateAction extends ModuleMaintenanceAction {
@@ -19,15 +19,17 @@ public class ModuleMaintenanceUpdateAction extends ModuleMaintenanceAction {
 	}
 
 	public String executeUpdate() throws AppException {
-		UserSession userSession = (UserSession) getSession().get(
-				GeneralConstants.USER_SESSION);
-		SimpleUser user = (SimpleUser) userSession.getUser();
+		SimpleUser user = (SimpleUser) getUserSession().getUser();
 
 		ModuleForm form = getForm();
-		getBL().update(form.getSelectedId(), form.getNewFirstEntry(),
-				form.getNewName(), form.getNewDescription(),
-				form.getNewParentId(), form.getNewURLs(), user.getId(),
-				new Timestamp(System.currentTimeMillis()));
+		Module module = getBL().update(form.getSelectedId(),
+				form.getNewFirstEntry(), form.getNewName(),
+				form.getNewDescription(), form.getNewParentId(),
+				form.getNewURLs(), user.getId(),
+				CommonUtils.getCurrentTimestamp());
+
+		saveActivityLog(ActionType.UPDATE, module);
+
 		return SUCCESS;
 	}
 

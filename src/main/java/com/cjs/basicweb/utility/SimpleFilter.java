@@ -1,8 +1,6 @@
 package com.cjs.basicweb.utility;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -16,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.LoggerFactory;
 
+import com.cjs.basicweb.modules.ModuleSession;
 import com.cjs.basicweb.modules.login.usersession.SimpleUserSession;
 import com.cjs.core.UserSession;
 
@@ -120,11 +119,10 @@ public class SimpleFilter implements Filter {
 
 	private void prepareModuleSession(HttpServletRequest request,
 			HttpSession session) {
-		@SuppressWarnings("unchecked")
-		Map<String, Object> moduleSession = (Map<String, Object>) session
+		ModuleSession moduleSession = (ModuleSession) session
 				.getAttribute(GeneralConstants.MODULE_SESSION);
 		if (moduleSession == null) {
-			moduleSession = new ConcurrentHashMap<String, Object>();
+			moduleSession = new ModuleSession();
 			session.setAttribute(GeneralConstants.MODULE_SESSION, moduleSession);
 		}
 

@@ -1,6 +1,7 @@
 package com.cjs.basicweb.modules.logout.action;
 
 import com.cjs.basicweb.modules.login.logic.LoginBL;
+import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.core.exception.AppException;
 import com.cjs.core.exception.UserException;
 import com.cjs.struts2.BaseAction;
@@ -15,6 +16,7 @@ public class LogoutExecuteAction extends BaseAction<LoginBL> {
 
 	@Override
 	public String execute() throws AppException, UserException {
+		saveActivityLog(ActionType.OTHER, "");
 		getSession().invalidate();
 		return SUCCESS;
 	}
