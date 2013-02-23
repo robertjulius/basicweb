@@ -1,3 +1,8 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.TreeMap"%>
+<%@page import="com.cjs.basicweb.modules.login.Privilege"%>
+<%@page
+	import="com.cjs.basicweb.modules.usergroupmaintenance.HtmlPrivilegeTreeGenerator"%>
 <%@page import="com.cjs.basicweb.utility.GeneralConstants"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -9,8 +14,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <s:head />
 <sj:head />
-<link rel="stylesheet"
-	href="/basicweb/css/ganesha-table-popupmenu-0.1.css" type="text/css" />
+
+<style type="text/css">
+ul {
+	list-style-type: none;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+</style>
+
 </head>
 <body>
 	<table>
@@ -34,16 +46,10 @@
 			<tr>
 				<td>
 					<table>
-						<s:textfield key="resource.moduleName" name="newName"
+						<s:textfield key="resource.userGroupName" name="newName"
 							theme="xhtml" />
 						<s:textfield key="resource.description" name="newDescription"
 							theme="xhtml" />
-						<s:textfield key="resource.firstEntry" name="newFirstEntry"
-							theme="xhtml" />
-						<s:select key="resource.parent" name="newParentId"
-							id="newParentId" list="selectListParent" listKey="key"
-							listValue="value" theme="xhtml" />
-						<s:hidden name="newParentName" id="newParentName" />
 					</table>
 				</td>
 			</tr>
@@ -54,27 +60,37 @@
 							<td><hr /></td>
 						</tr>
 					</table>
-					<table>
+					<table border="1px" bordercolor="#CCCCFF">
 						<tr>
-							<td><b>Access Paths</b></td>
+							<td><b><s:text name="resource.privileges" /></b></td>
 						</tr>
 						<tbody>
-							<s:iterator value="newAccessPaths" status="rowstatus">
-								<tr>
-									<td><s:textfield
-											name="listAccessPaths[%{#rowstatus.index}]" value="%{url}" /></td>
-									<td><input type="button" value="Remove"
-										onclick="removeRow($(this))" /></td>
-								</tr>
-							</s:iterator>
-						</tbody>
-						<tfoot>
 							<tr>
-								<td align="center" colspan="2"><input type="button"
-									value="Add" onclick="addRow($(this).closest('table'));" /></td>
+								<td>
+									<ul>
+										<%
+											@SuppressWarnings("unchecked")
+												List<String> newModuleIds = (List<String>) request
+														.getAttribute("newModuleIds");
+
+												@SuppressWarnings("unchecked")
+												TreeMap<String, Privilege> treeMap = (TreeMap<String, Privilege>) request
+														.getAttribute("treeMap");
+
+												String html = HtmlPrivilegeTreeGenerator.generateHtmlCheckBox(
+														treeMap, newModuleIds);
+
+												out.write(html);
+										%>
+									</ul>
+								</td>
 							</tr>
-						</tfoot>
+						</tbody>
 					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
 					<table width="100%">
 						<tr>
 							<td><hr /></td>

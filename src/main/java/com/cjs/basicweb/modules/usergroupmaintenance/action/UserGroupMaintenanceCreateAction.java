@@ -46,6 +46,8 @@ public class UserGroupMaintenanceCreateAction extends
 			form.getNewModuleIds().clear();
 		}
 
+		form.setSelectedId(null);
+
 		return SUCCESS;
 	}
 

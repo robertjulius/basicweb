@@ -1,3 +1,7 @@
+<%@page import="java.util.TreeMap"%>
+<%@page import="com.cjs.basicweb.modules.login.Privilege"%>
+<%@page
+	import="com.cjs.basicweb.modules.usergroupmaintenance.HtmlPrivilegeTreeGenerator"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
@@ -8,6 +12,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <s:head />
 <sj:head />
+
+<style type="text/css">
+ul {
+	list-style-type: none;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+</style>
+
 </head>
 <body>
 	<table>
@@ -19,7 +32,8 @@
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/module/executeNew.action" theme="simple">
+	<s:form action="/modules/usergroupmaintenance/executeCreate.action"
+		theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
 				<s:actionerror />
@@ -29,15 +43,16 @@
 		<table class="form">
 			<tr>
 				<td>
-					<table class="grid">
+					<table class="grid" id="grid2">
 						<thead>
 							<tr>
-								<td colspan="2"><s:text name="resource.moduleInformation" /></td>
+								<td colspan="2"><s:text
+										name="resource.userGroupInformation" /></td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td align="right"><s:text name="resource.moduleName" /></td>
+								<td align="right"><s:text name="resource.userGroupName" /></td>
 								<td align="left"><s:label name="newName" /></td>
 							</tr>
 							<tr>
@@ -45,23 +60,14 @@
 								<td align="left"><s:label name="newDescription" /></td>
 							</tr>
 							<tr>
-								<td align="right"><s:text name="resource.firstEntry" /></td>
-								<td align="left"><s:label name="newFirstEntry" /></td>
-							</tr>
-							<tr>
-								<td align="right"><s:text name="resource.parent" /></td>
-								<td align="left"><s:label name="newParentName" /></td>
-							</tr>
-							<tr>
-								<td align="left" colspan="2">
-									<table>
-										<tr><td><b><s:text name="resource.accessPaths" /></b></td></tr>
-										<s:iterator value="newAccessPaths" status="rowstatus">
-											<tr>
-												<td>&#149; <s:property /></td>
-											</tr>
-										</s:iterator>
-									</table>
+								<td colspan="2">
+									<ul>
+										<%
+												@SuppressWarnings("unchecked")
+												TreeMap<String, Privilege> newTreeMap = (TreeMap<String, Privilege>) request.getAttribute("newTreeMap");
+												out.write(HtmlPrivilegeTreeGenerator.generateHtmlTree(newTreeMap));
+										%>
+									</ul>
 								</td>
 							</tr>
 						</tbody>
@@ -74,7 +80,7 @@
 						<tr>
 							<td><input type="button"
 								value="<s:text name="resource.back"/>"
-								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/prepareNew.action'); $(this).closest('form').submit();" /></td>
+								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usergroupmaintenance/formCreate.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.submit"/>"
 								onclick="$(this).closest('form').submit();" /></td>
@@ -87,7 +93,8 @@
 </body>
 <script type="text/javascript">
 	window.onload = function() {
-		stripeTable($('table.grid'));
+		stripeTable($('table#grid1'));
+		stripeTable($('table#grid2'));
 	}
 </script>
 </html>

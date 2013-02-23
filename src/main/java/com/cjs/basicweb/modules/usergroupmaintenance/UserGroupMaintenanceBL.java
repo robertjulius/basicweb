@@ -1,6 +1,7 @@
 package com.cjs.basicweb.modules.usergroupmaintenance;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -30,7 +31,7 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 		userGroup.setUpdateDate(createDate);
 		userGroup.setRecStatus(GeneralConstants.REC_STATUS_ACTIVE);
 
-		userGroup.getModules().clear();
+		userGroup.setModules(new ArrayList<Module>());
 		for (String moduleId : newModules) {
 			Module module = (Module) getSession().load(Module.class, moduleId);
 			userGroup.getModules().add(module);
