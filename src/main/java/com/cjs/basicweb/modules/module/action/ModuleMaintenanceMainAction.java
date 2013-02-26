@@ -16,7 +16,7 @@ public class ModuleMaintenanceMainAction extends ModuleMaintenanceAction {
 
 	public String initial() throws AppException {
 		ModuleForm form = getForm();
-		List<Module> modules = getBL().getAllModules(form.getSelectedId());
+		List<Module> modules = getBL().getAllModules();
 		modules.add(0, new Module());
 		form.setSelectListParent(modules);
 		return SUCCESS;

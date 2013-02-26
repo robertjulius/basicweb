@@ -19,7 +19,7 @@
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/module/prepareUpdate.action" theme="simple">
+	<s:form theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
 				<s:actionerror />
@@ -55,7 +55,9 @@
 							<tr>
 								<td align="left" colspan="2">
 									<table>
-										<tr><td><b><s:text name="resource.accessPaths" /></b></td></tr>
+										<tr>
+											<td><b><s:text name="resource.accessPaths" /></b></td>
+										</tr>
 										<s:iterator value="old.accessPaths" status="rowstatus">
 											<tr>
 												<td>&#149; <s:property value="url" /></td>
@@ -77,7 +79,7 @@
 								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/searchResult.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.edit"/>"
-								onclick="$(this).closest('form').submit();" /></td>
+								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/prepareUpdate.action'); if (confirmAction()) {$(this).closest('form').submit();}" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.delete"/>"
 								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/executeDelete.action'); if (confirmAction()) {$(this).closest('form').submit();}" /></td>

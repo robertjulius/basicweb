@@ -23,7 +23,7 @@ import com.cjs.basicweb.model.usergroup.UserGroup;
 @org.hibernate.annotations.Entity(dynamicUpdate = true)
 public class Module extends Trackable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1218882314919256632L;
 
 	@Id
 	@GeneratedValue(generator = "system-uuid")

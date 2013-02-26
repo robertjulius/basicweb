@@ -73,7 +73,7 @@ public class ModuleBL extends BusinessLogic {
 		commit();
 	}
 
-	public List<Module> getAllModules(String id) throws AppException {
+	public List<Module> getAllModules() throws AppException {
 		Criteria criteria = getSession().createCriteria(Module.class);
 
 		@SuppressWarnings("unchecked")
@@ -88,7 +88,9 @@ public class ModuleBL extends BusinessLogic {
 
 	public List<Module> search(String name, String firstEntry, String parentId)
 			throws AppException {
+
 		Criteria criteria = getSession().createCriteria(Module.class);
+
 		if (name != null && !name.trim().isEmpty()) {
 			criteria.add(Restrictions.like("name", "%" + name + "%"));
 		}

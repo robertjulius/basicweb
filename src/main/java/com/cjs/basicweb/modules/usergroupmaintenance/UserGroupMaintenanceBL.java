@@ -58,8 +58,8 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 		userGroup.setUpdateBy(updateBy);
 		userGroup.setUpdateDate(updateDate);
 		userGroup.setRecStatus(GeneralConstants.REC_STATUS_NONACTIVE);
-		getSession().update(userGroup);
 
+		getSession().update(userGroup);
 		saveActivityLog(ActionType.DELETE, "Delete usergroup with id " + id);
 
 		commit();
@@ -92,7 +92,9 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 
 	public List<UserGroup> search(String name, String description)
 			throws AppException {
+
 		Criteria criteria = getSession().createCriteria(UserGroup.class);
+
 		if (name != null && !name.trim().isEmpty()) {
 			criteria.add(Restrictions.like("name", "%" + name + "%"));
 		}

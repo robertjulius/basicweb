@@ -35,7 +35,9 @@ public class MappingUtils {
 					stringBuilder.append(";").append(name).append("=");
 
 					Object value = method.invoke(object);
-					if (Collection.class.isAssignableFrom(value.getClass())) {
+					if (value != null
+							&& Collection.class.isAssignableFrom(value
+									.getClass())) {
 						stringBuilder.append("#")
 								.append(value.getClass().getSimpleName())
 								.append("#");
