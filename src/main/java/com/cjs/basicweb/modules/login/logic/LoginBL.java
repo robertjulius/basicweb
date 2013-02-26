@@ -15,6 +15,8 @@ import com.cjs.basicweb.modules.BusinessLogic;
 import com.cjs.basicweb.modules.login.Privilege;
 import com.cjs.basicweb.modules.login.PrivilegeUtils;
 import com.cjs.basicweb.modules.login.usersession.SimpleUserSession;
+import com.cjs.basicweb.utility.CommonUtils;
+import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.basicweb.utility.PropertiesConstants;
 import com.cjs.core.User;
 import com.cjs.core.UserSession;
@@ -49,6 +51,13 @@ public class LoginBL extends BusinessLogic {
 
 		((SimpleUserSession) userSession)
 				.setAccessPath(prepareAccessPath(user));
+
+		userSession.setUser(user);
+		userSession.setLoginTime(CommonUtils.getCurrentTimestamp());
+
+		beginTransaction();
+		saveActivityLog(ActionType.OTHER, "");
+		commit();
 
 		return user;
 	}

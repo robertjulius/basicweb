@@ -11,15 +11,15 @@ import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.model.usergroup.UserGroup;
 import com.cjs.basicweb.modules.BusinessLogic;
 import com.cjs.basicweb.utility.GeneralConstants;
+import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.basicweb.utility.PropertiesConstants;
 import com.cjs.core.exception.AppException;
 import com.cjs.core.exception.UserException;
 
 public class UserGroupMaintenanceBL extends BusinessLogic {
 
-	public UserGroup create(String newName, String newDescription,
-			String createBy, Timestamp createDate, List<String> newModules)
-			throws AppException {
+	public void create(String newName, String newDescription, String createBy,
+			Timestamp createDate, List<String> newModules) throws AppException {
 
 		beginTransaction();
 
@@ -39,9 +39,9 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 		}
 
 		getSession().save(userGroup);
-		commit();
+		saveActivityLog(ActionType.CREATE, userGroup);
 
-		return userGroup;
+		commit();
 	}
 
 	public void delete(String id, String updateBy, Timestamp updateDate)
@@ -59,6 +59,9 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 		userGroup.setUpdateDate(updateDate);
 		userGroup.setRecStatus(GeneralConstants.REC_STATUS_NONACTIVE);
 		getSession().update(userGroup);
+
+		saveActivityLog(ActionType.DELETE, "Delete usergroup with id " + id);
+
 		commit();
 	}
 
@@ -104,7 +107,7 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 		return userGroups;
 	}
 
-	public UserGroup update(String id, String newName, String newDescription,
+	public void update(String id, String newName, String newDescription,
 			String updateBy, Timestamp updateDate, List<String> newModules)
 			throws AppException {
 
@@ -124,8 +127,8 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 		}
 
 		getSession().save(userGroup);
-		commit();
+		saveActivityLog(ActionType.UPDATE, userGroup);
 
-		return userGroup;
+		commit();
 	}
 }

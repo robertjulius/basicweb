@@ -23,22 +23,18 @@ public class ActivityLog implements Serializable {
 	@Column(name = "user_name", nullable = false)
 	private String userName;
 
-	@Column(name = "action_class", nullable = false)
-	private String actionClass;
+	@Column(name = "action_url", nullable = false)
+	private String actionUrl;
 
 	@Column(name = "action_type", nullable = false)
 	private String actionType;
 
-	@Column(name = "description", nullable = false)
+	@Column(name = "description", nullable = false, length = 1024)
 	private String description;
 
 	@Id
 	@Column(name = "action_date")
 	private Timestamp actionDate;
-
-	public String getActionClass() {
-		return actionClass;
-	}
 
 	public Timestamp getActionDate() {
 		return actionDate;
@@ -46,6 +42,10 @@ public class ActivityLog implements Serializable {
 
 	public String getActionType() {
 		return actionType;
+	}
+
+	public String getActionUrl() {
+		return actionUrl;
 	}
 
 	public String getDescription() {
@@ -64,16 +64,16 @@ public class ActivityLog implements Serializable {
 		return userName;
 	}
 
-	public void setActionClass(String actionClass) {
-		this.actionClass = actionClass;
-	}
-
 	public void setActionDate(Timestamp actionDate) {
 		this.actionDate = actionDate;
 	}
 
 	public void setActionType(String actionType) {
 		this.actionType = actionType;
+	}
+
+	public void setActionUrl(String actionUrl) {
+		this.actionUrl = actionUrl;
 	}
 
 	public void setDescription(String description) {

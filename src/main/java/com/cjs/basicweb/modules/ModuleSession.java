@@ -10,9 +10,6 @@ public class ModuleSession implements Serializable {
 
 	private Map<String, Object> map;
 
-	private String moduleId;
-	private String moduleName;
-
 	public ModuleSession() {
 		map = new ConcurrentHashMap<String, Object>();
 	}
@@ -25,23 +22,15 @@ public class ModuleSession implements Serializable {
 		return map.get(key);
 	}
 
-	public String getModuleId() {
-		return moduleId;
-	}
-
-	public String getModuleName() {
-		return moduleName;
+	public String getUrl() {
+		return (String) map.get("url");
 	}
 
 	public void put(String key, Object value) {
 		map.put(key, value);
 	}
 
-	public void setModuleId(String moduleId) {
-		this.moduleId = moduleId;
-	}
-
-	public void setModuleName(String moduleName) {
-		this.moduleName = moduleName;
+	public void setUrl(String url) {
+		map.put("url", url);
 	}
 }

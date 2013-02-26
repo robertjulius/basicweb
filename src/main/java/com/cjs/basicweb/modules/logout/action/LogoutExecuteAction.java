@@ -1,5 +1,6 @@
 package com.cjs.basicweb.modules.logout.action;
 
+import com.cjs.basicweb.modules.BusinessLogic;
 import com.cjs.basicweb.modules.login.logic.LoginBL;
 import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.core.exception.AppException;
@@ -16,7 +17,15 @@ public class LogoutExecuteAction extends BaseAction<LoginBL> {
 
 	@Override
 	public String execute() throws AppException, UserException {
-		saveActivityLog(ActionType.OTHER, "");
+		BusinessLogic logic = new BusinessLogic() {
+			/*
+			 * Nothing to implements
+			 */
+		};
+		logic.beginTransaction();
+		logic.saveActivityLog(ActionType.OTHER, "");
+		logic.commit();
+
 		getSession().invalidate();
 		return SUCCESS;
 	}

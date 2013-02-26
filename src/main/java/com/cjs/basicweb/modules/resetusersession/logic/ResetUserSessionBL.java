@@ -8,6 +8,7 @@ import com.cjs.basicweb.modules.login.usersession.SimpleSessionManager;
 import com.cjs.basicweb.modules.login.usersession.SimpleUserSession;
 import com.cjs.basicweb.utility.AppContextManager;
 import com.cjs.basicweb.utility.GeneralConstants;
+import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.core.UserSession;
 import com.cjs.core.exception.AppException;
 
@@ -31,5 +32,7 @@ public class ResetUserSessionBL extends BusinessLogic {
 
 	public void reset(String userId) throws AppException {
 		AppContextManager.getSessionManager().getByUserId(userId).invalidate();
+		saveActivityLog(ActionType.OTHER, "Reset user session with id "
+				+ userId);
 	}
 }

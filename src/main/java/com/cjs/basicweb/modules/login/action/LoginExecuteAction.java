@@ -1,13 +1,10 @@
 package com.cjs.basicweb.modules.login.action;
 
-import com.cjs.basicweb.model.user.SimpleUser;
 import com.cjs.basicweb.modules.login.form.LoginForm;
 import com.cjs.basicweb.modules.login.logic.LoginBL;
 import com.cjs.basicweb.modules.login.usersession.SimpleUserSession;
 import com.cjs.basicweb.utility.AppContextManager;
-import com.cjs.basicweb.utility.CommonUtils;
 import com.cjs.basicweb.utility.GeneralConstants;
-import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.core.UserSession;
 import com.cjs.core.exception.AppException;
 import com.cjs.core.exception.UserException;
@@ -27,18 +24,15 @@ public class LoginExecuteAction extends FormAction<LoginForm, LoginBL> {
 	@Override
 	public String execute() throws AppException {
 		try {
-			SimpleUser user = getBL().performLogin(getForm().getUserId(),
-					getForm().getPassword(), userSession);
-			userSession.setUser(user);
-			userSession.setLoginTime(CommonUtils.getCurrentTimestamp());
 			getSession().put(GeneralConstants.USER_SESSION, userSession);
+			getBL().performLogin(getForm().getUserId(),
+					getForm().getPassword(), userSession);
 			AppContextManager.getSessionManager().registerSession(
 					getRequest().getSession());
 
-			saveActivityLog(ActionType.OTHER, "");
-
 			return SUCCESS;
 		} catch (UserException e) {
+			getSession().remove(GeneralConstants.USER_SESSION);
 			addActionError(e.getMessageId());
 			return INPUT;
 		}

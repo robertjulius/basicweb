@@ -3,11 +3,9 @@ package com.cjs.basicweb.modules.module.action;
 import java.util.ArrayList;
 
 import com.cjs.basicweb.model.accesspath.AccessPath;
-import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.model.user.SimpleUser;
 import com.cjs.basicweb.modules.module.ModuleForm;
 import com.cjs.basicweb.utility.CommonUtils;
-import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.core.exception.AppException;
 
 public class ModuleMaintenanceUpdateAction extends ModuleMaintenanceAction {
@@ -22,13 +20,10 @@ public class ModuleMaintenanceUpdateAction extends ModuleMaintenanceAction {
 		SimpleUser user = (SimpleUser) getUserSession().getUser();
 
 		ModuleForm form = getForm();
-		Module module = getBL().update(form.getSelectedId(),
-				form.getNewFirstEntry(), form.getNewName(),
-				form.getNewDescription(), form.getNewParentId(),
-				form.getNewURLs(), user.getId(),
+		getBL().update(form.getSelectedId(), form.getNewFirstEntry(),
+				form.getNewName(), form.getNewDescription(),
+				form.getNewParentId(), form.getNewURLs(), user.getId(),
 				CommonUtils.getCurrentTimestamp());
-
-		saveActivityLog(ActionType.UPDATE, module);
 
 		return SUCCESS;
 	}

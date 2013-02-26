@@ -6,12 +6,10 @@ import java.util.TreeMap;
 
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.model.user.SimpleUser;
-import com.cjs.basicweb.model.usergroup.UserGroup;
 import com.cjs.basicweb.modules.login.Privilege;
 import com.cjs.basicweb.modules.login.PrivilegeUtils;
 import com.cjs.basicweb.modules.usergroupmaintenance.UserGroupMaintenanceForm;
 import com.cjs.basicweb.utility.CommonUtils;
-import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.core.exception.AppException;
 
 public class UserGroupMaintenanceCreateAction extends
@@ -27,11 +25,9 @@ public class UserGroupMaintenanceCreateAction extends
 		SimpleUser user = (SimpleUser) getUserSession().getUser();
 
 		UserGroupMaintenanceForm form = getForm();
-		UserGroup userGroup = getBL().create(form.getNewName(),
-				form.getNewDescription(), user.getId(),
-				CommonUtils.getCurrentTimestamp(), form.getNewModuleIds());
-
-		saveActivityLog(ActionType.CREATE, userGroup);
+		getBL().create(form.getNewName(), form.getNewDescription(),
+				user.getId(), CommonUtils.getCurrentTimestamp(),
+				form.getNewModuleIds());
 
 		return SUCCESS;
 	}

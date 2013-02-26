@@ -1,7 +1,6 @@
 package com.cjs.basicweb.modules.module.action;
 
 import com.cjs.basicweb.modules.module.ModuleForm;
-import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.core.exception.AppException;
 import com.cjs.core.exception.UserException;
 
@@ -17,9 +16,6 @@ public class ModuleMaintenanceDeleteAction extends ModuleMaintenanceAction {
 		ModuleForm form = getForm();
 		try {
 			getBL().delete(form.getSelectedId());
-
-			saveActivityLog(ActionType.DELETE,
-					"Delete module with id " + form.getSelectedId());
 
 			return SUCCESS;
 		} catch (UserException e) {

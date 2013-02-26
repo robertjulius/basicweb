@@ -78,7 +78,7 @@ public class SimpleFilter implements Filter {
 			}
 		}
 
-		prepareModuleSession(request, session);
+		prepareModuleSession(request, session, url);
 
 		chain.doFilter(req, resp);
 	}
@@ -118,7 +118,7 @@ public class SimpleFilter implements Filter {
 	}
 
 	private void prepareModuleSession(HttpServletRequest request,
-			HttpSession session) {
+			HttpSession session, String url) {
 		ModuleSession moduleSession = (ModuleSession) session
 				.getAttribute(GeneralConstants.MODULE_SESSION);
 		if (moduleSession == null) {
@@ -130,5 +130,7 @@ public class SimpleFilter implements Filter {
 		if (initial != null && initial.trim().equalsIgnoreCase("true")) {
 			moduleSession.clear();
 		}
+
+		moduleSession.setUrl(url);
 	}
 }

@@ -12,13 +12,14 @@ import com.cjs.basicweb.model.accesspath.AccessPath;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.modules.BusinessLogic;
 import com.cjs.basicweb.utility.GeneralConstants;
+import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.basicweb.utility.PropertiesConstants;
 import com.cjs.core.exception.AppException;
 import com.cjs.core.exception.UserException;
 
 public class ModuleBL extends BusinessLogic {
 
-	public Module create(String newFirstEntry, String newName,
+	public void create(String newFirstEntry, String newName,
 			String newDescription, String newParentId,
 			List<String> newAccesssPaths, String createBy, Timestamp createDate)
 			throws AppException {
@@ -54,9 +55,9 @@ public class ModuleBL extends BusinessLogic {
 		}
 
 		getSession().save(module);
-		commit();
+		saveActivityLog(ActionType.CREATE, module);
 
-		return module;
+		commit();
 	}
 
 	public void delete(String id) throws UserException, AppException {
@@ -66,6 +67,8 @@ public class ModuleBL extends BusinessLogic {
 
 		Module module = (Module) getSession().load(Module.class, id);
 		recursiveDelete(module);
+
+		saveActivityLog(ActionType.DELETE, "Delete module with id " + id);
 
 		commit();
 	}
@@ -104,7 +107,7 @@ public class ModuleBL extends BusinessLogic {
 		return modules;
 	}
 
-	public Module update(String id, String newFirstEntry, String newName,
+	public void update(String id, String newFirstEntry, String newName,
 			String newDescription, String newParentId,
 			List<String> newAccesssPaths, String updateBy, Timestamp updateDate)
 			throws AppException {
@@ -138,9 +141,9 @@ public class ModuleBL extends BusinessLogic {
 		}
 
 		getSession().save(module);
-		commit();
+		saveActivityLog(ActionType.UPDATE, module);
 
-		return module;
+		commit();
 	}
 
 	private void checkDependencyToMsPrivilege(String moduleId)

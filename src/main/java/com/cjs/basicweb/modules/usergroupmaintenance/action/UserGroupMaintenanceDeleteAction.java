@@ -3,7 +3,6 @@ package com.cjs.basicweb.modules.usergroupmaintenance.action;
 import com.cjs.basicweb.model.user.SimpleUser;
 import com.cjs.basicweb.modules.usergroupmaintenance.UserGroupMaintenanceForm;
 import com.cjs.basicweb.utility.CommonUtils;
-import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.core.exception.AppException;
 import com.cjs.core.exception.UserException;
 
@@ -23,9 +22,6 @@ public class UserGroupMaintenanceDeleteAction extends
 		try {
 			getBL().delete(form.getSelectedId(), user.getId(),
 					CommonUtils.getCurrentTimestamp());
-
-			saveActivityLog(ActionType.DELETE, "Delete usergroup with id "
-					+ form.getSelectedId());
 
 			return SUCCESS;
 		} catch (UserException e) {
