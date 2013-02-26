@@ -65,4 +65,14 @@
 		</table>
 	</s:form>
 </body>
+<script type="text/javascript">
+	$(function() {
+		$('#newUserGroupId').change(
+				function() {
+					$('#newUserGroupName').val(
+							$(this).children("option").filter(":selected")
+									.text());
+				});
+	});
+</script>
 </html>
