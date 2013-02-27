@@ -19,22 +19,27 @@
 	</table>
 	<table class="form">
 		<tr>
-			<td align="right"><s:form
-					action="/modules/usermaintenance/prepareCreate.action" method="post">
-					<s:submit key="resource.create.new" name="%{resource.create.new}"/>
-				</s:form></td>
+			<td>
+				<ul>
+					<li><a
+						href="<%=request.getContextPath()%>/modules/usermaintenance/prepareCreate.action">
+							<b><s:text name="resource.create.new" /></b>
+					</a></li>
+				</ul>
+			</td>
 		</tr>
 		<tr>
 			<td><hr /></td>
 		</tr>
 		<tr>
-			<td><s:form action="/modules/usermaintenance/search.action" method="post">
+			<td><s:form action="/modules/usermaintenance/search.action"
+					method="post">
 					<s:actionerror />
 					<s:fielderror />
 					<s:textfield key="resource.userId" name="searchUserId" />
 					<s:textfield key="resource.userName" name="searchName" />
 					<s:textfield key="resource.userGroup" name="searchUserGroupName" />
-					<s:submit key="resource.search" name="%{resource.search}"/>
+					<s:submit key="resource.search" name="%{resource.search}" />
 				</s:form></td>
 		</tr>
 	</table>

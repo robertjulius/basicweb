@@ -25,3 +25,7 @@ thead {
 	color: white;
 	font-weight: bold;
 }
+
+a {
+	text-decoration: none;
+}

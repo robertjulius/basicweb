@@ -29,7 +29,7 @@
 				<s:fielderror />
 			</table>
 		</s:if>
-		<s:hidden name="userId"/>
+		<s:hidden name="userId" />
 		<table class="form">
 			<tr>
 				<td>

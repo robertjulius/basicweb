@@ -19,10 +19,14 @@
 	</table>
 	<table class="form">
 		<tr>
-			<td align="right"><s:form
-					action="/modules/module/prepareCreate.action" method="post">
-					<s:submit key="resource.create.new" name="%{resource.create.new}"/>
-				</s:form></td>
+			<td>
+				<ul>
+					<li><a
+						href="<%=request.getContextPath()%>/modules/module/prepareCreate.action">
+							<b><s:text name="resource.create.new" /></b>
+					</a></li>
+				</ul>
+			</td>
 		</tr>
 		<tr>
 			<td><hr /></td>
@@ -34,7 +38,7 @@
 					<s:textfield key="resource.moduleName" name="searchName" />
 					<s:textfield key="resource.firstEntry" name="searchFirstEntry" />
 					<s:textfield key="resource.parent" name="searchParentId" />
-					<s:submit key="resource.search" name="%{resource.search}"/>
+					<s:submit key="resource.search" name="%{resource.search}" />
 				</s:form></td>
 		</tr>
 	</table>
