@@ -16,6 +16,7 @@ import com.cjs.basicweb.modules.login.Privilege;
 import com.cjs.basicweb.modules.login.PrivilegeUtils;
 import com.cjs.basicweb.modules.login.usersession.SimpleUserSession;
 import com.cjs.basicweb.utility.CommonUtils;
+import com.cjs.basicweb.utility.GeneralConstants;
 import com.cjs.basicweb.utility.GeneralConstants.ActionType;
 import com.cjs.basicweb.utility.PropertiesConstants;
 import com.cjs.core.User;
@@ -33,6 +34,8 @@ public class LoginBL extends BusinessLogic {
 
 		Criteria criteria = getSession().createCriteria(User.class);
 		criteria.add(Restrictions.eq("userId", userId).ignoreCase());
+		criteria.add(Restrictions.eq("recStatus",
+				GeneralConstants.REC_STATUS_ACTIVE));
 
 		return (SimpleUser) criteria.uniqueResult();
 	}

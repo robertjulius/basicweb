@@ -36,10 +36,12 @@
 							size="30px" />
 						<s:textfield key="resource.userName" name="newName" theme="xhtml"
 							size="30px" />
+						<s:textfield key="resource.password" name="newPassword"
+							theme="xhtml" size="30px" />
 						<s:select key="resource.userGroup" name="newUserGroupId"
 							id="newUserGroupId" list="selectListUserGroup" listKey="id"
 							listValue="name" theme="xhtml" />
-						<s:hidden name="newUserGroupName" id="newUSerGroupName" />
+						<s:hidden name="newUserGroupName" id="newUserGroupName" />
 					</table>
 				</td>
 			</tr>
@@ -65,4 +67,14 @@
 		</table>
 	</s:form>
 </body>
+<script type="text/javascript">
+	$(function() {
+		$('#newUserGroupId').change(
+				function() {
+					$('#newUserGroupName').val(
+							$(this).children("option").filter(":selected")
+									.text());
+				});
+	});
+</script>
 </html>

@@ -75,6 +75,8 @@ public class ModuleBL extends BusinessLogic {
 
 	public List<Module> getAllModules() throws AppException {
 		Criteria criteria = getSession().createCriteria(Module.class);
+		criteria.add(Restrictions.eq("recStatus",
+				GeneralConstants.REC_STATUS_ACTIVE));
 
 		@SuppressWarnings("unchecked")
 		List<Module> modules = criteria.list();
@@ -82,8 +84,17 @@ public class ModuleBL extends BusinessLogic {
 	}
 
 	public Module getDetail(String moduleId) throws AppException {
-		Module module = (Module) getSession().get(Module.class, moduleId);
-		return module;
+		if (moduleId == null || moduleId.trim().isEmpty()) {
+			throw new AppException(
+					PropertiesConstants.ERROR_PRIMARY_KEY_REQUIRED);
+		}
+
+		Criteria criteria = getSession().createCriteria(Module.class);
+		criteria.add(Restrictions.eq("id", moduleId).ignoreCase());
+		criteria.add(Restrictions.eq("recStatus",
+				GeneralConstants.REC_STATUS_ACTIVE));
+
+		return (Module) criteria.uniqueResult();
 	}
 
 	public List<Module> search(String name, String firstEntry, String parentId)
@@ -103,6 +114,9 @@ public class ModuleBL extends BusinessLogic {
 		if (parentId != null && !parentId.trim().isEmpty()) {
 			criteria.add(Restrictions.like("parent.id", "%" + parentId + "%"));
 		}
+
+		criteria.add(Restrictions.eq("recStatus",
+				GeneralConstants.REC_STATUS_ACTIVE));
 
 		@SuppressWarnings("unchecked")
 		List<Module> modules = criteria.list();

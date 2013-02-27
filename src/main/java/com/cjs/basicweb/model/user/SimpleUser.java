@@ -80,6 +80,6 @@ public class SimpleUser extends Trackable implements User {
 
 	@Override
 	public void setUserId(String userId) {
-		setUserId(userId);
+		this.userId = userId;
 	}
 }

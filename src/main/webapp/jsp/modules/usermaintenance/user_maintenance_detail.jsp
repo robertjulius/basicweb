@@ -61,7 +61,7 @@
 								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usermaintenance/searchResult.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.edit"/>"
-								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usermaintenance/prepareUpdate.action'); if (confirmAction()) {$(this).closest('form').submit();}" /></td>
+								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usermaintenance/prepareUpdate.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.delete"/>"
 								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usermaintenance/executeDelete.action'); if (confirmAction()) {$(this).closest('form').submit();}" /></td>
