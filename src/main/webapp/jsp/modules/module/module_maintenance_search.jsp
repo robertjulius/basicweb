@@ -54,6 +54,20 @@
 					</table>
 				</td>
 			</tr>
+			<tr>
+				<td><table>
+						<tr>
+							<td>Showing 11 - 20 data</td>
+							<td><b>|&#60;</b></td>
+							<td><b>&#60;</b></td>
+							<td><input type="text" value="5" size="1px" /></td>
+							<td>/</td>
+							<td>10</td>
+							<td><b>&#62;</b></td>
+							<td><b>&#62;|</b></td>
+						</tr>
+					</table></td>
+			</tr>
 			<tr align="center">
 				<td>
 					<table>
