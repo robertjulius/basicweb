@@ -3,6 +3,7 @@ package com.cjs.basicweb.modules.module;
 import java.util.List;
 
 import com.cjs.basicweb.model.FormBean;
+import com.cjs.basicweb.model.Pagination;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.core.exception.AppException;
 import com.opensymphony.xwork2.ActionSupport;
@@ -15,18 +16,21 @@ public class ModuleForm extends FormBean {
 	private String searchName;
 	private String searchFirstEntry;
 	private String searchParentId;
-	private String selectedId;
 	private List<Module> searchResult;
+
+	private Pagination pagination;
+	private String selectedId;
 
 	private Module old;
 
 	private String newFirstEntry;
+
 	private String newName;
+
 	private String newDescription;
 	private String newParentId;
 	private String newParentName;
 	private List<String> newURLs;
-
 	private List<Module> selectListParent;
 
 	public String getNewDescription() {
@@ -55,6 +59,10 @@ public class ModuleForm extends FormBean {
 
 	public Module getOld() {
 		return old;
+	}
+
+	public Pagination getPagination() {
+		return pagination;
 	}
 
 	public String getSearchFirstEntry() {
@@ -111,6 +119,10 @@ public class ModuleForm extends FormBean {
 
 	public void setOld(Module old) {
 		this.old = old;
+	}
+
+	public void setPagination(Pagination pagination) {
+		this.pagination = pagination;
 	}
 
 	public void setSearchFirstEntry(String searchFirstEntry) {

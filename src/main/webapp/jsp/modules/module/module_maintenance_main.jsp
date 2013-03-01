@@ -38,6 +38,10 @@
 					<s:textfield key="resource.moduleName" name="searchName" />
 					<s:textfield key="resource.firstEntry" name="searchFirstEntry" />
 					<s:textfield key="resource.parent" name="searchParentId" />
+					<s:select key="resource.rowsPerPage"
+						list="pagination.availableRowsPerPage"
+						name="pagination.rowsPerPage" />
+					<s:hidden name="pagination.pageNumber" value="1" />
 					<s:submit key="resource.search" name="%{resource.search}" />
 				</s:form></td>
 		</tr>

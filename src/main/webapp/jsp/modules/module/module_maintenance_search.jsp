@@ -51,22 +51,34 @@
 								</tr>
 							</s:iterator>
 						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="3"><table class="pagination">
+										<s:hidden name="pagination.pageNumber" />
+										<tr>
+											<td><b>First</b></td>
+											<td><b>Previous</b></td>
+											<s:iterator var="counter" begin="1"
+												end="pagination.totalPage" status="rowstatus">
+												<td><s:if
+														test='#rowstatus.index+1 == pagination.pageNumber'>
+														<b><s:property value="%{#rowstatus.index+1}" /></b>
+													</s:if> <s:else>
+														<a
+															onclick="$(this).closest('form').find('input#prepareDetail_pagination_pageNumber').val('<s:property value="%{#rowstatus.index+1}" />')"
+															href="<%=request.getContextPath()%>/modules/module/search.action">
+															<s:property value="%{#rowstatus.index+1}" />
+														</a>
+													</s:else></td>
+											</s:iterator>
+											<td><b>Next</b></td>
+											<td><b>Last</b></td>
+										</tr>
+									</table></td>
+							</tr>
+						</tfoot>
 					</table>
 				</td>
-			</tr>
-			<tr>
-				<td><table>
-						<tr>
-							<td>Showing 11 - 20 data</td>
-							<td><b>|&#60;</b></td>
-							<td><b>&#60;</b></td>
-							<td><input type="text" value="5" size="1px" /></td>
-							<td>/</td>
-							<td>10</td>
-							<td><b>&#62;</b></td>
-							<td><b>&#62;|</b></td>
-						</tr>
-					</table></td>
 			</tr>
 			<tr align="center">
 				<td>
