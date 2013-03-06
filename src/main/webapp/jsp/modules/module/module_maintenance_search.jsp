@@ -65,9 +65,8 @@
 														<b><s:property value="%{#rowstatus.index+1}" /></b>
 													</s:if> <s:else>
 														<a
-															onclick="$(this).closest('form').find('input#prepareDetail_pagination_pageNumber').val('<s:property value="%{#rowstatus.index+1}" />')"
-															href="<%=request.getContextPath()%>/modules/module/search.action">
-															<s:property value="%{#rowstatus.index+1}" />
+															onclick="$(this).closest('form').find('input#prepareDetail_pagination_pageNumber').val('<s:property value="%{#rowstatus.index+1}" />'); $(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/module/search.action'); $(this).closest('form').submit();"
+															href="#"> <s:property value="%{#rowstatus.index+1}" />
 														</a>
 													</s:else></td>
 											</s:iterator>

@@ -117,7 +117,7 @@ public class ModuleBL extends BusinessLogic {
 			criteria.add(Restrictions.like("parent.id", "%" + parentId + "%"));
 		}
 
-		criteria.setFirstResult(pagination.getPageNumber() - 1);
+		criteria.setFirstResult((pagination.getPageNumber() - 1) * 5);
 		criteria.setMaxResults(pagination.getRowsPerPage());
 
 		criteria.add(Restrictions.eq("recStatus",
@@ -126,6 +126,8 @@ public class ModuleBL extends BusinessLogic {
 		@SuppressWarnings("unchecked")
 		List<Module> modules = criteria.list();
 
+		criteria.setFirstResult(0);
+		criteria.setMaxResults(1);
 		int rowCount = (int) criteria.setProjection(Projections.rowCount())
 				.uniqueResult();
 		pagination.setRowCount(rowCount);
