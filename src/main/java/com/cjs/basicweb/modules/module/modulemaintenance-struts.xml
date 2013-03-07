@@ -35,7 +35,7 @@
 		<action name="searchResult"
 			class="com.cjs.basicweb.modules.module.action.ModuleMaintenanceMainAction"
 			method="chainAction">
-			<result name="success">/jsp/modules/module/module_maintenance_search.jsp
+			<result name="success">/jsp/modules/module/module_maintenance_main.jsp
 			</result>
 		</action>
 
