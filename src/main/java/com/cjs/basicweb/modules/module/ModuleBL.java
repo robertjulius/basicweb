@@ -117,7 +117,8 @@ public class ModuleBL extends BusinessLogic {
 			criteria.add(Restrictions.like("parent.id", "%" + parentId + "%"));
 		}
 
-		criteria.setFirstResult((pagination.getPageNumber() - 1) * 5);
+		criteria.setFirstResult((pagination.getPageNumber() - 1)
+				* pagination.getRowsPerPage());
 		criteria.setMaxResults(pagination.getRowsPerPage());
 
 		criteria.add(Restrictions.eq("recStatus",

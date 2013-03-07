@@ -12,13 +12,13 @@ table.grid td {
 	padding-right: 5px;
 }
 
-table.form {
-	/*
+table.form { /*
 	border: thin;
 	border-style: solid;
 	background-color: #A0A0D0;
 	border-color: #000000;
 	*/
+	
 }
 
 tr.rowOdd {
@@ -35,8 +35,20 @@ tbody.selectable tr:HOVER {
 	cursor: pointer;
 }
 
+table.pagination {
+}
+
+table.pagination td {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+table.pagination td.pageSelected {
+	background-color: #AAAAAA;
+}
+
 table.pagination a {
-	color: white;
+	
 }
 
 table.pagination a:HOVER {

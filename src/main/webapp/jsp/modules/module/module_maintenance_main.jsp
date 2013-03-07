@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <s:head />
+<sj:head />
 </head>
 <body>
 	<table>
@@ -23,7 +24,7 @@
 		</tr>
 		<tr>
 			<td>
-				<table class="form" align="left">
+				<table class="form">
 					<tr>
 						<td>
 							<ul>
@@ -34,113 +35,129 @@
 							</ul>
 						</td>
 					</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td><table width="100%">
 					<tr>
 						<td><hr /></td>
 					</tr>
-				</table></td>
-		</tr>
-		<tr>
-			<td><s:form action="/modules/module/search.action"
-					theme="simple">
-					<s:if test="hasActionErrors()">
-						<table>
-							<s:actionerror />
-							<s:fielderror />
-						</table>
-					</s:if>
-					<s:hidden name="selectedId" />
-					<table>
-						<tr>
-							<td>
-								<table>
-									<tr>
-										<td><s:actionerror /> <s:fielderror /> <s:textfield
-												key="resource.moduleName" name="searchName" theme="xhtml" />
-											<s:textfield key="resource.firstEntry"
-												name="searchFirstEntry" theme="xhtml" /> <s:textfield
-												key="resource.parent" name="searchParentId" theme="xhtml" />
-											<s:select key="resource.rowsPerPage"
-												list="pagination.availableRowsPerPage"
-												name="pagination.rowsPerPage" theme="xhtml" /> <s:hidden
-												name="pagination.pageNumber" value="1" /> <s:submit
-												key="resource.search" name="%{resource.search}"
-												theme="xhtml" /></td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-						<s:if test="pagination.pageNumber == null">
-							<table>
+					<tr>
+						<td><s:form action="/modules/module/search.action"
+								method="post">
 								<s:actionerror />
 								<s:fielderror />
-							</table>
-						</s:if>
-						<s:else>
-							<tr>
-								<td><table width="100%">
-										<tr>
-											<td><hr /></td>
-										</tr>
-									</table></td>
-							</tr>
-							<tr>
-								<td>
-									<table class="grid">
-										<thead>
-											<tr align="center">
-												<td><s:text name="resource.moduleName" /></td>
-												<td><s:text name="resource.firstEntry" /></td>
-												<td><s:text name="resource.parent" /></td>
-											</tr>
-										</thead>
-										<tbody class="selectable">
-											<s:iterator value="searchResult" status="rowstatus">
-												<tr
-													onclick="$(this).closest('form').find('input#search_selectedId').val('<s:property value="id" />'); $(this).closest('form').submit();"
-													class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
-													<td><s:property value="name" /></td>
-													<td><s:property value="firstEntry" /></td>
-													<td><s:property value="parent.name" /></td>
-												</tr>
-											</s:iterator>
-										</tbody>
-										<tfoot>
-											<tr>
-												<td colspan="3"><table class="pagination">
-														<tr>
-															<td><b>First</b></td>
-															<td><b>Previous</b></td>
-															<s:iterator var="counter" begin="1"
-																end="pagination.totalPage" status="rowstatus">
-																<td><s:if
-																		test='#rowstatus.index+1 == pagination.pageNumber'>
-																		<b><s:property value="%{#rowstatus.index+1}" /></b>
-																	</s:if> <s:else>
-																		<a
-																			onclick="$(this).closest('form').find('input#search_pagination_pageNumber').val('<s:property value="%{#rowstatus.index+1}" />'); $(this).closest('form').submit();"
-																			href="#"> <s:property
-																				value="%{#rowstatus.index+1}" />
-																		</a>
-																	</s:else></td>
-															</s:iterator>
-															<td><b>Next</b></td>
-															<td><b>Last</b></td>
-														</tr>
-													</table></td>
-											</tr>
-										</tfoot>
-									</table>
-								</td>
-							</tr>
-						</s:else>
-					</table>
-				</s:form></td>
+								<s:textfield key="resource.moduleName" name="searchName" />
+								<s:textfield key="resource.firstEntry" name="searchFirstEntry" />
+								<s:textfield key="resource.parent" name="searchParentId" />
+								<s:select key="resource.rowsPerPage"
+									list="pagination.availableRowsPerPage"
+									name="pagination.rowsPerPage" />
+								<s:hidden name="pagination.pageNumber" value="1" />
+								<s:submit key="resource.search" name="%{resource.search}" />
+							</s:form></td>
+					</tr>
+					<tr>
+						<td><hr /></td>
+					</tr>
+				</table>
+			</td>
 		</tr>
+		<s:if test="pagination.pageNumber != null">
+			<tr>
+				<td><s:form action="/modules/module/prepareDetail.action"
+						theme="simple">
+						<s:hidden name="selectedId" />
+						<table class="grid">
+							<thead>
+								<tr align="center">
+									<td><s:text name="resource.moduleName" /></td>
+									<td><s:text name="resource.firstEntry" /></td>
+									<td><s:text name="resource.parent" /></td>
+								</tr>
+							</thead>
+							<tbody class="selectable">
+								<s:iterator value="searchResult" status="rowstatus">
+									<tr
+										onclick="$(this).closest('form').find('input#prepareDetail_selectedId').val('<s:property value="id" />'); $(this).closest('form').submit();"
+										class="<s:if test='#rowstatus.odd == true'>rowOdd</s:if><s:else>rowEven</s:else>">
+										<td><s:property value="name" /></td>
+										<td><s:property value="firstEntry" /></td>
+										<td><s:property value="parent.name" /></td>
+									</tr>
+								</s:iterator>
+							</tbody>
+						</table>
+					</s:form></td>
+			</tr>
+			<tr>
+				<td><s:form action="/modules/module/search.action"
+						theme="simple" id="paginationForm">
+						<s:hidden name="pagination.pageNumber" id="pageNumber" />
+						<table class="pagination">
+							<tr>
+								<s:if test='pagination.pageNumber <= 1'>
+									<td>First</td>
+									<td>Previous</td>
+								</s:if>
+								<s:else>
+									<td><a
+										onclick="pageFirst(); $(this).closest('form').submit();"
+										href="#">First</a></td>
+									<td><a
+										onclick="pagePrevious(); $(this).closest('form').submit();"
+										href="#">Previous</a></td>
+								</s:else>
+
+								<s:iterator var="counter" begin="1" end="pagination.totalPage"
+									status="rowstatus">
+									<s:if test='#rowstatus.index+1 == pagination.pageNumber'>
+										<td class="pageSelected"><b><s:property
+													value="%{#rowstatus.index+1}" /></b></td>
+									</s:if>
+									<s:else>
+										<td><a
+											onclick="pageGoto('<s:property value="%{#rowstatus.index+1}" />'); $(this).closest('form').submit();"
+											href="#"> <s:property value="%{#rowstatus.index+1}" />
+										</a></td>
+									</s:else>
+								</s:iterator>
+
+								<s:if test='pagination.pageNumber >= pagination.totalPage'>
+									<td>Next</td>
+									<td>Last</td>
+								</s:if>
+								<s:else>
+									<td><a
+										onclick="pageNext(); $(this).closest('form').submit();"
+										href="#">Next</a></td>
+									<td><a
+										onclick="
+											pageGoto('<s:property value="pagination.totalPage" />'); $(this).closest('form').submit();"
+										href="#">Last</a></td>
+								</s:else>
+							</tr>
+						</table>
+					</s:form></td>
+			</tr>
+		</s:if>
 	</table>
 </body>
+<script type="text/javascript">
+	function pageFirst() {
+		var pageNumber = $('#paginationForm').find('#pageNumber');
+		pageNumber.val(1);
+	}
+
+	function pageNext() {
+		var pageNumber = $('#paginationForm').find('#pageNumber');
+		pageNumber.val(pageNumber.val() * 1 + 1);
+	}
+
+	function pagePrevious() {
+		var pageNumber = $('#paginationForm').find('#pageNumber');
+		pageNumber.val(pageNumber.val() * 1 - 1);
+	}
+
+	function pageGoto(number) {
+		var pageNumber = $('#paginationForm').find('#pageNumber');
+		pageNumber.val(number);
+	}
+</script>
 </html>

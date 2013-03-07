@@ -9,7 +9,7 @@ public class Pagination implements Serializable {
 	private Integer pageNumber;
 	private Integer rowsPerPage;
 	private Integer rowCount;
-	private int[] availableRowsPerPage = new int[] { 5, 10, 20, 50, 100 };
+	private int[] availableRowsPerPage = new int[] { 2, 5, 10, 20, 50, 100 };
 
 	public int[] getAvailableRowsPerPage() {
 		return availableRowsPerPage;
@@ -17,6 +17,10 @@ public class Pagination implements Serializable {
 
 	public Integer getPageNumber() {
 		return pageNumber;
+	}
+
+	public Integer getRowCount() {
+		return rowCount;
 	}
 
 	public Integer getRowsPerPage() {
@@ -27,19 +31,15 @@ public class Pagination implements Serializable {
 		return (int) Math.ceil((double) rowCount / (double) rowsPerPage);
 	}
 
-	public Integer getRowCount() {
-		return rowCount;
-	}
-
 	public void setPageNumber(Integer pageNumber) {
 		this.pageNumber = pageNumber;
 	}
 
-	public void setRowsPerPage(Integer rowsPerPage) {
-		this.rowsPerPage = rowsPerPage;
-	}
-
 	public void setRowCount(Integer rowCount) {
 		this.rowCount = rowCount;
+	}
+
+	public void setRowsPerPage(Integer rowsPerPage) {
+		this.rowsPerPage = rowsPerPage;
 	}
 }
