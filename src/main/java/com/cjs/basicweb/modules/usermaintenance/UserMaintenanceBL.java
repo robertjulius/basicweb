@@ -11,6 +11,8 @@ import com.cjs.basicweb.model.usergroup.UserGroup;
 import com.cjs.basicweb.modules.BusinessLogic;
 import com.cjs.basicweb.utility.GeneralConstants;
 import com.cjs.basicweb.utility.GeneralConstants.ActionType;
+import com.cjs.basicweb.utility.PropertiesConstants;
+import com.cjs.core.User;
 import com.cjs.core.exception.AppException;
 import com.cjs.core.exception.UserException;
 
@@ -60,16 +62,26 @@ public class UserMaintenanceBL extends BusinessLogic {
 
 	public List<UserGroup> getAllUserGroup() throws AppException {
 		Criteria criteria = getSession().createCriteria(UserGroup.class);
+		criteria.add(Restrictions.eq("recStatus",
+				GeneralConstants.REC_STATUS_ACTIVE));
 
 		@SuppressWarnings("unchecked")
 		List<UserGroup> userGroups = criteria.list();
 		return userGroups;
 	}
 
-	public SimpleUser getDetail(String userId) throws AppException {
-		SimpleUser user = (SimpleUser) getSession().get(SimpleUser.class,
-				userId);
-		return user;
+	public SimpleUser getDetail(String id) throws AppException {
+		if (id == null || id.trim().isEmpty()) {
+			throw new AppException(
+					PropertiesConstants.ERROR_PRIMARY_KEY_REQUIRED);
+		}
+
+		Criteria criteria = getSession().createCriteria(User.class);
+		criteria.add(Restrictions.eq("id", id));
+		criteria.add(Restrictions.eq("recStatus",
+				GeneralConstants.REC_STATUS_ACTIVE));
+
+		return (SimpleUser) criteria.uniqueResult();
 	}
 
 	public List<SimpleUser> search(String userId, String name,
@@ -89,6 +101,9 @@ public class UserMaintenanceBL extends BusinessLogic {
 			criteria.add(Restrictions.like("userGroup.name", "%"
 					+ userGroupName + "%"));
 		}
+
+		criteria.add(Restrictions.eq("recStatus",
+				GeneralConstants.REC_STATUS_ACTIVE));
 
 		@SuppressWarnings("unchecked")
 		List<SimpleUser> users = criteria.list();

@@ -46,7 +46,7 @@
 			<br />
 
 			<ul id="tree">
-				<li><strong>Home</strong></li>
+				<li><a href="<%=request.getContextPath()%>/main/home.action"><strong>Home</strong></a></li>
 				<%
 					UserSession userSession = (UserSession) ActionContext.getContext()
 							.getSession().get("userSession");

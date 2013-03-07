@@ -36,8 +36,6 @@
 							size="30px" />
 						<s:textfield key="resource.userName" name="newName" theme="xhtml"
 							size="30px" />
-						<s:textfield key="resource.password" name="newPassword"
-							theme="xhtml" size="30px" />
 						<s:select key="resource.userGroup" name="newUserGroupId"
 							id="newUserGroupId" list="selectListUserGroup" listKey="id"
 							listValue="name" theme="xhtml" />

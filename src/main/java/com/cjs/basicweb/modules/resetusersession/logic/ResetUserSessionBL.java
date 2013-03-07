@@ -31,8 +31,9 @@ public class ResetUserSessionBL extends BusinessLogic {
 	}
 
 	public void reset(String userId) throws AppException {
-		AppContextManager.getSessionManager().getByUserId(userId).invalidate();
 		saveActivityLog(ActionType.OTHER, "Reset user session with id "
 				+ userId);
+
+		AppContextManager.getSessionManager().getByUserId(userId).invalidate();
 	}
 }

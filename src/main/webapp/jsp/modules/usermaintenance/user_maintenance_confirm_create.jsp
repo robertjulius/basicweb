@@ -19,7 +19,8 @@
 			</td>
 		</tr>
 	</table>
-	<s:form action="/modules/usermaintenance/executeCreate.action" theme="simple">
+	<s:form action="/modules/usermaintenance/executeCreate.action"
+		theme="simple">
 		<s:if test="hasActionErrors()">
 			<table>
 				<s:actionerror />
@@ -43,6 +44,10 @@
 							<tr>
 								<td align="right"><s:text name="resource.userName" /></td>
 								<td align="left"><s:label name="newName" /></td>
+							</tr>
+							<tr>
+								<td align="right"><s:text name="resource.password" /></td>
+								<td align="left"><s:label name="newPassword" /></td>
 							</tr>
 							<tr>
 								<td align="right"><s:text name="resource.userGroup" /></td>

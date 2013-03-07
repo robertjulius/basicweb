@@ -25,3 +25,16 @@ thead {
 	color: white;
 	font-weight: bold;
 }
+
+tfoot {
+	background-color: blue;
+	color: white;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:HOVER {
+	color: red;
+}

@@ -76,11 +76,12 @@ ul {
 									<ul>
 										<%
 											@SuppressWarnings("unchecked")
-																		TreeMap<String, Privilege> oldTreeMap = (TreeMap<String, Privilege>) request.getAttribute("oldTreeMap");
+																			TreeMap<String, Privilege> oldTreeMap = (TreeMap<String, Privilege>) request.getAttribute("oldTreeMap");
 
-																		String html = HtmlPrivilegeTreeGenerator.generateHtmlTree(
-																		oldTreeMap);
-																		out.write(html);
+																			String html = HtmlPrivilegeTreeGenerator.generateHtmlTree(
+																					oldTreeMap);
+
+																			out.write(html);
 										%>
 									</ul>
 								</td>
@@ -98,7 +99,7 @@ ul {
 								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usergroupmaintenance/searchResult.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.edit"/>"
-								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usergroupmaintenance/prepareUpdate.action'); if (confirmAction()) {$(this).closest('form').submit();}" /></td>
+								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usergroupmaintenance/prepareUpdate.action'); $(this).closest('form').submit();" /></td>
 							<td><input type="button"
 								value="<s:text name="resource.delete"/>"
 								onclick="$(this).closest('form').attr('action', '<%=request.getContextPath()%>/modules/usergroupmaintenance/executeDelete.action'); if (confirmAction()) {$(this).closest('form').submit();}" /></td>

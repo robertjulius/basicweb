@@ -18,6 +18,7 @@ public class UserMaintenanceMainAction extends UserMaintenanceAction {
 	public String initial() throws AppException {
 		UserMaintenanceForm form = getForm();
 		List<UserGroup> userGroups = getBL().getAllUserGroup();
+		userGroups.add(0, new UserGroup());
 		form.setSelectListUserGroup(userGroups);
 		return SUCCESS;
 	}

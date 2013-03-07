@@ -2,6 +2,7 @@ package com.cjs.basicweb.modules.module.action;
 
 import java.util.List;
 
+import com.cjs.basicweb.model.Pagination;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.modules.module.ModuleForm;
 import com.cjs.core.exception.AppException;
@@ -16,9 +17,13 @@ public class ModuleMaintenanceMainAction extends ModuleMaintenanceAction {
 
 	public String initial() throws AppException {
 		ModuleForm form = getForm();
+
 		List<Module> modules = getBL().getAllModules();
 		modules.add(0, new Module());
 		form.setSelectListParent(modules);
+
+		form.setPagination(new Pagination());
+
 		return SUCCESS;
 	}
 
@@ -37,7 +42,9 @@ public class ModuleMaintenanceMainAction extends ModuleMaintenanceAction {
 		String firstEntry = getForm().getSearchFirstEntry();
 		String parentId = getForm().getSearchParentId();
 
-		List<Module> modules = getBL().search(name, firstEntry, parentId);
+		Pagination pagination = getForm().getPagination();
+		List<Module> modules = getBL().search(name, firstEntry, parentId,
+				pagination);
 		getForm().setSearchResult(modules);
 		return SUCCESS;
 	}

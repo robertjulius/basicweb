@@ -34,3 +34,11 @@ tbody.selectable tr:HOVER {
 	cursor: hand;
 	cursor: pointer;
 }
+
+table.pagination a {
+	color: white;
+}
+
+table.pagination a:HOVER {
+	color: red;
+}

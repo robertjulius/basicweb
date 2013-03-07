@@ -70,20 +70,33 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 		criteria.add(Restrictions.or(Restrictions.isNull("childs"),
 				Restrictions.isEmpty("childs")));
 
+		criteria.add(Restrictions.eq("recStatus",
+				GeneralConstants.REC_STATUS_ACTIVE));
+
 		@SuppressWarnings("unchecked")
 		List<Module> modules = criteria.list();
 		return modules;
 	}
 
 	public UserGroup getDetail(String userGroupId) throws AppException {
-		UserGroup userGroup = (UserGroup) getSession().get(UserGroup.class,
-				userGroupId);
-		return userGroup;
+		if (userGroupId == null || userGroupId.trim().isEmpty()) {
+			throw new AppException(
+					PropertiesConstants.ERROR_PRIMARY_KEY_REQUIRED);
+		}
+
+		Criteria criteria = getSession().createCriteria(UserGroup.class);
+		criteria.add(Restrictions.eq("id", userGroupId).ignoreCase());
+		criteria.add(Restrictions.eq("recStatus",
+				GeneralConstants.REC_STATUS_ACTIVE));
+
+		return (UserGroup) criteria.uniqueResult();
 	}
 
 	public List<Module> getRootModules() throws AppException {
 		Criteria criteria = getSession().createCriteria(Module.class);
 		criteria.add(Restrictions.isNull("parent.id"));
+		criteria.add(Restrictions.eq("recStatus",
+				GeneralConstants.REC_STATUS_ACTIVE));
 
 		@SuppressWarnings("unchecked")
 		List<Module> modules = criteria.list();
@@ -103,6 +116,9 @@ public class UserGroupMaintenanceBL extends BusinessLogic {
 			criteria.add(Restrictions.like("description", "%" + description
 					+ "%"));
 		}
+
+		criteria.add(Restrictions.eq("recStatus",
+				GeneralConstants.REC_STATUS_ACTIVE));
 
 		@SuppressWarnings("unchecked")
 		List<UserGroup> userGroups = criteria.list();

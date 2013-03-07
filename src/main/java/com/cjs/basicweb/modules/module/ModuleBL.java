@@ -6,8 +6,10 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
+import com.cjs.basicweb.model.Pagination;
 import com.cjs.basicweb.model.accesspath.AccessPath;
 import com.cjs.basicweb.model.module.Module;
 import com.cjs.basicweb.modules.BusinessLogic;
@@ -75,6 +77,8 @@ public class ModuleBL extends BusinessLogic {
 
 	public List<Module> getAllModules() throws AppException {
 		Criteria criteria = getSession().createCriteria(Module.class);
+		criteria.add(Restrictions.eq("recStatus",
+				GeneralConstants.REC_STATUS_ACTIVE));
 
 		@SuppressWarnings("unchecked")
 		List<Module> modules = criteria.list();
@@ -82,12 +86,21 @@ public class ModuleBL extends BusinessLogic {
 	}
 
 	public Module getDetail(String moduleId) throws AppException {
-		Module module = (Module) getSession().get(Module.class, moduleId);
-		return module;
+		if (moduleId == null || moduleId.trim().isEmpty()) {
+			throw new AppException(
+					PropertiesConstants.ERROR_PRIMARY_KEY_REQUIRED);
+		}
+
+		Criteria criteria = getSession().createCriteria(Module.class);
+		criteria.add(Restrictions.eq("id", moduleId).ignoreCase());
+		criteria.add(Restrictions.eq("recStatus",
+				GeneralConstants.REC_STATUS_ACTIVE));
+
+		return (Module) criteria.uniqueResult();
 	}
 
-	public List<Module> search(String name, String firstEntry, String parentId)
-			throws AppException {
+	public List<Module> search(String name, String firstEntry, String parentId,
+			Pagination pagination) throws AppException {
 
 		Criteria criteria = getSession().createCriteria(Module.class);
 
@@ -104,8 +117,21 @@ public class ModuleBL extends BusinessLogic {
 			criteria.add(Restrictions.like("parent.id", "%" + parentId + "%"));
 		}
 
+		criteria.setFirstResult((pagination.getPageNumber() - 1) * 5);
+		criteria.setMaxResults(pagination.getRowsPerPage());
+
+		criteria.add(Restrictions.eq("recStatus",
+				GeneralConstants.REC_STATUS_ACTIVE));
+
 		@SuppressWarnings("unchecked")
 		List<Module> modules = criteria.list();
+
+		criteria.setFirstResult(0);
+		criteria.setMaxResults(1);
+		int rowCount = (int) criteria.setProjection(Projections.rowCount())
+				.uniqueResult();
+		pagination.setRowCount(rowCount);
+
 		return modules;
 	}
 
