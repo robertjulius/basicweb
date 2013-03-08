@@ -67,9 +67,9 @@
 						<table class="grid">
 							<thead>
 								<tr align="center">
-									<td><s:text name="resource.moduleName" /></td>
-									<td><s:text name="resource.firstEntry" /></td>
-									<td><s:text name="resource.parent" /></td>
+									<td width="150"><s:text name="resource.moduleName" /></td>
+									<td width="300"><s:text name="resource.firstEntry" /></td>
+									<td width="150"><s:text name="resource.parent" /></td>
 								</tr>
 							</thead>
 							<tbody class="selectable">
@@ -139,25 +139,4 @@
 		</s:if>
 	</table>
 </body>
-<script type="text/javascript">
-	function pageFirst() {
-		var pageNumber = $('#paginationForm').find('#pageNumber');
-		pageNumber.val(1);
-	}
-
-	function pageNext() {
-		var pageNumber = $('#paginationForm').find('#pageNumber');
-		pageNumber.val(pageNumber.val() * 1 + 1);
-	}
-
-	function pagePrevious() {
-		var pageNumber = $('#paginationForm').find('#pageNumber');
-		pageNumber.val(pageNumber.val() * 1 - 1);
-	}
-
-	function pageGoto(number) {
-		var pageNumber = $('#paginationForm').find('#pageNumber');
-		pageNumber.val(number);
-	}
-</script>
 </html>

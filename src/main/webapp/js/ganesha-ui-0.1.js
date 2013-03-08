@@ -18,3 +18,23 @@ function stripeTable(table) {
 		rows.eq(i).attr("class", i % 2 == 0 ? "rowOdd" : "rowEven");
 	}
 }
+
+function pageFirst() {
+	var pageNumber = $('#paginationForm').find('#pageNumber');
+	pageNumber.val(1);
+}
+
+function pageNext() {
+	var pageNumber = $('#paginationForm').find('#pageNumber');
+	pageNumber.val(pageNumber.val() * 1 + 1);
+}
+
+function pagePrevious() {
+	var pageNumber = $('#paginationForm').find('#pageNumber');
+	pageNumber.val(pageNumber.val() * 1 - 1);
+}
+
+function pageGoto(number) {
+	var pageNumber = $('#paginationForm').find('#pageNumber');
+	pageNumber.val(number);
+}
