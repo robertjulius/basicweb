@@ -2,6 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+<%@ taglib prefix="ex" uri="/WEB-INF/ganesha-tags.tld"%>
+<%@ taglib prefix="lab" uri="/WEB-INF/custom-tags.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -86,57 +88,14 @@
 						</table>
 					</s:form></td>
 			</tr>
+			
 			<tr>
-				<td><s:form action="/modules/module/search.action"
-						theme="simple" id="paginationForm">
-						<s:hidden name="pagination.pageNumber" id="pageNumber" />
-						<table class="pagination">
-							<tr>
-								<s:if test='pagination.pageNumber <= 1'>
-									<td>First</td>
-									<td>Previous</td>
-								</s:if>
-								<s:else>
-									<td><a
-										onclick="pageFirst(); $(this).closest('form').submit();"
-										href="#">First</a></td>
-									<td><a
-										onclick="pagePrevious(); $(this).closest('form').submit();"
-										href="#">Previous</a></td>
-								</s:else>
-
-								<s:iterator var="counter" begin="1" end="pagination.totalPage"
-									status="rowstatus">
-									<s:if test='#rowstatus.index+1 == pagination.pageNumber'>
-										<td class="pageSelected"><b><s:property
-													value="%{#rowstatus.index+1}" /></b></td>
-									</s:if>
-									<s:else>
-										<td><a
-											onclick="pageGoto('<s:property value="%{#rowstatus.index+1}" />'); $(this).closest('form').submit();"
-											href="#"> <s:property value="%{#rowstatus.index+1}" />
-										</a></td>
-									</s:else>
-								</s:iterator>
-
-								<s:if test='pagination.pageNumber >= pagination.totalPage'>
-									<td>Next</td>
-									<td>Last</td>
-								</s:if>
-								<s:else>
-									<td><a
-										onclick="pageNext(); $(this).closest('form').submit();"
-										href="#">Next</a></td>
-									<td><a
-										onclick="
-											pageGoto('<s:property value="pagination.totalPage" />'); $(this).closest('form').submit();"
-										href="#">Last</a></td>
-								</s:else>
-							</tr>
-						</table>
-					</s:form></td>
+				<td><lab:pagination formAction="/modules/module/search.action"
+						pageNumber="%{pagination.pageNumber}" totalPage="%{pagination.totalPage}" /></td>
 			</tr>
+
 		</s:if>
+
 	</table>
 </body>
 </html>
