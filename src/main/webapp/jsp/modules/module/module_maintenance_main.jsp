@@ -2,8 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
-<%@ taglib prefix="ex" uri="/WEB-INF/ganesha-tags.tld"%>
-<%@ taglib prefix="lab" uri="/WEB-INF/custom-tags.tld"%>
+<%@ taglib prefix="g" uri="/ganesha-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -88,10 +87,8 @@
 						</table>
 					</s:form></td>
 			</tr>
-			
 			<tr>
-				<td><lab:pagination formAction="/modules/module/search.action"
-						pageNumber="%{pagination.pageNumber}" totalPage="%{pagination.totalPage}" /></td>
+				<td><g:pagination formAction="/modules/module/search.action" /></td>
 			</tr>
 
 		</s:if>

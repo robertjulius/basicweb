@@ -11,8 +11,6 @@ public class Pagination extends Component {
 
 	private String contextPath;
 	private String formAction;
-	private String pageNumber;
-	private String totalPage;
 
 	public Pagination(ValueStack stack, String contextPath) {
 		super(stack);
@@ -23,20 +21,14 @@ public class Pagination extends Component {
 		this.formAction = formAction;
 	}
 
-	public void setPageNumber(String pageNumber) {
-		this.pageNumber = pageNumber;
-	}
-
-	public void setTotalPage(String totalPage) {
-		this.totalPage = totalPage;
-	}
-
 	@Override
 	public boolean start(Writer writer) {
 		try {
-			Integer actualPageNumber = Integer.parseInt(findString(pageNumber));
-			Integer actualTotalPage = Integer.parseInt(findString(totalPage));
-			writer.write(generateHtml(actualPageNumber, actualTotalPage));
+			Integer pageNumber = Integer
+					.parseInt(findString("%{pagination.pageNumber}"));
+			Integer totalPage = Integer
+					.parseInt(findString("%{pagination.totalPage}"));
+			writer.write(generateHtml(pageNumber, totalPage));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
