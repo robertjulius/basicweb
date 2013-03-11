@@ -5,7 +5,7 @@
 
 <struts>
 
-	<package name="resetusersession" extends="app-default"
+	<package name="resetusersession" extends="basicweb"
 		namespace="/modules/resetusersession">
 
 		<action name="initial"

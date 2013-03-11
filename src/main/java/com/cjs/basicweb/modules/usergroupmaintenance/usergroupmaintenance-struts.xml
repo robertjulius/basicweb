@@ -5,7 +5,7 @@
 
 <struts>
 
-	<package name="usergroupmaintenance" extends="app-default"
+	<package name="usergroupmaintenance" extends="basicweb"
 		namespace="/modules/usergroupmaintenance">
 
 		<!-- ====================================== -->

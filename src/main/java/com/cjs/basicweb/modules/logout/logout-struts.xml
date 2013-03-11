@@ -5,7 +5,7 @@
 
 <struts>
 
-	<package name="logout" extends="app-default" namespace="/modules/logout">
+	<package name="logout" extends="basicweb" namespace="/modules/logout">
 
 		<action name="executeLogout" class="logoutExecuteAction">
 			<result name="success">/jsp/modules/logout/logout.jsp</result>

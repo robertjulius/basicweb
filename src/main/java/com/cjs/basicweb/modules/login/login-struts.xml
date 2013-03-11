@@ -5,7 +5,7 @@
 
 <struts>
 
-	<package name="login" extends="app-default" namespace="/modules/login">
+	<package name="login" extends="basicweb" namespace="/modules/login">
 	
 		<action name="executeLogin" class="loginExecuteAction">
 			<result name="input">/jsp/modules/login/login.jsp</result>

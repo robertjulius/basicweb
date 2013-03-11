@@ -5,7 +5,7 @@
 
 <struts>
 
-	<package name="modulemaintenance" extends="app-default"
+	<package name="modulemaintenance" extends="basicweb"
 		namespace="/modules/module">
 
 		<!-- =================================== -->
